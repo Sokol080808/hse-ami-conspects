@@ -1,0 +1,143 @@
+\section{Система линейных уравнений}
+
+\subsection{Как выглядит}
+\[
+\begin{cases}
+	a_{1 1}x_{1} + a_{1 2}x_{2} + \dots + a_{1 n}x_{n} = b_1 \\
+	\cdots \\
+	a_{m 1}x_{1} + a_{m 2}x_{2} + \dots + a_{m n}x_{n} = b_m
+\end{cases}
+\]
+
+Система линейных уравнений называется однородной, если \( \forall i \: b_i = 0 \)
+
+\[
+\begin{pmatrix}
+c_1 \\
+c_2 \\
+\vdots \\
+c_n
+\end{pmatrix} - \text{решение}
+\]
+
+Решение - какой-то столбец из \( \mathbb{R}^n \)
+
+\bigskip
+
+$\mathbb{R}^n = \{
+    \begin{pmatrix}
+    a_1 \\
+    \vdots \\
+    a_n
+    \end{pmatrix}
+    \ | \
+    a_i \in \mathbb{R}
+\}$
+
+\bigskip
+
+Пример:
+\[
+\begin{cases}
+	1x + 2y + 3z = 0 \\
+	4x + 5y + 6z = 0 \\
+	7x + 8y + 9z = 0
+\end{cases}
+\]
+
+Будем записывать СЛУ так:
+\[
+\begin{pmatrix}
+    a_{1 1} & a_{1 2} & \dots & a_{1 n} & \vline & b_1 \\
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+    a_{m 1} & a_{m 2} & \dots & a_{m n} & \vline & b_m \\
+\end{pmatrix}
+\]
+
+Может иметь:
+\begin{itemize}
+    \item 1 решение:
+      
+    $x = 1$
+    \item 0 решений:
+    
+		$0 \cdot x = 1$
+    \item $\infty$ решений:
+    
+		$0 \cdot x = 0$
+\end{itemize}
+
+
+\subsection{Как решать}
+\[ \Sigma \rightarrow \Sigma_1 \rightarrow \Sigma_2 \rightarrow \dots \rightarrow \Sigma_k - \text{хорошая} \]
+
+
+Какие преобразования можно делать?
+\begin{itemize}
+  \item Умножить строчку на ненулевое число
+  \[
+  \begin{pmatrix}
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+    a_{i 1} & a_{i 2} & \dots & a_{i n} & \vline & b_i \\
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+  \end{pmatrix}
+  \rightarrow
+  \begin{pmatrix}
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+    \lambda \cdot a_{i 1} & \lambda \cdot a_{i 2} & \dots & \lambda \cdot a_{i n} & \vline & \lambda \cdot b_i \\
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+  \end{pmatrix}, \lambda \neq 0
+  \]
+  \item Поменять две строки местами
+  \[
+  \begin{pmatrix}
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+    a_{i 1} & a_{i 2} & \dots & a_{i n} & \vline & b_i \\
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+    a_{j 1} & a_{j 2} & \dots & a_{j n} & \vline & b_j \\
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+  \end{pmatrix}
+  \rightarrow
+  \begin{pmatrix}
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+    a_{j 1} & a_{j 2} & \dots & a_{j n} & \vline & b_j \\
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+    a_{i 1} & a_{i 2} & \dots & a_{i n} & \vline & b_i \\
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+  \end{pmatrix}
+  \]
+  \item Прибавить строчку к другой
+  \[
+  \begin{pmatrix}
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+    a_{i 1} & a_{i 2} & \dots & a_{i n} & \vline & b_i \\
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+    a_{j 1} & a_{j 2} & \dots & a_{j n} & \vline & b_j \\
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+  \end{pmatrix}
+  \rightarrow
+  \begin{pmatrix}
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+    a_{i 1} + a_{j, 1} & a_{i 2} + a_{j 2} & \dots & a_{i n} + a_{j n} & \vline & b_i + b_j \\
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+    a_{j 1} & a_{j 2} & \dots & a_{j n} & \vline & b_j \\
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+  \end{pmatrix}
+  \]
+\end{itemize}
+
+Очевидно, что такие преобразования не уменьшают множество решений.
+Так как можем сделать обратные преобразования, СЛУ равносильны.
+
+\subsection{Алгоритм Гаусса}
+
+\begin{itemize}
+  \item Прямой ход:
+  
+  Приводим матрицу к ступенчатому виду с помощью преобразований
+  \item Обратный ход:
+  
+	Сделать все лидеры равными $1$
+
+	Поднимаемся снизу вверх, зануляя все над лидером
+\end{itemize}

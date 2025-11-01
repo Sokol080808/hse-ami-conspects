@@ -1,0 +1,937 @@
+\section{Матрицы}
+Матрица - это таблица с числами:
+\[
+A = 
+\begin{pmatrix}
+    a_{1 1} & a_{1 2} & \dots & a_{1 n} \\
+    \vdots & \vdots & \vdots & \vdots \\
+    a_{m 1} & a_{m 2} & \dots & a_{m n} \\
+\end{pmatrix}
+\]
+
+В данном случае \( A \in M_{mn}(\mathbb{R}) \) 
+--- множество матриц \(m \times n \) с числами из \( \mathbb{R} \)
+
+\( M_n(\mathbb{R}) \) --- множество квадратных матриц \( n \times n \) 
+с числами из \( \mathbb{R} \)
+
+\bigskip
+
+Операции, которые можно делать с матрицами:
+\begin{itemize}
+    \item Сложение / вычитание:
+    \[
+    \begin{pmatrix}
+    a_{1 1} & \dots & a_{1 n}  \\
+    \vdots & \ddots & \vdots \\
+    a_{m 1} & \dots & a_{m n}  \\
+    \end{pmatrix}
+    \pm
+    \begin{pmatrix}
+    b_{1 1} & \dots & b_{1 n}  \\
+    \vdots & \ddots & \vdots \\
+    b_{m 1} & \dots & b_{m n}  \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+    a_{1 1} \pm b_{1 1} & \dots & a_{1 n} \pm b_{1 n} \\
+    \vdots & \ddots & \vdots & \\
+    a_{m 1} \pm b_{m 1} & \dots & a_{m n} \pm b_{m n} \\
+    \end{pmatrix}
+    \]
+    \item Умножение на число
+    \[
+    \lambda \cdot
+    \begin{pmatrix}
+    a_{1 1} & \dots & a_{1 n}  \\
+    \vdots & \ddots & \vdots \\
+    a_{m 1} & \dots & a_{m n}  \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+    \lambda \cdot a_{1 1} & \dots & \lambda \cdot a_{1 n}  \\
+    \vdots & \ddots & \vdots \\
+    \lambda \cdot a_{m 1} & \dots & \lambda \cdot a_{m n}  \\
+    \end{pmatrix}
+    \]
+    \item Транспонирование
+    \[
+    \begin{pmatrix}
+    a_{1 1} & a_{1 2} & \dots & a_{1 n}  \\
+    \vdots & \vdots & \vdots & \vdots \\
+    a_{m 1} & a_{m 2} & \dots & a_{m n}  \\
+    \end{pmatrix}^T
+    =
+    \begin{pmatrix}
+    a_{1 1} & \dots & a_{m 1}  \\
+    a_{1 2} & \dots & a_{m 2} \\
+    \vdots & \vdots & \vdots \\
+    a_{1 n} & \dots & a_{m n}  \\
+    \end{pmatrix}
+    \]
+
+    Иными словами, отражаем относительно главной диагонали:
+    \[
+    \begin{pmatrix}
+    1 & 2 & 3 \\
+    4 & 5 & 6 
+    \end{pmatrix}^T
+    =
+    \begin{pmatrix}
+    1 & 4 \\
+    2 & 5 \\
+    3 & 6
+    \end{pmatrix}
+    \]
+    \item Умножение на матрицу
+    Пусть \(
+    A \in M_{nm}(\mathbb{R}), B \in M_{mk}(\mathbb{R})
+    \).
+
+    Тогда \( AB \in M_{nk}(\mathbb{R}) \), причем 
+    \( AB_{i j} = \sum\limits_{r=1}^{m} A_{i r}B_{r j} \)
+\end{itemize}
+
+Некоторые матрицы:
+\begin{itemize}
+    \item Нулевая матрица
+    
+    \( A \) -- нулевая матрица, если \( \forall i, j \: A_{i j} = 0 \)
+
+    Если известны размеры, то можно просто написать \( A = 0 \)
+
+    \item Единичная матрица
+    
+    Матрица, в которой на диагонали стоят \( 1 \), а остальные числа равны \( 0 \)
+
+    \( E_n = 
+    \begin{pmatrix}
+    1 & 0 & \dots & 0 \\
+    0 & 1 & \dots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \dots & 1  \\
+    \end{pmatrix}
+    \) --- единичная матрица \( n \times n \)
+
+    Называется так, потому что \( AE = EA = A \)
+\end{itemize}
+
+Тогда с точки зрения матриц, СЛУ можно записать так:
+\[
+A =
+\begin{pmatrix}
+    a_{1 1} & a_{1 2} & \dots & a_{1 n} & \vline & b_1 \\
+    \vdots & \vdots & \vdots & \vdots & \vline & \vdots \\
+    a_{m 1} & a_{m 2} & \dots & a_{m n} & \vline & b_m \\
+\end{pmatrix} \:
+x = 
+\begin{pmatrix}
+    x_1 \\
+    x_2 \\
+    \vdots \\
+    x_n
+\end{pmatrix} \:
+b = 
+\begin{pmatrix}
+    y_1 \\
+    y_2 \\
+    \vdots \\
+    y_m
+\end{pmatrix}
+\]
+\[ Ax = b \]
+
+Если СЛУ однородная, то \( Ax = 0 \)
+
+\bigskip
+
+Полезные свойства операций над матрицами:
+\begin{itemize}
+    \item Ассоциативность
+    
+    \( (AB)C = A(BC) \)
+    \item Дистрибутивность относительно сложения
+    
+    \( (A + B)C = AC + BC \)
+\end{itemize}
+
+
+Связь СЛУ и ОСЛУ:
+
+\( A \in M_{mn}(\RR), b \in \RR^n, x_0 \in \RR^n : Ax_0 = b \)
+
+Тогда:
+
+\( 
+    E_b = \{ z \in \RR^n \ \vline \ Az = b \}, 
+    E_0 = \{ y \in \RR^n \ \vline \ Ay = 0 \}
+    \Rightarrow
+    E_b = x_0 + E_0
+\)
+
+Если в \( A \) нулевая строка, то в \( AB \) та же строка будет нулевой.
+Аналогично, если в \( B \) есть нулевой столбец.
+
+\begin{remark}{}{}
+    \[
+        (AB)^T = B^T A^T
+    \]
+\end{remark}
+
+\newpage
+
+\subsection{Дефекты матричных операций}
+
+\begin{enumerate}
+    \item {
+        Произведение не коммутативно.
+
+        Если матрицы не квадратные, то произведение \( BA \) либо не существует,
+        либо имеет отличные от \( AB \) размеры.
+
+        В случае квадратных, например:
+
+        \begin{gather*}
+            \begin{pmatrix}
+                0 & 1 \\ 
+                0 & 0 
+            \end{pmatrix}
+            \cdot
+            \begin{pmatrix}
+                0 & 0 \\ 
+                1 & 0 
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                1 & 0 \\ 
+                0 & 0 
+            \end{pmatrix} 
+            \\
+            \begin{pmatrix}
+                0 & 0 \\ 
+                1 & 0 
+            \end{pmatrix}
+            \cdot
+            \begin{pmatrix}
+                0 & 1 \\ 
+                0 & 0 
+            \end{pmatrix} 
+            =
+            \begin{pmatrix}
+                0 & 0 \\ 
+                0 & 1 
+            \end{pmatrix}
+        \end{gather*}
+    }
+
+    \item {
+        Есть делители нуля.
+
+        \begin{gather*}
+            \begin{pmatrix}
+                1 & 0 \\ 
+                0 & 0 
+            \end{pmatrix}
+            \cdot 
+            \begin{pmatrix}
+                0 & 0 \\ 
+                0 & 1
+            \end{pmatrix} 
+            =
+            \begin{pmatrix}
+                0 & 0 \\ 
+                0 & 0
+            \end{pmatrix}
+        \end{gather*}
+
+        Диагональные матрицы ведут себя как функции на конечном множестве,
+        поэтому если что-то можно получить с такими функциями,
+        то и с матрицами скорее всего тоже.
+
+        Благодаря этому у ОСЛУ могут быть ненулевые решения.
+    }
+
+    \item {
+        Нильпотенты.
+        
+        \( A \in M_{mn}(\RR) \) --- нильпотентна, если \( \exists N : A^N = 0 \)
+
+        Например: 
+        \[ 
+            \begin{pmatrix}
+                0 & 1 \\ 
+                0 & 0
+            \end{pmatrix}^2
+            =
+            \begin{pmatrix}
+                0 & 0 \\ 
+                0 & 0
+            \end{pmatrix}
+        \]
+    }
+\end{enumerate}
+
+\subsection{Деление}
+
+В силу некоммутативности нам нужно деление слева и деление справа.
+Но тогда придется доказывать совместимость со всеми остальными операциями.
+Поэтому вместо деления принято говорить про обратимые матрицы.
+
+\begin{defn}{}{}
+    \[ A \in M_{mn}(\RR), B \in M_{nm}(\RR) \] 
+    \begin{enumerate}
+        \item {
+            Правая обратная, если \( AB = E_m \)
+        }
+        \item {
+            Левая обратная, если \( BA = E_n \)
+        }
+        \item {
+            Обратная, если верны (1) и (2)
+        }
+    \end{enumerate}
+\end{defn}
+
+\begin{defn}{След матрицы}{trace}
+    \[ A \in M_n(\RR) \]
+
+    \( \tr A = \sum\limits_{i = 1}^n a_{i i} \)
+\end{defn}
+
+\begin{enumerate}
+    \item {
+        \( \tr (\lambda A) = \lambda \tr (A) \)
+    }
+    \item {
+        \( \tr (A + B) = \tr (A) + \tr (B) \)
+    }
+    \item {
+        \( \tr (AB) = \tr (BA) \)
+
+        \begin{gather*}
+            \tr (AB) = \sum\limits_{i = 1}^m (AB)_{i i} = 
+            \sum\limits_{i = 1}^m \sum\limits_{j = 1}^n A_{i j} B_{j i}
+            \\
+            \tr (BA) = \sum\limits_{i = 1}^n (BA)_{i i} = 
+            \sum\limits_{i = 1}^n \sum\limits_{j = 1}^m B_{i j} A_{j i}           
+        \end{gather*}
+    }
+\end{enumerate}
+
+
+\begin{lemma}{}{}
+    \begin{gather*}
+        A \in M_{mn}(\RR) \\
+        \exists L - \text{любой левый обратный} \\
+        \exists R - \text{любой правый обратный}
+    \end{gather*}
+
+    Тогда:
+    \begin{enumerate}
+        \item \( n = m \)
+        \item \( L = R \Rightarrow \) существует единственный обратный.
+    \end{enumerate}
+\end{lemma}
+
+Докажем второе:
+\begin{gather*}
+    LA = E \\ 
+    AR = E \\
+    (LA)R = L(AR) \\ 
+    ER = LE \\ 
+    R = L
+\end{gather*}
+
+Теперь первое:
+
+\begin{gather*}
+    \tr (AB) = \tr (E_m) = m \\ 
+    \tr (BA) = \tr (E_n) = n \\ 
+    \tr (AB) = \tr (BA) \Rightarrow m = n
+\end{gather*}
+
+\begin{defn}{Обратная матрица}{}
+    \[ 
+        A \in M_n(\RR), B - \text{обратный}
+        \Leftrightarrow
+        \begin{cases}
+            AB = E \\
+            BA = E
+        \end{cases}
+    \]
+
+    Тогда \( B = A^{-1} \). 
+\end{defn}
+
+Примеры:
+\begin{enumerate}
+    \item {
+        Матрица с нулевой строчкой или столбцом необратима.
+    }
+    \item {
+        Диагональная матрица с ненулевыми элементами обратима:
+
+        \[ 
+            \begin{pmatrix}
+                \lambda_1 & & 0 \\ 
+                & \ddots & \\ 
+                0 & & \lambda_n
+            \end{pmatrix}
+            \cdot 
+            \begin{pmatrix}
+                \frac{1}{\lambda_1} & & 0 \\ 
+                & \ddots & \\ 
+                0 & & \frac{1}{\lambda_n}
+            \end{pmatrix}
+            =
+            E_n
+        \] 
+    }
+\end{enumerate}
+
+\subsection{Элементарные матрицы}
+
+\begin{enumerate}
+    \item {
+        Как прибавить строчку \( j \), умноженную на \( \lambda \), к строчке \( i \)?
+
+        Нужно умножить слева на матрицу:
+
+        \( 
+            S_{i j}(\lambda) = 
+            \begin{cases}
+                (S_{i j}(\lambda))_{x y} = \lambda, (x, y) = (i, j) \\
+                (S_{i j}(\lambda))_{x y} = (E_n)_{x y}, \text{иначе}
+            \end{cases}
+        \)
+
+        Если умножить на такую матрицу справа, 
+        то к \( j \) столбцу прибавится столбец \( i \), умноженный на \( \lambda \)
+    }
+    \item {
+        Как поменять две строчки местами?
+
+        Умножить слева на матрицу:
+
+        \( 
+            U_{i j} = 
+            \begin{cases}
+                (U_{i j})_{x y} = 1, (x = y \neq i, j) \lor ((x, y) \in \{ (i, j), (j, i)\}) \\ 
+                (U_{i j})_{x y} = 0, \text{иначе}
+            \end{cases}
+        \)
+
+        Если умножить справа, то поменяются местами столбцы.
+    }
+    \item {
+        Как умножить строчку \( i \) на \( \lambda \) ?
+
+        Умножить слева на матрицу:
+
+        \(
+            D_{i j}(\lambda) = 
+            \begin{cases}
+                (D_{i j})_{x y} = \lambda, x = y = i \\ 
+                (D_{i j})_{x y} = (E_n)_{x y}, \text{иначе}
+            \end{cases}
+        \)
+        
+        Если умножить справа, то умножится \( i \)-й столбец.
+    }
+\end{enumerate}
+
+Очевидно, все элементарные матрицы обратимы.
+
+\begin{remark}{}{}
+    \[
+        A, B \in M_n(\RR), \exists A^{-1}, B^{-1} \Rightarrow \exists (AB)^{-1} = B^{-1} A^{-1}
+    \]
+\end{remark}
+
+\begin{thrm}{}{invert-equiv}
+    \[
+        A \in M_n(\RR) \\ 
+    \]
+    Следующие утверждения эквивалентны:
+    \begin{enumerate}
+        \item {
+            \( Ax = 0 \Rightarrow !x \) 
+        }
+        \item {
+            \( A^T y = 0 \Rightarrow !y \)
+        }
+        \item {
+            \( A = U_1 \cdot U_2 \cdot \ldots \cdot U_k \), \( U_i \) --- элементарная
+        }
+        \item {
+            \( \exists A^{-1} \)
+        }
+        \item {
+            \( \exists L \in M_n(\RR) : LA = E \)
+        }
+        \item {
+            \( \exists R \in M_n(\RR) : AR = E \)
+        }
+    \end{enumerate}
+\end{thrm}
+
+Будем доказывать через два цикла:
+
+\(
+    1 \rightarrow 3 \rightarrow 4 \rightarrow 5 \rightarrow 1, \
+    2 \rightarrow 3 \rightarrow 4 \rightarrow 6 \rightarrow 2
+\)
+
+\( 3 \rightarrow 4, \ 4 \rightarrow 5, \ 5 \rightarrow 1 \) очевидны.
+
+\( 1 \rightarrow 3 \):
+
+Приведем Гауссом к улучшенному ступенчатому виду. 
+Одно решение, значит у нас \( n \) ступенек.
+Так как матрица квадратная, значит у нас в каждом столбце и каждой строчке есть лидер,
+то есть улучшенный ступенчатый вид --- это \( E_n \).
+Все преобразования --- умножения на элементарную матрицу.
+Возьмем обратные матрицы (тоже элементарные), умножим на них обратно.
+Получим \( A \).
+
+Второй цикл аналогично.
+
+Тогда как искать обратную матрицу? Нужно решить \( AX = E \).
+
+\subsection{Блочные умножения}
+
+\begin{gather*}
+    \begin{pmatrix}
+        A & B \\
+        C & D
+    \end{pmatrix}
+    \begin{pmatrix}
+        X & Y \\
+        Z & W
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        AX + BZ & AY + BN \\
+        CX + DZ & CY + DW
+    \end{pmatrix}
+\end{gather*}
+
+\newpage
+
+Примеры:
+\begin{enumerate}
+    \item
+        \begin{gather*}
+            \begin{pmatrix}
+                \ & \ & \ \\
+                \ & A & \ \\
+                \ & \ & \
+            \end{pmatrix}
+            \begin{pmatrix}
+                \ & \vline & \ & \vline & \ \\
+                B_1 & \vline & \cdots & \vline & B_n \\
+                \  & \vline & \ & \vline & \
+            \end{pmatrix}
+            =
+            \\
+            =
+            \begin{pmatrix}
+                A
+            \end{pmatrix}
+            \begin{pmatrix}
+                B_1 & \cdots & B_n
+            \end{pmatrix}
+            =
+            \\
+            =
+            \begin{pmatrix}
+                A B_1 & A B_2 & \cdots & A B_n
+            \end{pmatrix}
+        \end{gather*}
+    \item
+        \begin{gather*} 
+            \begin{pNiceMatrix}
+                \ & X_1 & \\
+                \hline
+                \ & \vdots & \ \\
+                \hline
+                \ & X_n & \
+            \end{pNiceMatrix}
+            \begin{pmatrix}
+                \ & \vline & \ & \vline & \ \\
+                Y_1 & \vline & \cdots & \vline & Y_n \\
+                \  & \vline & \ & \vline & \
+            \end{pmatrix}
+            =
+            \\
+            =
+            \begin{pmatrix}
+                X_1 \\
+                \vdots \\
+                X_n
+            \end{pmatrix}
+            \begin{pmatrix}
+                Y_1 & \cdots & Y_n
+            \end{pmatrix}
+            =
+            \\
+            = X_1 Y_1 + \ldots + X_n Y_n
+        \end{gather*}
+\end{enumerate}
+
+\subsection{Единственность УСВ для ОСЛУ}
+
+\begin{thrm}{}{uniq-RREF}
+    Для \( Ax = 0 \) существует только один улучшенный ступенчатый вид.
+\end{thrm}
+
+Пусть
+\[
+    P_k(A) = ( \forall x : Ax = 0 \ \land \ (x_{k + 1} = x_{k + 2} = \ldots = x_n = 0) \Rightarrow x_k = 0 )
+\]
+
+\begin{lemma}{}{main-var}
+    Дана ступенчатая матрица \( A \)
+    \[
+        P_k(A) = true \Leftrightarrow x_k - \text{главная}
+    \]
+\end{lemma}
+
+Доказательство:
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+        
+        Пусть \( x_k \) не является главной.
+        Но тогда мы можем назначить ей абсолютно любое значение и \( P_k(A) \) не будет верно.
+    \item 
+        \( \Leftarrow \)
+
+        \( x_k \) главная \( \Rightarrow \) однозначно восстанавливается по \( x_{k + 1}, \ldots, x_n \).
+        Нетрудно убедиться, что если \( x_{k + 1} = \ldots = x_n \), то \( x_k = 0 \).
+\end{itemize}
+
+\begin{lemma}{}{uniq-REF}
+    Пусть \( Ax = 0 \Leftrightarrow Bx = 0 \) 
+    
+    Приведём их к ступенчатым видам \( S_A, S_B \)
+
+    Тогда (главные для \( S_A \)) \( \Leftrightarrow \) (главные для \( S_B \))
+\end{lemma}
+
+Доказательство
+Очевидно, что у ступенчатого вида такие же решения, как и у изначальной матрицы.
+Но тогда
+\[
+    P_k(S_A) = P_k(A) = P_k(B) = P_k(S_B)
+\]
+
+Так как верно \ref{lemma:main-var}, это доказывает лемму.
+
+Из \ref{lemma:uniq-REF} следует, что ступенчатый вид матрицы всегда выглядит одинаково.
+
+Осталось показать, что совпадают УСВ.
+
+Единственная проблема может возникнуть в каком-то столбце, где нет лидера.
+
+Сделаем решение \( A \), где у всех свободных переменных кроме одной значение \( 0 \),
+а у оставшейся \( 1 \). 
+Тогда главные примут значений столбца этой переменной с минусом.
+Подставим в \( B \). Поскольку системы эквивалентны, а главные переменные совпадают, 
+главные в \( B \) должны совпадать с столбцом той свободной переменной, умноженному
+на \( -1 \). 
+Но это значит, что столбцы этой переменной в \( A \) и \( B \) равны.
+Проделаем такое для всех переменных \( \Rightarrow \) УСВ \( A \) и \( B \) совпадают.
+
+\begin{thrm}{}{}
+    Пусть \( A, B \in M_{mn}(\RR) \)
+
+    Следующие утверждения равносильны:
+    \begin{enumerate}
+        \item
+            \( Ax = 0 \Leftrightarrow Bx = 0 \)
+        \item
+            \( A \) можно элементарными операциями превратить в \( B \)
+        \item
+            \( \exists \) обратимая \( C \in M_m(\RR) : B = CA \)
+        \item
+            \( \text{УСВ}_A = \text{УСВ}_B \)
+    \end{enumerate}
+\end{thrm}
+
+Доказательство:
+
+\begin{itemize}
+    \item
+        \( 2 \rightarrow 1, 2 \rightarrow 3 \) очевидны
+    \item
+        \( 1 \rightarrow 4 \) доказано выше
+    \item
+        \( 3 \rightarrow 2 \) следует из \ref{thrm:invert-equiv}
+    \item
+        \( 4 \rightarrow 2 \)
+
+        Приведем \( A \) к \( \text{УСВ}_A \), \( B \) к \( \text{УСВ}_B \).
+        Они равны. Сделаем обратные элементарные преобразования.
+\end{itemize}
+
+\subsection{Полиномиальное исчисление}
+
+Пусть есть
+\[
+    f = a_0 + a_1 x + \ldots + a_m x^m, A \in M_n(\RR)
+\]
+
+Подставим туда \( A \)
+\[
+    f(A) = a_0 + a_1 A + \ldots + a_m A^m
+\]
+
+Имеется проблема \( a_0 \) --- число, а все остальные слагаемые --- матрицы.
+На самом деле при \( a_0 \) стоит \( x^0 \).
+Поэтому на самом деле все будет так
+\[
+    f = a_0 E + a_1 A + \ldots + a_m A^m
+\]
+
+\begin{lemma}{}{}
+    \[
+        A \in M_n (\RR), f, g \in \RR [x]
+    \]
+
+    Тогда:
+    \begin{enumerate}
+        \item
+            \[ 
+                (f + g) (A) = f(A) + g(A)
+            \]
+        \item
+            \[
+                (f \cdot g) (A) = f(A) \cdot g(A)
+            \]
+        \item
+            \[
+                f(\lambda E) = f(\lambda) E
+            \]
+        \item
+            \begin{gather*}
+                C \in M_n (\RR) : \exists C^{-1}
+                \\
+                f(C^{-1} A C) = C^{-1} f(A) C^1
+            \end{gather*}
+
+    \end{enumerate}
+\end{lemma}
+
+\begin{lemma}{}{}
+    \begin{gather*}
+        A \in M_n (\RR)
+        \\
+        \Downarrow
+        \\
+        \exists f \in \RR [x] : \deg f \leq n^2 \ (\deg f \leq n), f(A) = 0
+    \end{gather*}
+\end{lemma}
+
+Доказательство:
+
+Рассмотрим
+\[
+    f = a_0 + a_1 x + \ldots + a_{n^2} x^{n^2}
+\]
+
+Подставим туда \( A \)
+\[
+    f(A) = a_0 E + a_1 A + \ldots + a_{n^2} A^{n^2} = 0
+\]
+
+Напишем равенство для каждого элемента.
+Получится ОСЛУ на \( n^2 + 1 \) и \( n^2 \) уравнений.
+А значит существует ненулевое решение \( \Rightarrow \) есть подходящий многочлен.
+
+\begin{example}{}{}
+    \[
+        \begin{pmatrix}
+            \lambda_1 & \ldots & 0 \\
+            \vdots  & \ddots & \vdots \\
+            0 & \ldots & \lambda_n
+        \end{pmatrix}
+    \]
+
+    Зануляющий многочлен:
+    \[
+        f = (x - \lambda_1) \cdots (x - \lambda_n)
+    \]
+
+    Интересный факт:
+
+    Числа над диагональю могут быть любыми,
+    но многочлен все еще будет занулять.
+\end{example}
+
+\subsection{Спектр}
+
+\begin{defn}{}{}
+    \begin{gather*}
+        A \in M_n (\RR)
+        \\
+        \spec_\RR A = \{ \lambda \in \RR \ \vline \ A - \lambda E - \text{необратима} \}
+    \end{gather*}
+\end{defn}
+
+\begin{example}{}{}
+    \begin{gather*}
+        A
+        =
+        \begin{pmatrix}
+            \lambda_1 & \ldots & 0 \\
+            \vdots  & \ddots & \vdots \\
+            0 & \ldots & \lambda_n
+        \end{pmatrix}
+        \\
+        \spec_\RR A = \{ \lambda_1, \lambda_2, \ldots, \lambda_n \}
+    \end{gather*}
+\end{example}
+
+\begin{example}{}{}
+    \begin{gather*}
+        A
+        =
+        \begin{pmatrix}
+            \lambda_1 & \ldots & * \\
+            \vdots  & \ddots & \vdots \\
+            0 & \ldots & \lambda_n
+        \end{pmatrix}
+        \\
+        \spec_\RR A = \{ \lambda_1, \lambda_2, \ldots, \lambda_n \}
+    \end{gather*}
+\end{example}
+
+Доказательство:
+
+Если после сдвига на \( \lambda E \) на диагонали нет нулевого элемента,
+то у нее, очевидно, \( n \) лидеров \( \Rightarrow \) она обратима.
+А если есть, то у нее \( < n \) лидеров \( \Rightarrow \) элементарными преобразованиями можно получить нулевую строку,
+поэтому матрица необратима.
+
+\begin{lemma}{}{}
+    \begin{gather*}
+        A \in M_n (\RR), g \in \RR [x] : g(A) = 0
+        \\
+        \Downarrow
+        \\
+        \spec_\RR A \subseteq \text{корни \( g \) в \( \RR \)}
+    \end{gather*}
+
+    Аналогично \( \spec_\CC (A) \subseteq \text{корни \( g \) в \( \CC \)} \)
+\end{lemma}
+
+Доказательство:
+
+Будем доказывать \( \lambda \neq 0, g(\lambda) \neq 0 \Rightarrow \lambda \notin \spec_\RR A \).
+
+Покажем, что \( A - \lambda E \) обратима.
+
+\begin{gather*}
+    x = \lambda \Rightarrow g = q \cdot (x - \lambda) + r
+    \\
+    g = q \cdot (x - \lambda) + g(\lambda)
+    \\
+    \text{Подставим сюда \( A \)}
+    \\
+    0 = g(A) = q(A) (A - \lambda E) + g(\lambda) E 
+    \\
+    -g(\lambda) E = q(A) (A - \lambda E)
+    \\
+    E = (A - \lambda E) \frac{q(A)}{-g(\lambda)}
+\end{gather*}
+
+\begin{defn}{Минимальный многочлен}{}
+    \[
+        A \in M_n (\RR), 0 \neq h \in \RR [x]
+    \]
+
+    \( h \) называется минимальным, если
+    \begin{itemize}
+        \item
+            \( h(A) = 0 \)
+        \item
+            \( \deg h \to \min \)
+        \item
+            Старший коэффициент \( h \) равен \( 1 \)
+    \end{itemize}
+\end{defn}
+
+\begin{lemma}{}{}
+    \[
+        A \in M_n ( \RR )
+    \]
+
+    \begin{enumerate}
+        \item
+            Минимальный многочлен \( h \) единственный.
+        \item
+            \( \forall g \in \RR [x] : g(A) = 0 \) верно \( f_{min} \vline g \)
+        \item
+            \( \spec_\RR A = \) корни \( f_{min} \) в \( \RR \)
+    \end{enumerate}
+\end{lemma}
+
+Доказательство:
+\begin{enumerate}
+    \item
+        Пусть есть \( h1, h2 \).
+        Тогда \( h1 - h2 \) тоже зануляющий многочлен, причем степени меньше \( n \) (так как старшие члены равны \( 1 \)).
+        Получается, что этот многочлен должен быть нулевым, а значит \( h1 = h2 \).
+    \item
+        \begin{gather*}
+            g = q \cdot f_{min} + r
+            \\
+            \deg r < \deg f_{min}
+            \\
+            g(A) = q(A) \cdot f_{min} (A) + r(A)
+            \\
+            0 = 0 + r(A)
+            \\
+            r(A) = 0
+        \end{gather*}
+    \item
+        Будем доказывать, что \( \spec_\RR A \supseteq \) корни \( f_{min} \) в \( \RR \)
+
+        Докажем от противного.
+        \begin{gather*}
+            f_{min} (\lambda) = 0
+            \\
+            f_{min} (\lambda) = (x - \lambda) h(x)
+            \\
+            0 = f_{min} (A) = (A - \lambda E) h(A)
+        \end{gather*}
+
+        Если \( A - \lambda E \) обратима, то \( h(A) \) тоже является зануляющим, 
+        причем степени на \( 1 \) меньше --- противоречие.
+        Значит \( A - \lambda E \) необратима \( \Rightarrow \lambda \in \spec_\RR A \).
+\end{enumerate}
+
+\begin{example}{}{}
+    \begin{gather*}
+        A
+        =
+        \begin{pmatrix}
+            0 & -1 \\
+            1 & 0 \\
+        \end{pmatrix}
+        \\
+        A^2
+        =
+        \begin{pmatrix}
+            -1 & 0 \\
+            0 & -1
+        \end{pmatrix}
+        =
+        -E
+    \end{gather*}
+
+    В таком случае \( h(x) = x^2 + 1 \) является зануляющим.
+
+    У него нет вещественных корней, а значит \( \spec_\RR A = \varnothing \).
+\end{example}

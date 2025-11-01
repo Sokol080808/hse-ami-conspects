@@ -1,0 +1,135 @@
+\section{Математическая индукция}
+
+\subsection{Что это такое?}
+
+\begin{example}{}{}
+    Докажите, что если на плоскости проведены \( n \) прямых,
+    то можно раскрасить полученные области в два цвета так,
+    что никакие две соседних не покрашены в один цвет.
+\end{example}
+
+Выкинем прямую, покрасим для \( n - 1 \), потом добавим прямую обратно и инвертируем полуплоскость.
+
+Что необходимо для индукции?
+\begin{enumerate}
+    \item База: \( A(1) \) --- истинно
+    \item Переход: \( \forall n (A(n) \Rightarrow A(n + 1)) \)
+\end{enumerate}
+
+По принципу математической индукции \( \forall n \ A(n) \) --- истинно
+
+\begin{example}{}{}
+    \( 1 + 2 + \ldots + n = \frac{n(n + 1)}{2} \)
+\end{example}
+
+База:
+\[ 
+    1 = \frac{1 \cdot 2}{2} 
+\]
+
+Переход:
+\[
+    \frac{n(n + 1)}{2} + (n + 1) = (n + 1)(\frac{n}{2} + 1) = \frac{(n + 1)(n + 2)}{2}
+\]
+
+\begin{example}{}{}
+    \( 1 + \frac{1}{2^2} + \ldots + \frac{1}{100^2} < 2 \)
+\end{example}
+
+\( A(n) = 1 + \frac{1}{2^2} + \ldots \frac{1}{n^2} \leq 2 - \frac{1}{n} \)
+
+База:
+\[
+    1 \leq 1
+\]
+
+Переход:
+\begin{gather*}
+    1 + \frac{1}{2^2} + \ldots + \frac{1}{n^2} + \frac{1}{(n + 1)^2} \leq 2 - \frac{1}{n} + \frac{1}{(n + 1)^2} \leq \\
+    \leq 2 - \frac{1}{n} + \frac{1}{n(n + 1)} = 2 - \frac{1}{n + 1}
+\end{gather*}
+
+Что нужно делать аккуратно:
+\begin{itemize}
+    \item Не забыть проверить базу
+    \item Убедиться, что переход работает для всех \( n \) (не забыть всякие крайние случаи \( 1 \rightarrow 2 \) и т.п.)
+    \item Не надо добавлять объект к конструкции на \( n \) элементах, надо выкинуть один из \( n + 1 \)
+\end{itemize}
+
+\subsection{Полная индукция}
+
+Есть \( A(1), A(2), \ldots , A(n), \ldots \)
+
+Главное отличие в переходе: \( (\forall k < n \ A(k)) \Rightarrow A(n) \)
+
+\begin{example}{}{}
+    Докажите, что выпуклый многоугольник можно триангулировать, причем всего будет \( n - 2 \) треугольника.
+\end{example}
+
+\subsection{Эквивалентность различных принципов индукции}
+
+\begin{enumerate}
+    \item {
+        Принцип математической индукции:
+        \[
+        \begin{rcases}
+            A(1) \\ 
+            \forall n \ A(n) \Rightarrow A(n + 1)
+        \end{rcases}
+        \Rightarrow \forall n \ A(n)
+        \]
+    }
+    \item {
+        Полная индукция:
+        \[
+            ( ( \forall k < n \ A(k) ) \Rightarrow A(n) ) \Rightarrow \forall n \ A(n)
+        \]
+    }
+    \item {
+        Принцип наименьшего числа \( \forall S \subseteq \NN, S \neq \varnothing \)
+        Тогда в \( S \). есть наименьший элемент: \( \exists s \in S : \forall t \in S \ s \leq t \)
+    }
+\end{enumerate}
+
+\begin{thrm}{}{induction-equiv}
+    Три вышеуказанных принципа индукции эквивалентны.
+\end{thrm}
+
+\begin{itemize}
+    \item
+        \( 3 \rightarrow 1 \) 
+
+        Имеем \( A(1), A(2), \ldots, A(n), \ldots \) и \( A(n) \Rightarrow A(n + 1) \)
+
+        \( S = \{ n \in N \ \vline \ A(n) - \text{ложно} \} \)
+
+        Либо \( S \) пустое, либо в нем есть минимальный элемент \( s \).
+        Но тогда либо \( s = 1 \) и неверна база, либо неверен переход \( A(s - 1) \Rightarrow A(s) \).
+        Значит \( S \) пустое и все \( A(n) \) верны.
+    \item 
+        \( 2 \rightarrow 3 \)
+
+        Есть \( S \neq \varnothing \). Пусть \( S \) не имеет наименьшего элемента.
+        
+        \( A(n) = n \notin S \)
+
+        \( \forall k < n \ A(k) \Rightarrow A(n) \) 
+
+        \( \forall k < n \ k \notin S \Rightarrow n \notin S \) --- иначе в \( S \) есть минимальный элемент.
+
+        Тогда \( \forall n \ n \notin S \Rightarrow S = \varnothing \)
+    \item
+        \( 1 \rightarrow 2 \)
+
+        \( B(n) = A(1) \land A(2) \land \ldots \land A(n) \)
+        
+        \[
+            \begin{rcases}
+                B(1) = A(1)
+                \\ 
+                B(n) \Rightarrow A(n) \Rightarrow A(n + 1) \Rightarrow B(n + 1)
+            \end{rcases}
+            \Rightarrow
+            \forall n \ B(n)
+        \]  
+\end{itemize}

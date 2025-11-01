@@ -1,0 +1,1557 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Define Article %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[14pt]{extarticle}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Using Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[main=russian, english]{babel}
+
+\usepackage{geometry}
+\usepackage{esvect}
+\usepackage{bm}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{nicematrix}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{ytableau}
+\usepackage{mathdots}
+\usepackage[most]{tcolorbox}
+
+\usepackage{indentfirst}
+\usepackage{import}
+\usepackage{fancybox, fancyhdr}
+\usepackage[colorlinks=true, linkcolor=blue, unicode]{hyperref}
+\usepackage{tocloft}
+\usepackage{titlesec}
+
+\usepackage{graphics}
+\usepackage{pgfplots}
+\usepackage{tikz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Other Settings
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Page Setting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\geometry{a4paper, top=2cm, right=1.5cm, bottom=2cm, left=1.5cm}
+\setlength{\parindent}{20pt}
+\setlength{\headheight}{17pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Table of contents Setting %%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\cfttoctitlefont}{\hfill\Large\bfseries}
+\renewcommand{\cftaftertoctitle}{\hfill}
+
+\renewcommand{\cftsecaftersnum}{.}
+\renewcommand{\cftsubsecaftersnum}{.}
+\renewcommand{\cftsubsubsecaftersnum}{.}
+
+\renewcommand{\cftsecdotsep}{\cftdotsep}
+\renewcommand{\cftsubsecdotsep}{\cftdotsep}
+\renewcommand{\cftsubsubsecdotsep}{\cftdotsep}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title Setting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titleformat{\section}
+    {\centering\LARGE\bfseries} % format
+    {\thesection. } % label
+    {0pt} % sep
+    {\LARGE} % size
+
+\titleformat{\subsection}
+    {\centering\large\bfseries} % format
+    {\thesubsection. } % label
+    {0pt} % sep
+    {\large} % size
+
+\titleformat{\subsubsection}
+    {\centering\normalsize\bfseries} % format
+    {\thesubsubsection. } % label
+    {0pt} % sep
+    {\normalsize} % size
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Drawing Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetikzlibrary{calc, arrows.meta, angles, quotes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Plotting Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{compat=newest}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Colors %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{mygreen}{HTML}{a5d88a}
+\definecolor{myyellow}{HTML}{f5e04c}
+\definecolor{myorange}{HTML}{ffb299}
+\definecolor{mypink}{HTML}{f0b6e0}
+\definecolor{myblue}{HTML}{c8e1f2}
+\definecolor{mypurple}{HTML}{b19cd9}
+\definecolor{mygray}{HTML}{cccccc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newtheorem{definition}{Определение}[section]
+%\newtheorem{theorem}{Теорема}[section]
+%\newtheorem{lemma}{Лемма}[section]
+%\newtheorem{proposition}{Предложение}[section]
+%\newtheorem*{remark}{Замечание}
+%\newtheorem{example}{Пример}[section]
+%\newtheorem*{corollary}{Следствие}
+\numberwithin{equation}{section}
+%\newtheorem{exercise}{Упражнение}[section]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Math Sets %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\BB}{\mathbb{B}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\II}{\mathbb{I}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\silentsection}[1]{
+    \refstepcounter{section}
+    \addcontentsline{toc}{section}{\protect#1}
+    \section*{#1}
+    \sectionmark{#1}
+}
+
+\newcommand{\silentsubsection}[1]{
+    \refstepcounter{subsection}
+    \addcontentsline{toc}{subsection}{\protect#1}
+    \subsection*{#1}
+    \subsectionmark{#1}
+}
+
+\newcommand{\silentsubsubsection}[1]{
+    \refstepcounter{subsubsection}
+    \addcontentsline{toc}{subsubsection}{\protect#1}
+    \subsubsection*{#1}
+    \subsubsectionmark{#1}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tcbset{
+    myboxstyle/.style={
+        enhanced,
+        breakable,
+        fonttitle=\bfseries,
+        coltitle=black,
+        arc=3mm,
+        top=2mm,
+        bottom=2mm, 
+        left=3mm,
+        right=3mm,
+        boxsep=1mm,
+        drop fuzzy shadow={black!30!white}
+    }
+}
+\newtcbtheorem[number within=section]
+    {defn}{Определение}
+    {myboxstyle,
+     colback=mygreen!10,
+     colframe=mygreen!60
+    }
+    {defn}
+\newtcbtheorem[use counter from=defn]
+    {prop}{Предложение}
+    {myboxstyle,
+     colback=myblue!10,
+     colframe=myblue!90
+    }
+    {prop}
+\newtcbtheorem[use counter from=defn]
+    {thrm}{Теорема}
+    {myboxstyle,
+     colback=myorange!10,
+     colframe=myorange!70
+    }
+    {thrm}
+\newtcbtheorem[use counter from=defn]
+    {lemma}{Лемма}
+    {myboxstyle,
+     colback=mypink!10,
+     colframe=mypink!60
+    }
+    {lemma}
+\newtcbtheorem[use counter from=defn]
+    {coroll}{Следствие}
+    {myboxstyle,
+     colback=mypink!10,
+     colframe=mypink!60
+    }
+    {coroll}
+\newtcbtheorem[use counter from=defn]
+    {example}{Пример}
+    {myboxstyle,
+     colback=myyellow!10,
+     colframe=myyellow!60
+    }
+    {example}
+\newtcbtheorem[use counter from=defn]
+    {exercise}{Упражнение}
+    {myboxstyle,
+     colback=mypurple!10,
+     colframe=mypurple!60
+    }
+    {exercise}
+\newtcbtheorem[use counter from=defn]
+    {remark}{Замечание}
+    {myboxstyle,
+     colback=mygray!10,
+     colframe=mygray!60
+    }
+    {remark}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Math Operators %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\tr}{tr}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title & Author & Date %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\Huge Задачи к коллоквиуму}
+\author{\huge Группа 251}
+\date{2025 --- 2026}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+    \pagestyle{fancy}
+    \maketitle
+    \tableofcontents
+    \newpage
+
+    \silentsection{Листик 1}
+
+    \begin{center}
+        \textit{(Индукция, суммирование, действительные числа)}
+    \end{center}
+
+    \silentsubsection{Вопрос 1}
+
+    \textbf{Условие:}
+
+    Доказать равенства и неравенства по индукции:
+
+    \silentsubsubsection{а)}
+
+    \textbf{Условие:}
+
+    \( 1^3 + 2^3 + \dots + n^3 = \left( \frac{n(n + 1)}{2} \right)^2\)
+
+    \textit{(0.5 балла)}
+
+    \bigskip \bigskip
+
+    Докажем по индукции:
+
+    База: \( n = 1, \ 1^3 = \left( \frac{1 \cdot 2}{2} \right)^2\)
+
+    Переход: 
+
+    Пусть верно для \( n = k \), докажем для \( n = k + 1 \)
+    \[ 1^3 + 2^3 + \dots + k^3 = \left( \frac{k(k + 1)}{2} \right)^2 \]
+
+    Добавим \( (k + 1)^3 \) к обеим сторонам равенства:
+    \begin{gather*}
+        1^3 + 2^3 + \dots + k^3 + (k + 1)^3 = \left( \frac{k(k + 1)}{2} \right)^2 + (k + 1)^3 = \\
+        = \frac{k^2 (k + 1)^2 + 4(k + 1)^3}{4} = \frac{(k + 1)^2 (k^2 + 4k + 4)}{4} = \\
+        \frac{(k + 1)^2 (k + 2)^2}{4} = \left( \frac{(k + 1)(k + 2)}{2} \right)^2
+    \end{gather*}
+
+    Что и требовалось доказать.
+    \newpage
+
+    \silentsubsubsection{б)}
+
+    \textbf{Условие:}
+
+    \( (x + y)^n = \sum\limits_{i = 0}^n C_n^i x^i y^{n - i} \)
+
+    \textit{(0.5 балла)}
+
+    \bigskip \bigskip
+
+    Докажем по индукции:
+
+    База: \(n = 1, \ (x + y)^1 = C_1^0 x^0 y^1 + C_1^1 x^1 y^0 \)
+
+    Переход: 
+
+    Пусть верно для \( n = k \), докажем для \( n = k + 1 \)
+    \[ (x + y)^k = \sum\limits_{i = 0}^k C_k^i x^i y^{k - i} \]
+
+    Домножим на \( (x + y) \)
+
+    \begin{gather*}
+        (x + y)^{k + 1} = (x + y) \sum\limits_{i = 0}^k C_k^i x^i y^{k - i} = \\ 
+        = \sum\limits_{i = 0}^k C_k^i (x^{i + 1} y^{k - i} + x^i y^{k + 1 - i}) 
+            = C_k^0 y^{k + 1} + \sum\limits_{i = 1}^k (C_k^{i - 1} + C_k^i) x^i y^{k + 1 - i} + C_k^k x^{k + 1} = \\
+        = C_{k + 1}^0 y^{k + 1} + \sum\limits_{i = 1}^k C_{k + 1}^i x^i y^{k + 1 - i} 
+            + C_{k + 1}^{k + 1} x^{k + 1} = \\
+        = \sum\limits_{i = 0}^{k + 1} C_{k + 1}^i x^i y^{k + 1 - i}
+    \end{gather*}
+
+    Что и требовалось доказать.
+    \newpage
+
+    \silentsubsubsection{в)}
+
+    \textbf{Условие:}
+
+    \( (n + 1)^n < n^{n + 1}, \ n \geq 3 \)
+
+    \textit{(0.5 балла)}
+
+    \bigskip \bigskip
+
+    Докажем по индукции:
+
+    База: \( n = 3, 4^3 = 64 < 81 = 3^4 \)
+
+    Переход: 
+
+    Пусть верно для \( n = k \), докажем для \( n = k + 1 \)
+
+    \[ (k + 1)^k < k^{k + 1} \]
+
+    Домножим на \( \frac{(k + 2)^{k + 1}}{(k + 1)^k} > 0 \)
+
+    \[ (k + 2)^{k + 1} < k^{k + 1} \cdot \frac{(k + 2)^{k + 1}}{(k + 1)^k} \]
+
+    Покажем, что 
+    \[ k^{k + 1} \cdot \frac{(k + 2)^{k + 1}}{(k + 1)^k} < (k + 1)^{k + 2} \]
+
+    Действительно:
+    \begin{gather*}
+        k^{k + 1} \cdot \frac{(k + 2)^{k + 1}}{(k + 1)^k} < (k + 1)^{k + 2} \\
+        k^{k + 1} (k + 2)^{k + 1} < (k + 1)^{2k + 2} \\
+        k(k + 2) < (k + 1)^2 \\
+        k^2 + 2k < k^2 + 2k + 1 \\
+        0 < 1
+    \end{gather*}
+
+    Значит 
+    \[ 
+        (k + 2)^{k + 1} < k^{k + 1} \cdot \frac{(k + 2)^{k + 1}}{(k + 1)^k} < (k + 1)^{k + 2}
+    \]
+
+    Что и требовалось доказать.    
+    \newpage
+
+    \silentsubsubsection{г)}
+
+    \textbf{Условие:}
+
+    \( \sqrt{n} < \sum\limits_{i = 1}^n \frac{1}{\sqrt{i}} < 2\sqrt{n}, \ n > 1 \)
+
+    \textit{(0.5 балла)}
+
+    \bigskip \bigskip
+
+    Докажем по индукции:
+
+    База: 
+    \( 
+        n = 2, \ \sqrt{2} = 2 \cdot \frac{1}{\sqrt{2}} < \frac{1}{\sqrt{1}} + \frac{1}{\sqrt{2}}
+        < 2 \cdot 1 < 2 \sqrt{2}
+    \)
+
+    Переход: 
+
+    Пусть верно для \( n = k \), докажем для \( n = k + 1 \)
+
+    \[ \sqrt{k} < \sum\limits_{i = 1}^k \frac{1}{\sqrt{i}} < 2\sqrt{k} \]
+
+    Прибавим \( \frac{1}{\sqrt{k + 1}} \)
+    \[ 
+        \sqrt{k} + \frac{1}{\sqrt{k + 1}} < \sum\limits_{i = 1}^{k + 1} \frac{1}{\sqrt{i}} 
+        < 2 \sqrt{k} + \frac{1}{\sqrt{k + 1}}
+    \]
+
+    Докажем, что 
+    \[ 
+        \sqrt{k + 1} < \sqrt{k} + \frac{1}{\sqrt{k + 1}} 
+        \quad \text{и} \quad
+        2 \sqrt{k} + \frac{1}{\sqrt{k + 1}} < 2 \sqrt{k + 1}
+    \]
+
+    Действительно:
+
+    \begin{gather*}
+        \sqrt{k + 1} < \sqrt{k} + \frac{1}{\sqrt{k + 1}} \\
+        k + 1 < \sqrt{k (k + 1)} + 1 \\ 
+        k < \sqrt{k (k + 1)} \\ 
+        k^2 < k^2 + k \\
+        0 < k
+    \end{gather*}
+
+    \begin{gather*}
+        2 \sqrt{k} + \frac{1}{\sqrt{k + 1}} < 2 \sqrt{k + 1} \\
+        2 \sqrt{k (k + 1)} + 1 < 2 (k + 1) \\
+        2 \sqrt{k (k + 1)} < 2k + 1 \\
+        4 (k^2 + k) < 4k^2 + 4k + 1 \\
+        4k^2 + 4k < 4k^2 + 4k + 1 \\
+        0 < 1
+    \end{gather*}
+
+    Тогда
+
+    \[
+        \sqrt{k + 1}
+        < \sqrt{k} + \frac{1}{\sqrt{k + 1}} 
+        < \sum\limits_{i = 1}^{k + 1} \frac{1}{\sqrt{i}} 
+        < 2 \sqrt{k} + \frac{1}{\sqrt{k + 1}}
+        < 2 \sqrt{k + 1}
+    \]
+
+    Что и требовалось доказать
+    \newpage
+
+    \silentsubsection{Вопрос 2}
+
+    \textbf{Условие:}
+
+    Найти суммы:
+
+    \silentsubsubsection{а)}
+
+    \textbf{Условие:}
+
+    \( C_{100}^0 + C_{100}^1 + \dots + C_{100}^{100} \)
+
+    \textit{(0.5 балла)}
+
+    \bigskip \bigskip
+
+    Решим комбинаторно:
+
+    \( C_{100}^i \) --- количество подмножеств набора из \( 100 \) элементов размера \( i \). 
+    Так как суммируем по всем \( i \) от \( 0 \) до \( 100 \),
+    ответом будет количество всех подмножеств набора из \( 100 \) элементов --- \( 2^{100} \)
+
+    \bigskip \bigskip
+
+    Решим через бином:
+    \[
+        2^{100} = (1 + 1)^{100} = \sum\limits_{k = 0}^{100} 1^{100} C_{100}^k
+        = 
+        C_{100}^0 + C_{100}^1 + \dots + C_{100}^{100}
+    \]
+
+    \textbf{Ответ:} \( 2^{100} \)
+    \newpage
+
+    \silentsubsubsection{б)}
+
+    \textbf{Условие:}
+
+    \( \sum\limits_{k = 1}^n 2^k C_n^k \)
+
+    \textit{(0.5 балла)}
+
+    \bigskip \bigskip
+
+    \( \sum\limits_{k = 1}^n 2^k C_n^k = \sum\limits_{k = 0}^n 2^k C_n^k - 1\)
+
+    Комбинаторно найдем \( \sum\limits_{k = 0}^n 2^k C_n^k \)
+
+    \( C_n^k \) --- выбрали подмножество размера \( k \). 
+    \( 2^k \) --- покрасили его в два цвета.
+    Оставшееся покрасим в третий цвет.
+    Таким образом, одно слагаемое суммы 
+    --- количество способов покрасить \( n \) элементов в \( 3 \) цвета так,
+    чтобы элементов первого и второго цвета было \( k \). 
+    Тогда вся сумма --- количество способов покрасить \( n \) элементов в \( 3 \) цвета,
+    т.е. \( \sum\limits_{k = 0}^n 2^k C_n^k = 3^n \). Значит ответ на задачу --- \( 3^n - 1\).
+
+    \bigskip \bigskip
+
+    Решим через бином:
+    \[
+        3^n = (2 + 1)^n = \sum\limits_{k = 0}^n 1^{n-k} 2^k C_n^k
+        = 
+        \sum\limits_{k = 1}^n 2^k C_n^k + 1
+    \]
+
+    \textbf{Ответ:} \(3^n - 1\)
+    \newpage
+
+    \silentsubsubsection{в)}
+
+    \textbf{Условие:}
+
+    \( C_n^0 - C_n^1 + C_n^2 - \dots + (-1)^n C_n^n \)
+
+    \textit{(0.5 балла)}
+
+    \bigskip \bigskip
+
+    Заметим, что ответ равен разнице количеств подмножеств чётного размера 
+    и подмножеств нечётного размера набора из \( n \) элементов.
+
+    \( n \) --- натуральное, а значит набор не пустой.
+
+    Разобьем подмножества на пары: каждому подмножеству, содержащему \( 1 \)-й элемент, сопоставим
+    такой же набор, но без \( 1 \)-го элемента. 
+    Очевидно, что таким образом мы разобьем абсолютно все подмножества на пары 
+    (биекцию несложно проверить), причем в каждой паре размеры подмножеств различаются на \( 1 \).
+    Это означает, что количества подмножеств с чётным размером и с нечётным размером равны
+    \( \Rightarrow \) сумма из условия равна \( 0 \).
+
+    \bigskip \bigskip
+
+    Решим через бином (\( n > 0\)):
+
+    \[
+        0 = (1 + (-1))^n = \sum\limits_{k = 0}^n 1^{n-k} (-1)^k C_n^k
+        = 
+        C_n^0 - C_n^1 + C_n^2 - \dots + (-1)^n C_n^n
+    \]
+
+    \textbf{Ответ:} \( 0 \) (если вдруг \( n = 0\), то \( 1 \))
+    \newpage
+
+    \silentsubsection{Вопрос 3}
+
+    \textbf{Условие:}
+
+    Доказать, что \( (\sqrt{3} - \sqrt{2})^{999} \) можно представить в виде \( a \sqrt{3} - b \sqrt{2}\), 
+    причем \( 3a^2 - 2b^2 = 1\).
+
+    \textit{(1.5 балла)}
+
+    \bigskip \bigskip
+
+    \( 
+        (\sqrt{3} - \sqrt{2}) (\sqrt{3} + \sqrt{2}) = 1 \Rightarrow \sqrt{3} + \sqrt{2} =
+        \frac{1}{\sqrt{3} - \sqrt{2}}
+    \)
+
+    \begin{gather*}
+        3a^2 - 2b^2 = 1 \\ 
+        (a \sqrt{3} - b \sqrt{2}) (a \sqrt{3} + b \sqrt{2}) = 3 - 2 = 1
+    \end{gather*}
+
+    Если \( (\sqrt{3} - \sqrt{2})^{999} = a \sqrt{3} - b \sqrt{2} \), то
+    \begin{gather*}
+        (\sqrt{3} - \sqrt{2})^{999}(a \sqrt{3} + b \sqrt{2}) = 1 \\
+        a \sqrt{3} + b \sqrt{2} = \frac{1}{(\sqrt{3} - \sqrt{2})^{999}} = (\sqrt{3} + \sqrt{2})^{999}
+    \end{gather*}
+
+    Тогда если мы решим
+
+    \[
+        \begin{cases}
+            a \sqrt{3} - b \sqrt{2} = (\sqrt{3} - \sqrt{2})^{999} \\ 
+            a \sqrt{3} + b \sqrt{2} = (\sqrt{3} + \sqrt{2})^{999}
+        \end{cases}
+    \]
+
+    то очевидно, что такие \( a, b \) подойдут под условие.
+
+    Решением является:
+    \[
+        \begin{cases}
+            a = \frac{(\sqrt{3} - \sqrt{2})^{999} + (\sqrt{3} + \sqrt{2})^{999}}{2 \sqrt{3}} \\ 
+            b = \frac{(\sqrt{3} + \sqrt{2})^{999} - (\sqrt{3} - \sqrt{2})^{999}}{2 \sqrt{2}}
+        \end{cases}
+    \]
+
+    А значит подходящие \( a, b \) существуют. Что и требовалось доказать.
+
+    \bigskip
+
+    P.S. Если \( 999 \) заменить на \( n \), ничего не поменяется.
+
+    \newpage
+
+    \silentsubsection{Вопрос 4}
+
+    \textbf{Условие:}
+
+    Для любого ли конечного множества действительных чисел \( a_1, a_2, \ldots, a_n\)
+    существует такое \(m \in  \{0, 1, 2, \ldots, n\} \), что
+    \[
+        \left| \sum\limits_{k = 1}^{m} a_k - \sum\limits_{k = m + 1}^{n} a_k \right|
+        \leq
+        \max\limits_{1 \leq l \leq n} | a_l |
+    \]
+    (при \( m = 0 \) считаем равной нулю первую сумму, а при \( m = n \) --- вторую)?
+
+    \textit{(1.5 балла)}
+
+    \bigskip \bigskip
+
+    Обозначим левую часть неравенства без модуля за \( f(m) \), а правую --- за \( C \).
+    \begin{itemize}
+        \item 
+            \( | f(0) | \leq C \Rightarrow \) подходящее \( m \) существует.
+        \item
+            \( | f(0) | > C \)
+
+            Не умаляя общности, \( f(0) > C \).
+
+            \( f(n) = -f(0) \Rightarrow f(n) < -C \).
+
+            Предположим, что нужного \( m \) не существует. 
+            В таком случае
+            \begin{gather*}
+                \exists x \in \{ 0, 1, \ldots, n - 1 \} : ( f(x) > C ) \land ( f(x + 1) < -C )
+                \\
+                \begin{cases}
+                    f(x) > C
+                    \\
+                    f(x + 1) < -C
+                \end{cases}
+                \Rightarrow
+                f(x) - f(x + 1) > 2C
+                \Rightarrow
+                -2 a_{x + 1} > 2C
+                \Rightarrow
+                a_{x + 1} < -C
+            \end{gather*}
+
+            Но тогда \( | a_{x + 1} | > C = \max\limits_{0 \leq l \leq n} | a_l | \) --- противоречие.
+
+            Значит нужное \( m \) существует.
+    \end{itemize}
+
+    \textbf{Ответ:} да, всегда
+
+    \newpage
+
+    \silentsection{Листик 2}
+
+    \begin{center}
+        \textit{(Действительные числа)}
+    \end{center}
+
+    \silentsubsection{Вопрос 1}
+
+    \textbf{Условие:}
+
+    Найти все положительные числа, представимые двумя способами в виде бесконечной дроби с основанием \( q \)
+
+    \textit{(1 балл)}
+
+    \bigskip \bigskip
+
+    Как мы строим запись неотрицательного числа?
+
+    \begin{itemize}
+        \item
+            Разбиваем \( [0, +\infty) \) на отрезки длины \( 1 \): \( [0, 1], [1, 2], \ldots \)
+        \item
+            Целая часть --- номер отрезка (в \( 0 \)-индексации)
+        \item
+            Для получения дробной части:
+
+            Бьем наш отрезок, в который попало число, еще на \( q \) равных, первая цифра дробной части 
+            --- снова номер отрезка (в \( 0 \)-индексации).
+            Чтобы получить вторую часть, снова бьем отрезок, в который теперь попало число на \( q \) равных,
+            определяем вторую цифру дробной части, повторяем процедуру до бесконечности.
+    \end{itemize}
+
+    Когда будет неоднозначность?
+
+    В тот момент, когда число попадет на стык двух отрезков, после чего мы не сможем однозначно выбрать отрезок,
+    в котором оно лежит.
+    В таком случае число представимо двумя способами --- бесконечной дробью с периодом \( (0) \)
+    или с периодом \( (q - 1) \).
+
+    Нетрудно понять, что все такие положительные числа представимы в виде
+    \[
+        \frac{n}{q^k}, n \in \NN, k \in \NN_0
+    \]
+
+    Точная формулировка ответа будет немного нуднее, так как при определении рациональных чисел мы считали,
+    что числитель и знаменатель взаимнопросты.
+
+    \textbf{Ответ:}
+
+    Пусть \( p_1, p_2, \ldots, p_k \) --- все различные простые делители \( q \).
+
+    Число \( x \) представимо двумя способами в виде бесконечной дроби с основанием \( q \)
+    тогда и только тогда, когда
+    \begin{gather*}
+        x = \frac{n}{p_1^{d_1} p_2^{d_2} \ldots p_k^{d_k}}
+        \\
+        n \in \NN, p_1, p_2, \ldots, p_k \in \NN_0
+        \\
+        (x, p_1) = (x, p_2) = \ldots = (x, p_k) = 1
+    \end{gather*}
+
+    \newpage
+
+    \silentsubsection{Вопрос 2}
+
+    \textbf{Условие:}
+
+    Доказать, что выполнение одновременно аксиомы Архимеда и леммы о стягивающихся отрезках
+    равносильно выполнению аксиомы полноты.
+
+    \textit{(1 балл)}
+
+    \bigskip \bigskip
+
+    \begin{itemize}
+        \item
+            \( \Rightarrow \)
+
+            Есть \( A \leq B \)
+
+            Изначально возьмем \( a_1 \in A, b_1 \in B \). 
+
+            Если так совпало, что \( a_1 = b_1 \), то можно взять \( c = a_1 \).
+
+            И правда \( \forall a \in A, b \in B : a \leq b_1 = c, c = a_1 \leq b \)
+
+            Иначе будем строить последовательность стягивающихся отрезков.
+
+            \( I_1 = [a_1, b_1] \). 
+
+            Заметим, что в \( I_1 \) есть как элементы \( A \), так и элементы \( b \).
+
+            Поделим \( I_1 \) пополам.
+            Если в какой-то половине лежат числа и из \( A \), и из \( B \),
+            то сделаем следующим отрезком ее.
+            В противном случае разделителем является середина \( c = \frac{a_1 + b_1}{2} \):
+
+            Чтобы это доказать, рассмотрим \( a \in A \):
+
+            \( b_1 \in B, A \leq B \Rightarrow a \leq b_1 \),
+            но \( \left[ \frac{a_1 + b_1}{2}, b_1 \right] \cap A = \varnothing \),
+            а значит \( a \leq c \). 
+
+            Аналогично \( \forall b \in B \ c \leq b \)
+
+            Продолжим построение остальных отрезков аналогично:
+
+            Есть отрезок \( I_n = [a_n, b_n] \).
+            Важно, что в этом отрезке содержатся элементы и \( A \), и \( B \).
+            Если в какой-то из половин
+            \(
+                \left[ a_n, \frac{a_n + b_n}{2} \right), \left( \frac{a_n + b_n}{2}, b_n \right]    
+            \)
+            есть числа и из \( A \), и из \( B \), то возьмем ее следующим отрезком.
+            Иначе разделителем можно взять \( \frac{a_n + b_n}{2} \):
+
+            Действительно, возьмем какое-нибудь число \( b \in B \cap I_n \)
+            (такое обязательно есть, так как \( I_n \cap A, I_n \cap B \neq \varnothing \)).
+            \( A \leq B \Rightarrow \forall a \in A \ a \leq b \leq b_n \),
+            но \( \left( \frac{a_n + b_n}{2}, b_n \right] \cap A = \varnothing \),
+            поэтому \( \forall a \in A \ a \leq \frac{a_n + b_n}{2} \).
+
+            Аналогично \( \forall b \in B \ \frac{a_n + b_n}{2} \leq b \).
+
+            Либо когда-то найдем разделитель, либо получим последовательность вложенных отрезков.
+
+            По Бернулли \( 2^n = (1 + 1)^n \geq 1 + n \)
+
+            \( | I_n | = \frac{b_1 - a_1}{2^{n - 1}} \leq \frac{1}{n} \)
+
+            По аксиоме Архимеда \( \forall \varepsilon > 0 \ \exists n : \frac{1}{n} < \varepsilon \).
+
+            Значит длина отрезка стремится к нулю \( \Rightarrow \{ I_n \}_{n = 1}^{+ \infty} \) ---
+            последовательность стягивающихся отрезков.
+
+            А у таких отрезков всегда есть общая точка \( c \).
+
+            Предположим, что это не разделитель:
+
+            Не умаляя общности, \( \exists a' \in A : c < a' \).
+            Тогда \( a_n < c < a' \leq b_n \) (выше показывалось, почему \( A \leq \{ b_n \} \)).
+            Получаем, что \( | I_n | = b_n - a_n > a' - c \), 
+            то есть последовательность отрезков не является стягивающейся --- противоречие.
+        \item
+            \( \Leftarrow \)
+
+            \begin{enumerate}
+                \item
+                    Покажем выполнение леммы о стягивающихся отрезках
+
+                    Возьмем \( A = \{ a_1, a_2, \ldots, a_n, \ldots \}, B = \{ b_1, b_2, \ldots, b_n, \ldots \} \).
+
+                    Покажем, что \( A \leq B \):
+
+                    Для этого покажем, что \( \forall i, j \in \NN \ a_i \leq b_j \):
+                    \[
+                        a_i \leq a_{ \max \{ i, j \} } \leq b_{ \max\{ i, j \} } \leq b_j
+                    \]
+
+                    (неравенства выше верны в силу вложенности отрезков)
+
+                    Таким образом для любой последовательности вложенных отрезков у этих отрезков существует общая точка.
+
+                    Если длины стремятся к \( 0 \), то такая точка одна, иначе:
+                    \begin{gather*}
+                        \forall n \in \NN \ a_n \leq c_1 < c_2 \leq b_n
+                        \\
+                        \Downarrow
+                        \\
+                        \forall n \in \NN \ | I_n | > c_2 - c_1
+                    \end{gather*}
+
+                    Противоречие с тем, что последовательность стягивающаяся.
+                \item
+                    Покажем выполнение аксиомы Архимеда
+
+                    Покажем, что  \( \forall \varepsilon > 0 \ \forall x \ \exists n : n \varepsilon > x \).
+
+                    Зафиксируем \( \varepsilon > 0 \)
+
+                    Пусть \( A = \{ x \in \RR : \exists n : x < n \varepsilon \}, B = \RR \setminus A \)
+
+                    Если \( B = \varnothing \), то лемма Архимеда верна. Предположим обратное.
+
+                    \( 0 < \varepsilon \Rightarrow 0 \in A \).
+
+                    Значит \( A, B \neq \varnothing \).
+
+                    Предположим, что \( A \leq B \) неверно.
+                    Тогда \( \exists a \in A, b \in B : b < a \).
+                    Но
+                    \(
+                        a \in A \Rightarrow \exists n : a < n \varepsilon
+                        \Rightarrow 
+                        b < a < n \varepsilon \Rightarrow b \in A \Rightarrow b \notin B
+                    \) --- противоречие.
+
+                    Значит существует разделитель \( c \).
+
+                    Покажем, что разделитель единственный.
+                    Пусть есть \( c_1 < c_2 \).
+                    Но тогда \( \forall a \in A, b \in B \) выполнено \( a < c_1 < c_2 < b \),
+                    а значит \( \frac{c_1 + c_2}{2} \notin A, B \), но \( B = \RR \setminus A \) --- противоречие.
+
+                    Заметим, что \( A \leq \{ c \} \leq B \), а значит все числа \( < c \) принадлежат \( A \)
+                    (так как каждое число лежит либо в \( A \), либо в \( B \)).
+
+                    Но тогда рассмотрим \( c - \varepsilon \):
+                    \begin{gather*}
+                        c - \varepsilon < c \Rightarrow c - \varepsilon \in A
+                        \\
+                        \Downarrow
+                        \\
+                        \exists n \in \NN : c - \varepsilon < n \varepsilon \Rightarrow c + \varepsilon < (n + 2) \varepsilon
+                        \\
+                        \Downarrow
+                        \\
+                        c + \varepsilon \in A
+                    \end{gather*}
+
+                    Но \( c < c + \varepsilon \) --- противоречие.
+
+                    Значит изначально было \( B = \varnothing \Rightarrow A = \RR \),
+                    а именно это мы и хотели доказать.
+            \end{enumerate}
+    \end{itemize}
+
+    \newpage
+
+    \silentsection{Листик 3}
+
+    \begin{center}
+        \textit{(Последовательности и число \( e \))}
+    \end{center}
+
+    \silentsubsection{Вопрос 1}
+
+    \textbf{Условие:}
+
+    Пусть \( \lim\limits_{n \to \infty} a_n = a \)
+
+    \silentsubsubsection{а)}
+
+    \textbf{Условие:}
+
+    \( \lim\limits_{n \to \infty} \frac{a_1 + a_2 + \ldots + a_n}{n} = a \)
+
+    \textit{(1.5 балла)}
+
+    \bigskip \bigskip
+
+    Рассмотрим \( \varepsilon > 0 \)
+
+    \( \exists K : \forall n > K \ |a_n - a| < \frac{\varepsilon}{2} \).
+
+    Пусть \( C = a_1 + a_2 + \ldots + a_K \)
+    \begin{gather*}
+        \forall n > K
+        \\
+        \frac{C + (n - K)(a - \frac{\varepsilon}{2})}{n} 
+            < \frac{a_1 + a_2 + \ldots + a_n}{n} 
+            < \frac{C + (n - K)(a + \frac{\varepsilon}{2})}{n}
+    \end{gather*}
+
+    Очевидно, что левая и правая части неравенства стремятся к 
+    \( a - \frac{\varepsilon}{2} \) и \( a + \frac{\varepsilon}{2} \), соответственно.
+    \begin{gather*}
+        \exists N_1 > K : \forall n > N_1 \ \frac{C + (n - K)(a - \frac{\varepsilon}{2})}{n} > a - \varepsilon
+        \\
+        \exists N_2 > K : \forall n > N_2 \ \frac{C + (n - K)(a + \frac{\varepsilon}{2})}{n} < a + \varepsilon
+        \\
+        \Downarrow
+        \\
+        N = \max \{ N_1, N_2 \}
+        \\
+        \forall n > N \ a - \varepsilon < \frac{a_1 + a_2 + \ldots + a_n}{n} < a + \varepsilon
+    \end{gather*}
+
+    А значит \( \lim\limits_{n \to \infty} \frac{a_1 + a_2 + \ldots + a_n}{n} = a \)
+
+    Что и требовалось доказать.
+
+    \silentsubsubsection{б)}
+
+    \textbf{Условие:}
+
+    Если \( \forall n \in \NN \ a_n > 0 \), то и \( \lim\limits_{n \to \infty} \sqrt[n]{a_1 a_2 \cdot \ldots \cdot a_n} = a \)
+
+    \textit{(1 балл)}
+
+    \bigskip \bigskip
+
+    \begin{enumerate}
+        \item
+            \( a > 0 \) 
+
+            Рассмотрим \( 0 < \varepsilon < a \)
+
+            \( \exists K : \forall n > K \ 0 < a - \frac{\varepsilon}{2} < a_n < a + \frac{\varepsilon}{2} \).
+
+            Пусть \( C = a_1 a_2 \cdot \ldots \cdot a_K \)
+            \begin{gather*}
+                \forall n > K
+                \\
+                \sqrt[n]{C \left( a - \frac{\varepsilon}{2} \right)^{n - K}}
+                    < \sqrt[n]{a_1 a_2 \cdot \ldots \cdot a_n}
+                    < \sqrt[n]{C \left( a + \frac{\varepsilon}{2} \right)^{n - K}}
+            \end{gather*}
+
+            Очевидно, что левая и правая части неравенства стремятся к 
+            \( a - \frac{\varepsilon}{2} \) и \( a + \frac{\varepsilon}{2} \), соответственно.
+            \begin{gather*}
+                \exists N_1 > K : \forall n > N_1 \ \sqrt[n]{C \left( a - \frac{\varepsilon}{2} \right)^{n - K}} > a - \varepsilon
+                \\
+                \exists N_2 > K : \forall n > N_2 \ \sqrt[n]{C \left( a + \frac{\varepsilon}{2} \right)^{n - K}} < a + \varepsilon
+                \\
+                \Downarrow
+                \\
+                N = \max \{ N_1, N_2 \}
+                \\
+                \forall n > N \ a - \varepsilon < \sqrt[n]{a_1 a_2 \cdot \ldots \cdot a_n} < a + \varepsilon
+            \end{gather*}
+
+            А значит \( \lim\limits_{n \to \infty} \sqrt[n]{a_1 a_2 \cdot \ldots \cdot a_n} = a \)
+        \item
+            \( a = 0 \)
+
+            Рассмотрим \( 0 < \varepsilon \)
+
+            \( \exists K : \forall n > K \ 0 < a_n < \frac{\varepsilon}{2} \).
+
+            Пусть \( C = a_1 a_2 \cdot \ldots \cdot a_K \)
+            \begin{gather*}
+                \forall n > K
+                \\ 
+                0 < \sqrt[n]{a_1 a_2 \cdot \ldots \cdot a_n}
+                    < \sqrt[n]{C \left( \frac{\varepsilon}{2} \right)^{n - K}}
+            \end{gather*}
+
+            Очевидно, что правая часть неравенства стремится к \( \frac{\varepsilon}{2} \)
+            \begin{gather*}
+                \exists N > K : \forall n > N \ \sqrt[n]{C \left( \frac{\varepsilon}{2} \right)^{n - K}} < \varepsilon
+                \\
+                \Downarrow
+                \\
+                \forall n > N \ 0 - \varepsilon < 0 < \sqrt[n]{a_1 a_2 \cdot \ldots \cdot a_n} < 0 + \varepsilon
+            \end{gather*}
+
+            А значит \( \lim\limits_{n \to \infty} \sqrt[n]{a_1 a_2 \cdot \ldots \cdot a_n} = 0 \)
+    \end{enumerate}
+
+    Что и требовалось доказать.
+
+    \newpage
+
+    \silentsubsubsection{в)}
+
+    Если \( \forall n \in \NN \ a_n > 0 \) и \( \lim\limits_{n \to \infty} \frac{a_{n + 1}}{a_n} \), 
+    то \( \lim\limits_{n \to \infty} \sqrt[n]{a_n} = a \)
+
+    \textit{(1 балл)}
+
+    \bigskip \bigskip
+
+    \begin{gather*}
+        b_n = \frac{a_{n + 1}}{a_n}
+        \\
+        b_n > 0
+        \\
+        \lim\limits_{n \to \infty} b_n = a
+        \\
+        \lim\limits_{n \to \infty} \sqrt[n]{a_n} = \lim\limits_{n \to \infty} \sqrt[n] {b_1 b_2 \cdot \ldots \cdot b_{n - 1}}
+    \end{gather*}
+
+    Сводим к предыдущему пункту (внутри корня \( n - 1 \) множитель, а не \( n \), но не критично).
+
+    \newpage
+
+    \silentsubsection{Вопрос 2}
+
+    \textbf{Условие:}
+
+    \textbf{(Теорема Штольца).} 
+    Пусть \( \forall n \in \NN \ y_{n + 1} > y_n > 0 \) и \( \lim\limits_{n \to \infty} y_n = +\infty \),
+    а также \( \lim\limits_{n \to \infty} \frac{x_{n + 1} - x_n}{y_{n + 1} - y_n} = l \).
+    Доказать, что \( \lim\limits_{n \to \infty} \frac{x_n}{y_n} = l \).
+
+    \textit{(1.5 балла, если выводится из теоремы Теплица и 2 балла, если доказывается независимо)}
+
+    (Артем Александрович говорил, что то, как доказывать Штольца, будет решать проверяющий, а не Вы)
+
+    \bigskip \bigskip
+
+    \begin{itemize}
+        \item
+            Из Теплица:
+
+            \begin{gather*}
+                a_n = \frac{x_{n + 1} - x_n}{y_{n + 1} - y_n}
+                \\
+                c_{i j} = \frac{y_{j + 1} - y_j}{y_{i + 1}}
+            \end{gather*}
+
+            Убедимся, что \( c_{i j} \) удовлетворяют условиям теоремы Теплица:
+            \begin{gather*}
+                \lim\limits_{n \to \infty} c_{n k} = \frac{y_{k + 1} - y_k}{y_{n + 1}} = 0
+                \\
+                \lim\limits_{n \to \infty} \sum\limits_{k = 1}^{n} c_{n k}
+                    = \lim\limits_{n \to \infty} \frac{y_{n + 1} - y_1}{y_{n + 1}} 
+                    = 1
+                \\
+                \sum\limits_{k = 1}^{n} |c_{n k}| = \frac{y_{n + 1} - y_1}{y_{n + 1}} < 1
+            \end{gather*}
+
+            \begin{gather*}
+                b_n = \sum\limits_{k = 1}^{n} c_{nk} a_k
+                    = \frac{x_2 - x_1}{y_2 - y_1} \cdot \frac{y_2 - y_1}{y_{n + 1}} 
+                    + \ldots 
+                    + \frac{x_{n + 1} - x_n}{y_{n + 1} - y_n} \cdot \frac{y_{n + 1} - y_n}{y_{n + 1}}
+                    =
+                \\
+                = \frac{x_{n + 1} - x_1}{y_{n + 1}}
+                \\
+                \begin{rcases}
+                    \lim\limits_{n \to \infty} b_n = l
+                    \\
+                    \lim\limits_{n \to \infty} \frac{x_1}{y_{n + 1}} = 0
+                \end{rcases}
+                \Rightarrow
+                \lim\limits_{n \to \infty} \frac{x_{n + 1}}{y_{n + 1}} = l
+            \end{gather*}
+
+            Что и требовалось доказать.
+
+            \newpage
+        \item
+            Независимо:
+
+            Рассмотрим \( a_n = \frac{x_{n + 1} - x_n}{y_{n + 1} - y_n} \).
+            После домножения на знаменатель:
+            \begin{gather*}
+                x_2 - x_1 = a_1 (y_2 - y_1)
+                \\
+                \vdots
+                \\
+                x_{n + 1} - x_n = a_n (y_{n + 1} - y_n) 
+            \end{gather*}
+
+            Знаем, что \( a_n = l + \alpha_n \), где \( \alpha_n \) --- бесконечно малая последовательность.
+            Сложим все равенства:
+            \begin{gather*}
+                x_{n + 1} - x_1 = l (y_{n + 1} - y_1) + \alpha_1 (y_2 - y_1) + \ldots + \alpha_n (y_{n + 1} - y_n)
+                \\
+                x_{n + 1} = l y_{n + 1} - l y_1 + \alpha_1 (y_2 - y_1) + \ldots + \alpha_n (y_{n + 1} - y_n) + x_1
+                \\
+                \frac{x_{n + 1}}{y_{n + 1}} 
+                    = l + \frac{\alpha_1 (y_2 - y_1) + \ldots + \alpha_n (y_{n + 1} - y_n) + x_1 - l y_1}{y_{n + 1}}
+            \end{gather*}
+
+            Давайте покажем, что правая часть стремится к \( l \). 
+            Для этого докажем, что дробь стремится к нулю.
+
+            Очевидно, что \( \frac{x_1 - l y_1}{y_{n + 1}} \) стремится к \( 0 \) 
+            (в числителе константа, \( y_{n + 1} \to +\infty \)).
+            Остается разобраться с альфами.
+
+            Рассмотрим \( \varepsilon > 0 \)
+
+            \( \exists K : \forall n > K \ 0 < \alpha_n < \frac{\varepsilon}{2} \).
+
+            Пусть \( C = \alpha_1 (y_2 - y_1) + \ldots + \alpha_K (y_{K + 1} - y_K) \)
+            \begin{gather*}
+                b_n = \frac{\alpha_1 (y_2 - y_1) + \ldots + \alpha_n (y_{n + 1} - y_n)}{y_{n + 1}}
+                \\
+                \forall n > K
+                \\
+                b_n < \frac{C + \frac{\varepsilon}{2} ((y_{K + 2} - y_{K + 1}) + \ldots + (y_{n + 1} - y_n))}{y_{n + 1}}
+                \\
+                b_n < \frac{C + \frac{\varepsilon}{2} (y_{n + 1} - y_{K + 1})}{y_{n + 1}}
+            \end{gather*}
+
+            Очевидно, что правая часть неравенства стремится к \( \frac{\varepsilon}{2} \)
+            \begin{gather*}
+                \exists N > K : \forall n > N \ \frac{C + \frac{\varepsilon}{2} (y_{n + 1} - y_{K + 1})}{y_{n + 1}} < \varepsilon
+                \\
+                \Downarrow
+                \\
+                \forall n > N \ 0 - \varepsilon < 0 \leq b_n < 0 + \varepsilon
+            \end{gather*}
+
+            А значит \( \lim\limits_{n \to \infty} b_n = 0 \).
+
+            Что и требовалось доказать.
+    \end{itemize}
+
+    \newpage
+
+    \silentsubsection{Вопрос 3}
+
+    \textbf{Условие:}
+
+    Доказать, что
+
+    \bigskip \bigskip
+
+    P.S.
+    \begin{itemize}
+        \item
+            Нормально сформулированные доказательства а) и б) взяты из первого тома Фихтенгольца
+        \item
+            в), г) на эту тему есть \href{https://www.youtube.com/watch?v=uXaELjpY9ps}{видео} на youtube-канале HMath
+            (прикольный канал, всем советую)
+    \end{itemize}
+
+    \silentsubsubsection{а)}
+
+    \textbf{Условие:}
+
+    \( \lim\limits_{n \to \infty} ( 1 + \frac{1}{1!} + \frac{1}{2!} + \ldots + \frac{1}{n!} ) = e \)
+
+    \textit{(1.5 балла)}
+
+    \bigskip \bigskip
+
+    Пусть \( a_n = (1 + \frac{1}{n})^n  \) и \( b_n = 1 + \frac{1}{1!} + \frac{1}{2!} + \ldots + \frac{1}{n!} \).
+
+    \begin{gather*}
+        a_n = \left( 1 + \frac{1}{n} \right)^n
+        \\
+        = 1 + \frac{1}{1!} \left( 1 - \frac{0}{n} \right) 
+            + \frac{1}{2!} \left( 1 - \frac{0}{n} \right) \left( 1 - \frac{1}{n} \right)
+            + \ldots
+            + \frac{1}{n!} \left (1 - \frac{0}{n} \right) \ldots \left( 1 - \frac{n - 1}{n} \right)
+        \\
+        \leq 1 + \frac{1}{1!} + \frac{1}{2!} + \ldots + \frac{1}{n!} = b_n
+    \end{gather*}
+
+    Теперь давайте покажем, что \( \forall n \in \NN \ b_n \leq e \).
+
+    Зафиксируем какое-то \( k \in \NN \) и покажем, что \( b_k \leq e \)
+    \begin{gather*}
+        \forall n > k
+        \\
+        \left( 1 + \frac{1}{n} \right)^n 
+        > 1 + \frac{1}{1!} \left( 1 - \frac{0}{n} \right) 
+            + \ldots
+            + \frac{1}{k!} \left (1 - \frac{0}{n} \right) \ldots \left( 1 - \frac{k - 1}{n} \right)
+    \end{gather*}
+
+    После предельного перехода в неравенстве:
+    \[
+        e \geq 1 + \frac{1}{1!} + \ldots + \frac{1}{k!} = b_k
+    \]
+
+    Получили, что \( \forall n \in \NN \ a_n \leq b_n \leq e \).
+
+    Поскольку \( \lim\limits_{n \to \infty} a_n = e \), по теореме о зажатом пределе \( \lim\limits_{n \to \infty} b_n = e \).
+
+    Что и требовалось доказать.
+
+    \newpage
+
+    \silentsubsubsection{б)}
+
+    \textbf{Условие:}
+
+    \( e =  1 + \frac{1}{1!} + \frac{1}{2!} + \ldots + \frac{1}{n!} + \frac{\alpha_n}{n \cdot n!} \), 
+    причем \( 0 < \alpha_n < 1 \).
+
+    \textit{(1.5 балла)}
+
+    \bigskip \bigskip
+
+    \begin{gather*}
+        y_{n + p} - y_n = \frac{1}{(n + 1)!} + \frac{1}{(n + 2)!} + \ldots + \frac{1}{m!}
+        \\
+        y_{n + p} - y_n = \frac{1}{(n + 1)!} \left( 1 + \frac{1}{n + 1} + \ldots + \frac{1}{(n + 1)(n + 2) \ldots (n + p - 1)} \right)
+        \\
+        y_{n + p} - y_n \leq \frac{1}{(n + 1)!} \left( 1 + \frac{1}{n + 1} + \ldots + \frac{1}{(n + 1)^{(p - 1)}} \right)
+    \end{gather*}
+
+    После предельного перехода и применения суммы убывающей геометрической прогрессии:
+    \begin{gather*}
+        e - y_n \leq \frac{1}{(n + 1)!} \cdot \frac{n + 2}{n + 1}
+        \\
+        0 \leq e - y_{n + 1} < e - y_n < \frac{1}{(n + 1)!} \cdot \frac{n + 2}{n + 1} 
+            < \frac{1}{(n + 1)!} \cdot \frac{n + 1}{n} = \frac{1}{n \cdot n!}
+        \\
+        0 < \frac{\alpha_n}{n \cdot n!} < \frac{1}{n \cdot n!}
+    \end{gather*}
+
+    А значит действительно верно, что \( 0 < \alpha_n < 1 \)
+
+    \newpage
+
+    \silentsubsubsection{в)}
+
+    \textbf{Условие:}
+
+    \( e \) --- иррациональное
+
+    \textit{(1 балл)}
+
+    \bigskip \bigskip
+
+    Пусть это не так и \( e = \frac{m}{n} \)
+
+    Уже знаем, что
+    \( \frac{m}{n} = e = 1 + \frac{1}{1!} + \frac{1}{2!} + \ldots + \frac{1}{n!} + \frac{\alpha_n}{n \cdot n!} \)
+    и \( 0 < \alpha_n < 1 \)
+
+    Но после умножения на \( n! \) обеих сторон равенства слева будет целое число,
+    а справа --- нет, так как \( \frac{\alpha_n}{n} \) --- нецелое (так как \( 0 < \alpha_n < 1 \)).
+
+    Получили противоречие \( \Rightarrow e \) --- иррациональное.
+
+    \newpage
+
+    \silentsubsubsection{г)}
+
+    \textbf{Условие:}
+
+    \( \lim\limits_{n \to \infty} \sin (2 \pi e n!) = 0 \)
+
+    \textit{(1 балл)}
+
+    \bigskip \bigskip
+
+    \begin{gather*}
+        \sin (2 \pi e n!)
+        =
+        \\
+        = 
+        \sin \left( 2 \pi n! \left( 1 + \frac{1}{1!} + \frac{1}{2!} + \ldots + \frac{1}{n!} + \frac{\alpha_n}{n \cdot n!} \right) \right) 
+        =
+        \\
+        =
+        \sin \left( 
+            2 \pi \left( n! + \frac{n!}{1!} + \frac{n!}{2!} + \ldots + \frac{n!}{n!} \right) + \frac{2 \pi \alpha_n}{n} 
+            \right) 
+        =
+        \\
+        =
+        \sin \left( \frac{2 \pi \alpha_n}{n} \right)
+    \end{gather*}
+
+
+    Поскольку \( 0 < \alpha_n < 1 \), очевидно, что \( \lim\limits_{n \to \infty} \frac{2 \pi \alpha_n}{n} = 0 \).
+
+    По непрерывности синуса (если ее нельзя, то лапками разбирайтесь)
+    \[
+        \lim\limits_{n \to \infty} \sin (2 \pi e n!) 
+        = 
+        \lim\limits_{n \to \infty} \sin \left( \frac{2 \pi \alpha_n}{n} \right)
+        =
+        0
+    \]
+
+    \newpage
+
+    \silentsection{Листик 4}
+
+    \begin{center}
+        \textit{(Частичные пределы и критерий Коши)}
+    \end{center}
+
+    \silentsubsection{Вопрос 1}
+
+    \textbf{Условие:}
+
+    Доказать, что из последовательности функций \( f_n : A \to [0, 1] \) можно выбрать подпоследовательность,
+    сходящуюся в каждой точке \( A \), если:
+
+    \silentsubsubsection{а)}
+
+    \textbf{Условие:}
+
+    \( A = \{ 1, 2, \ldots, n \} \)
+
+    \textit{(1 балл)}
+
+    \bigskip \bigskip
+
+    Поступим так же, как и со сходящейся подпоследовательностью.
+
+    Но теперь будем опираться на \( n \) отрезков --- для каждого элемента \( A \).
+
+    Пусть у нас есть набор отрезков \( ( J_1, J_2, \ldots, J_n ) \).
+    Тогда функция \( f \) удовлетворяет набору, если  \( \forall i \in \{ 1, 2, \ldots, n \} \ f(i) \in J_i \)
+
+    Изначально для каждого у нас набор вида \( J_1 = J_2 = \ldots = J_n = [0, 1] \).
+
+    Теперь давайте поделим каждый отрезок пополам.
+    Теперь сделаем \( 2^n \) наборов из половин (то есть возьмем от каждого отрезка только половину).
+    Причем \( i \)-й элемент набора (\( J_i \)) -- какая-то половина отрезка для \( f(i) \).
+    Давайте для каждого набора возьмем все такие функции, которые ему удовлетворяют.
+
+    Заметим, что поскольку наборов конечно, а набор, из которого мы строили новые, удовлетворяет счетное число функций,
+    какому-то набору половин удовлетворяет счетное число функций.
+
+    Давайте возьмем его новым набором и продолжим шаг.
+
+    Делая так, мы построим последовательности стягивающихся отрезков сразу для \( f(1), f(2), \ldots, f(n) \).
+
+    (понятно, что нужно еще выбрать кандидатов из функций, которые удовлетворяют каждому набору, но это несложно,
+    так как на каждом шаге у нас будет ``заблокировано'' лишь конечное число функций)
+
+    \newpage
+
+    \silentsubsubsection{б)}
+
+    \textbf{Условие:}
+
+    \( A = \NN \)
+
+    \textit{(1.5 балла)}
+
+    \bigskip \bigskip
+
+    Нам не нужна равномерная сходимость, поэтому давайте немного адаптируем решение из пункта а).
+
+    Будем называть удовлетворяющим набору размера \( n \) все функции такие, 
+    что \( \forall i \in \{ 1, 2, \ldots, n \} \ f(i) \in J_i \)
+    (то есть теперь нас интересует только префикс значений области определения, потому что набор конечный).
+
+    Пусть у нас сейчас набор \( ( J_1, J_2, \ldots, J_n ) \).
+
+    Немного изменим процесс выбора следующего набора.
+    Помимо половин, давайте просто ко всем наборам добавим \( J_{n + 1} = [0, 1] \) --- стартовый отрезок для \( f(n + 1) \).
+
+    То есть после каждого шага наш набор будет увеличиваться на \( 1 \) отрезок.
+
+    Продолжая строить так отрезки, мы сможем построить последовательность стягивающихся отрезков для любого \( f(n) \).
+
+    \newpage
+
+    \silentsubsection{Вопрос 2}
+
+    \textbf{Условие:}
+
+    Найти все частичные пределы, точные верхние и точные нижние грани последовательности \( a_n \)
+
+    \silentsubsubsection{а)}
+
+    \textbf{Условие:}
+
+    \( a_n = \sin n \)
+
+    \textit{(1.5 балла)}
+
+    \bigskip \bigskip
+
+    Кажется, это называется теоремой Кронекера. 
+
+    Покажем, что
+    \begin{gather*}  
+        \forall \varepsilon > 0, \ a \in [0, 2 \pi), \ N \in \NN
+        \\
+        \exists n, k \in \NN : n > N, \ |2 \pi k + a - n| < \varepsilon
+    \end{gather*}
+
+    Зафиксируем \( \varepsilon > 0 \).
+
+    Теперь разобьем окружность длиной \( 2 \pi \) на дуги размера \( \varepsilon \) (последняя дуга, возможно будет меньше).
+
+    Начнем отмечать, куда попадают \( n > N \) на этой окружности.
+    По принципу Дирихле в какую-то дугу точно попадут две точки.
+    Если они совпали, то \( m - n = 2 \pi k \), где \( n, m, k \in \NN \) --- противоречие, ведь \( \pi \) иррациональное.
+
+    В противном случае мы знаем, что за \( m - n \) ``прыжков'' точки мы умеем сдвигаться по окружности \( \leq \varepsilon \)
+    в какую-то сторону.
+    Давайте теперь совершать толькор такие прыжки --- поскольку их длина не превышает длины дуги, 
+    мы обязательно попадем во все дуги, на которые мы разбили окружность.
+    А значит можем подобраться к любому числу на этой окружности с любой точностью
+    (причем отбросив первые члены последовательности).
+
+    Отсюда понятно, что точные нижняя и верхняя грани \( a_n \) --- \( -1 \) и \( 1 \), соответственно,
+    а все частичные пределы --- \( [-1, 1] \)
+
+    \textbf{Ответ:}
+
+    \( \inf a_n = -1 \) 
+
+    \( \sup a_n = 1 \)
+
+    Все частичные пределы --- \( [-1, 1] \)
+
+    \newpage
+
+    \silentsubsubsection{б)}
+
+    \textbf{Условие:}
+
+    \( a_n = \max \{ |\sin n|, |\sin (n + 1)| \} \)
+
+    \textit{(1.5 балла)}
+
+    \bigskip \bigskip
+
+    Давайте поймем, что \( a_n \) может быть бесконечно близко к любому числу на отрезке \( [\sin 0.5, 1] \)
+
+    И правда, пусть надо приблизить
+    \[
+        \sin x, x \in \left[ 0.5, \frac{\pi}{2} \right]
+    \]
+
+    Мы точно можем найти \( \forall N \in \NN \ n > N \) такое,
+    что оно на окружности попадет в \( (x, x + \varepsilon) \) или \( (x - \varepsilon, x) \) 
+    (главное, чтобы этот интервал был внутри \( \left[ 0.5, \frac{\pi}{2} \right] \))
+    для любого достаточно маленького \( \varepsilon > 0 \).
+
+    Заметим, что в таком случае,
+    \begin{gather*}
+        0 \leq |n - 1| \leq |n| < \frac{\pi}{2}
+        \\
+        \Downarrow
+        \\
+        \max \{ |\sin (n - 1)|, |\sin n| \} = \sin n
+    \end{gather*}
+
+    В силу непрерывности синуса получим, что  \( \sin n \) может достаточно точно приблизить \( \sin x \).
+
+    С другой стороны понятно, что если \( | \sin n | < \sin 0.5 \), то \( | \sin (n + 1) | \geq \sin 0.5 \), и наоборот.
+    А значит все значения \( \{ a_n \} \) хотя бы \( \sin 0.5 \).
+
+    Тогда понятно, что нижняя и верхняя грани --- \( \sin 0.5, \) и \( 1 \), 
+    а \( [ \sin 0.5, 1 ] \) --- все частичные пределы.
+
+    \textbf{Ответ:}
+
+    \( \inf a_n = \sin 0.5 \)
+
+    \(\sup a_n = 1 \)
+
+    Все частичные пределы --- \( [\sin 0.5, 1] \)
+
+    \newpage
+
+    \silentsubsubsection{в)}
+
+    \textbf{Условие:}
+
+    Пусть \( s_n = a_1 + a_2 + \ldots + a_n \to +\infty \), при любом \( k \) выполнено \( a_k > 0 \), 
+    \( \lim\limits_{k \to \infty} a_k = 0 \).
+
+    Найти множество частичных пределов дробных частей элементов \( s_n \).
+
+    \textit{(1.5 балла)}
+
+    \bigskip \bigskip
+
+    Делаем то же самое, что и в предыдущих пунктах, только теперь окружность длины \( 1 \).
+
+    Разобьем ее на дуги длины \( \varepsilon \).
+    Поскольку \( a_n > 0 \) и \( \lim\limits_{n \to \infty} a_n = 0 \), с какого-то момента \( 0 < a_n < \varepsilon \).
+    А значит прыжки по окружности становятся меньше длины дуги.
+    \( \lim\limits_{n \to \infty} s_n = +\infty \), поэтому нам хватит суммарной длины прыжков,
+    чтобы попасть в каждую дугу.
+
+    Таким образом, мы умеем попадать в любую дугу заданного размера. 
+    Значит \( s_n \) может быть бесконечно близко к любой точке окружности.
+    Отсюда искомые частичные пределы --- \( [0, 1) \).
+
+    \textbf{Ответ:}
+
+    \( [0, 1] \)
+
+    \newpage
+
+    \silentsubsection{Вопрос 3}
+
+    \textbf{Условие:}
+
+    Имеет ли предел последовательность \( a_n = \sum\limits_{k = 1}^{n} \frac{\cos \sqrt{k}}{\sqrt{k}} \) ?
+
+    \textit{(1.5 балла)}
+
+    \bigskip \bigskip
+
+    Покажем невыполнение критерия Коши.
+
+    Постараемся найти много \( \cos \sqrt{k} \geq \frac{1}{2} \), идущих подряд.
+
+    \( 2 \pi l - \frac{\pi}{3} \leq \sqrt {k} \leq 2 \pi l + \frac{\pi}{3}, \ l \in \NN \) --- в таком случае
+    косинус будет именно таким, каким нам нужно. Какие тогда ограничения на \( k \)?
+    \begin{gather*}
+        2 \pi l - \frac{\pi}{3} \leq \sqrt {k} \leq 2 \pi l + \frac{\pi}{3}, \ l \in \ZZ
+        \\
+        \left( 2 \pi l - \frac{\pi}{3} \right)^2 \leq k \leq \left( 2 \pi l + \frac{\pi}{3} \right)^2
+        \\
+        4 \pi^2 l^2 - \frac{4 \pi^2 l}{3} + \frac{\pi^2}{9} \leq k \leq 4 \pi^2 l^2 + \frac{4 \pi^2 l}{3} + \frac{\pi^2}{9}
+    \end{gather*}
+
+    Получили отрезок прямой длиной \( \frac{8 \pi^2 l}{3} \).
+
+    Очевидно, что в нем хотя бы \( \frac{8 \pi^2 l}{3} - 1 \) натуральных чисел.
+
+    Пусть это числа от \( L \) до \( R \).
+
+    Но тогда
+    \begin{gather*}
+        \sum\limits_{k = L}^{R} \frac{\cos \sqrt{k}}{\sqrt{k}} \geq \sum\limits_{k = L}^{R} \frac{1}{2 \sqrt k}
+            \geq \frac{R - L + 1}{2 \sqrt R}
+        \\
+        \sum\limits_{k = L}^{R} \frac{\cos \sqrt{k}}{\sqrt{k}}
+            \geq \frac{\frac{8 \pi^2 l}{3} - 1}{2 \pi l + \frac{\pi}{3}}
+            \geq \frac{\pi^2 l}{4 \pi l} 
+            = \frac{\pi}{4}
+    \end{gather*}
+
+    Поскольку \( \forall N \in \NN \) мы можем найти пару \( (L, R) \) такую, что \( L > N \), 
+    получили противоречие критерию Коши.
+
+    \newpage
+
+    \silentsection{Листик 5}
+
+    Очень подозрительно, но тут нет дополнительных вопросов к коллоквиуму...
+
+    \newpage
+
+    \silentsection{Листик 6}
+
+    много буков не осилил
+
+    \newpage
+\end{document}

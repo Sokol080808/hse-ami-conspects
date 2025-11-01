@@ -1,0 +1,357 @@
+\section{Предел функции}
+
+\begin{defn}{Предел функции по Коши}{}
+    Пусть \( f : E \to \RR \).
+
+    Пусть \( a \in E \). 
+    Тогда \( \lim\limits_{x (\in E) \to a} f(x) = A \)
+
+    \[
+        \Updownarrow
+    \]
+
+    \[
+        \forall \varepsilon > 0 \ \exists \delta > 0 : \forall x : x \in E \land 0 < |x - a| < \delta \ |f(x) - A| < \varepsilon
+    \]
+
+    Через окрестности:
+    \[
+        \forall V_{\varepsilon}(A) \ \exists \mathring{U_\delta} (a) : 
+        \forall x \in E \cap \mathring{U_\delta} (a) \ f(x) \in V_{\varepsilon} (A)
+    \]
+\end{defn}
+
+\begin{defn}{Предел функции по Гейне}{}
+    \[
+        \lim\limits_{x (\in E) \to a} f(x) = A
+        \Leftrightarrow
+        \forall \{ a_n \} \in E : ( \ \lim\limits_{n \to \infty} a_n = a \land a_n \neq a \ \forall n \in \NN ) 
+        \ \lim\limits_{n \to \infty} f(a_n) = A
+    \]
+\end{defn}
+
+\begin{example}{}{}
+    \( \lim\limits_{x \to a} x^2 = a^2 \)
+\end{example}
+\begin{gather*}
+    \forall \varepsilon > 0 \ \exists \delta > 0 : \forall x : 0 < |x - a| < \delta |x - a| < \varepsilon
+    \\
+    |x^2 - a^2| = |x - a||x + a| < \delta |x - a + 2a| < \delta(\delta + 2|a|) < \varepsilon
+\end{gather*}
+
+Последнее неравенство очевидно имеет положительные корни.
+\begin{example}{Функция Дирихле}{}
+    \[
+        D(x) 
+        =
+        \begin{cases}
+            1, x \in \QQ
+            \\
+            0, x \in \II
+        \end{cases}
+    \]
+\end{example}
+
+Не имеет предела ни в какой точке.
+
+\begin{thrm}{}{}
+    Определение по Коши \( \Leftrightarrow \) определение по Гейне
+\end{thrm}
+
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+
+        Рассмотрим \( \forall \)-ю \( \{ a_n \} : a_n \neq a \ \forall n \in \NN \) и \( a_n \to a \)
+
+        Тогда 
+        \( 
+            \forall \mathring{U_{\varepsilon}} (a) \ \exists N \in \NN : 
+            \forall n > N \ a_n \in \mathring{U_{\varepsilon}} (a) \Rightarrow f(a_n) \in V_{\varepsilon} (A)
+        \)
+    \item
+        \( \Leftarrow \)
+
+        От противного
+
+        \( 
+            \exists \varepsilon > 0 : \forall \delta > 0 : \exists x : 
+            0 < |x - a| < \varepsilon \land |f(x) - A| \geq \varepsilon 
+        \)
+
+        При
+        \(
+            \delta = \frac{1}{n} \exists x_n \in \mathring{U_{\frac{1}{n}}} : |f(a_n) - A| \geq \varepsilon
+        \)
+
+        Имеем \( \{ x_n \} : \lim\limits_{n \to \infty} x_n = a \) и \( x_n \neq a \ \forall n \in \NN \).
+
+        Тогда \( \lim\limits_{n \to \infty} f(x_n) = A \), но \( 0 = \lim\limits_{n \to \infty} |f(x_n) - A| \geq eps > 0 \)
+\end{itemize}
+
+\begin{thrm}{Свойства пределов}{}
+    Пусть \( f, g, h : E \to \RR \).
+
+    \( a \in E, \lim\limits_{x \to a} f(x) = A, \lim\limits_{x \to b} g(x) = B \).
+
+    Тогда
+    \begin{enumerate}
+        \item
+            \( A \) --- единственный предел функции \( f \)
+        \item
+            \( \forall \alpha, \beta \in \RR \ \lim\limits_{x \to a} (\alpha f(x) + \beta g(x)) = \alpha A + \beta B \)
+        \item
+            \( \lim\limits_{x \to a} f(x)g(x) = AB \)
+        \item
+            Пусть 
+            \( 
+                B \neq 0, g(x) \neq 0 \ \forall x \in E \Rightarrow \lim\limits_{x \to a} \frac{f(x)}{g(x)} = \frac{A}{B} 
+            \)
+        \item
+            \( \exists \mathring{U} (a) : \forall x \in \mathring{U}(a) \ f(x) \leq g(x) \Rightarrow A \leq B \)
+        \item
+            \( \exists C > 0, \mathring{U}(a) : \forall x \in \mathring{U}(a) \ |f(x)| \leq C \)
+        \item
+            Если \( \exists \mathring{U}(a) : \forall x \in \mathring{U}(a) \ f(x) \leq h(x) \leq g(x) \)
+            и \( A = B \), то \( \lim\limits_{x \to a} = h(x) = A = B \)
+        \item
+            Если \( B \neq 0 \), то \( \exists \mathring{U}(a) : \forall x \in \mathring{U}(a) \ |g(x)| \geq \frac{|B|}{2} \)
+    \end{enumerate}
+\end{thrm}
+
+\( 1-5, 7 \) следуют из свойств пределов последовательности и определения по Гейне
+
+\( 6, 8 \) следуют из определения по Коши
+
+\begin{thrm}{}{}
+    \begin{gather*}
+        g : D \to \RR,  b \in D
+        \\
+        f : E \to D, a \in E
+        \\
+        \exists \mathring{U}(a) : \forall x \in \mathring{U}(a) \ f(x) \neq b
+        \\
+        \\
+        \lim\limits_{x \to a} f(x) = b, \lim\limits_{y \to b} g(y) = c \Rightarrow \lim\limits_{x \to a} g(f(x)) = c
+    \end{gather*}
+\end{thrm}
+
+\(
+    \forall \{ a_n \} \subset E : a_n \to a, a_n \neq a \ \forall n \in \NN \ f(a_n) \to b, f(a_n) \neq b \ \forall n \in \NN
+\)
+при достаточно больших \( n \)
+
+Можно считать, что \( \forall n \in \NN \ f(a_n) \neq b \)
+
+Тогда \( g(f(a_n)) \to c \) верно по определению по Гейне
+
+Ну по Коши там тоже чето получится.
+
+\begin{example}{}{}
+    \begin{gather*}
+        \lim\limits_{y \to \infty} g(y) = A, f(x) = \frac{1}{x}
+        \\
+        \lim\limits_{x \to 0+} g \left( \frac{1}{x} \right) = A
+    \end{gather*}
+\end{example}
+
+
+\begin{thrm}{Первый замечательный предел}{}
+    \[
+        \lim\limits_{x \to 0} \frac{\sin x}{x} = 1
+    \]
+\end{thrm}
+
+Доказательство:
+
+Покажем, что
+\[
+    \forall x \in \left[ 0, \frac{\pi}{2} \right) \ x \cos x \leq \sin x \leq x
+\]
+
+Длина окружности --- супремум длин вписанных в нее ломанных.
+Длина ломанной больше или равна длины хорды, стягивающей дугу.
+Отсюда длина дуги (\( x \)) больше или равна хорды, которая больше равна \( \sin(x) \).
+
+%TODO рисунок вставить
+
+Тогда \( 2 \tan x \geq 2x \)
+
+\( 0 < \sin x \leq x \Rightarrow \) по лемме о зажатом пределе \( \lim\limits_{x \to 0+} \sin x = 0 \)
+
+\( \lim\limits_{x \to 0+} \cos x = \lim\limits_{x \to 0+} (1 - 2 \sin \frac{x}{2}) = 1 \) 
+\begin{gather*}
+    x \cos x \leq \sin x \leq x
+    \\
+    \cos x \leq \frac{\sin x}{x} \leq 1
+\end{gather*}
+
+Возьмем \( \lim\limits_{x \to 0+} \), по лемме о зажатом пределе получим 
+\( \lim\limits_{x \to 0+} \frac{\sin x}{x} = 1 \)
+
+Для отрицательных \( x \) верно в силу четности всех функций.
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( \displaystyle \lim\limits_{x \to 0} \cos x = 1 \)
+
+            \( \displaystyle \lim\limits_{x \to 0} \sin x = 0 \)
+        \item
+            \( \displaystyle \lim\limits_{x \to 0} \frac{\sin 7x}{x} = 7 \)
+        \item
+            \( 
+                \displaystyle
+                \lim\limits_{x \to 0} \frac{\tan x}{x} 
+                = \lim\limits_{x \to 0} \frac{\sin x}{x} \cdot \frac{1}{\cos x} = 1
+            \)
+        \item
+            \(
+                \displaystyle
+                \lim\limits_{x \to 0} \frac{\arctan x}{x} =
+                \left[
+                    \begin{gathered}
+                        \arctan x = t
+                        \\
+                        x = \tan t
+                        \\
+                        t \to 0
+                    \end{gathered}
+                \right] =
+                \lim\limits_{t \to 0} \frac{t}{\tan t} = 1
+            \)
+        \item
+            \(
+                \displaystyle
+                \lim\limits_{x \to 0} \frac{\arcsin x}{x} =
+                \left[
+                    \begin{gathered}
+                        \arcsin x = t
+                        \\
+                        x = \sin t
+                        \\
+                        t \to 0
+                    \end{gathered}
+                \right] =
+                \lim\limits_{t \to 0} \frac{t}{\sin t} = 1
+            \)
+        \item
+            \(
+                \displaystyle
+                \lim\limits_{x \to 0} \frac{1 - \cos x}{x^2} =
+                \lim\limits_{x \to 0} \frac{2 \sin^2 \frac{x}{2}}{x^2} =
+                \frac{1}{2} \lim\limits_{x \to 0} 
+                    \frac{\sin \frac{x}{2} \cdot \sin \frac{x}{2}}{\frac{x}{2} \cdot \frac{x}{2}} =
+                \frac{1}{2}
+            \)
+    \end{enumerate}
+\end{example}
+
+\begin{defn}{}{}
+    Функция \( f \) эквивалентна функции \( g \), 
+    если \( \exists \gamma : \) при \( x \to a \) верно \( f(x) = \gamma(x) g(x) \) и 
+    \( \lim\limits_{x \to a} \gamma (x) = 1 \)
+
+    При \( g(x) \neq 0 \) при \( x \to a \) это равносильно \( \lim\limits_{x \to a} \frac{f(x)}{g(x)} = 1 \)
+\end{defn}
+
+\begin{example}{}{}
+    При \( x \to 0 \):
+    \begin{gather*}
+        \tan x \sim \sin x \sim x \sim \arcsin x \sim \arctan x
+        \\
+        1 - \cos x \sim \frac{x^2}{2}
+    \end{gather*}
+\end{example}
+
+Теперь можем посчитать:
+\begin{gather*}
+    \lim\limits_{x \to 0} \frac{\sin 3x}{\arctan 10x} = \lim\limits_{x \to 0} \frac{3x}{10x} = \frac{3}{10}
+    \\
+    \\
+    \lim\limits_{x \to 0} \frac{\tan x - \sin x}{x^3}
+        = \lim\limits_{x \to 0} \frac{\sin x}{x} \cdot \frac{1 - \cos x}{x^2} \cdot \frac{1}{\cos x}
+            = \frac{1}{2}
+\end{gather*}
+
+\textbf{Важно:} во втором пределе нельзя заменить \( \tan x \) и \( \sin x \) на \( x \) --- получится бред.
+
+\begin{thrm}{Второй замечательный предел}{}
+    \begin{enumerate}
+        \item
+            \( \displaystyle \lim\limits_{x \to +\infty} \left( 1 + \frac{1}{x} \right)^x = e \)
+        \item
+            \( \displaystyle \lim\limits_{x \to -\infty} \left( 1 + \frac{1}{x} \right)^x = e \)
+        \item 
+            \( \displaystyle \lim\limits_{x \to 0} (1 + x)^{\frac{1}{x}} = e \)
+    \end{enumerate}
+\end{thrm}
+
+Доказательство:
+\begin{gather*}
+    \lim\limits_{n \to \infty} \left( 1 + \frac{1}{n} \right)^{n + 1} = e
+    \\
+    \lim\limits_{n \to \infty} \left( 1 + \frac{1}{n + 1} \right)^{n} = e
+\end{gather*}
+
+\begin{gather*}
+    \forall \varepsilon > 0 \ \exists N \in \NN :
+    \\
+    \left| \left( 1 + \frac{1}{n + 1} \right)^{n} - e \right| < \varepsilon
+    \\
+    \left| \left( 1 + \frac{1}{n} \right)^{n + 1} - e \right| < \varepsilon
+\end{gather*}
+
+Пусть \( x > N + 100 \)
+\[
+    e - \varepsilon 
+    < 
+    \left( 1 + \frac{1}{[x] + 1} \right)^{[x]} 
+    \leq
+    \left( 1 + \frac{1}{x} \right)^x
+    \leq
+    \left( 1 + \frac{1}{[x]} \right)^{[x] + 1}
+\]
+
+Пусть \( x \to -\infty \), сделаем \( t = -x, t \to +\infty \)
+\[
+    \left( 1 + \frac{1}{x} \right)^x = \left( 1 + \frac{1}{-t} \right)^{-t} = \left( 1 + \frac{1}{t - 1} \right)^t 
+\]
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \(
+                \displaystyle
+                \lim\limits_{x \to 0} \frac{\ln (1 + x)}{x} = \lim\limits_{x \to 0} \ln (1 + x)^{\frac{1}{x}} = \ln e = 1
+            \)
+        \item
+            \(
+                \displaystyle
+                \lim\limits_{x \to 0} \frac{e^x - 1}{x} = 
+                \left[
+                    \begin{gathered}
+                        e^x - 1 = t
+                        \\
+                        x = \ln (1 + t)
+                        \\
+                        t \to 0
+                    \end{gathered}
+                \right]
+                =
+                \lim\limits_{t \to 0}\frac{t}{\ln (1 + t)} = 1
+            \)
+        \item
+            \begin{gather*}
+                \lim\limits_{x \to 0} \frac{(1 + x)^{\alpha} - 1}{x}
+                =
+                \lim\limits_{x \to 0} \frac{e^{\alpha \ln (1 + x)} - 1}{x}
+                =
+                \\
+                =
+                \alpha \lim\limits_{x \to 0} \frac{e^{\alpha \ln (1 + x)} - 1}{\alpha \ln (1 + x)}
+                =
+                \alpha \lim\limits_{t \to 0} \frac{e^t - 1}{t} = \alpha
+            \end{gather*}
+    \end{itemize}
+\end{example}

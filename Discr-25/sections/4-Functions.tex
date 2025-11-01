@@ -1,0 +1,175 @@
+\section{Функции}
+
+\begin{defn}{Упорядоченная пара}{}   
+    \( (a, b) = \{ \{ a \}, \{ a, b \} \} \)
+\end{defn}
+
+\begin{defn}{Декартово произведение}{cartesian-product}
+Декартово произведение множеств \( A \) и \( B \) обозначается \( A \times B \)
+и является множеством всех упорядоченных пар \( (a, b) \), где \( a \in A, b \in B \).
+
+\[
+    A \times B = \{ (a, b) \ \vline \ a \in A, b \in B \}
+\]
+\end{defn}
+
+\begin{defn}{Функция}{function}
+Подмножество \( f \) декартова произведения \( X \times Y \) 
+называется функцией из \( X \) в \( Y \) (\(f : X \rightarrow Y \)), если 
+\( \forall x \in X \: \exists ! \ (x, y) \in f \)
+\end{defn}
+
+\( y = f(x) \).
+
+\( x \) --- прообраз \( y \), \( y \) --- образ \( x \).
+
+\( X \) --- область определения, \( Y \) --- область значений.
+
+Когда пишут \( f : X \rightarrow Y \) обычно считают,
+что \( X \) --- полная область определения, то есть
+\( f \) определена на всем \( X \).
+Тогда \( f \) --- тотальная функция.
+
+\begin{defn}{Инъекция}{}
+    \( f \) --- инъекция (вложение) множества \( X \) на множество \( Y \), 
+    если
+    \[
+        f(x_1) = f(x_2) \Rightarrow x_1 = x_2
+    \]
+\end{defn}
+\begin{defn}{Сюръекция}{}
+    \( f \) --- сюръекция (накрытие) множества \( X \) на множество \( Y \), 
+    если
+    \[
+        \forall y \in Y \: \exists x \in X : f(x) = y
+    \]
+\end{defn}
+\begin{defn}{Биекция}{}
+    \( f \) --- биекция множества \( X \) на множество \( Y \), если она является и сюръекцией, и инъекцией.
+\end{defn}
+
+\subsection{Композиция функций}
+
+\begin{defn}{Композиция}{}
+    Пусть есть тотальные \( f : A \to B, g : B \to C \)
+
+    Определим функцию \( g \circ f : A \to C \)
+
+    \( (g \circ f)(a) = g(f(a)) \)
+\end{defn}
+
+\begin{thrm}{Ассоциативность композиции}{}
+    Пусть есть тотальные \( f : A \to B, g : B \to C, h : C \to D \)
+
+    \( h \circ ( g \circ f ) = ( h \circ g ) \circ f \)
+\end{thrm}
+
+Доказательство:
+\begin{gather*}
+    h \circ ( g \circ f ) : A \to D
+    \\ 
+    ( h \circ ( g \circ f ) ) (a) = h ( ( g \circ f )(a) ) = h(g(f(a)))
+    \\
+    ( h \circ g ) \circ f : A \to D
+    \\ 
+    ( ( h \circ g ) \circ f ) (a) = (h \circ g) ( f(a) ) = h(g(f(a)))
+\end{gather*}
+
+\subsection{Критерий биективности}
+
+\begin{defn}{Тождественная на \( X \) функция}{}
+    Определим на множестве \( X \) функцию \( id_X : X \to X \)
+    \[
+        \forall x \in X \ id_X(x) = x
+    \]
+
+    \begin{remark}
+        \( f \circ id_A = f \)
+    \end{remark}
+    \begin{remark}
+        \( id_B \circ f = f \)
+    \end{remark}
+\end{defn}
+
+\begin{thrm}{Критерий биективности функций}{}
+    Пусть \( f : A \to B \). 
+
+    Тогда \( f \) --- биекция \( \Leftrightarrow \exists g : B \to A : f \circ g = id_B, g \circ f = id_A \)
+\end{thrm}
+
+Доказательство:
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+        
+        Построим \( g : B \to A \)
+
+        \( g(b) \in f^{-1}({b}) \)
+
+        Тогда \( f(g(b)) = b \Rightarrow f \circ g = id_B \).
+
+        \( g(f(a)) \in f^{-1}({f(a)}) = f{a} \Rightarrow g(f(a)) = a \Rightarrow g \circ f = id_A \)
+    \item
+        \( \Leftarrow \)
+
+        \( \exists g : B \to A : f \circ g = id_A, g \circ f = id_B \)
+
+        \begin{enumerate}
+            \item
+                Покажем, что \( f \) --- инъекция
+
+                \( f(a_1) = f(a_2) \Rightarrow g(f(a_1)) = g(f(a_2)) \Rightarrow id_A(a_1) = id_A(a_2) \Rightarrow a_1 = a_2 \)
+            \item
+                Покажем, что \( f \) --- сюръекция
+
+                Рассмотрим \( b \in B \). Найдем \( a \in A : f(a) = b \).
+
+                \begin{gather*}
+                    ( f \circ g ) (b) = b
+                    \\
+                    f(g(b)) = b
+                    \\
+                    a = g(b) \in A - \text{подходит}
+                \end{gather*}
+        \end{enumerate}
+
+        \( f \) --- сюръекция и инъекция, а значит \( f \) --- биекция.
+\end{itemize}
+
+\begin{defn}{Обратная функция}{}
+    Пусть \( f : A \to B \) --- биекция
+
+    Тогда \( g : B \to A \), для которой \( f \circ g = id_B \) и \( g \circ f = id_A \),
+    называют обратной к \( f \) и обозначают \( f^{-1} \)
+\end{defn}
+
+\begin{exercise}{}{}
+    Если \( f \) --- биекция, то \( f^{-1} \) единственна
+\end{exercise}
+
+\begin{lemma}{}{}
+    Пусть \( f : A \to B, g : B \to C \) --- биекции
+
+    Тогда
+    \begin{itemize}
+        \item
+            \( g \circ f \) биективна
+        \item
+            \( ( g \circ f )^{-1} = f^{-1} \circ g^{-1} \)
+    \end{itemize}
+\end{lemma}
+
+Доказательство:
+
+Просто проверим критерий биективности, используя две эти функции.
+
+\begin{exercise}{}{}
+    \( f : A \to B, g : B \to C \)
+    \begin{enumerate}
+        \item
+            если \( f, g \) --- инъекции, то \( g \circ f \) --- инъекция
+        \item
+            если \( f, g \) --- сюръекции, то \( g \circ f \) --- сюръекция
+    \end{enumerate}
+\end{exercise}
+

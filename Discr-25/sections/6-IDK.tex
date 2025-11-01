@@ -1,0 +1,299 @@
+\section{Формула включений-исключений}
+\begin{thrm}{Формула включений-исключений}{}
+    \[
+        | A_1 \cup A_2 \cup \ldots \cup A_n | = 
+        \sum\limits_{k = 1}^n \sum\limits_{1 \leq i_1 < \ldots < i_k \leq n} | A_{i_1} \cap \ldots \cap A_{i_k} |
+    \]
+\end{thrm}
+
+Доказательство (через характеристические функции):
+% TODO
+
+\section{Опять множества}
+\begin{defn}{Равномощные множества}{}
+    Множества \( A \) и \( B \) равномощны, если существует биекция \( f : A \to B \)
+
+    Обозначается \( A \sim B, |A| = |B| \)
+\end{defn}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( \NN \sim \NN \cup \{ 0 \} \) \( n \mapsto n - 1 \)
+        \item
+            \( [0, 1] \sim [0, 2] \) \( x \mapsto 2x \)
+        \item
+            \( (0, 1) \sim (1, +\infty) \) \( x \mapsto \frac{1}{x} \)
+    \end{itemize}
+\end{example}
+
+\begin{exercise}{}{}
+    \( [a, b] \sim [c, d], \ a, b, c, d \in \RR \)
+\end{exercise}
+
+Свойства:
+\begin{enumerate}
+    \item
+        \( \forall A \ A \sim A \) (рефлексивность)
+    \item 
+        \( \forall A, B \ A \sim B \Rightarrow B \sim A \) (симметричность)
+    \item
+        \( \forall A, B, C \ A \sim B, B \sim C \Rightarrow A \sim C \) (транзитивность)
+\end{enumerate}
+
+\begin{defn}{Счетные множества}{}
+    Множество \( A \) счетно, если \( A \sim \NN \)
+\end{defn}
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( \ZZ \sim \NN \)
+        \item
+            \( \QQ \sim \NN \)
+    \end{itemize}
+\end{example}
+
+\begin{lemma}{}{}
+    \begin{itemize}
+        \item
+            \( A, B \) --- счетны \( \Rightarrow A \cup B \) --- счетно
+        \item
+            \( A \) --- конечно, \( B \) --- счетно \( \Rightarrow A \cup B \) --- счетно
+    \end{itemize}
+\end{lemma}
+
+\begin{lemma}{}{}
+    \( A \) --- счетно, \( B \subseteq A \).
+
+    Тогда \( B \) не более чем счетно.
+\end{lemma}
+
+\begin{lemma}{}{}
+    \( A \) --- бесконечно, тогда существует счетное \( B \subseteq A \)
+\end{lemma}
+
+Доказательство:
+
+Будем строить итеративно: берем любой \( a_{n + 1} \in A \setminus \{ a_1, a_2, \ldots, a_n \} \).
+\[
+    B_n = \{ a_1, \ldots, a_n \}, B = \bigcup\limits_{n = 1}^{\infty} B_n
+\]
+
+\begin{lemma}{}{}
+    \( A_1, A_2, \ldots, A_n, \ldots \) --- счетны
+
+    Тогда \( \displaystyle \bigcup\limits_{n = 1}^{\infty} \Rightarrow A_n \) --- счетно
+\end{lemma}
+
+\begin{lemma}{}{}
+    \( A, B \) --- счетны
+
+    Тогда \( A \times B \) --- тоже счетно
+\end{lemma}
+
+Доказательство:
+\[
+    A \times B = \bigcup\limits_{n = 1}^{\infty} A \times \{ B_n \}
+\]
+
+\begin{thrm}{}{}
+    Пусть \( A \) --- бесконечно, а \( B \) --- счетно.
+
+    Тогда \( A \cup B \sim A \)
+\end{thrm}
+
+Доказательство:
+
+\begin{gather*}
+    A \cup B = A \cup ( B \setminus A )
+    \\
+    A \cup B = A \cup B', A \cap B' = \varnothing
+\end{gather*}
+
+Рассмотрим счетное \( C \)
+
+\( C \sim C \cup B' \)
+
+
+\( \exists f : C \to C \cup B' \) --- биекция
+
+Построим биекцию \( g : A \to A \cup B' \)
+\[
+    g =
+    \begin{cases}
+        x, x \notin C 
+        \\
+        f(x), x \in C
+    \end{cases}
+\]
+
+\subsection{Несчетные множества}
+
+Счетные (\(\sim A\)): \( \NN, \ZZ, \QQ, \NN^k, \bigcup\limits_{k = 1}^n \NN^k \)
+
+\begin{defn}{}{}
+    \[
+        \BB^\infty = \{ (b_1, b_2, \ldots) \ \vline \ b_i \in \{ 0, 1 \} \}
+    \]
+\end{defn}
+
+\begin{thrm}{}{}
+    \[
+        \BB^\infty \not\sim \NN
+    \]
+\end{thrm}
+
+\begin{lemma}{}{}
+    \[ 
+        \BB^\infty \sim [0, 1) \sim [0, 1] \sim (0, 1) \sim \RR \sim 2^\NN 
+    \]
+\end{lemma}
+
+Доказательство:
+
+\( \BB^\infty \sim [0, 1) \), так как можно сопоставить последовательности число в двоичной записи.
+
+Все кроме последнего тривиально.
+
+\( 2^\NN \sim \BB^\infty \), так как по сути выбираем что взяли в набор, а что нет.
+
+
+
+\begin{defn}{}{}
+    Множество \( A \) имеет мощность континуум, если \( A \sim \RR \)
+\end{defn}
+
+\begin{thrm}{}{}
+    \[
+        [0, 1] \sim [0, 1]^2
+    \]
+\end{thrm}
+
+Будем доказывать \( \BB^\infty = ( \BB^\infty )^2 \)
+
+\( (x_1, x_2, \ldots) \leftrightarrow (x_1, x_3, \ldots ) (x_2, x_4, \ldots ) \)
+
+\begin{coroll}{}{}
+    \[ 
+        \RR^k \sim \RR 
+    \]
+\end{coroll}
+
+\begin{defn}{}{}
+    \( |A| \leq |B| \), если существует инъекция \( f : A \to B \)
+
+    \( |A| < |B| \), если \( |A| \leq |B| \) и \( |A| \neq |B| \)
+\end{defn}
+
+Свойства:
+\begin{itemize}
+    \item
+        \( |A| \leq |B| \Leftrightarrow \exists A' \subseteq B : A' \sim A \)
+    \item
+        \( |A| \leq |A| \)
+    \item
+        \( |A| \leq |B|, |B| \leq |C| \Rightarrow |A| \leq |C| \)
+    \item
+        \( |A| \leq |B|, |B| \leq |A| \Rightarrow |A| \sim |B| \) (теорема Кантора-Бернштейна)
+    \item
+        \( \forall A, B \ |A| \leq |B| \lor |B| \leq |A| \)
+\end{itemize}
+
+\begin{thrm}{}{}
+    \[
+        |X| < |2^X|
+    \]
+\end{thrm}
+
+Доказательство:
+\begin{enumerate}
+    \item
+        \( |X| \leq |2^X| \)
+
+        \( \exists f : X \to 2^X \), \( f(x) = {x} \) --- инъекция
+    \item
+        \( |X| \neq |2^X| \)
+
+        Докажем от противного. 
+        Пусть существует \( f : X \to 2^X \).
+
+        Определим \( Y = \{ x \in X \ \vline \ x \notin f(x) \} \subseteq X \).
+
+        Поскольку \( Y \in 2^X, \exists y \in X : f(y) = Y \)
+        \begin{itemize}
+            \item
+                \( y \in Y \Rightarrow y \notin f(y) = Y \) --- противоречие
+            \item
+                \( y \notin Y \Rightarrow y \in f(y) = Y \) --- противоречие
+        \end{itemize}
+\end{enumerate}
+
+\begin{coroll}{}{}
+    Существует бесконечно много мощностей.
+    \[
+        \NN < 2^\NN < 2^{2^\NN} < \ldots
+    \]
+\end{coroll}
+
+\begin{thrm}{Теорема Кантора Бернштейна}{}
+    \[ 
+        |A| \leq |B|, |B| \leq |A| \Rightarrow |A| = |B|
+    \]
+\end{thrm}
+
+Доказательство:
+
+Пусть \( f : A \to B, g : B \to A \) --- инъекции.
+
+Определим \( C_0 = A \setminus g(B) \). 
+\( A \supseteq C_{n + 1} = g(f(C_n)), n \geq 0 \)
+
+\( C = \bigcup\limits_{n \geq 0} C_n \)
+
+Возьмем
+\(
+    h = 
+    \begin{cases}
+        f(x), x \in C
+        \\
+        g^{-1}(x), x \notin C
+    \end{cases}
+\), (\( x \notin C \Rightarrow x \notin C_0 \Rightarrow x \in g(B) \))
+
+Покажем, что мы построили биекцию.
+\begin{enumerate}
+    \item
+        \( h \) --- инъекция
+
+        \( h(x_1) = h(x_2) \)
+        
+        \begin{itemize}
+            \item
+                \( x_1, x_2 \in C \Rightarrow f(x_1) = f(x_2) \Rightarrow x_1 = x_2 \)
+            \item
+                \( x_1, x_2 \notin C \Rightarrow g^{-1} (x_1) = g^{-1} (x_2) \Rightarrow x_1 = x_2 \)
+            \item
+                \( x_1 \in C, x_2 \notin C \Rightarrow f(x_1) = g^{-1} (x_2) \). 
+                Но тогда \( g(f(x_1)) = x_2 \).
+                \( x_1 \in C_n \Rightarrow x_2 \in C_{n + 1} \) --- противоречие.
+        \end{itemize}
+    \item
+        \( h \) --- сюръекция
+
+        Хотим найти такой \( x \), что \( h(x) = y \)
+
+        \begin{itemize}
+            \item
+                \( y \in f(C) \Rightarrow y = f(x) = h(x) \)
+            \item
+                \( y \notin f(C) \).
+
+                Рассмотрим \( g(y) \)
+
+                Если \( g(y) \notin C \), то \( h(g(y)) = y \).
+
+                В противном случае \( g(y) \in C_n, n > 0 \).
+
+                В таком случае \( g(y) = g(f(x')), x \in C_{n - 1} \Rightarrow y = f(x') = h(x') \), так как \( x' \in C \).
+        \end{itemize}
+\end{enumerate}

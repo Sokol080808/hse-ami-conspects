@@ -1,0 +1,814 @@
+\section{Последовательности}
+
+\begin{defn}{Последовательность}{seq}
+    Последовательность --- это \( f : \NN \rightarrow \RR \).
+
+    \( f(n) \) обозначается \( a_n \)
+
+    Сама последовательность обозначается \( \{ a_n \} \)
+\end{defn}
+
+Примеры:
+\begin{itemize}
+    \item
+        \( a_n = \frac{1}{n} \)
+    \item
+        \( F_1 = F_2 = 1, \ F_n = F_{n - 2} + F_{n - 1} \)
+    \item 
+        \( a_1 = 1, \ a_n = \frac{1}{a_{n - 1} + 1} \)
+    \item 
+        \( a_1 = 1, a_2 = 1.4, a_3 = 1.41, \ldots \) --- десятичное приближение числа
+\end{itemize}
+
+Из последнего примера видно, что \( \QQ \) всюду плотно.
+
+\subsection{Предел}
+
+\begin{defn}{Предел 0}{limit1}
+    Последовательность \( \{ a_n \} \) стремится к \( A \), если
+
+    \[
+        \forall U(A) \ \exists N : \forall n > N \ a_n \in U(A)
+    \]
+\end{defn}
+
+\begin{defn}{Предел 1}{limit2}
+    Последовательность \( \{ a_n \} \) стремится к \( A \), если 
+
+    \[
+        \forall \varepsilon > 0 \ \exists N : \forall n > N \ a_n \in U_\varepsilon(A)
+    \]
+\end{defn}
+
+\begin{defn}{Отсутствие предела}{}
+    \( A \) не является пределом последовательности \( \{ a_n \} \), если
+
+    \[
+        \exists \varepsilon > 0 \ \forall N : \exists n > N \ a_n \notin U_\varepsilon(A)
+    \]
+
+    Чтобы получить отсутствие предела, нужно добавить в начало \( \forall A \)
+\end{defn}
+
+\begin{example}{}{}
+    \[ 
+        \lim_{n \to \infty} \frac{1}{n} = 0
+    \]
+\end{example}
+
+Доказательство:
+
+\[
+    \frac{1}{n} < \varepsilon \Leftrightarrow n > \frac{1}{\varepsilon} \Rightarrow N = \left[ \frac{1}{\varepsilon} \right]
+\]
+
+\begin{example}{}{}
+    \( b_n = (-1)^n + \frac{1}{n} \) не имеет предела
+\end{example}
+
+Доказательство:
+
+Пусть 
+\( 
+    A_n = \lim\limits_{n \to \infty} b_n 
+    \Rightarrow
+    \forall \varepsilon > 0 \ \exists N : \forall n > N \ |b_n - A| < \varepsilon
+\)
+
+Возьмём \( \varepsilon = \frac{1}{2} \):
+
+\begin{gather*}
+    |b_n - b_{n + 1}| \leq |b_n - A| + |A - b_{n + 1}| < 2 \varepsilon = 1
+    \\
+    \left| (-1)^{n} + \frac{1}{n} - (-1)^{n + 1} - \frac{1}{n + 1} \right| 
+        = \left| \pm 2 + \frac{1}{n} - \frac{1}{n + 1} \right| > 1
+\end{gather*}
+
+Основные свойства пределов:
+\begin{enumerate}
+    \item
+        Пусть \( A = \lim\limits_{n \to \infty} a_n \)
+        Тогда \( A \) единственно.
+
+        Доказательство:
+        
+        Пусть \( \exists B \neq A : B = \lim\limits_{n \to \infty} \)
+
+        \( \forall \varepsilon > 0: \)
+
+        \begin{gather*}
+            \exists N_1 : \forall n > N_1 \ |a_n - A| < \varepsilon
+            \\
+            \exists N_2 : \forall n > N_1 \ |a_n - B| < \varepsilon
+        \end{gather*}
+
+        Получим противоречие: 
+        \begin{gather*}
+            \varepsilon = \frac{|B - A|}{2}, \ N = \max\{ N_1, N_2 \} \Rightarrow
+            \\
+            \forall n > N 2 \varepsilon = |B - A| = |B - a_n| + |a_n - A| < 2 \varepsilon
+        \end{gather*}
+    \item
+        \begin{lemma}{Лемме об отделимости}{}
+            Пусть
+            \(
+                A = \lim\limits_{n \to \infty} a_n, \ A \neq 0 \Rightarrow \exists N : \forall n > N \ |a_n| > \frac{|A|}{2}
+            \)
+        \end{lemma}
+        Доказательство:
+
+        Возьмём \( \varepsilon = \frac{|A|}{2} \Rightarrow \exists N : \forall n > N \ |a_n - A| < \frac{|A|}{2} \)
+\end{enumerate}
+
+\begin{defn}{Ограниченная последовательность}{}
+    Последовательность \( \{ a_n \} \) ограничена, если
+    \[
+        \exists c, C \in \RR : \forall n \in \NN \ c < a_n < C
+    \]
+    или
+    \[
+        \exists M \in \RR : \forall n \in \NN \ |a_n| \leq M
+    \]
+\end{defn}
+
+\begin{lemma}{}{}
+    \( \{ a_n \} \) имеет предел \( \Rightarrow \{ a_n \} \) является ограниченной
+\end{lemma}
+
+Доказательство: тривиально
+
+\begin{thrm}{Арифметика пределов}{}
+    Пусть \( \lim\limits_{n \to \infty} a_n = A, \lim\limits_{n \to \infty} b_n = B \)
+
+    \begin{enumerate}
+        \item
+            \( \forall \alpha, \beta \in \RR \ \lim\limits_{n \to \infty} (\alpha a_n + \beta b_n) = \alpha A + \beta B \)
+        \item 
+            \( \lim\limits_{n \to \infty} a_n b_n = AB \)
+        \item
+            Если \( \forall n \ b_n \neq 0 \), \( \lim\limits_{n \to \infty} \frac{a}{b} = \frac{A}{B} \)
+    \end{enumerate}
+\end{thrm}
+
+Доказательство:
+
+\(
+    \forall \varepsilon_1 > 0 \ \exists N_1 \in \NN \land \exists N_2 \in \NN : 
+    \forall l > N_1, \forall k > N_2 \ |a_l - A| < \varepsilon_1, |b_k - B| < \varepsilon_1
+\)
+
+\begin{enumerate}
+    \item
+        \begin{gather*}
+            \forall \varepsilon > 0 \ \exists N \in \NN : 
+                \forall n > N | \alpha a_n + \beta b_n - \alpha A - \beta B | < \varepsilon
+            \\
+            \text{Пусть} \ N = \max \{ N_1, N_2 \}
+            \\
+            | \alpha a_n + \beta b_n - \alpha A - \beta B | \leq
+                | \alpha a_n - \alpha A | + |\beta b_n - \beta B | <
+                    ( |\alpha| + |\beta| ) \varepsilon_1
+        \end{gather*}
+
+        Если \( |\alpha| + |\beta| = 0 \), то очевидно, иначе положим 
+        \(
+            \varepsilon_1 = \frac{\varepsilon}{|\alpha| + |\beta|}
+        \)
+    \item
+        \begin{gather*}
+            \forall \varepsilon > 0 \ \exists N \in \NN : 
+                \forall n > N | a_n b_n - A B | < \varepsilon
+            \\
+            \text{Пусть} \ N = \max \{ N_1, N_2 \}
+            \\
+            | a_n b_n - A B | = |a_n b_n - A b_n + A b_n - A B| \leq 
+                | b_n | |a_n - A| + | A | | b_n - B | <
+            \\
+            < ( | b_n | + | A | ) \varepsilon_1
+        \end{gather*}
+
+        Так как \( \exists \lim\limits_{n \to \infty} b_n \), то
+        \( \exists C > 0 : \forall n \in \NN \ | b_n | \leq C \).
+        
+        Тогда \( | a_n b_n - A B | < ( C + | A |) \varepsilon_1 \).
+        Возьмем \( \varepsilon_1 = \frac{\varepsilon}{ C + | A |} \).
+    \item 
+        Покажем, что \( \lim\limits_{n \to \infty} \frac{1}{b_n} = \frac{1}{B} \)
+
+        Так как \( \lim\limits_{n \to \infty} b_n = B \neq 0 \), то
+        \( \exists N' \ \forall n > N' \ | b_n | > \frac{|B|}{2} \).
+
+        Пусть \( N = \max \{ N_2, N' \} \)
+
+        \begin{gather*} 
+            \forall \varepsilon > 0 \ \exists N \in \NN : 
+                \forall n > N \left| \frac{1}{b_n} - \frac{1}{B} \right| < \varepsilon
+            \\
+            \left| \frac{1}{b_n} - \frac{1}{B} \right|
+            =
+            \frac{ |B - b_n| }{ |B| |b_n| }
+            <
+            \frac{\varepsilon_1}{|B| |b_n|}
+            <
+            \frac{2 \varepsilon_1}{|B|^2}
+        \end{gather*}
+
+        Возьмем \( \varepsilon_1 = \frac{B^2}{2 \varepsilon} \)
+
+        Тогда
+        \[
+            \lim\limits_{n \to \infty} \frac{a_n}{b_n}
+            =
+            \lim\limits_{n \to \infty} a_n
+            \cdot
+            \lim\limits_{n \to \infty} \frac{1}{b_n}
+            =
+            \frac{A}{B}
+        \]
+\end{enumerate}
+
+\begin{thrm}{Предельный переход в неравенствах}{} 
+    Пусть \( \lim\limits_{n \to \infty} a_n = A, \lim\limits_{n \to \infty} b_n = B \)
+
+    \( \exists n_0 \in \NN : \forall n > n_0 \ a_n \leq b_n \Rightarrow A \leq B \)
+\end{thrm}
+
+Доказательство:
+
+Пусть \( A > B \Rightarrow A - B = \varepsilon > 0 \).
+
+Возьмем \( U_\frac{\varepsilon}{3} (A), U_\frac{\varepsilon}{3} (B) \).
+\begin{gather*}
+    \exists N_1 : \forall n > N_1 \ a_n \in U_\frac{\varepsilon}{3} (A)
+    \\
+    \exists N_2 : \forall n > N_2 \ b_n \in U_\frac{\varepsilon}{3} (B)
+\end{gather*}
+
+Тогда \( \forall n > \max \{ N_1, N_2 \} \ a_n > b_n \) --- противоречие.
+
+\begin{thrm}{Теорема о двух милиционерах}{}
+    Пусть \( \lim\limits_{n \to \infty} a_n = \lim\limits_{n \to \infty} b_n = A \)
+    
+    Пусть
+    \(
+        \exists n_0 : \forall n > n_0 \ a_n \leq c_n \leq b_n \Rightarrow \lim\limits_{n \to \infty} c_n = A
+    \)
+\end{thrm}
+
+Доказательство:
+
+\begin{align*}
+    & \forall \varepsilon > 0
+    \\
+    & \exists N_1 \in \NN : \forall n > N_1 \ |a_n - A| < \varepsilon
+    \\
+    & \exists N_2 \in \NN : \forall n > N_2 \ |b_n - A| < \varepsilon
+    \\
+    & N = \max \{ N_1, N_2 \} \Rightarrow \forall n > N \ A - \varepsilon < a_n \leq c_n \leq b_n < A + \varepsilon
+\end{align*}
+
+\subsection{Бесконечные малые последовательности}
+
+\begin{defn}{Бесконечно малая последовательность}{}
+    \[
+        \{ a_n \} - \text{БМП, если} \ \lim\limits_{n \to \infty} a_n = 0
+    \]
+\end{defn}
+
+\begin{defn}{Предел 2}{}
+    \[
+        \lim\limits_{n \to \infty} b_n = B \Leftrightarrow \exists \ \text{БМП} \ \{ a_n \} : b_n = B + a_n
+    \]
+\end{defn}
+
+\begin{lemma}{}{}
+    Все определения пределов равносильны
+\end{lemma}
+
+Доказательство:
+
+В эту сторону очевидно, в эту сторону тривиально.
+
+\begin{defn}{Верхние и нижние грани}{}
+    Пусть \( A \subset \RR, A \neq \varnothing \).
+
+    Если существует \( \exists C \in \RR \ \forall a \in A \ a \leq C \), 
+    то \( C \) называется верхней гранью множества \( A \).
+
+
+    Если существует \( \exists c \in \RR \ \forall a \in A \ a \geq c \), 
+    то \( c \) называется нижней гранью множества \( A \).
+
+    Наименьшая из верхних граней множества \( A \) называется точной верхней гранью
+    и обозначается \( \sup \).
+
+    Наибольшая из нижних граней множества \( A \) называется точной нижней гранью
+    и обозначается \( \inf \).
+\end{defn}
+
+\begin{defn}{Супремум}{}
+    \( C = \sup A \), если:
+    \begin{itemize}
+        \item
+            \(
+                \forall a \in A \ a \leq C
+            \)
+        \item
+            \(
+                \forall \varepsilon > 0 \ \exists a \in A : a > C - \varepsilon
+            \)
+    \end{itemize}
+\end{defn}
+
+\begin{defn}{Инфимум}{}
+    \( c = \inf A \), если:
+    \begin{itemize}
+        \item
+            \(
+                \forall a \in A \ a \geq c
+            \)
+        \item
+            \(
+                \forall \varepsilon > 0 \ \exists a \in A : a < c + \varepsilon
+            \)
+    \end{itemize}
+\end{defn}
+
+\begin{thrm}{}{}
+    \[
+        A \in \RR, A \neq \varnothing, \exists \ \text{верхняя грань} \ C \Rightarrow \exists \sup A
+    \]
+\end{thrm}
+Доказательство:
+
+Пусть \( B \) --- множество всех верхних граней \( A \).
+Так как \( C \in B \), то \( B \neq \varnothing \).
+Поскольку \( A \leq B \), по принципу полноты существует разделяющий элемент \( c \)
+--- нетрудно убедиться, что он будет единственным и что он будет точной верхней гранью.
+
+\begin{defn}{Монотонная последовательность}{}
+    Если \( \forall n \in N \ a_n \leq a_{n + 1} \), то
+    \( \{ a_n \} \) называется неубывающей, если \( a_n < a_{n + 1} \) --- возрастающей.
+
+    Если \( \forall n \in N \ a_n \geq a_{n + 1} \), то
+    \( \{ a_n \} \) называется невозрастающей, если \( a_n > a_{n + 1} \) --- убывающей.
+\end{defn}
+
+Будем обозначать убывающую \( \downarrow \downarrow \), невозрастающую \( \downarrow \).
+Аналогично возрастающую \( \uparrow \uparrow \) и неубывающую \( \uparrow \).
+
+\begin{thrm}{Теорема Вейерштрасса}{}
+    Если \( \{ a_n \} \) монотонна и ограничена, то у нее есть предел.
+\end{thrm}
+
+Доказательство:
+
+Не умаляя общности, \( \{ a_n \} \uparrow \). 
+\[
+    \exists \sup \{ a_n \} \Rightarrow \forall \varepsilon > 0 \ \exists n_0 \in \NN :
+    \sup \{ a_n \} - \varepsilon < a_{n_0} \leq \sup \{ a_n \} < \sup \{ a_n \} + \varepsilon
+\]
+
+Но последовательность не убывает, поэтому
+\[
+    \forall n \geq n_0 \ |a_n - \sup \{ a_n \}| < \varepsilon \Rightarrow \exists \lim\limits_{n \to \infty} a_n
+\]
+
+Если \( \{ a_n \} \downarrow \), рассмотрим \( \{ -a_n \} \)
+
+\begin{example}{}{}
+    \( c > 0, a_1 = 1, a_n = \sqrt{c + a_{n - 1}} \)
+\end{example}
+
+Пусть \( \lim\limits_{n \to \infty} a_n = A \)
+\begin{gather*} 
+    \lim\limits_{n \to \infty} a_n = A = \lim\limits_{n \to \infty} \sqrt{c + a_{n - 1}} = \sqrt{c + A}
+    \\
+    A = \sqrt{c + A}
+    \\
+    \begin{cases}
+        A^2 - A - C = 0
+        \\
+        A \geq 0
+    \end{cases}
+    \\
+    A = \frac{1 + \sqrt{1 + 4c}}{2}
+\end{gather*}
+
+Докажем, что \( \exists A \).
+\begin{enumerate}
+    \item
+        \( a_1 = 1 < \sqrt{c + 1} = a_2 \)
+        
+        \( a_{n - 1} < a_n \)
+
+        \( a_n = \sqrt{c + a_{n - 1}} < \sqrt{c + a_n} = a_{n - 1} \)
+    \item
+        \( a_1 \leq 10 + 2c \)
+
+        \( a_{n + 1} = \sqrt{c + a_n} \leq \sqrt{c + 10 + 2c} < 10 + 2c \)
+\end{enumerate}
+
+\newpage
+
+\begin{example}{}{}
+    \[
+        a_1 = a > 1, a_{n + 1} = \frac{1}{2} \left( a_n + \frac{a}{a_n} \right)
+    \]
+\end{example}
+
+\begin{enumerate}
+    \item
+        \[
+            a_{n + 1} \geq \sqrt{a_n \cdot \frac{a}{a_n}} = \sqrt{a}
+        \]
+    \item
+        Теперь сделаем предельный переход:
+        \[
+            A = \frac{1}{2} \left( A + \frac{a}{A} \right) \Leftrightarrow A^2 = a \Rightarrow A = \sqrt{a}
+        \]
+    \item
+        \[
+            a_{n + 1} = \frac{1}{2} \left( a_n + \frac{a}{a_n} \right) \leq 
+            \frac{1}{2} \left( a_n + \frac{a_n^2}{a_n} \right) = a_n
+        \]
+\end{enumerate}
+
+Оценим скорость сходимости:
+\begin{gather*}
+    \{ a_n \} \downarrow
+    \\
+    | a_{n + 1} \pm \sqrt{a} | = \frac{| a_n^2 + a \pm 2 \sqrt{a} a_n |}{2 a_n} = \frac{| a_n \pm \sqrt{a} |^2}{2 a_n}
+    \\
+    \frac{a_1 - \sqrt{a}}{a_1 + \sqrt{a}} = q, 0 < q < 1
+    \\
+    \frac{a_n - \sqrt{a}}{a_n + \sqrt{a}} = q^{2^{n - 1}} \Leftrightarrow 
+        a_n = \frac{\sqrt{a} ( q^{2^{n - 1}} + 1 )}{1 - q^{2^{n - 1}}}
+    \\
+    | a_n - \sqrt{a} | = \sqrt{a} \frac{2 q^{2^{n - 1}}}{1 - q^{2^{n - 1}}}
+\end{gather*}
+
+Это называется ``Итерационная формула Герона''.
+
+\subsection{Число e}
+
+\begin{thrm}{Число \( e \)}{}
+    Существует предел этой последовательности:
+
+    \[
+        a_n = \left( 1 + \frac{1}{n} \right)^n
+    \]
+\end{thrm}
+
+\begin{itemize}
+    \item
+        \( a_n < 3 \) --- доказано в ДЗ
+    \item
+        Покажем возрастание
+
+        \begin{gather*}
+            a_n = \left( 1 + \frac{1}{n} \right)^n = 
+                2 
+                + \frac{1}{2!} \left( 1 - \frac{1}{n} \right)
+                + \ldots
+                + \frac{1}{n!} \left( 1 - \frac{1}{n} \right) \cdots \left( 1 - \frac{n - 1}{n} \right) <
+            \\
+            < 
+                2
+                + \frac{1}{2!} \left( 1 - \frac{1}{n + 1} \right)
+                + \ldots
+                + \frac{1}{n!} \left( 1 - \frac{1}{n + 1} \right) \cdots \left( 1 - \frac{n - 1}{n + 1} \right) <
+            \\
+            < a_{n + 1}
+        \end{gather*}
+\end{itemize}
+
+\begin{defn}{Число e}{number-e}
+    \[
+        \lim\limits_{n \to \infty} \left( 1 + \frac{1}{n} \right)^n = e
+    \]
+\end{defn}
+
+\begin{defn}{}{}
+    \[
+        \lim\limits_{n \to \infty} p_n = +\infty 
+        \Leftrightarrow
+        \forall M \ \exists N : \forall n > N \ p_n > M
+    \]
+\end{defn}
+
+\begin{lemma}{}{}
+    \begin{gather*}   
+        \lim\limits_{n \to \infty} p_n = +\infty
+        \\
+        \lim\limits_{n \to \infty} q_n = -\infty
+    \end{gather*}
+
+    Тогда
+    \[
+        \lim\limits_{n \to \infty} \left( 1 + \frac{1}{p_n} \right)^{p_n} = 
+        \lim\limits_{n \to \infty} \left( 1 + \frac{1}{q_n} \right)^{q_n} =
+        e
+    \]
+\end{lemma}
+
+\begin{enumerate}
+    \item    
+        Пусть \( n_k \in \NN, \lim\limits_{n \to \infty} n_k = +\infty \)
+        \begin{gather*}
+            \forall \varepsilon > 0 \ \exists N : \forall n > N \ \left| \left( 1 + \frac{1}{n} \right)^n - e \right| < \varepsilon
+            \\
+            \exists K : \forall k > K \ n_k > N \Rightarrow \left| \left( 1 + \frac{1}{n_k} \right)^n_k - e \right| < \varepsilon
+        \end{gather*}
+
+        Так как \( \lim\limits_{n \to \infty} p_n = + \infty \), 
+        существует последовательность
+        \[
+            \{ n_k \} : n_k \leq p_k < n_k + 1
+        \]
+        .
+
+        Тогда
+        \begin{gather*}
+            \forall k > K
+            \\
+            \frac{ \left( 1 + \frac{1}{n_k + 1} \right)^{n_k + 1} }{1 + \frac{1}{n_k + 1}}
+                \leq
+                \left( 1 + \frac{1}{p_k} \right)^{p_k}
+                \leq
+                \left( 1 + \frac{1}{n_k} \right)^{n_k} \cdot \left( 1 + \frac{1}{n_k} \right)         
+        \end{gather*}
+
+        По теорема о зажатой последовательности \( \lim\limits_{n \to \infty} \left( 1 + \frac{1}{p_n} \right)^{p_n} = e \)
+    \item
+        \( \exists N_1 : \forall n > N_1 \ q_n < -1 \)
+
+        Пусть \( q_n = -\beta_n, \beta_n > 1 \ \forall n > N_1 \)
+
+        \begin{gather*}
+            \left( 1 + \frac{1}{q_n} \right)^{q_n} = \left(1 - \frac{1}{\beta_n} \right)^{-\beta_n}
+            =
+            \left( \frac{\beta_n}{\beta_n - 1} \right)^{\beta_n} 
+            =
+            \\
+            =
+            \left( 1 + \frac{1}{\beta_n - 1} \right)^{\beta_n - 1} \left( 1 + \frac{1}{\beta_n - 1} \right)
+            \to
+            e
+        \end{gather*}
+\end{enumerate}
+
+\subsection{Подпоследовательности и частичные пределы}
+
+\begin{defn}{Подпоследовательность}{subseq}
+    Пусть \( n_1 < n_2 < \ldots < n_k < \ldots \) --- последовательность натуральных чисел
+    и \( \lim\limits_{n \to \infty} n_k = +\infty \)
+
+    Пусть \( \{ a_n \} \) --- последовательность, тогда последовательность \( b_k = a_{n_k} \) 
+    называют подпоследовательностью \( \{ a_n \} \)
+\end{defn}
+
+\begin{defn}{Частичный предел}{}
+    Число \( B \) называют частичным пределом, если \( \exists b_k = a_{n_k} : \lim\limits_{n \to \infty} b_k = b \)
+\end{defn}
+
+\begin{lemma}{}{}
+    \[
+        \lim\limits_{n \to \infty} a_n = A \Rightarrow \forall \{ b_k \} \lim\limits_{n \to \infty} b_k = A
+    \]
+\end{lemma}
+
+Доказательство:
+\begin{gather*}
+    \forall \varepsilon > 0 \ \exists N : \forall n > N |a_n - A| < \varepsilon
+    \\
+    \{ n_k \} \uparrow \uparrow \ \Rightarrow \exists K : \forall k > K \ n_k > N 
+        \Rightarrow
+        \forall k > K \ | b_k - A | < \varepsilon
+\end{gather*}
+
+\begin{thrm}{Теорема Больцано-Вейерштрасса}{}
+    Если \( \{ a_n \} \) ограничена, то у нее есть частичный предел.
+\end{thrm}
+
+Доказательство:
+\begin{gather*}
+    \exists c > 0 : \forall n \in N \ | a_n | \leq C
+    \\
+    I_1 = [ -C , C ]
+\end{gather*}
+
+Разобьем отрезок пополам, в какой-то половине будет бесконечное число элементов последовательности.
+Не умаляя общности это правая половина.
+\begin{gather*} 
+    I_2 = [ 0, C ]
+    \\
+    I_3 = \left[ 0, \frac{C}{2} \right] \lor I_3 = \left[ \frac{C}{2}, C \right]
+    \\
+    \vdots
+\end{gather*}
+
+Продолжим так деление, получим последовательность стягивающихся отрезков, так как \( | I_n | = \frac{| I_1 |}{2^{n - 1}} \)
+
+Значит \( \exists ! b : \forall n \in N \ b \in I_n \).
+
+Выберем элементы из \( \{ a_n \} \) из полученных отрезков, предел такой подпоследовательности будет \( b \).
+
+\begin{defn}{Верхний и нижний пределы}{}
+    Пусть \( \{ a_n \} \) ограничена. \( M_n = \sup \{ a_{n + 1}, a_{n + 2}, \ldots \} \).
+
+    Очевидно, что \( \{ M_n \} \downarrow \) и \( M_n \geq \inf \{ a_n \} \).
+    Значит у \( \{ M_n \} \) есть предел.
+
+    \( \lim\limits_{n \to \infty} M_n = M \) называется верхним пределом последовательности \( \{ a_n \} \)
+
+    Аналогично \( m_n = \inf \{ a_{n + 1}, a_{n + 2}, \ldots \} \). 
+
+    \( \lim\limits_{n \to \infty} m_n = m \) называется нижним пределом последовательности \( \{ a_n \} \)
+\end{defn}
+
+\begin{thrm}{}{}
+    Пусть \( \{ a_n \} \) ограничена.
+
+    Тогда \( m, M \) --- частичные пределы \( \{ a_n \} \).
+
+    Если \( b \) --- частичный предел, то \( b \in [m, M] \)
+\end{thrm}
+
+Доказательство:
+
+Пусть
+\begin{gather*}
+    \exists n_1 : M_1 - 1 < a_{n_1} \leq M_1
+    \\
+    \exists n_2 > n_1 : M_{n_1} + \frac{1}{2} < a_{n_2} \leq M_{n_1}
+\end{gather*}
+
+Продолжим:
+\[
+    \exists n_{k + 1} > n_k: M_{n_k} -\frac{1}{k + 1} < a_{n_{k + 1}} \leq M_{n_k}
+\]
+
+Получаем \( n_1 < n_2 < \ldots < n_k < \ldots \)
+\begin{gather*}
+    b_k = a_{n_k} \Rightarrow M_{n_k} - \frac{1}{k + 1} < b_{k + 1} \leq M_{n_k}
+    \\
+    \lim\limits_{n \to \infty} M_n = M = \lim\limits_{n \to \infty} M_{n_k}
+    \\
+    \Downarrow
+    \\
+    \lim\limits_{n \to \infty} \left( M_{n_k} - \frac{1}{k + 1} \right) 
+        = \lim\limits_{k \to \infty} b_{k + 1}
+        = \lim\limits_{k \to \infty} M_{n_k}
+    \\
+    \lim\limits_{k \to \infty} b_k = M
+\end{gather*}
+
+Для нижнего предела аналогично.
+
+Пусть \( \lim\limits_{l \to \infty} a_{n_l} = a \).
+\begin{gather*}
+    m_{n_l - 1} \leq a_{n_l} \leq M_{n_l - 1}
+    \\
+    \Downarrow
+    \\
+    m \leq a \leq M
+\end{gather*}
+
+\begin{thrm}{}{}
+    Ограниченная последовательность \( \{ a_n \} \) имеет предел \( \Leftrightarrow m = M \)
+    \begin{itemize}
+        \item
+            \( \Rightarrow \)
+
+            Уже доказано
+        \item
+            \( \Leftarrow \)
+            \begin{gather*}
+                m_n \leq a_{n + 1} \leq M_n
+                \\
+                \lim\limits_{n \to \infty} m_n = m = M = \lim\limits_{n \to \infty} M_n
+                \\
+                \lim\limits_{n \to \infty} a_{n + 1} = M
+            \end{gather*}
+    \end{itemize}
+\end{thrm}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( a_n = n \)
+            
+            \( m = M = +\infty \)
+        \item
+            \( a_n = (-1)^n n \)
+
+            \( m = -\infty \)
+
+            \( M = +\infty \)
+    \end{enumerate}
+\end{example}
+
+\begin{defn}{Фундаментальная последовательность}{}
+    \( \{ a_n \} \) называется фундаментальной, если
+    \[
+        \forall \varepsilon > 0 \ \exists N \in \NN : \forall n, m > N \ | a_n - a_m | < \varepsilon
+    \]
+\end{defn}
+
+\begin{thrm}{Критерий Коши}{}
+    \( \{ a_n \} \) имеет предел \( \Leftrightarrow \) \( \{ a_n \} \) --- фундаментальная
+\end{thrm}
+
+Доказательство:
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+        \begin{gather*}
+            \forall \varepsilon > 0 \ \exists N \in \NN : \forall n > N \ | a_n - A | < \frac{\varepsilon}{2}
+            \\
+            \Downarrow
+            \\
+            \forall m, n > N \ | a_n - a_m| \leq | a_n - A | + | a_m - A | < \varepsilon
+        \end{gather*}
+    \item
+        \( \Leftarrow \) 
+        \begin{gather*}
+            \varepsilon = 1 \Rightarrow \exists N : \forall n > N | a_{N + 1} - a_n | < 1
+            \\
+            \Downarrow
+            \\
+            a_{N + 1} - 1 < a_n < A_{N + 1} + 1
+        \end{gather*}
+
+        Значит \( \{ a_n \} \) --- ограниченная.
+
+        Значит по теореме Больцано-Вейерштрасса \( \exists \{ a_{n_k} \} : \lim\limits_{k \to \infty} a_{n_k} = A \)
+
+        Проверим, что это предел всей последовательности.
+        \begin{gather*}
+            \forall \varepsilon > 0 \ \exists K : \forall k > K \ | a_{n_k} - A | < \varepsilon
+            \\
+            \exists N_1 : \forall n, m > N_1 \ | a_m - a_n | < \varepsilon
+            \\
+            M = \max \{ N_1, K \}
+            \\
+            \Downarrow
+            \\
+            \forall n, k > M \ | a_n - A | \leq | a_n - a_{n_k} | + | a_{n_k} - A | 
+                < \varepsilon + \varepsilon = 2 \varepsilon
+        \end{gather*}
+\end{itemize}
+
+\newpage
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \(
+                a_1 = 1, a_n = 1 + \frac{1}{1 + a_{n - 1}}
+            \)
+        \item
+            \(
+                a_n = \sum\limits_{k = 1}^n \frac{1}{k}
+            \)
+    \end{enumerate}
+\end{example}
+
+\begin{enumerate}
+    \item
+        \begin{gather*}
+            \forall n \in \NN \ a_n \geq 1
+            \\
+            | a_{n + 1} - a_n | = \left| \frac{1}{1 + a_n} - \frac{1}{1 + a_{n - 1}} \right|
+                = \frac{ | a_n - a_{n - 1} | }{ (1 + a_n)(1 + a_{n - 1}) } 
+                \leq \frac{ | a_n - a_{n - 1} | }{4}
+            \\
+            | a_{n + 1} - a_n | \leq \frac{ | a_n - a_{n - 1} | }{4} \leq \frac{ | a_{n - 1} - a_{n - 2} | }{4^2}
+                \leq \frac{ | a_1 - a_2 | }{ 4^{n - 1} } = \frac{1}{2} \cdot \frac{1}{4^{n - 1}}
+            \\
+            m > n 
+            \\
+            \Downarrow
+            \\
+            | a_m - a_n | 
+                \leq | a_m - a_{m - 1} | + | a_{m - 1} - a_{m - 2} + \ldots + | a_{n + 1} - a_n |
+                \leq
+            \\
+            \leq \frac{1}{2} \left( \frac{1}{ 4^{m - 2} } + \ldots + \frac{1}{ 4^{n - 1} } \right)
+                < \frac{1}{2} \cdot \frac{1}{4^n} \cdot \frac{3}{4} = \frac{3}{8} \cdot \frac{1}{4^n}
+            \\
+            \frac{1}{4^n} \leq \frac{1}{1 + 3n} \leq \frac{1}{n} < \varepsilon 
+                \Rightarrow N = \left[ \frac{1}{\varepsilon} \right]
+        \end{gather*}
+    \item \ \\
+        Покажем, что критерий Коши не выполняется.
+        \begin{gather*}
+            \exists \varepsilon > 0 : \forall N \ \exists n, m > N : | a_n - a_m | \geq \varepsilon
+            \\
+            \varepsilon = \frac{1}{2}, n = N + 1, m = 2N + 2 = 2n
+            \\
+            | a_m - a_n | = \left| \frac{1}{n + 1} + \frac{1}{n + 2} + \ldots + \frac{1}{2n} \right|
+                > \frac{n}{2n} = \frac{1}{2}
+        \end{gather*}
+\end{enumerate}

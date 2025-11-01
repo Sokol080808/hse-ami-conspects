@@ -1,0 +1,681 @@
+\section{Булевы функции}
+
+\subsection{Определение}
+
+\begin{defn}{Булева функция}{}
+    \( \BB = \{ 0, 1 \} \)
+    
+    Булева функция --- это \( f : \BB^n \to \BB \)
+\end{defn}
+
+\begin{example}{}{}
+    \begin{center}
+        \begin{tabular}{ | *{8}{ >{\(} c <{\)} | } }
+            \hline
+            x & y & x \lor y & x \land y & \lnot x & x \oplus y & x \to y & x \equiv y \\
+            \hline
+            0 & 0 & 0 & 0 & 1 & 0 & 1 & 1 \\
+            \hline
+            0 & 1 & 1 & 0 & 1 & 1 & 1 & 0 \\
+            \hline
+            1 & 0 & 1 & 0 & 0 & 1 & 0 & 0 \\
+            \hline
+            1 & 1 & 1 & 1 & 0 & 0 & 1 & 1 \\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{example}
+
+Количество булевых функций от \( n \) переменных равно \( 2^{2^n} \)
+
+\subsection{Свойства}
+
+\begin{exercise}{}{}
+    \begin{itemize}
+        \item
+            \( 
+                x \land ( y \land z ) = ( x \land y ) \land z,
+                \
+                x \land y = y \land x,
+                \
+                x \land 0 = 0,
+                \
+                x \land 1 = x
+            \)
+        \item
+            \(
+                x \lor ( y \lor z ) = ( x \lor y ) \lor z,
+                \
+                x \lor y = y \lor x,
+                \
+                x \lor 0 = x,
+                \
+                x \lor 1 = 1
+            \)
+        \item
+            \(
+                x \oplus ( y \oplus z ) = ( x \oplus y ) \oplus z,
+                \
+                x \oplus y = y \oplus x,
+                \
+                x \oplus 0 = x,
+                \
+                x \oplus 1 = \lnot x
+            \)
+        \item
+            \(
+                x \land ( y \oplus z ) = ( x \land y ) \oplus ( x \land z )
+            \)
+        \item
+            \(
+                x \land ( y \lor z ) = ( x \land y ) \lor ( x \land z ),
+                \
+                x \lor ( y \land z ) = ( x \lor y ) \land ( x \lor z )
+            \)
+        \item
+            \(
+                \lnot ( \lnot x ) = x 
+            \)
+            --- закон двойного отрицания
+        \item
+            \(
+                x \to y = \lnot y \to \lnot x
+            \)
+            --- контрапозиция
+        \item
+            \(
+                \lnot ( x \land y ) = \lnot x \lor \lnot y,
+                \
+                \lnot ( x \lor y ) = \lnot x \land \lnot y
+            \)
+            --- законы де Моргана
+    \end{itemize}
+\end{exercise}
+
+\newpage
+
+\subsection{Дизъюнктивная нормальная форма}
+
+\( \lnot x = \overline{x} \)
+
+Для
+\(
+    \alpha \in \{ 0, 1 \}
+    \
+    x^\alpha
+    =
+    \begin{cases}
+        x, \text{при} \ \alpha = 1
+        \\
+        \overline{x}, \text{при} \ \alpha = 0
+    \end{cases}
+    -
+    \text{литерал}
+\)
+
+\begin{defn}{Конъюнкт}{}
+    \[
+        x_{i_1}^{\alpha_1} \land x_{i_2}^{\alpha_2} \land \ldots \land x_{i_k}^{\alpha_k} = K
+    \]
+\end{defn}
+
+\begin{defn}{Дизъюнктивная нормальная форма}{}
+    ДНФ --- дизъюнкция конъюнктов
+    \[
+        K_1 \lor K_2 \lor \ldots \lor K_n
+    \]
+\end{defn}
+
+\begin{thrm}{}{}
+    Каждая булева функция \( f : \BB^n \to \BB \) может быть представлена в виде ДНФ
+\end{thrm}
+
+Доказательство:
+
+Пусть \( f( x_1, x_2, \ldots, x_n ) \not\equiv 0 \)
+
+Если \( f( \sigma_1, \sigma_2, \ldots, \sigma_n ) = 1 \),
+возьмем конъюнкт \( K = x_1^{\sigma_1} \land x_2^{\sigma_2} \land \ldots \land x_n^{\sigma_n} \).
+Очевидно, он принимает значение \( 1 \) только на наборе своих степеней.
+
+Возьмем произведение этих конъюнктов по всем наборам \( f \), где она равна \( 1 \)
+
+Это представление называется совершенное ДНФ (СДНФ).
+
+\begin{defn}{Дизъюнкт}{}
+    \[
+        x_{i_1}^{\alpha_1} \lor x_{i_2}^{\alpha_2} \lor \ldots \lor x_{i_k}^{\alpha_k} = K
+    \]
+\end{defn}
+
+
+\begin{defn}{Конъюктивная нормальная форма}{}
+    КНФ --- конъюнкция дизъюнктов
+    \[
+        D_1 \lor D_2 \lor \ldots \lor D_n
+    \]
+\end{defn}
+
+\begin{exercise}{}{}
+    Любая булева функция имеет КНФ
+\end{exercise}
+
+\subsection{Многочлен Жегалкина}
+
+\begin{defn}{Многочлен Жегалкина}{}
+    \begin{gather*}
+        \bigoplus\limits_{ I = \{ i_1, i_2, \ldots, i_k \} \subseteq \{ 1, 2, \ldots, n \} }
+            a_i \land x_{i_1} \land x_{i_2} \land \ldots \land x_{i_k}
+        \\
+        a_i \in \{ 0, 1 \}
+    \end{gather*}
+
+    По сути каждый возможный моном либо входит в сумму, либо нет.
+\end{defn}
+
+\begin{example}{}{}
+    \[
+        x \lor y = x \oplus y \oplus (x \land y) = x + y + xy
+    \]
+\end{example}
+
+\begin{thrm}{}{}
+    Каждая булева функция \( f : \BB^n \to B \) имеет представление в виде многочлена Жегалкина (от \( n \) переменных),
+    и притом единственное с точностью до перестановки мономов
+\end{thrm}
+
+Доказательство:
+\[
+    f(x_1, x_2, \ldots, x_n) = ( x_n \land f(x_1, \ldots, x_{n - 1}, 1) ) 
+    \oplus 
+    ( (x_n \oplus 1) \land f(x_1, \ldots, x_{n - 1}, 0)
+\]
+
+Теперь докажем по индукции, что всякая функция представима в виде многочлена Жегалкина:
+
+База \( n = 1 \): очевидно
+
+Переход \( n \to n + 1 \):
+\[
+    f_0(x_1, \ldots, x_{n - 1}) = f(x_1, \ldots, x_{n - 1}, 0),
+    \
+    f_1(x_1, \ldots, x_{n - 1}) = f(x_1, \ldots, x_{n - 1}, 1)
+\]
+
+По формуле выше:
+
+\[
+    f(x_1, \ldots, x_n) 
+    = 
+    (x_n \land f_1(x_1, \ldots, x_{n - 1})) 
+    \oplus 
+    ( (x_n \oplus 1) \land f_0(x_1, \ldots, x_{n - 1}) )
+\]
+
+По индукции \( f_0, f_1 \) представимы в виде многочлена Жегалкина, остается просто раскрыть скобки.
+
+Покажем единственность:
+
+Всего \( 2^{2^n} \) различных булевых функций. 
+Также всего различных \( 2^{2^n} \) различных многочленов Жегалкина.
+Значит каждой функции сопоставлен уникальный многочлен Жегалкина.
+
+
+\subsection{Замыкание системы связок}
+
+\begin{defn}{}{}
+    \( P_2 \) --- множество всех булевых функций
+
+    \( P_2(n) \) --- множество всех булевых функций от \( x_1, \ldots, x_n \)
+
+    \( \mathcal{F} \subseteq P_2 \) --- систему связок
+\end{defn}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( \{ \lor, \land, \lnot \} \)
+        \item
+            \( \{ \lor, \oplus, 1 \} \)
+    \end{itemize}
+\end{example}
+
+\begin{defn}{}{}
+    Замыкание \( \mathcal{F} \) --- это \( [ \mathcal{F} ] \), равное следующему:
+    \begin{gather*}
+        \mathcal{F}_0 = \mathcal{F} \cup \{ x_1, x_2, \ldots \}
+        \\
+        \mathcal{F}_k \to \mathcal{F}_{k + 1} : 
+            \begin{cases}
+                F_k \subseteq F_{k + 1}
+                \\
+                g = h( f_1(y_1^{(1)}, \ldots y_{l_1}^{(1)}), \ldots, f_s(y_1^{(s)}, \ldots y_{l_s}^{(s)}) ) \in F_{k + 1}
+            \end{cases}
+        \\
+        [ \mathcal{F} ] = \bigcup\limits_{k = 0}^{\infty} \mathcal{F}_k
+    \end{gather*}
+\end{defn}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( [ \{ \land, \lor, \lnot \} ] = P_2 \) (ДНФ)
+        \item
+            \( [ \{ \land, \oplus, 1 \} ] = P_2 \) (многочлены Жегалкина)
+    \end{itemize}
+\end{example}
+
+\begin{defn}{}{}
+    \( \mathcal{F} \subseteq P_2 \) --- полная система связок, если \( [ \mathcal{F} ] = P_2 \)
+\end{defn}
+
+\begin{exercise}{}{}
+    \begin{itemize}
+        \item
+            \( \mathcal{F} \subseteq [ \mathcal{F} ] \)
+        \item
+            \( A \subseteq B \Rightarrow [ A ] \subseteq [ B ] \)
+        \item
+            \( [ [ \mathcal{F} ] ] = [ \mathcal{F} ] \)
+    \end{itemize}
+\end{exercise}
+
+\begin{lemma}{Достаточное условие полноты системы}{}
+    Пусть \( A \subseteq P_2 \) --- полная система и \( \forall f \in A \) верно, что \( f \in [ B ] \)
+
+    Тогда \( B \) --- полная система.
+\end{lemma}
+
+Доказательство:
+\[
+    A \subseteq [ B ] \Rightarrow [ A ] \subseteq [ [ B ] ] = B \Rightarrow P_2 \subseteq [ B ] \Rightarrow [ B ] = P_2
+\]
+
+\begin{coroll}{}{}
+    \( \{ \land, \lnot \}, \{ \lor, \lnot \} \) --- полные системы
+\end{coroll}
+
+Доказательство:
+
+\( B = \{ \land, \lnot \} \)
+
+\( A = \{ \land, \lor, \lnot \}, \ [ A ] = P_2 \)
+
+\( x \lor y = \lnot ( \lnot x \land \lnot y ) \in [ B ] \)
+
+Для второй системы аналогично
+
+\subsection{Замкнутые классы}
+
+\begin{defn}{}{}
+    Пусть \( F \subseteq P_2 \). 
+    \( F \) называется замкнутым классом, если \( [F] = F \)
+\end{defn}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( F = P_2 \)
+        \item
+            \( F = [A], \ A \in P_2, A \neq \varnothing \)
+        \item
+            \( F = L \)
+    \end{itemize}
+\end{example}
+
+\subsubsection{Класс L}
+
+\begin{defn}{Класс \( L \)}{}
+    \( f(x_1, \ldots, x_n) \) --- линейная, если
+    \[
+        f(x_1, \ldots, x_n) = a_0 \oplus ( a_1 \oplus x_1 ) \oplus \ldots \oplus ( a_n \oplus x_n )
+    \]
+\end{defn}
+
+\begin{defn}{}{}
+    \( L \) --- все линейные функций.
+\end{defn}
+
+\begin{remark}
+    \( [ L ] = L \)
+\end{remark}
+
+\begin{lemma}{Лемма о нелинейной функции}{}
+    Из любой нелинейной функции \( f(x_1, \ldots x_n), n > 1 \) подстановкой вместо переменных \( 0, x, y \) 
+    можно получить \( g(x, y) \notin L \)
+\end{lemma}
+
+Доказательство:
+
+Рассмотрим полином Жегалкина для \( f \) и выберем моном наименьшей длины, большей \( 1 \).
+
+Не умаляя общности, это моном \( x_1 x_2 \ldots x_r, r > 1 \).
+
+Рассмотрим \( g(x, y, \ldots, y, 0, \ldots 0 \) (последние \( n - r \) --- нули).
+Нетрудно убедиться, что получим \( xy + linear \Rightarrow \) получили нелинейную функцию \( g \).
+
+\begin{coroll}{}{}
+    Пусть \( f \notin L \), тогда \( x \land y \in [ \{ 0, \lnot, f \} ] \)
+\end{coroll}
+
+Доказательство:
+
+По лемме построим \( g(x, y) \). 
+Понятно, что \( g(x, y) \in [ \{ f, 0 \} ] \).
+\begin{gather*}
+    g(x, y) = xy + ax + by + c, \ a, b, c \in \{ 0, 1 \}
+    \\
+    g(x + b, y + a) = (x + b)(y + a) + a(x + b) + b(y + a) + c = 
+    \\
+    = xy + by + xa + ba + ax + ab + by + ab + c = xy + ab + c
+    \\
+    g(x + b, y + a) =
+    \left[
+        \begin{gathered}
+            x \land y
+            \\
+            \lnot (x \land y)
+        \end{gathered}
+    \right.
+    \in [ \{ f, 0, \lnot x \} ]
+    \\
+    \Downarrow
+    \\
+    x \land y \in [ \{ f, 0, \lnot x \} ]
+\end{gather*}
+
+\subsubsection{Класс S}
+
+\begin{defn}{}{}
+    Пусть \( f(x_1, \ldots, x_n) \in P_2 \)
+
+    Тогда двойственная булевая функция к \( f \)
+    --- это \( f^* = \lnot f(\lnot x_1, \ldots, \lnot x_n) \)
+\end{defn}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( x^* = \lnot \lnot x = x \)
+        \item
+            \( (x \land y)^* = \lnot (\lnot x \land \lnot y) = x \lor y \)
+        \item
+            \( (f^*)^* = f \)
+    \end{itemize}
+\end{example}
+
+\begin{lemma}{Принцип двойственности}{}
+    \( f(x_1, \ldots, x_n) = f_0(f_1(x_1, \ldots, x_n), \ldots, f_n(x_1, \ldots, x_n)) \)
+
+    Тогда
+
+    \( f(x_1, \ldots, x_n) = f_0^*(f_1^*(x_1, \ldots, x_n), \ldots, f_n^*(x_1, \ldots, x_n)) \)
+\end{lemma}
+
+\begin{defn}{Класс \( S \)}{}
+    \( S = \{ f \in P_2 : f = f^* \} \) --- самодвойственные функции.
+\end{defn}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( x = x^* \)
+        \item
+            \( MAJ(x, y, z) = MAJ^*(x, y, z) \)
+        \item
+            \( (x \oplus y)^* = \lnot ( \lnot x \oplus \lnot y ) = x \oplus y \oplus 1 = x \equiv y \)
+    \end{itemize}
+\end{example}
+
+\begin{lemma}{}{}
+    \[ [S] = S \]
+\end{lemma}
+
+Доказательство:
+\begin{gather*}
+    h(x_1, \ldots, x_n) = f_0(f_1(x_1, \ldots, x_n), \ldots, f_n(x_1, \ldots, x_n))
+    =
+    \\
+    =
+    f_0^*(f_1^*(x_1, \ldots, x_n), \ldots, f_n^*(x_1, \ldots, x_n)) = h^*(x_1, \ldots, x_n) 
+\end{gather*}
+
+\begin{lemma}{Лемма о самодвойственной функции}{}
+    Пусть \( f(x_1, \ldots, x_n) \notin S \)
+
+    Тогда подстановкой вместо переменных \( x, \lnot x \) можно получить константу.
+\end{lemma}
+
+Доказательство:
+\begin{gather*}
+    \exists (\alpha_1, \ldots, \alpha_n) \in \BB^n : 
+        f(\alpha_1, \ldots, \alpha_n) = f(\overline{\alpha_1}, \ldots, \overline{\alpha_n}) \ (f \notin S)
+    \\
+    x_i 
+    \to
+    \begin{cases}
+        x, \alpha_i = 0
+        \\
+        \lnot x, \alpha_i = 1
+    \end{cases}
+    \\
+    g(0) = f(\alpha_1, \ldots, \alpha_n) = f(\overline{\alpha_1}, \ldots, \overline{\alpha_n}) = g(1)
+\end{gather*}
+
+\subsubsection{Классы \( T_0 \), \( T_1 \)}
+
+\begin{defn}{\( T_0, T_1 \)}{}{}
+    \begin{gather*}
+        T_0 = \{ f \in P_2 : f(0, \ldots, 0) = 0 \}
+        \\
+        T_1 = \{ f \in P_2 : f(1, \ldots, 1) = 1 \}
+    \end{gather*}
+\end{defn}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( x \land y, x \lor y \in T_0, T_1 \)
+        \item
+            \( 1 \in T_1, 0 \in T_0 \)
+        \item
+            \( x \oplus y \in T_0 \setminus T_1 \)
+    \end{itemize}
+\end{example}
+
+\begin{lemma}{Лемма о функции, не сохраняющей константу}{}
+    \begin{enumerate}
+        \item
+            \( f \notin T_0 \Rightarrow f(x, \ldots, x) \in \{ 1, \lnot x \} \)
+        \item
+            \( f \notin T_1 \Rightarrow f(x, \ldots, x) \in \{ 0, \lnot x \} \)
+    \end{enumerate}
+\end{lemma}
+
+\subsubsection{Класс M}
+
+\begin{defn}{}{}
+    \begin{gather*}
+        0 < 1
+        \\
+        (\alpha_1, \ldots, \alpha_n ) \leq (\beta_1, \ldots, \beta_2)
+        \\
+        \Updownarrow
+        \\
+        \forall i \ \alpha_i \leq \beta_i
+    \end{gather*}
+\end{defn}
+
+\begin{defn}{Монотонная функция}{}
+    \( f(x_1, \ldots, x_n) \) --- монотонная, если 
+    \( 
+        \forall \tilde{\alpha}, \tilde{\beta} \in \BB^n : 
+        ( \tilde{\alpha} < \tilde{\beta} \Rightarrow f(\tilde{\alpha}) \leq f(\tilde{\beta})) 
+    \)
+\end{defn}
+
+\begin{defn}{Класс M}{}
+    \[
+        M = \{ f \in P_2 : f - \ \text{монотонная} \}
+    \]
+\end{defn}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( 1, 0 \in M \)
+        \item
+            \( MAJ \in M \)
+        \item 
+            \( x \oplus y \notin M \)
+    \end{itemize}
+\end{example}
+
+\begin{exercise}{}{}
+    \[ [M] = M \]
+\end{exercise}
+
+\begin{lemma}{Лемма о немонотонной функции}{}
+    Пусть \( f \notin M \).
+
+    Тогда подставляя в \( f \) вместо переменных \( 0, 1, x \) 
+    можно получить \( \lnot x \).
+\end{lemma}
+
+Доказательство:
+\begin{gather*}
+    f \notin M \Rightarrow \exists \tilde{\alpha}, \tilde{\beta} \in \BB^n : 
+        \tilde{\alpha} \leq \tilde{\beta}, f(\tilde{\alpha}) = 1, f (\tilde{\beta}) = 0
+    \\
+    \tilde{\alpha} = (0, \ldots, 0, 1, \ldots 1, 0, \ldots 0)
+    \\
+    \tilde{\beta} = (0, \ldots, 0, 1, \ldots 1, 1, \ldots 1)
+    \\
+    \text{различающиеся позиции есть, так как значения функции на наборах различны}
+    \\
+    g(x) = (0, \ldots, 0, 1, \ldots 1, x, \ldots x)
+    \\
+    g(0) = f(\tilde{\alpha}) = 1
+    \\
+    g(1) = f(\tilde{\beta}) = 0
+\end{gather*}
+
+\begin{thrm}{Критерий Поста}{}
+    \( F \) --- полная 
+    \( 
+        \Leftrightarrow F \not\subseteq L, F \not\subseteq S, F \not\subseteq T_0, F \not\subseteq T_1, F \not\subseteq M 
+    \)
+\end{thrm}
+
+Доказательство:
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+
+        Тривиально
+    \item
+        \( \Leftarrow \)
+
+        Покажем, что \( x \land y, \lnot x \in [F] \)
+
+        Дано: 
+        \( 
+            \exists 
+            f_M \in F \setminus M, 
+            f_L \in F \setminus L, 
+            f_{T_0} \in F \setminus T_0, 
+            f_{T_1} \in F \setminus T_1, 
+            f_S \in F \setminus S
+        \)
+
+        По лемме о функции, не сохраняющей константу:
+        \begin{gather*}
+            f_{T_0} (x, \ldots x)
+            =
+            \left[
+                \begin{gathered}
+                    1 \in [F]
+                    \\
+                    \lnot x \in [F]
+                \end{gathered}
+            \right.
+            \\
+            f_{T_1} (x, \ldots x)
+            =
+            \left[
+                \begin{gathered}
+                    0 \in [F]
+                    \\
+                    \lnot x \in [F]
+                \end{gathered}
+            \right.
+        \end{gather*}
+        
+        Рассмотрим два случая:
+        \begin{enumerate}
+            \item
+                \( 0, 1 \in [F] \)
+
+                По лемме о немонотонной функции:
+                \( f_M, 0, 1, x \to \lnot x \in [F] \)
+            \item
+                \( \lnot x \in [F] \)
+
+                Лемма о несамодвойстенной функции:
+                \( f_S, x, \lnot x \to const \Rightarrow 0, 1 \in [F] \)
+        \end{enumerate}
+
+        Значит \( 0, 1, \lnot x \in [F] \).
+
+        По лемме о нелинейной функции и следствию из нее:
+
+        \( x \land y \in [ \{0, f_L, \lnot x \} ] \ \subseteq [F] \)
+
+        Получили, что \( \lnot x, x \land y \in [F] \Rightarrow [F] = [[F]] = P_2 \)
+\end{itemize}
+
+\subsection{Предполные классы}
+
+\begin{defn}{Предполный класс}{}
+    \( F \subseteq P_2 \) --- предполный класс (в \( P_2 \)), если
+    \begin{itemize}
+        \item
+            \( [F] = F \)
+        \item
+            \( F \neq P_2 \)
+        \item
+            \( \forall g \in P_2 \setminus F \ [F \cup \{ g \}] = P_2 \)
+    \end{itemize}
+\end{defn}
+
+\begin{thrm}{}{}
+    В \( P_2 \) существует лишь \( 5 \) предполных классов: \( L, S, M, T_0, T_1 \)
+\end{thrm}
+
+Доказательство:
+
+Пусть \( F \neq L, S, M, T_0, T_1 \) --- предполный.
+
+Тогда \( [F] = F \neq P_2 \).
+
+По критерию Поста \( F \subseteq L \ \text{или} \ S \ \text{или} \ M \ \text{или} \ T_0 \ \text{или} \ T_1 \).
+Не умаляя общности, \( F \subseteq L \). 
+Тогда \( \exists g_L \in L \setminus F \Rightarrow P_2 = [F \cup \{ g_L \}] \subseteq L \) --- противоречие.
+
+Почему эти пять классов подходят?
+
+\begin{tabular}{ | c | c | c | c | c | c | }
+    \hline
+    \ & \( T_0 \) & \( T_1 \) &  \( M \) & \( S \) & \( L \) \\
+    \hline
+    \( T_0 \) & \ & \( 0 \) & \( x \oplus y \) & \( 0 \) & \( x \land y \) \\
+    \hline
+    \( T_1 \) & \( 1 \) & \ & \( x \equiv y \) & \( 1 \) & \( x \land y \) \\
+    \hline
+    \( M \) & \( 1 \) & \( 0 \) & \ & \( 1 \) & \( x \land y \) \\
+    \hline
+    \( S \) & \( \lnot x \) & \( \lnot x \) & \( \lnot x \) & \ & \( MAJ( x, y, z ) \) \\
+    \hline
+    \( L \) & \( 1 \) & \( 0 \) & \( x \oplus y \) & \( 1 \) & \ \\
+    \hline
+\end{tabular}
