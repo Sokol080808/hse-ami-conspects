@@ -1093,6 +1093,76 @@
 
     \newpage
 
+    \silentsubsection{15}
+
+    \textbf{Условие:}
+
+    Критерий Коши существования предела функции.
+    Определение односторонних пределов.
+    Определение монотонной функции.
+    Определение ограниченной функции.
+    Теорема Вейерштрасса для монотонной функции.
+
+    \begin{itemize}
+        \item
+            Критерий Коши существования предела функции.
+            \[
+                \exists \lim\limits_{x \to a} f(x)
+                \Leftrightarrow
+                \forall \varepsilon > 0 \ \exists \delta > 0 :
+                    \forall x_1, x_2 \in \mathring{U}_\delta(a) \ |f(x_1) - f(x_2)| < \varepsilon
+            \]
+        \item
+            Односторонние пределы.
+            \begin{gather*}
+                E_a^- = \{ x \in E : x < a \}
+                \\
+                E_a^+ = \{ x \in E : x > a \}
+            \end{gather*}
+
+            \( \lim\limits_{x \to a-} f(x) = \lim\limits_{x ( \in E_a^- ) \to a} \) --- предел слева.
+
+            \( \lim\limits_{x \to a+} f(x) = \lim\limits_{x ( \in E_a^+ ) \to a} \) --- предел справа.
+        \item
+            Монотонные функции.
+
+            Пусть \( f : E \to \RR \) и \( \forall x_1, x_2 \in E : x_1 < x_2 \)
+            \begin{enumerate}
+                \item
+                    \( f(x_1) \leq f(x_2) \Rightarrow f \uparrow \)
+                \item
+                    \( f(x_1) < f(x_2) \Rightarrow f \uparrow \uparrow \)
+                \item
+                    \( f(x_1) \geq f(x_2) \Rightarrow f \downarrow \)
+                \item
+                    \( f(x_1) > f(x_2) \Rightarrow f \downarrow \downarrow \)
+            \end{enumerate}
+        \item
+            Ограниченная функции.
+
+            Функция \( f \) ограничена на множестве \( A \),
+            если \( f \) определена на \( A \),
+            и существует константа \( C : \forall x \in A \ |f(x)| < C \).
+        \item
+            Теорема Вейерштрасса для монотонной функции.
+
+            Пусть \( f : E \to \RR \)
+            \begin{enumerate}
+                \item
+                    Если \( f \uparrow \) и ограничена сверху на \( E_a^- \),
+                    а \( a \) --- предельная точка \( E_a^- \),
+                    то \( \exists \lim\limits_{x \to a-} f(x) \)
+                \item
+                    Если \( f \downarrow \) и ограничена снизу \( E_a^+ \),
+                    а \( a \) --- предельная точка \( E_a^+ \),
+                    то \( \exists \lim\limits_{x \to a+} f(x) \)
+            \end{enumerate}
+    \end{itemize}
+
+    \bigskip \bigskip
+
+    \newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     \silentsection{Листик 1}
