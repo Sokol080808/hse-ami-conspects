@@ -962,6 +962,62 @@
     \end{itemize}
 
     \newpage
+
+    \silentsubsection{13}
+
+    \textbf{Условие:}
+
+    Определение предела по Коши (в том числе через окрестности).
+    Определение предела при \( x \to +\infty \).
+    Определение предела по Гейне.
+    Эквивалентность определений по Коши и Гейне.
+
+    \bigskip \bigskip
+
+    \begin{itemize}
+        \item
+            Определение предела по Коши.
+
+            Пусть \( f : E \to \RR \).
+
+            Пусть \( a \in E \).
+            \begin{gather*}
+                \lim\limits_{x (\in E) \to a} f(x) = A
+                \\
+                \Updownarrow
+                \\
+                \forall \varepsilon > 0 \ \exists \delta > 0 : \forall x :
+                    (x \in E \land 0 < |x - a| < \delta) \ |f(x) - A| < \varepsilon
+            \end{gather*}
+
+            Через окрестности:
+            \[
+                \forall V_{\varepsilon}(A) \ \exists \mathring{U_\delta} (a) :
+                \forall x \in E \cap \mathring{U_\delta} (a) \ f(x) \in V_{\varepsilon} (A)
+            \]
+        \item
+            Определение предела при \( x \to +\infty \).
+            \[
+                \forall U_{\varepsilon}(A) \ \exists M :
+                \forall x \in E \cap (M, +\infty) \ f(x) \in U_{\varepsilon} (A)
+            \]
+        \item
+            Определение предела по Гейне.
+            \begin{gather*}
+                \lim\limits_{x (\in E) \to a} f(x) = A
+                \\
+                \Updownarrow
+                \\
+                \forall \{ a_n \} \in E : ( \ \lim\limits_{n \to \infty} a_n = a \land a_n \neq a \ \forall n \in \NN )
+                \ \lim\limits_{n \to \infty} f(a_n) = A
+            \end{gather*}
+        \item
+            Эквивалентность определений по Коши и Гейне.
+
+            Два вышеприведенных определения эквивалентны.
+    \end{itemize}
+
+    \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     \silentsection{Листик 1}
