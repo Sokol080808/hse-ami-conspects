@@ -874,9 +874,9 @@
 
             \begin{enumerate}
                 \item
-                    \( \alpha > 1 \Rightarrow \) расходится
+                    \( \alpha < 1 \Rightarrow \) расходится
                 \item
-                    \( \alpha < 1 \Rightarrow \) сходится
+                    \( \alpha > 1 \Rightarrow \) сходится
                 \item
                     \( \alpha = 1 \)
 
@@ -1018,6 +1018,81 @@
     \end{itemize}
 
     \newpage
+
+    \silentsubsection{14}
+
+    \textbf{Условие:}
+
+    Свойства предела.
+    Теорема о пределе композиции.
+    Эквивалентные функции.
+
+    \bigskip \bigskip
+
+    \begin{itemize}
+        \item
+
+            Пусть \( f, g, h : E \to \RR \).
+
+            \( a \in E, \lim\limits_{x \to a} f(x) = A, \ \lim\limits_{x \to b} g(x) = B \).
+
+            Свойства предела:
+            \begin{enumerate}
+                \item
+                    Единственность
+                \item
+                    \( \forall \alpha, \beta \in \RR \ \lim\limits_{x \to a} (\alpha f(x) + \beta g(x)) = \alpha A + \beta B \)
+                \item
+                    \( \lim\limits_{x \to a} f(x)g(x) = AB \)
+                \item
+                    Пусть
+                    \(
+                        B \neq 0, \ g(x) \neq 0 \ \forall x \in E \Rightarrow \lim\limits_{x \to a} \frac{f(x)}{g(x)} = \frac{A}{B}
+                    \)
+                \item
+                    Предельный переход в неравенстве.
+
+                    (нужна окрестность с \( f(x) \leq g(x) \))
+                \item
+                    Если функция имеет предел в точке, то существует окрестность этой точки, в которой функция ограничена.
+                \item
+                    Лемма о зажатом пределе
+
+                    (нужна окрестность с \( f(x) \leq h(x) \leq g(x)\) и \( A = B \))
+                \item
+                    Отделимость от нуля (можем найти ``хорошую'' окрестность).
+            \end{enumerate}
+        \item
+            Теорема о пределе композиции.
+            \begin{gather*}
+                g : D \to \RR, \ b \in D
+                \\
+                f : E \to D, \ a \in E
+                \\
+                \exists \mathring{U}(a) : \forall x \in \mathring{U}(a) \ f(x) \neq b
+                \\
+                \lim\limits_{x \to a} f(x) = b, \ \lim\limits_{y \to b} g(y) = c \Rightarrow \lim\limits_{x \to a} g(f(x)) = c
+            \end{gather*}
+        \item
+            Эквивалентные функции.
+
+            Пусть \( f, g : E \to \RR \) и \( a \) --- предельная точка \( E \)
+
+            \( f \sim g, \ x \to a \), если
+            \begin{enumerate}
+                \item
+                    \( \exists \mathring{U}(a) : \forall x \in \mathring{U}(a) \cap E \ f(x) = g(x)h(x) \),
+                    где \( h : \mathring{U}(a) \cap E \to \RR \)
+                \item
+                    \( \lim\limits_{x \to a} h(x) = 1 \)
+            \end{enumerate}
+
+            При \( g(x) \neq 0 \) в \( \mathring{U}(a) \cap E \) это равносильно
+            \( \lim\limits_{x \to a} \frac{f(x)}{g(x)} = 1 \)
+    \end{itemize}
+
+    \newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     \silentsection{Листик 1}
