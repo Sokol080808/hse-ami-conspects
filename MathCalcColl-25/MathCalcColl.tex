@@ -770,18 +770,123 @@
         \item
             Необходимый признак сходимости ряда.
 
-            Ряд \( \{ a_n \} \) сходится \( \Rightarrow \lim\limits_{n \to \infty} a_n = 0 \)
+            Ряд \( \sum\limits_{n = 1}^{\infty} a_n \) сходится \( \Rightarrow \lim\limits_{n \to \infty} a_n = 0 \)
         \item
             Абсолютная и условная сходимость ряда.
 
-            Пусть ряд \( \{ a_n \} \) сходится.
+            Пусть ряд \( \sum\limits_{n = 1}^{\infty} a_n \) сходится.
 
-            Если ряд \( \{ |a_n| \} \) тоже сходится, то такую сходимость называют абсолютной,
+            Если ряд \( \sum\limits_{n = 1}^{\infty} |a_n| \) тоже сходится, то такую сходимость называют абсолютной,
             в противном случае --- условной.
         \item
             Критерий сходимости рядов с неотрицательными членами.
 
             Ряд сходится \( \Leftrightarrow \) \( \{ S_n \} \) --- ограниченная последовательность.
+    \end{itemize}
+
+    \newpage
+
+    \silentsubsection{11}
+
+    \textbf{Условие:}
+
+    Признак сравнения.
+    Признак сравнения в предельной форме.
+    Мажорантный признак Вейерштрасса.
+    Признак разрежения Коши.
+    Признак Даламбера.
+    Признак Коши.
+    Признак Гаусса.
+
+    \bigskip \bigskip
+
+    \begin{itemize}
+        \item
+            Признак сравнения.
+
+            Пусть \( \exists n_0 \in \NN : \forall n > n_0 \ 0 \leq a_n \leq b_n \),
+
+            \( \sum\limits_{n = 1}^{\infty} b_n \) сходится \( \Rightarrow \) \( \sum\limits_{n = 1}^{\infty} a_n \) сходится.
+
+            \( \sum\limits_{n = 1}^{\infty} a_n \) расходится \( \Rightarrow \) \( \sum\limits_{n = 1}^{\infty} b_n \) расходится.
+        \item
+            Признак сравнения в предельной форме.
+
+            Пусть \( \exists N : \forall n > N \ a_n \geq 0, b_n > 0 \)
+            и \( \lim\limits_{n \to \infty} \frac{a_n}{b_n} = A \in (0, +\infty) \)
+
+            Тогда либо \( \sum\limits_{n = 1}^{\infty} a_n, \ \sum\limits_{n = 1}^{\infty} b_n \) оба сходятся,
+            либо оба расходятся.
+        \item
+            Мажорантный признак Вейерштрасса.
+
+            Пусть \( \forall n > N \ |a_n| \leq b_n \)
+
+            \( \sum\limits_{n = 1}^{\infty} b_n \) сходится \( \Rightarrow \sum\limits_{n = 1}^{\infty} a_n \) тоже сходится.
+        \item
+            Признак разрежения Коши.
+
+            Пусть \( \{ a_n \} \) не возрастает.
+
+            Тогда \( \sum\limits_{n = 1}^{\infty} a_n \) сходится тогда и только тогда,
+            когда сходится \( \sum\limits_{k = 1}^{\infty} 2^k a_{2^k} \)
+        \item
+            Признак Д'Аламбера.
+
+            Пусть дан ряд \( \sum\limits_{n = 1}^{\infty} a_n \)
+            и \( \exists \lim\limits_{n \to \infty} \left| \frac{a_{n + 1}}{a_n} \right| = q \).
+            \begin{enumerate}
+                \item
+                    \( q < 1 \Rightarrow \sum\limits_{n = 1}^{\infty} a_n \) сходится
+                \item
+                    \( q > 1 \Rightarrow \sum\limits_{n = 1}^{\infty} a_n \) расходится
+                \item
+                    \( \not\exists\lim \) или \( q = 1 \Rightarrow \) может быть что угодно
+            \end{enumerate}
+
+            \newpage
+        \item
+            Радикальный Признак Коши.
+
+            Пусть дан ряд \( \sum\limits_{n = 1}^{\infty} a_n \)
+            и \( \exists \overline{\lim\limits_{n \to \infty}} \sqrt[n]{|a_n|} = q \)
+
+            Тогда
+            \begin{enumerate}
+                \item
+                    \( q < 1 \Rightarrow \sum\limits_{n = 1}^{\infty} a_n \) сходится
+                \item
+                    \( q > 1 \Rightarrow \sum\limits_{n = 1}^{\infty} a_n \) расходится
+                \item
+                    \( \not\exists\lim \) или \( q = 1 \Rightarrow \) может быть что угодно
+            \end{enumerate}
+        \item
+            Признак Гаусса.
+
+            Пусть дан ряд \( \sum\limits_{n = 1}^{\infty} a_n \) и \( a_n \geq 0 \ \forall n \in \NN \)
+
+            Пусть
+            \[
+                \exists \delta > 0 : \frac{a_n}{a_{n + 1}} = \alpha + \frac{\beta}{n} + \gamma_n \cdot \frac{1}{n^{1 + \delta}}
+            \]
+
+            причем \( \gamma_n \) --- ограниченная последовательность.
+
+            \begin{enumerate}
+                \item
+                    \( \alpha > 1 \Rightarrow \) расходится
+                \item
+                    \( \alpha < 1 \Rightarrow \) сходится
+                \item
+                    \( \alpha = 1 \)
+
+                    \begin{enumerate}
+                        \item
+                            \( \beta > 1 \Rightarrow \) сходится
+                        \item
+                            \( \beta \leq 1 \Rightarrow \) расходится
+                    \end{enumerate}
+            \end{enumerate}
     \end{itemize}
 
     \newpage
