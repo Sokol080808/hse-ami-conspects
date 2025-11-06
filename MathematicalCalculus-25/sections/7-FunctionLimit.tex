@@ -1,5 +1,7 @@
 \section{Предел функции}
 
+\subsection{Определение}
+
 \begin{defn}{Предел функции по Коши}{}
     Пусть \( f : E \to \RR \).
 
@@ -355,3 +357,314 @@
             \end{gather*}
     \end{itemize}
 \end{example}
+
+\subsection{Асимптотика}
+
+\begin{defn}{}{}
+    Пусть \( f, g : E \to \RR \) и \( a \) --- предельная точка \( E \) и существует 
+    \( \mathring{U}(a) : \forall x \in \mathring{U}(a) \cap E \ f(x) = h(x) \cdot g(x) \),
+    где \( h : \mathring{U}(a) \cap E \to  \RR \)
+
+    Тогда:
+    \begin{enumerate}
+        \item
+            Если \( h(x) \to 1 \) при \( x \to a \), то \( f ~ g, x \to a \)
+        \item
+            Если \( \lim\limits_{x \to a} h(x) = 0 \), то \( f = o(g), x \to a \)
+        \item
+            Если \( h \) ограничено на \( \mathring{U}(a) \cap E \), то \( f = O(g) \)
+    \end{enumerate}
+
+    Если в \( \mathring{U}(a) \cap E \ g(x) \neq 0 \), то
+    \begin{enumerate}
+        \item
+            \( \Leftrightarrow \lim\limits_{x \to a} \frac{f(x)}{g(x)} = 1 \)
+        \item
+            \( \Leftrightarrow \lim\limits_{x \to a} \frac{f(x)}{g(x)} = 0 \)
+        \item
+            \( \Leftrightarrow \frac{f(x)}{g(x)} \) --- ограниченная функция в \( \mathring{U}(a) \cap E \)
+    \end{enumerate}
+\end{defn}
+
+\newpage
+
+\begin{example}{}{}
+    \( f ~ g, x \to a \Leftrightarrow f - g = o(f), f - g = o(g), x \to a \)
+\end{example}
+
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+        \begin{gather*}
+            f ~ g, x \to a \Rightarrow f(x) = h(x) \cdot g(x) \Rightarrow f(x) - g(x) = (h(x) - 1) \cdot g(x)
+            \\
+            \lim\limits_{x \to a} h(x) = 1 \Rightarrow \lim\limits_{x \to a} (h(x) - 1) = 0
+        \end{gather*}
+    \item
+        \( \Leftarrow \)
+        \begin{gather*} 
+            f - g = o(g), x \to a \Rightarrow f(x) - g(x) = h(x) \cdot g(x) \Rightarrow f(x) = (h(x) + 1) \cdot g(x)
+            \\
+            \lim\limits_{x \to a} h(x) = 0 \Rightarrow \lim\limits_{x \to a} (h(x) + 1) = 1
+        \end{gather*}
+\end{itemize}
+
+\begin{example}{}{}
+    Пусть \( m > n > 0 \)
+    \begin{enumerate}
+        \item
+            \( x \to 0 \Rightarrow x^m = o(x^n) \)
+        \item
+            \( x \to +\infty \Rightarrow x^n = o(x^m) \)
+        \item
+            \( f(x) = x + \sin x = O(x), x \to +\infty \)
+        \item
+            \( f(x) = x + \sin x = O(x), x \to 0 \)
+
+            Так как \( \lim\limits_{x \to 0} \frac{\sin x}{x} = 1 \)
+    \end{enumerate}
+\end{example}
+
+\begin{defn}{}{}
+    Бесконечно малая функция при \( x \to a \) обозначается \( o(1) \)
+    \\
+    Ограниченная функция при \( x \to a \) (в \( \mathring{U}(a) \)) обозначается \( O(1) \)
+\end{defn}
+
+\newpage
+
+Асимптотические равенства:
+\begin{enumerate}
+    \item
+        \( \sin x = x + o(x), \ x \to 0 \)
+    \item
+        \( \tan x = x + o(x), \ x \to 0 \)
+    \item
+        \( \arctan x = x + o(x), \ x \to 0 \)
+    \item
+        \( \arcsin x = x + o(x), \ x \to 0 \)
+    \item
+        \( \ln (1 + x) = x + o(x), \ x \to 0 \)
+    \item
+        \( e^x = 1 + x + o(x), \ x \to 0 \)
+    \item
+        \( \cos x = 1 - \frac{x^2}{2} + o(x), \ x \to 0 \)
+    \item 
+        \( (1 + x)^\alpha = 1 + \alpha x + o(x), \ x \to 0 \)
+\end{enumerate}
+
+\begin{example}{}{}
+    \[
+        \lim\limits_{x \to 0} \frac{\ln ( \cos x ) }{e^{\sin^2 x} - 1}
+    \]
+\end{example}
+\[
+    \lim\limits_{x \to 0} \frac{\ln ( \cos x ) }{e^{\sin^2 x} - 1}
+    =
+    \lim\limits_{x \to 0} \frac{\ln ( 1 - 2 \sin^2 \frac{x}{2} ) }{\sin^2 x}
+    =
+    \lim\limits_{x \to 0} \frac{-2 \sin^2 \frac{x}{2}}{\sin^2 x}
+    =
+    -2 \lim\limits_{x \to 0} \frac{\frac{x^2}{4}}{x^2}
+    =
+    -\frac{1}{2}
+\]
+
+Также можно использовать точные равенства:
+\begin{gather*}
+    \lim\limits_{x \to 0} \frac{\ln ( \cos x ) }{e^{\sin^2 x} - 1}
+    =
+    \lim\limits_{x \to 0} \frac{\ln ( 1 - \frac{x^2}{2} + o(x) ) }{e^{( x + o(x) )^2} - 1}
+    =
+    \lim\limits_{x \to 0} \frac{\frac{x^2}{2} + o(x) + o(\frac{x^2}{2} + o(x))}{( x + o(x) )^2 + o(( x + o(x) )^2)}
+    =
+    \\
+    =
+    \lim\limits_{x \to 0} 
+        \frac{ x^2 (-\frac{1}{2} + o(1) + o(-\frac{1}{2} + o(1))}{x^2 (1 + 2o(1) + (o(1)^2) + o(1 + 2o(1) + (o(1))^2)}
+    =
+    -\frac{1}{2}
+\end{gather*}
+
+\begin{example}{}{}
+    \[
+        \lim\limits_{x \to 0} \frac{\sin x - x}{x^2}
+    \]
+\end{example}
+\[
+    \lim\limits_{x \to 0} \frac{\sin x - x}{x^2}
+    =
+    \lim\limits_{x \to 0} \frac{x + o(x) - x}{x^3}
+    =
+    \lim\limits_{x \to 0} \frac{o(x)}{x^3}
+\]
+
+\newpage
+
+Формулы Тейлора при \( x \to 0 \):
+\begin{enumerate}
+    \item
+        \( 
+            \displaystyle
+            e^x = \sum\limits_{k = 0}^n \frac{x^k}{k!} + o(x^n) 
+        \)
+    \item
+        \( 
+            \displaystyle
+            \sin x = \sum\limits_{k = 0}^n (-1)^k \frac{x^{2k + 1}}{(2k + 1)!} + o(x^{2n + 1}) 
+        \)
+    \item
+        \( 
+            \displaystyle
+            \cos x = \sum\limits_{k = 0}^n (-1)^k \frac{x^{2k}}{(2k)!} + o(x^{2n}) 
+        \)
+    \item
+        \( 
+            \displaystyle
+            \ln (1 + x) = \sum\limits_{k = 1}^n (-1)^k \frac{x^k}{k} + o(x^n) 
+        \)
+    \item
+        \(
+            \displaystyle
+            (1 + x)^\alpha = \sum\limits_{k = 0}^n \frac{\alpha (\alpha - 1) \ldots (\alpha - k + 1)}{k!} x^k + o(x^n)
+        \)
+\end{enumerate}
+
+Теперь можем решить тот предел.
+\begin{gather*}
+    \lim\limits_{x \to 0} \frac{\sin x - x}{x^2}
+    =
+    \lim\limits_{x \to 0} \frac{x - \frac{x^3}{6} + o(x^3) - x}{x^3}
+    =
+    \lim\limits_{x \to 0} \frac{-\frac{x^3}{6} + o(x^3)}{x^3}
+    =
+    \\
+    =
+    \lim\limits_{x \to 0} \frac{x^3 ( -\frac{1}{6} + o(1) ) }{x^3}
+    =
+    -\frac{1}{6}
+\end{gather*}
+
+Например, из
+\[
+    \lim\limits_{x \to 0} \frac{\tan x - \sin x}{x^3} = \frac{1}{2}
+\]
+
+понятно, что \( \tan x = x + \frac{x^3}{3} + o(x^3) \) при \( x \to 0 \)
+
+(кажется нам просто этот предел дали, или я что-то пропустил)
+
+\newpage
+
+\subsection{Важные теоремы}
+
+\begin{thrm}{Критерий Коши}{}
+    \[
+        A = \lim\limits_{x \to a} f(x) 
+        \Leftrightarrow 
+        \forall \varepsilon > 0 \ \exists \delta > 0 :
+        \forall x_1, x_2 \in \mathring{U}_\delta(a) \ | f(x_1) - f(x_2) | < \varepsilon
+    \]
+\end{thrm}
+
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+        \begin{gather*}
+            \forall \varepsilon > 0 \ \exists \delta > 0 : \forall x \in \mathring{U}_\delta(a) \ |f(x) - A| < \frac{\varepsilon}{2}
+            \\
+            \Downarrow
+            \\
+            \forall x_1, x_2 \in \mathring{U}_\delta(a) \
+                |f(x_1) - f(x_2)| \leq |f(x_1) - A| + |f(x_2) - A| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+        \end{gather*}
+    \item
+        \( \Leftarrow \)
+
+        Пусть \( \{ a_n \} : \lim\limits_{n \to \infty} a_n = a, \ a_n \neq a \ \forall n \in \NN \).
+        Тогда \( \{ f(a_n) \} \) --- фундаментальная.
+        Значит \( \exists B = \lim\limits_{n \to \infty} f(a_n) \).
+
+        Пусть \( \{ b_n \} : \lim\limits_{n \to \infty} b_n = a, \ b_n \neq a \ \forall n \in \NN \).
+        По аналогичным рассуждениям \( \exists C = \lim\limits_{n \to \infty} f(b_n) \).
+
+        Аналогично для
+        \[
+            c_n = \begin{cases}
+                a_k, n = 2k - 1
+                \\
+                b_k, n = 2k
+            \end{cases}
+        \]
+
+        Откуда получим, что \( B = C \)
+\end{itemize}
+
+\begin{defn}{}{}
+    Пусть \( f : E \to \RR \) и \( \forall x_1, x_2 \in E : x_1 < x_2 \)
+    \begin{enumerate}
+        \item
+            \( f(x_1) \leq f(x_2) \Rightarrow f \uparrow \)
+        \item
+            \( f(x_1) < f(x_2) \Rightarrow f \uparrow \uparrow \)
+        \item
+            \( f(x_1) \geq f(x_2) \Rightarrow f \downarrow \)
+        \item
+            \( f(x_1) > f(x_2) \Rightarrow f \downarrow \downarrow \)
+    \end{enumerate}
+\end{defn}
+
+\newpage
+
+\begin{defn}{}{}
+    \begin{gather*}
+        E_a^+ = \{ x \in E : x > a \}
+        \\
+        E_a^- = \{ x \in E : x < a \}
+    \end{gather*}
+
+    Если смотреть пределы для \( a \) на таких областях, получим предел сверху / снизу
+\end{defn}
+
+\begin{thrm}{Теорема Вейерштрасса}{}
+    Пусть \( f \) монотонна на \( E \) и ограничена на \( E \).
+
+    Тогда если \( a \) --- предельная точка \( E_a^+ \), то \( \exists \lim\limits_{x \to a+} f(x) \)
+\end{thrm}
+
+Доказательство:
+
+Пусть \( f \uparrow \). 
+Тогда \( \{ f(x) \} \) ограниченно снизу на \( E_a^+ \).
+
+Значит
+\begin{gather*}
+    \exists \inf\limits_{x \in E_a^+} f(x) = A
+    \\
+    \Downarrow
+    \\
+    \forall \varepsilon > 0 \ \exists x_0 \in E_a^+ : \forall x < x_0 \land x \in E_a^+
+        \ A \leq f(f)x < A + \varepsilon
+\end{gather*}
+
+\subsection{Предел по базе}
+
+\begin{defn}{База}{}
+    Пусть \( E \) --- область определения функции, а \( B = \{ b \} \) 
+    --- бесконечная система непустых подмножеств \( E \)
+    и \( \forall b_1, b_2 \in B \) и \( b_1 \cap b_2 = \varnothing \ \exists b_3 \in B : b_3 \subset b_1 \cap b_2 \).
+
+    Тогда \( B \) называется базой множеств множества \( E \).
+
+    \( b \) --- окончание базы \( B \).
+\end{defn}
+
+\begin{defn}{}{}
+    Пусть \( B \) --- база множеств на \( E \)
+
+    \[
+        \lim\limits_B f(x) = A 
+        \Leftrightarrow 
+        \forall \varepsilon > 0 \ \exists b \in B : \forall x \in b \ |f(x) - A| < \varepsilon
+    \]
+\end{defn}
