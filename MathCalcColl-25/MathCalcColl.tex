@@ -419,6 +419,72 @@
 
     \newpage
 
+    \silentsubsection{4}
+
+    \textbf{Условие:}
+
+    Единственность предела последовательности, определение ограниченной последовательности, 
+    ограниченность сходящейся последовательности и лемма об отделимости.
+    Арифметика пределов, переход к пределу в неравенстве и лемма о зажатом пределе.
+
+    \bigskip \bigskip
+
+    \begin{itemize}
+        \item
+            Единственность предела последовательности.
+
+            Если последовательность имеет предел, то он единственен.
+        \item
+            Ограниченная последовательность.
+
+            \( \{ a_n \} \) ограничена, если \( \exists C : \forall n \ |a_n| < C \)
+        \item
+            Ограниченность сходящейся последовательности.
+
+            \( \{ a_n \} \) сходится \( \Rightarrow \) \( \{ a_n \} \) ограничена.
+        \item
+            Лемма об отделимости.
+
+            \( \lim\limits_{n \to \infty} a_n = A \) и \( A \neq 0 \) 
+            \( \Rightarrow \exists N : \forall n > N \ |a_n| > \frac{|A|}{2} \) 
+        \item
+            Арифметика пределов.
+
+            Пусть \( \lim\limits_{n \to \infty} a_n = A \) и \( \lim\limits_{n \to \infty} b_n = B \)
+
+            Тогда:
+            \begin{enumerate}
+                \item
+                    \( \forall \alpha, \beta \in \RR \ \lim\limits_{n \to \infty} (\alpha a_n + \beta b_n) = \alpha A + \beta B \)
+                \item 
+                    \( \lim\limits_{n \to \infty} a_n b_n = AB \)
+                \item
+                    Если \( \forall n \ b_n \neq 0 \), 
+                    то \( \lim\limits_{n \to \infty} \frac{a}{b} = \frac{A}{B} \)
+
+                    (на самом деле, благодаря лемме об отделимости, достаточно \( B \neq 0 \))
+            \end{enumerate}
+        \item
+            Предельный переход в неравенстве.
+
+            Пусть \( \lim\limits_{n \to \infty} a_n = A \) и \( \lim\limits_{n \to \infty} b_n = B \),
+            причем \( \exists N : \forall n > N \ a_n \leq b_n \).
+
+            Тогда \( A \leq B \).
+
+            \textbf{Важно}, если заменить \( a_n \leq b_n \) на \( a_n < b_n \), то все еще будет \( A \leq B \)
+        \item
+            Лемма о зажатом пределе.
+
+            Пусть \( \lim\limits_{n \to \infty} a_n = A \) и \( \lim\limits_{n \to \infty} b_n = A \),
+            причем \( \exists N : \forall n > N \ a_n \leq c_n \leq b_n \).
+
+            Тогда \( \exists \lim\limits_{n \to \infty} c_n \), 
+            более того --- \( \lim\limits_{n \to \infty} c_n = A \)
+    \end{itemize}
+
+    \newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     \silentsection{Листик 1}
