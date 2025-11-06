@@ -1031,12 +1031,12 @@
 
     \begin{itemize}
         \item
+            Свойства предела.
 
             Пусть \( f, g, h : E \to \RR \).
 
             \( a \in E, \lim\limits_{x \to a} f(x) = A, \ \lim\limits_{x \to b} g(x) = B \).
 
-            Свойства предела:
             \begin{enumerate}
                 \item
                     Единственность
@@ -1103,6 +1103,8 @@
     Определение ограниченной функции.
     Теорема Вейерштрасса для монотонной функции.
 
+    \bigskip \bigskip
+
     \begin{itemize}
         \item
             Критерий Коши существования предела функции.
@@ -1159,7 +1161,103 @@
             \end{enumerate}
     \end{itemize}
 
+    \newpage
+
+    \silentsubsection{16}
+
+    \textbf{Условие:}
+
+    Определение бесконечно малой функции.
+    Определение \( o \)-малого.
+    \( o \)-малое в терминах пределов.
+    Определение \( O \)-большого.
+    Асимптотические равенства \( 1 \) - \( 13 \).
+
     \bigskip \bigskip
+
+    \begin{itemize}
+        \item
+            Бесконечно малая функция.
+
+            \( f : E \to \RR \) называется бесконечно малой при \( x \to a \),
+            если \( \lim\limits_{x (\in E) \to a} f(x) = 0 \)
+        \item
+            \( o \)-малое и \( O \)-большое
+
+            Пусть \( f, g : E \to \RR \) и \( a \) --- предельная точка \( E \).
+
+            Пусть \( \exists \mathring{U}(a) : \forall x \in \mathring{U}(a) \cap E \ f(x) = g(x)h(x) \).
+
+            Тогда:
+            \begin{enumerate}
+                \item
+                    Если \( \lim\limits_{x \to a} h(x) = 0 \), то \( f = o(g), x \to a \)
+                \item
+                    Если \( h \) ограничено на \( \mathring{U}(a) \cap E \), то \( f = O(g), x \to a \)
+            \end{enumerate}
+
+            Если в \( \mathring{U}(a) \cap E \ g(x) \neq 0 \), то
+            \begin{enumerate}
+                \item
+                    \( \Leftrightarrow \lim\limits_{x \to a} \frac{f(x)}{g(x)} = 0 \)
+                \item
+                    \( \Leftrightarrow \frac{f(x)}{g(x)} \) --- ограниченная функция в \( \mathring{U}(a) \cap E \)
+            \end{enumerate}
+
+            Тогда бесконечно малая при \( x \to a \) может быть обозначена как \( o(1) \).
+        \item
+            Асимптотические равенства.
+
+            \begin{enumerate}
+                \item
+                    \( \sin x = x + o(x), \ x \to 0 \)
+                \item
+                    \( \tan x = x + o(x), \ x \to 0 \)
+                \item
+                    \( \arctan x = x + o(x), \ x \to 0 \)
+                \item
+                    \( \arcsin x = x + o(x), \ x \to 0 \)
+                \item
+                    \( \ln (1 + x) = x + o(x), \ x \to 0 \)
+                \item
+                    \( e^x = 1 + x + o(x), \ x \to 0 \)
+                \item
+                    \( \cos x = 1 - \frac{x^2}{2} + o(x), \ x \to 0 \)
+                \item
+                    \( (1 + x)^\alpha = 1 + \alpha x + o(x), \ x \to 0 \)
+            \end{enumerate}
+
+            \newpage
+
+            Обрубки ряда Тейлора в \( x = 0 \):
+            \begin{enumerate}
+                \item
+                    \(
+                        \displaystyle
+                        e^x = \sum\limits_{k = 0}^n \frac{x^k}{k!} + o(x^n)
+                    \)
+                \item
+                    \(
+                        \displaystyle
+                        \sin x = \sum\limits_{k = 0}^n (-1)^k \frac{x^{2k + 1}}{(2k + 1)!} + o(x^{2n + 1})
+                    \)
+                \item
+                    \(
+                        \displaystyle
+                        \cos x = \sum\limits_{k = 0}^n (-1)^k \frac{x^{2k}}{(2k)!} + o(x^{2n})
+                    \)
+                \item
+                    \(
+                        \displaystyle
+                        \ln (1 + x) = \sum\limits_{k = 1}^n (-1)^k \frac{x^k}{k} + o(x^n)
+                    \)
+                \item
+                    \(
+                        \displaystyle
+                        (1 + x)^\alpha = \sum\limits_{k = 0}^n \frac{\alpha (\alpha - 1) \ldots (\alpha - k + 1)}{k!} x^k + o(x^n)
+                    \)
+            \end{enumerate}
+    \end{itemize}
 
     \newpage
 
