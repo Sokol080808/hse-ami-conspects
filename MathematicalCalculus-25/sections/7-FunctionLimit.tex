@@ -675,3 +675,208 @@
         \forall \varepsilon > 0 \ \exists b \in B : \forall x \in b \ |f(x) - A| < \varepsilon
     \]
 \end{defn}
+
+\subsection{Непрерывность}
+
+\begin{defn}{Непрерывность}{}
+    Дана \( f : E \to \RR \)
+
+    \begin{enumerate}
+        \item
+            \( 
+                f \in C(a) \Leftrightarrow \forall \varepsilon > 0 \ \exists \delta > 0 : 
+                \forall x : | x - a | < \delta, \ x \in E \ | f(x) - f(a) | < \varepsilon
+            \)
+        \item
+            \( f \in C(a) \Leftrightarrow \) \( a \) --- изолированная точка
+            или \( a \) --- предельная точка и \( \lim\limits_{x \to a} f(x) = f(a) \)
+        \item
+            \( f \in C(a) \Leftrightarrow \) \( a \) --- изолированная точка
+            или \( a \) --- предельная точка и \( \lim\limits_{x \to a} f(x) = f( \lim\limits_{x \to a} x) \)
+        \item
+            \( f \in C(a) \Leftrightarrow \) \( a \) --- изолированная точка
+            или \( a \) --- предельная точка и 
+            \( \exists \alpha : E \to \RR :  f(x) = f(a) + \alpha(x) \)
+        \item
+            \( f \in C(a) \Leftrightarrow \) \( a \) --- изолированная точка
+            или \( a \) --- предельная точка и 
+            \( \forall V(f(a)) \ \exists U(a) : \forall x \in U(a) \cap E \ f(x) \in V(f(a)) \)
+        \item
+            \( f \in C(a) \Leftrightarrow \forall \{ a_n \} \subset E, \ a_n \to a, \ f(a_n) \to f(a) \)
+    \end{enumerate}
+\end{defn}
+
+\begin{exercise}{}{}
+    Пусть \( a \) --- предельная точка \( E \).
+
+    \( \lim\limits_{x \to a-} f(x) = A \)
+
+    \( \lim\limits_{x \to a+} f(x) = B \)
+
+    \( f \in C(a) \Leftrightarrow A = B \)
+\end{exercise}
+
+Пусть \( f, g \in C(a) \).
+Тогда
+\begin{enumerate}
+    \item
+        \( \forall \alpha, \beta \in \RR \ \ \alpha f(x) + \beta g(x) \in C(a) \)
+    \item
+        \( f(x)g(x) \in C(a) \)
+    \item
+        Если \( g(x) \neq 0 \) (\( x \in E \)), то \( \frac{f(x)}{g(x)} \in C(a) \)
+    \item
+        \( \exists C > 0, \ \exists U(a) : \forall x \in U(a) \cap E \ | f(x) | \leq C \)
+    \item
+        Если \( f(a) \neq 0 \), то \( \exists U(a) : \forall x \in U(a) \ | f(x) | > \frac{| f(a) |}{2} \)
+\end{enumerate}
+
+Если \( a \) --- изолированная точка, то очевидно.
+
+Иначе \( a \) --- предельная точка.
+Вышеописанные свойства следуют из ранее доказанных свойств пределов.
+
+\begin{thrm}{Непрерывность композиции}{}
+    Пусть \( f : E \to D, \ a \in E, f \in C(a) \)
+
+    Пусть \( g : D \to \RR, \ g \in C(f(a)) \)
+
+    Тогда \( g(f(a)) \in C(a) \).
+\end{thrm}
+
+Доказательство:
+
+\( \{ a_n \} \subset E, \ a_n \to a \).
+
+Тогда \( f(a_n) \to f(a) \).
+
+\( g \in C(f(a)) \Rightarrow g(f(a_n)) \to g(f(a)) \)
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( \sqrt{y} \in C(1) \)
+        \item
+            \( \sin x \in C \left( \frac{\pi}{2} + 2 \pi k \right), \ k \in \ZZ \)
+    \end{itemize}
+
+    Следствие:
+
+    \( \sqrt{\sin x} \in C \left( \frac{\pi}{2} + 2 \pi k \right), \ k \in \ZZ \)
+\end{example}
+
+\begin{defn}{Функция, непрерывная на множестве}{}
+    \( f \in C(E) \Leftrightarrow \forall x \in E \ f \in C(x) \)
+\end{defn}
+
+\begin{thrm}{}{}
+    Пусть \( f \in C[a, b] \) и \( f(a) \cdot f(b) < 0 \).
+
+    Тогда \( \exists c \in (a, b) : f(c) = 0 \)
+\end{thrm}
+
+Доказательство:
+
+Пусть \( I_0 = [a, b] \).
+Поделим \( [a, b] \) пополам.
+
+Если в точке \( \frac{a + b}{2} \) функция принимает нулевое значение, то нашли корень.
+
+Иначе либо на \( [a, \frac{a + b}{2}] \), либо на \( [\frac{a + b}{2}, b] \)
+функция принимает разные значения на концах.
+Пусть это \( I_1 = [a_1, b_1] \).
+Тогда \( f(a_1) \cdot f(b_1) < 0 \).
+
+Поделим \( I_1 \) пополам и продолжаем процедуру.
+
+Либо найдем корень, либо построим последовательность стягивающихся отрезков \( \{ I_n \} \).
+Значит \( \exists c = \bigcap\limits_{n = 0}^\infty \)
+\begin{gather*}
+    \lim\limits_{n \to \infty} f(a_n) = f(c)
+    \\
+    \lim\limits_{n \to \infty} f(b_n) = f(c)
+\end{gather*}
+
+По предельному переходу в неравенстве:
+\[
+    f^2(c) = \lim\limits_{n \to \infty} f(a_n) f(b_n) \leq 0 \Rightarrow f(c) = 0
+\]
+
+\begin{example}{}{}
+    Докажите, что \( x^3 - 3x + 1 \) имеет \( 3 \) действительных корня.
+\end{example}
+
+\( f(x) = x^3 - 3x + 1 \in C(\RR) \)
+
+\( f(2) < 0, f(0) > 0, f(1) < 0, f(2) > 0 \).
+
+Значит \( \exists c_1 \in (-2, 0), c_2 \in (0, 1), c_3 \in (1, 2) : f(c_1) = f(c_2) = f(c_3) = 0 \).
+
+\begin{thrm}{Первая теорема Вейерштрасса}{}
+    \( f \in C[a, b] \Rightarrow f \) ограничена на \( [a, b] \).
+\end{thrm}
+
+Доказательство:
+
+Пусть \( f \) неограничена на \( [a, b] \).
+
+Тогда \( \exists x_n \in [a, b] : |f(x_n)| > n \).
+\( \{ x_n \} \in [a, b] \Rightarrow \) 
+по теореме Больцано-Вейерштрасса существует подпоследовательность такая, что
+\( \lim\limits_{k \to \infty} x_{n_k} = x_0 \in [a, b] \).
+
+\( f \in C[a, b] \Rightarrow \lim\limits_{k \to \infty} f(x_{n_k}) = f(x_0) \).
+
+Но \( |f(x_{n_k})| > n_k \Rightarrow \not\exists \lim\limits_{k \to \infty} f(x_{n_k}) \) --- противоречие.
+
+Значит \( f \) ограничена на \( [a, b] \)
+
+\begin{thrm}{Вторая теорема Вейерштрасса}{}
+    Пусть \( f \in C[a, b] \).
+
+    Тогда
+    \begin{gather*}
+        \exists x_1 \in [a, b] : \inf\limits_{[a, b]} f(x) = f(x_1)
+        \\
+        \exists x_2 \in [a, b] : \sup\limits_{[a, b]} f(x) = f(x_2)
+    \end{gather*}
+\end{thrm}
+
+Доказательство:
+
+Пусть, например, \( \not\exists x_2 \).
+
+По первой теореме Вейерштрасса 
+\( \exists C : \forall x \in [a, b] \ |f(x)| < C \Rightarrow \exists M = \sup\limits_{[a, b]} f(x) \)
+
+Но \( x_2 \) не существует, значит \( M > f(x) \ \forall x \in [a, b] \).
+
+\( M - f(x) > 0 \ \forall x \in [a, b] \Rightarrow g(x) = \frac{1}{M - f(x)} \in C[a, b] \Rightarrow g \) 
+ограничена на \( [a, b] \).
+
+Но \( \forall \varepsilon > 0 \ \exists x : M - f(x) < \varepsilon \Rightarrow g \) 
+неограничена на \( [a, b] \) --- противоречие.
+
+Значит \( x_2 \) существует, для \( x_1 \) аналогично.
+
+\begin{exercise}{}{}
+    Доказать эти две теоремы для компактов.
+\end{exercise}
+
+\begin{thrm}{Теорема Больцано-Коши}{}
+    Пусть \( f \in C[a, b], \ M = \max\limits_{[a, b]} f(x), m = \min\limits_{[a, b]} f(x) \)
+
+    Тогда \( \forall C \in [m, M] \ \exists c \in [a, b] : f(c) = C \)
+\end{thrm}
+
+Доказательство:
+
+Если \( C = m \) или \( C = M \), то уже доказали (вторая теорема Вейерштрасса).
+
+Иначе по второй теореме Вейерштрасса найдем \( x_1, x_2 \).
+Введем \( g(x) = f(x) - C \).
+
+Получим, что \( g(x_1) = f(x_1) - C < 0, \ g(x_2) = f(x_2) - C > 0 \).
+Ранее доказали, что у такой функции существует корень \( c \in [a, b] \).
+
+\( g(c) = 0 \Rightarrow f(c) - C = 0 \Rightarrow f(c) = C \).
