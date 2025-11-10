@@ -821,6 +821,7 @@
 Пусть \( f \) неограничена на \( [a, b] \).
 
 Тогда \( \exists x_n \in [a, b] : |f(x_n)| > n \).
+
 \( \{ x_n \} \in [a, b] \Rightarrow \) 
 по теореме Больцано-Вейерштрасса существует подпоследовательность такая, что
 \( \lim\limits_{k \to \infty} x_{n_k} = x_0 \in [a, b] \).
@@ -880,3 +881,204 @@
 Ранее доказали, что у такой функции существует корень \( c \in [a, b] \).
 
 \( g(c) = 0 \Rightarrow f(c) - C = 0 \Rightarrow f(c) = C \).
+
+\begin{defn}{Точка разрыва}{}
+    Пусть \( f : E \to \RR \) и \( a \) --- предельная точка \( E \), \( a \in E \).
+
+    Тогда \( a \) --- точка разрыва \( f \), если \( f \notin C(a) \)
+\end{defn}
+
+\begin{example}{}{}
+    \( f(x) = \frac{1}{x} \in C(\RR \setminus \{ 0 \}) \)
+
+    Но если определить в \( 0 \), то \( f \notin C(\RR) \)
+\end{example}
+
+\begin{defn}{Точка устранимого разрыва}{}
+    Пусть \( \exists \lim\limits_{x \to a} \neq f(a) \).
+
+    Тогда \( a \) --- точка устранимого разрыва \( f \), если \( f \notin C(a) \)
+\end{defn}
+
+\begin{example}{}{}
+    \begin{gather*}
+        f(x)
+        =
+        \begin{cases}
+            \frac{\sin x}{x}, x \neq 0
+            \\
+            0, x = 0
+        \end{cases}
+        \\
+        \lim\limits_{x \to 0} f(x) = 1 \neq 0 = f(0)
+    \end{gather*}
+\end{example}
+
+\begin{defn}{Точка разрыва I рода (скачок)}{}
+    Пусть \( a \) --- предельная точка \( E_a^- \) и \( E_a^+ \).
+
+    Если \( A = \lim\limits_{x \to a-} \neq \lim\limits_{x \to a+} = B \),
+    то \( a \) --- точка устранимого разрыва.
+\end{defn}
+
+\begin{example}{}{}
+    \[
+        f(x)
+        =
+        \begin{cases}
+            -1, x \leq 0
+            \\
+            1, x > 0
+        \end{cases}
+    \]
+\end{example}
+
+\begin{defn}{Точка разрыва II рода}{}
+    Пусть \( a \) --- предельная точка \( E_a^+ \) или \( E_a^- \), 
+    и не существует соответствующего одностороннего предела.
+
+    Тогда \( a \) --- точка разрыва II рода.
+\end{defn}
+
+\begin{example}{}{}
+    \[
+        f(x)
+        =
+        \begin{cases}
+            \frac{1}{x}, x \neq 0
+            \\
+            2025, x = 0
+        \end{cases}
+    \]
+\end{example}
+
+\begin{thrm}{}{}
+    Пусть \( f \) монотонна и ограничена на \( ( a, b ) \).
+
+    Тогда \( f \) имеет не более чем счетное множество точек разрыва, причем все они I рода.
+\end{thrm}
+
+Доказательство:
+
+\( c \in (a, b) \Rightarrow c \) --- предельная точка \( (a, b) \).
+
+По теореме Вейрштрасса для функций \( \exists A = \lim\limits_{x \to c-} f(x) \)
+и \( B = \lim\limits_{x \to c+} f(x) \).
+
+Если \( A = B \), то \( f \in C(c) \).
+В противном случае \( c \) --- точка разрыва первого рода по определению.
+
+Но тогда каждой точке разрыва можно сопоставить интервал \( (A, B) \).
+В силу монотонности интервалы не пересекаются, поэтому их счетно
+(в каждом можно выбрать уникальную рациональную точку)
+
+\begin{defn}{Равномерная непрерывность}{}
+    \(
+        f \in UC(E) \Leftrightarrow \forall \varepsilon > 0 \ \exists \delta > 0 :
+        \forall x_1, x_2 \in E : |x_1 - x_2| < \delta \ |f(x_1) - f(x_2)| < \varepsilon
+    \)
+\end{defn}
+
+\begin{example}{}{}
+    \[
+        \frac{\sin x}{x} \notin UC(0, 1)
+    \]
+\end{example}
+
+\newpage
+
+\begin{thrm}{Теорема Гейне-Кантора}{}
+    \[
+        f \in C[a, b] \Rightarrow f \in UC[a, b]
+    \]
+\end{thrm}
+
+Доказательство:
+\[
+    f \in C[a, b] \Rightarrow \forall x \in [a, b] \ \exists U_{\delta(x)} (x) :
+    \forall x', x'' \in U_{\delta(x)} (x) \ | f(x') - f(x'') | < \varepsilon
+\]
+
+для какого-то заранее заданного \( \varepsilon \).
+
+\( U_{\frac{\delta(x)}{2}} (x) \) --- окрестности все еще покрывают весь отрезок,
+поэтому по принципу Бореля-Лебега существует конечное подпокрытие \( U_{\frac{\delta(x_i)}{2}} (x_i) \).
+
+Присвоим \( \delta = \min \left\{ \frac{\delta(x_i)}{2} \ \vline \ i = 1, \ldots, n \right\} \)
+
+Докажем, что \( \forall x', x'' \in [a, b] : |x' - x''| < \delta \ |f(x') - f(x'')| < \varepsilon \).
+
+\( \exists k : x' \in U_{\frac{\delta(x_k)}{2}} (x_k) \).
+
+Поэтому \( |x'' - x_k| \leq |x'' - x'| + |x' - x_k| < \delta + \frac{\delta(x_k)}{2} \leq \delta(x_k) \)
+
+\begin{exercise}{}{}
+    \begin{itemize}
+        \item
+            Обобщить на компакты.
+        \item
+            Верна ли обратная теорема?
+    \end{itemize}
+\end{exercise}
+
+\subsection{Обратная функция}
+
+\begin{defn}{Обратная функция}{}
+    Пусть \( f : E \to D \) --- биекция.
+
+    Это значит, что \( \forall y \in D \ \exists ! x \in E : f(x) = y \).
+
+    Поэтому \( \exists g : D \to E : \forall x \in E \ \exists ! y \in D : g(y) = x \).
+
+    \( g \) --- обратная к \( f \) функция, обозначается \( g = f^{-1} \)
+\end{defn}
+
+\begin{thrm}{}{}
+    Пусть \( f \) монотонна на отрезке \( [a, b] \).
+
+    Тогда \( f \in C[a, b] \Leftrightarrow f([a, b]) \) --- это отрезок.
+\end{thrm}
+
+Доказательство:
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+
+        \( f \) принимает все значения на отрезке \( [f(a), f(b)] \) по теореме Больцано-Коши.
+    \item
+        \( \Leftarrow \)
+
+        Пусть \( f([a, b]) \) --- отрезок, но \( f \notin C[a, b] \).
+
+        Пусть \( c \in [a, b] \) --- точка разрыва.
+
+        Если \( c \in (a, b) \), то это разрыв I рода
+        и весь интервал с концами \( \lim\limits_{x \to c-} f(x) \) и \( \lim\limits_{x \to c+} f(x) \)
+        пересекается со значениями функции не более чем по одной точке.
+
+        Если \( c = a \), то \( f(a) \neq \lim\limits_{x \to a+} f(x) \).
+
+        Значит интервал с концами \( f(a) \) и \( \lim\limits_{x \to a+} f(x) \) 
+        не пересекается с \( f[a, b] \).
+
+        \( c = b \) аналогично.
+\end{itemize}
+
+\begin{thrm}{Теорема об обратной функции}{}
+    Пусть \( f \in C[a, b] \), а также \( \uparrow \uparrow \) или \( \downarrow \downarrow \).
+
+    Тогда \( \exists f^{-1} \) на отрезке \( [f(a), f(b)] \),
+    а также либо \( f \downarrow \downarrow \), либо \( f \uparrow \uparrow \).
+\end{thrm}
+
+Доказательство:
+
+\( f \) --- биекция \( [a, b] \) на \( [f(a), f(b)] \),
+так как она является строго монотонной.
+
+Поэтому существует \( f^{-1} \).
+
+\( f^{-1} ( [f(a), f(b)] ) = [a, b] \).
+
+\( f^{-1} \uparrow \uparrow \), если \( f \uparrow \uparrow \), так как
+\( f^{-1} ( f(x_1) ) = x_1 < x_2 = f^{-1} ( f(x_2) ) \)
