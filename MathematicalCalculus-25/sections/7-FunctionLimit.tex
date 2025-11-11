@@ -1068,7 +1068,7 @@
     Пусть \( f \in C[a, b] \), а также \( \uparrow \uparrow \) или \( \downarrow \downarrow \).
 
     Тогда \( \exists f^{-1} \) на отрезке \( [f(a), f(b)] \),
-    а также либо \( f \downarrow \downarrow \), либо \( f \uparrow \uparrow \).
+    а также либо \( f^{-1} \uparrow \uparrow \), либо \( f^{-1} \downarrow \downarrow \).
 \end{thrm}
 
 Доказательство:
@@ -1080,5 +1080,8 @@
 
 \( f^{-1} ( [f(a), f(b)] ) = [a, b] \).
 
-\( f^{-1} \uparrow \uparrow \), если \( f \uparrow \uparrow \), так как
-\( f^{-1} ( f(x_1) ) = x_1 < x_2 = f^{-1} ( f(x_2) ) \)
+\( f^{-1} \uparrow \uparrow \), если \( f \uparrow \uparrow \), 
+так как \( f^{-1} ( f(x_1) ) = x_1 < x_2 = f^{-1} ( f(x_2) ) \)
+
+Получили, что образ \( f^{-1} \) --- \( [a, b] \), \( f^{-1} \) строго монотонна,
+а также \( f^{-1} \in C[f(a), f(b)] \)
