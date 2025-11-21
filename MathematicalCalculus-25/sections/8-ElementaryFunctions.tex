@@ -1,0 +1,202 @@
+\section{Элементарные функции}
+
+\subsection{Что это}
+
+\begin{enumerate}
+    \item
+        Полиномы
+    \item
+        Рациональные функции (отношение полиномов)
+    \item
+        Показательные функции
+    \item
+        Логарифмические функции
+    \item
+        \( x^\alpha, \ \alpha \in \RR \)
+    \item
+        Тригонометрические функции
+    \item
+        Композиция вышеперечисленных функций
+\end{enumerate}
+
+\subsection{Определение экспоненты}
+
+\begin{gather*}
+    f(x) = x \Rightarrow f(x) \in C(\RR) \Rightarrow x^n \in C(\RR)
+    \\
+    x \geq 0 \Rightarrow x^n \uparrow \uparrow
+    \\
+    f(x) = x^n \in [0, +\infty), \ f(x) \uparrow \uparrow \ \Rightarrow \exists f^{-1}(x) = \sqrt[n]{x}
+    \\
+    \\
+    x^\frac{m}{n} = ( \sqrt[n]{x} )^m = \sqrt[n]{x^m}
+    \\
+    r = \frac{a}{b}, \ r_1 = \frac{a_1}{b_1}
+    \\
+    x^\frac{1}{b b_1} = d
+    \\
+    x^r = d^{a b_1}, \ x^{r_1} = d^{a_1 b}
+    \\
+    x^r \cdot x^{r_1} = d^{a b_1 + a_1 b} = x^{r + r_1}
+    \\
+    (x^r)^{r_1} = (d^{a b_1})^\frac{a_1}{b_1} = d^{a a_1} = x^\frac{a a_1}{b b_1} = x^{r \cdot r_1}
+    \\
+    x^n \uparrow \uparrow \ \text{на} \ [0, +\infty)
+    \\
+    r > r_1 \Rightarrow x^r = d^{a b_1} > d_{a_1 b} = x^{r_1}
+    \\
+    x^{-r} = \frac{1}{x_r}
+\end{gather*}
+
+\newpage
+
+\begin{prop}{}{}
+    \[
+        \forall r \in \QQ \cap (0, 1) \ e^r < 1 + \frac{r}{1 - r}
+    \]
+\end{prop}
+\begin{gather*}
+    \forall b \geq 1 \ \left( 1 + \frac{1}{b} \right)^b < e < \left( 1 + \frac{1}{b} \right)^{b + 1}
+    \Rightarrow
+    e^\frac{1}{b + 1} < 1 + \frac{1}{b} < e^\frac{1}{b}
+    \\
+    e^\frac{1}{b + 1} < \frac{b + 1}{b} \Leftrightarrow e^{-\frac{1}{b + 1}} > \frac{b}{b + 1} = 1 - \frac{1}{b + 1}
+\end{gather*}
+
+Если \( b = 0 \), то неравенство верно \( \Rightarrow e^{\pm \frac{1}{b}} > 1 \pm \frac{1}{b} \)
+
+Пусть \( r = \pm \frac{|m|}{n} \) и \( |m| < n \).
+\begin{gather*}
+    \left( e^{\pm \frac{1}{n}} \right)^m > \left( 1 \pm \frac{1}{n} \right)^{|m|} \geq 1 \pm \frac{|m|}{n}
+    \\
+    e^{\pm \frac{|m|}{n}} > 1 \pm \frac{|m|}{n}
+    \\
+    e^{r_1} > 1 + r_1
+    \\
+    r_1 = -r
+    \\
+    e^{-r} > 1 - r
+    \\
+    e^r < \frac{1}{1 - r} = 1 + \frac{r}{1 - r}
+\end{gather*}
+
+Пусть \( \alpha \in \RR \setminus \QQ \)
+
+\( M_1 = \{ e^{r_1} \ \vline \ r_1 \in \QQ \cap r_1 < \alpha \} \)
+
+\( M_2 = \{ e^{r_2} \ \vline \ r_2 \in \QQ \cap r_2 > \alpha \} \)
+
+\( M_1 \) ограничено сверху любым элементом \( M_2 \),
+а \( M_2 \) ограничено снизу любым элементом \( M_1 \).
+
+Значит \( \exists \gamma_1 = \sup M_1, \ \gamma_2 = \inf M_2 \).
+
+Очевидно, что \( \gamma_1 \leq \gamma_2 \).
+
+Пусть \( [\alpha] < r_1 < \alpha < r_2 < [\alpha] + 1 \)
+
+\(
+    0 \leq \gamma_2 - \gamma_1 \leq e^{r_2} - e^{r_1}
+    =
+    e^{r_1} ( e^{r_2 - r_1} - 1) < e^{[\alpha] + 1} \cdot \frac{r_2 - r_1}{1 - (r_2 - r_1)}
+\)
+
+\( \frac{r_2 - r_1}{1 - (r_2 - r_1)} \) может быть сделано меньше любого \( \varepsilon > 0 \),
+\( \Rightarrow \gamma_2 - \gamma_1 = 0 \Rightarrow \gamma_1 = \gamma_2 \).
+
+Определим \( e^\alpha = \gamma_1 = \gamma_2 \).
+
+\newpage
+
+\begin{thrm}{}{}
+    \begin{enumerate}
+        \item
+            \( f(x) = e^x \uparrow \uparrow \ \text{на} \ \RR \)
+        \item
+            \( \forall \alpha, \beta \in \RR \ e^{\alpha + \beta} = e^\alpha \cdot e^\beta \)
+    \end{enumerate}
+\end{thrm}
+
+\begin{enumerate}
+    \item
+        Рассмотрим \( x_1 < x_2 \).
+
+        \( \exists r \in \QQ : x_1 < r < x_2 \Rightarrow e^{x_1} < e^r < e^{x_2} \)
+
+        Для рациональных чисел мы показали возрастание, а в случае иррационального \( x_1 \)
+        или \( x_2 \) \( r \) будет находиться в \( M_1 \) или \( M_2 \), поэтому неравенство
+        выше будет верно.
+    \item
+        \( \alpha + \beta = \mu \)
+
+        \( \exists r_1 \in \QQ : e^{r_1} < e^\mu \)
+
+        \( \exists r_2 \in \QQ : e^{r_2} > e^\mu \)
+
+        Пусть \( r_1 = r_1' + r_2' : r_1' < \alpha, \ r_2' < \beta \)
+
+        А \( r_2 = r_1'' + r_2'' : r_1'' > \alpha, \ r_2'' > \beta \)
+
+        Тогда \( e^{r_1'} e^{r_2'} < e^\alpha e^\beta < e^{r_1''} e^{r_2''} \Rightarrow e^{r_1} < e^\mu < e^{r_2} \)
+
+        \(
+            | e^\alpha e^\beta - e^\mu | < e^{r_2} - e^{r_1}
+            < e^{r_1} \cdot \frac{r_2 - r_1}{1 - (r_2 - r_1)} < \varepsilon
+        \)
+\end{enumerate}
+
+Поскольку \( e^x \uparrow \uparrow \), существует обратная \( f(x) = \ln x \).
+
+\( e^{\ln y_1 y_2} = y_1 y_2 = e^{\ln y_1} e^{\ln y_2} = e^{\ln y_1 + \ln y_2} \)
+
+Поэтому можем ввести \( a^x = e^{x \ln a} \ \forall a > 0, a \neq 1 \)
+
+Если \( a > 1 \), то \( a^x = e^{x \ln a} \),
+иначе \( 0 < a < 1 \Rightarrow a = \frac{1}{b} \Rightarrow a^x = \frac{1}{b^x} = \frac{1}{e^{x \ln b}} \)
+
+\begin{thrm}{}{}
+    \[
+        a > 1, x \in \RR \ f(x) = a^x \in C(\RR)
+    \]
+\end{thrm}
+\[
+    \forall \varepsilon > 0 \ \exists \delta > 0 : \forall x \ |x - x_0| < \delta
+    \ | a^x - a^{x_0} | < \varepsilon \Leftrightarrow | a^{x - x_0} - 1 | < a^{-x_0} \cdot \varepsilon = \varepsilon_1
+\]
+
+Сразу считаем, что \( \varepsilon_1 < 1 \)
+\begin{gather*}
+    1 - \varepsilon_1 < a^{x - x_0} < 1 + \varepsilon_1
+    \Leftrightarrow
+    1 - \varepsilon_1 < a^{-\delta} < a_{x - x_0} < a^{\delta} < 1 + \varepsilon_1
+    \\
+    a^\delta < 1 + \varepsilon_1
+    \\
+    a^{-\delta} > 1 - \frac{\varepsilon_1}{1 + \varepsilon_1} > 1 - \varepsilon_1
+\end{gather*}
+
+Пусть \( N = \left[ \frac{1}{\delta} \right] \)
+\begin{gather*}
+    N \leq \frac{1}{\delta} \Leftrightarrow \frac{1}{N} \geq \delta
+    \\
+    a^\frac{1}{N} < 1 + \varepsilon_1 \Leftrightarrow a < (1 + \varepsilon_1)^N
+    \\
+    a < 1 + N \varepsilon_1 \Rightarrow N = \left] \frac{a}{\varepsilon_1} \right[
+\end{gather*}
+
+Значит \( | a^{x - x_0} - 1 | < \varepsilon_1 \Rightarrow a^x \in C(\RR) \)
+
+\begin{thrm}{}{}
+    \( \cos x, \sin x \in C(\RR) \)
+
+    \( \tan x, \cot x \) непрерывны там, где \( \sin x \) или \( \cos x \neq 0 \)
+\end{thrm}
+
+\[
+    \forall x \in \RR \ | \sin x - \sin x_0 |  = 2 \left| \sin \frac{x - x_0}{2} \cos \frac{x + x_0}{2} \right| 
+        \leq | x - x_0 | < \delta
+\]
+
+\( \cos x = \sin (x + \frac{\pi}{2}) \ \forall x \in \RR \Rightarrow \cos x \in C(\RR) \)
+
+\( \tan x, \cot x  \) непрерывны по композиции непрерывных функций.

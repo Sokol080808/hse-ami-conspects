@@ -89,6 +89,7 @@
 \definecolor{mypink}{HTML}{f0b6e0}
 \definecolor{myblue}{HTML}{c8e1f2}
 \definecolor{mypurple}{HTML}{b19cd9}
+\definecolor{mygray}{HTML}{cccccc}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,7 +97,7 @@
 %\newtheorem{theorem}{Теорема}[section]
 %\newtheorem{lemma}{Лемма}[section]
 %\newtheorem{proposition}{Предложение}[section]
-\newtheorem*{remark}{Замечание}
+%\newtheorem*{remark}{Замечание}
 %\newtheorem{example}{Пример}[section]
 %\newtheorem*{corollary}{Следствие}
 \numberwithin{equation}{section}
@@ -145,7 +146,7 @@
         coltitle=black,
         arc=3mm,
         top=2mm,
-        bottom=2mm, 
+        bottom=2mm,
         left=3mm,
         right=3mm,
         boxsep=1mm,
@@ -201,6 +202,13 @@
      colframe=mypurple!60
     }
     {exercise}
+\newtcbtheorem[use counter from=defn]
+    {remark}{Замечание}
+    {myboxstyle,
+     colback=mygray!10,
+     colframe=mygray!60
+    }
+    {remark}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Math Operators %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -231,5 +239,7 @@
     \includefrom{sections/}{5-NumberSeries.tex}
     \includefrom{sections/}{6-RealLineTopology.tex}
     \includefrom{sections/}{7-FunctionLimit.tex}
+    \includefrom{sections/}{8-ElementaryFunctions.tex}
+    \includefrom{sections/}{9-Differentiation.tex}
 
 \end{document}

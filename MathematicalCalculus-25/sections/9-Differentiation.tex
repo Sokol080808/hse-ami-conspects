@@ -1,0 +1,144 @@
+\section{Дифференциал и производная}
+
+\subsection{Определение и связь}
+
+\begin{defn}{}{}
+    Функция дифферинцируема (\( \in D(a) \)), 
+    если
+    \(
+        \exists \mathring{U}(a), \ \alpha: \mathring{U}(0) : \lim\limits_{h \to 0} \alpha(h) = 0
+    \) 
+    и
+    \(
+        \exists A \in \RR : f(a + h) - f(a) = Ah + h \alpha(h) \ \forall h \in \mathring{U}(0)
+    \)
+\end{defn}
+
+\begin{defn}{Дифференциал}{}
+    \( df(a)(h) = Ah \) --- дифференциал \( f \) в точке \( a \)
+\end{defn}
+
+Тогда \( \forall h_1, h_2 \in \RR: df(a)(\alpha h_1 + \beta h_2) = \alpha df(a)(h_1) + \beta df(a)(h_2) \)
+
+Иными словами, \( df(a) \) --- линейная функция.
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( f(x) = x \)
+
+            \( f(a + h) - f(a) = (a + h) - a = 1 \cdot h + 0 \cdot h \Rightarrow A = 1, \ \alpha(h) = 0 \)
+
+            \( df(a)(h) = h \ \forall h \in \RR \), поэтому такой дифференциал обозначают \( dx \)
+        \item
+            \( f(x) = x \)
+
+            \( f(a + h) - f(a) = (a + h)^3 - a^3 = 3a^2 \cdot h + h(3ah + h^2) \)
+    \end{itemize}
+\end{example}
+
+\begin{defn}{Производная}{}
+    Если \( \exists \lim\limits_{h \to 0} \frac{f(a + h) - f(a)}{h} \),
+    то он называется производной в \( f \) в точке \( a \) и обозначается \( f'(a) \)
+\end{defn}
+
+\begin{thrm}{}{}
+    \[
+        f \in D(a) \Leftrightarrow \exists f'(a)
+    \]
+\end{thrm}
+
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+
+        \( f(a + h) - f(a) = h(A + \alpha(h)) \Rightarrow \frac{f(a + h) - f(a)}{h} = A + \alpha(h) \to A \) при \( h \to 0 \)
+    \item
+        \( \Leftarrow \)
+
+        \( f'(a) + \alpha(h) = \frac{f(a + h) - f(a)}{h} \Rightarrow f(a + h) - f(h) = f'(a) h + \alpha(h) \cdot h \)
+\end{itemize}
+
+\begin{defn}{Касательная}{}
+    Пусть \( f \in D(a)( \), тогда \( y = f'(x - a) + f(a) \) --- касательная к графику \( y = f(x) \) 
+    в точке \( a \)
+\end{defn}
+
+\begin{thrm}{}{}
+    \[
+        f \in D(a) \Rightarrow f \in C(a)
+    \]
+\end{thrm}
+
+\( f(a + h) = f(a) + f'(a)h + h \cdot \alpha(h) \to f(a) \) при \( h \to 0 \)
+
+\begin{example}{}{}
+    В обратную сторону неверно: \( f(x) = |x| \)
+
+    \( \not\exists f(0) \Rightarrow f \notin D(0) \)
+\end{example}
+
+Получим производную, как отношение двух дифференциалов:
+\begin{gather*}
+    df(a)(h) = f'(a) h
+    \\
+    f'(a) dx(\cdot) = df(a)(\cdot)
+    \\
+    \frac{df}{dx} (a) = f'(a)
+\end{gather*}
+
+\subsection{Равномерная сходимость}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \begin{gather*}
+                f_n(x) = x^n
+                \\
+                x \in (-1, 1]:
+                \lim\limits_{x \to 0} = \begin{cases}
+                    0, \ x \in (-1, 1)
+                    \\
+                    1, \ x = 1
+                \end{cases}
+            \end{gather*}
+        \item
+            \begin{gather*}
+                f_n(x) = \frac{x^n}{n}
+                \\
+                x \in [0, 1]: \left| \frac{x^n}{n} \right| \leq \frac{1}{n}
+            \end{gather*}
+    \end{enumerate}
+\end{example}
+
+\newpage
+
+\begin{defn}{Равномерная сходимость}{}
+    Пусть \( \{ f_n(x) \} \) сходится на \( X \), 
+    то есть \( \forall x \in X \ \exists \lim\limits_{n \to \infty} f_n(x) \),
+    и \( \forall \varepsilon > 0 \ \exists N : \forall n > N \land x \in X \ |f_n(x) - f(x)| < \varepsilon \).
+
+    Тогда говорят, что \( f_n \) равномерно сходятся к \( f \)
+    на множестве \( X \) и обозначают это так \( f_n(x) \underset{X}{\rightrightarrows} f(x) \)
+\end{defn}
+
+\begin{thrm}{}{}
+    Пусть \( \{ f_n(x) \} \) равномерно сходится на \( X \) к \( f(x) \)
+
+    Пусть \( \forall n \in \NN \ f_n \in C(x_0), x_0 \in X \Rightarrow f \in C(x_0) \)
+\end{thrm}
+
+\begin{exercise}{}{}
+    \begin{gather*}
+        f_n(x) = \frac{nx}{1 + n^2 x^2}
+        \\
+        f_n(x) \underset{\RR}{\not\rightrightarrows} 0
+    \end{gather*}
+
+    (сходится, но неравномерно)
+\end{exercise}
+
+Пример, который недифференцируем в множестве точек, однако непрерывен.
+\[
+    r(x) = \sum\limits_{n = 1}^{\infty} \frac{\cos(n^2 x)}{n^2}
+\]
