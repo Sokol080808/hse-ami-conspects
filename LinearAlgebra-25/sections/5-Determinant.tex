@@ -1,0 +1,782 @@
+\section{Определители}
+
+Идея: считать ориентированный объем (длину / площадь)
+
+Существует несколько способов задать определитель.
+Мы приведем \( 3 \) и докажем их равносильность.
+Будем доказывать равносильность так: \( 1 \to 2 \to 3, 2 \to 1 \)
+
+\begin{defn}{Определитель}{}
+    Опишем \( 3 \) способа задания:
+
+    \begin{enumerate}
+        \item
+            Явная формула
+
+            \( A \in M_n (\RR), \det : M_n (\RR) \to \RR \)
+
+            \( \det A = \sum\limits_{\sigma \in S_n} sgn(\sigma) \cdot a_{1 \sigma(1)} \cdot \ldots \cdot a_{n \sigma(n)} \)
+        \item
+            Полилинейная кососимметрическая функция (можно и по строкам)
+
+            \( \phi : M_n(\RR) \to \RR \)
+
+            \( A = ( A_1 | \ldots | A_n ) \)
+
+            \( \phi(A) = \phi(A_1, \ldots A_n) \)
+            
+            \begin{itemize}
+                \item
+                    Полилинейность
+                    \begin{gather*} 
+                        \phi(A_1, \ldots, A_i + A_i', \ldots A_n)
+                        =
+                        \\
+                        =
+                        \phi(A_1, \ldots, A_i, \ldots, A_n)
+                        +
+                        \phi(A_1, \ldots, A_i', \ldots, A_n)
+                        \\
+                        \phi(A_1, \ldots, \lambda A_i, \ldots, A_n)
+                        =
+                        \lambda \phi(A_1, \ldots, A_i, \ldots, A_n)
+                    \end{gather*}
+                \item
+                    Кососимметричность 
+                    \[
+                        \phi(A_1, \ldots, A_i, \ldots, A_j, \ldots A_n)
+                        =
+                        -\phi(A_1, \ldots, A_j, \ldots, A_i, \ldots A_n)
+                    \]
+                \item
+                    \( \phi(E) = 1 \)
+            \end{itemize}
+        \item
+            Мультипликативная функция
+
+            \( \Psi: M_n (\RR) \to \RR \)
+
+            \begin{itemize}
+                \item
+                    \( \Psi(AB) = \Psi(A)\Psi(B) \)
+                \item
+                    \( 
+                        \Psi 
+                        \begin{pmatrix}
+                            1 & & & \\
+                            & \ddots & & \\
+                            & & 1 & \\
+                            & & & d
+                        \end{pmatrix}
+                        =
+                        d
+                    \)
+            \end{itemize}
+    \end{enumerate}
+\end{defn}
+
+\begin{example}{}{}
+    Из первого определения:
+    \[
+        \det 
+        \begin{pmatrix}
+            a & b \\
+            c & d \\
+        \end{pmatrix}
+        =
+        ad - bc
+    \]
+\end{example}
+
+\begin{example}{}{}
+    \[
+        \det 
+        \begin{pmatrix}
+            a_1 & & * \\
+            & \ddots & \\
+            0 & & a_n \\
+        \end{pmatrix}
+        =
+        a_1 \cdot \ldots \cdot a_n
+    \]
+\end{example}
+
+\begin{lemma}{}{}
+    \( A \in M_n (\RR) \Rightarrow \det A^T = \det A \)
+\end{lemma}
+
+Доказательство:
+\begin{gather*}
+    \det A^T 
+    = 
+    \sum\limits_{\sigma \in S_n} sgn(\sigma) (A^T)_{1 \sigma(1)} \ldots (A^T)_{n \sigma(n)}
+    = 
+    \sum\limits_{\sigma \in S_n} sgn(\sigma) a_{\sigma(1) 1} \ldots a_{\sigma(n) n}
+    =
+    \\
+    \sum\limits_{\sigma \in S_n} sgn(\sigma) a_{1 \sigma^{-1}(1)} \ldots a_{n \sigma^{-1}(n)}
+    =
+    \sum\limits_{\rho \in S_n} sgn(\rho^{-1}) a_{1 \rho(1)} \ldots a_{n \rho(n)}
+    =
+    \det A
+\end{gather*}
+
+\begin{lemma}{}{}
+    Определитель --- полилинейный кососимметрический по строкам (столбцам)
+\end{lemma}
+Доказательство:
+
+Полилинейность:
+\begin{gather*}
+    \det A 
+    = 
+    \sum\limits_{\sigma \in S_n} sgn(\sigma) 
+        \cdot a_{1 \sigma(1)} \ldots \cdot (a_{i \sigma(i)} + a_{i \sigma(i)}') \cdot \ldots \cdot a_{n \sigma(n)}
+    \\
+    =
+    \\
+    \sum\limits_{\sigma \in S_n} sgn(\sigma) \cdot a_{1 \sigma(1)} \ldots \cdot a_{i \sigma(i)} \ldots \cdot a_{n \sigma(n)}
+    +
+    \sum\limits_{\sigma \in S_n} sgn(\sigma) \cdot a_{1 \sigma(1)} \ldots \cdot a_{i \sigma(i)}' \ldots \cdot a_{n \sigma(n)}
+\end{gather*}
+
+Кососимметричность:
+
+Вместо суммы по \( \sigma \), будет сумма по \( \sigma (i, j) \).
+Но \( sgn( \sigma (i, j) ) = -sgn( \sigma ) \)
+
+\( \det E = 1 \) (очевидно)
+
+\newpage
+
+\begin{lemma}{}{}
+    \( \phi : M_n (\RR) \to \RR \)
+
+    \( \phi \) --- полинейная + кососимметрическая по строкам
+
+    Тогда
+    \begin{enumerate}
+        \item
+            Прибавление строки к другой не меняет \( \phi \)
+        \item
+            Если поменять две строки местами, \( \phi \) поменяет знак
+        \item
+            Можно выность коэффициент строки за \( \phi \)
+    \end{enumerate}
+\end{lemma}
+
+Последние два следуют из полилинейности и кососимметричности. 
+Покажем выполнение первого:
+\begin{gather*}
+    \phi (A')
+    =
+    \phi 
+    \begin{pNiceMatrix}
+        & & & & \\
+        \hline
+        & & A_i & & \\
+        \hline
+        & & & & \\
+        \hline
+        & & A_j + \lambda A_i & & \\
+        \hline
+        & & & & \\
+    \end{pNiceMatrix}
+    =
+    \phi 
+    \begin{pNiceMatrix}
+        & & & & \\ 
+        \hline
+        \ & \ & A_i & \ & \ \\
+        \hline
+        & & & & \\
+        \hline
+        \ & \ & A_i & \ & \ \\
+        \hline
+        & & & & \\
+    \end{pNiceMatrix}
+    +
+    \lambda \phi 
+    \begin{pNiceMatrix}
+        & & & & \\
+        \hline
+        \ & \ & A_i & \ & \ \\
+        \hline
+        & & & & \\
+        \hline
+        \ & \ & A_i & \ & \ \\
+        \hline
+        & & & & \\
+    \end{pNiceMatrix}
+    =
+    \phi (A)
+\end{gather*}
+
+По кососимметричности у матрицы с двумя равными строками \( \phi = 0 \),
+так как при их смене должен поменяться знак \( \phi \),
+но сама матрица не меняется, а значит и \( \phi \) тоже.
+
+\begin{remark}{}{}
+    \begin{itemize}
+        \item
+            \( \det S_{ij} = 1 \)
+        \item
+            \( \det U_{ij} = -1 \)
+        \item
+            \( \det D_i(\lambda) = \lambda \)
+    \end{itemize}
+\end{remark}
+
+\begin{lemma}{}{}
+    \( \phi : M_n (\RR) \to \RR \)
+
+    Тогда:
+    \begin{enumerate}
+        \item
+            \( \phi (UX) = \det (U) \phi (X) \)
+
+            \( \forall X \in M_n (\RR), \forall U \) --- элементарная
+        \item
+            \( \phi (AX) = \det (A) \phi (X) \)
+
+            \( \forall X \in M_n (\RR), \forall A \in M_n (\RR) \) --- элементарная
+    \end{enumerate}
+\end{lemma}
+
+\newpage
+
+Доказательство:
+
+Первое очевидно.
+
+Второе:
+
+Пусть \( A \) --- невырожденная.
+
+Тогда \( A = U_1 \ldots U_k \).
+
+\( \det \) тоже кососимметрическая и полилинейная функция, поэтому:
+\[
+    \det(A) = \det (AE) = \det (U_1) \ldots \det(U_k) \det(E) = \det (U_1) \ldots \det(U_k)
+\]
+
+Но тогда:
+\[
+    \phi (AX) = \det (U_1) \ldots \det(U_k) \phi(X) = \det(A) \phi(X)
+\]
+
+\( A \) --- вырожденная \( \Rightarrow AX \) --- вырожденная.
+Просто приведем к улучшенному ступенчатому виду, там будет нулевая строка \( \Rightarrow \det = \phi = 0 \).
+
+Следствия:
+\begin{enumerate}
+    \item
+        \( B = E \)
+        \( \phi (A) = \det (A) \phi (E) \)
+        \( \phi (A) = C \det (A) \)
+    \item
+        \( \phi (E) = 1 \Rightarrow \phi(A) = \det(a) \)
+    \item 
+        \( \det : M_n (\RR) \to \RR \) --- полилинейная кососимметрическая функция
+
+        \( \det (AB) = \det (A) \det (B) \)
+
+        \( 
+            \det 
+            \begin{pmatrix}
+                1 & & & \\
+                & \ddots & & \\
+                & & 1 & \\
+                & & & d
+            \end{pmatrix}
+            =
+            d
+        \)
+
+        Значит доказали \( 2 \to 3 \)
+\end{enumerate}
+
+
+
+Покажем, что определитель блочной верхнетреугольной матрицы --- произведение определителей диагональных блоков.
+
+\begin{gather*}
+    D =
+    \begin{pmatrix}
+        A & B \\
+        0 & C \\
+    \end{pmatrix}
+    \\
+    \det D = \det A \cdot \det C
+\end{gather*}
+
+\newpage
+
+\begin{gather*}
+    \phi_1 : M_n(\RR) \to \RR
+    \\
+    X \to \det 
+    \begin{pmatrix}
+        X & B \\
+        0 & C \\
+    \end{pmatrix}
+\end{gather*}
+
+\( \phi_1 \) --- полилинейная кососимметрическая функция по столбцам, 
+так как можно спокойно менять местами и складывать любые два столбца \( X \).
+Также несложно доказать, что можно выносить константу из столбца.
+\begin{gather*}
+    \phi_1 (X) = \det (X) \phi_1 (E)
+    \\
+    \phi_1 (A) = \det (A) \det 
+    \begin{pmatrix}
+        E & B \\
+        0 & C \\
+    \end{pmatrix}
+\end{gather*}
+
+Аналогично рассмотрим
+\begin{gather*}
+    \phi_2 : M_n (\RR) \to \RR
+    \\
+    y \to \det
+    \begin{pmatrix}
+        E & B \\
+        0 & y
+    \end{pmatrix}
+    \\
+    \phi_2 (C) = \det C
+    \det
+    \begin{pmatrix}
+        E & B \\
+        0 & E \\
+    \end{pmatrix}
+    = 
+    \det C
+    \\
+    \\
+    \det D = \phi_1 (A) = \det (A) \phi_2 (C) = \det (A) \det (C)
+\end{gather*}
+
+Давайте теперь доказывать \( 3 \to 1 \)
+\( \Psi : M_n (\RR) \to \RR \)
+\begin{enumerate}
+    \item
+        \( \Psi (AB) = \Psi (A) \Psi (B) \)
+    \item
+        \( \Psi 
+            \begin{pmatrix}
+                1 & & & \\
+                & \ddots & & \\
+                & & 1 & \\
+                & & & d
+            \end{pmatrix}
+            =
+            d,
+            \forall d \in \RR, d \neq 0
+        \)
+\end{enumerate}
+\begin{remark}{}{}
+    \begin{enumerate}
+        \item
+            \( \Psi (E) = 1 \)
+        \item
+            \( A \in M_n ( \RR ) \) --- обратима \( \Rightarrow \Psi(A^{-1}) = \Psi(A)^{-1} \)
+    \end{enumerate}
+\end{remark}
+
+\newpage
+
+Давайте докажем, что
+\begin{enumerate}
+    \item
+        \( \Psi (S_{ij} (\lambda)) = 1 \)
+    \item
+        \( \Psi (D_i (\lambda) = \lambda \)
+    \item
+        \( \Psi (U_{ij}) = -1 \)
+\end{enumerate}
+
+\begin{enumerate}
+    \item
+        Давайте попытаемся представить \( S_{ij} (\lambda) \) в виде \( S_{ij} = ABA^{-1}B \).
+
+        Тогда \( \Psi (S_{ij} (\lambda)) = \Psi(A) \Psi(B) \Psi(A^{-1}) \Psi(B^{-1}) = 1 \)
+
+        Покажем на примере \( 2 \times 2 \)
+        \begin{gather*}
+            S_{12} (\lambda)
+            =
+            \begin{pmatrix}
+                1 & \lambda \\
+                0 & 1 \\
+            \end{pmatrix}
+            \\
+            \begin{pmatrix}
+                2 & 0 \\
+                0 & 1 \\
+            \end{pmatrix}
+            \begin{pmatrix}
+                1 & \lambda \\
+                0 & 1 \\
+            \end{pmatrix}
+            \begin{pmatrix}
+                \frac{1}{2} & 0 \\
+                0 & 1 \\
+            \end{pmatrix}
+            \begin{pmatrix}
+                1 & -\lambda \\
+                0 & 1 \\
+            \end{pmatrix}
+            =
+            \\
+            =
+            \begin{pmatrix}
+                1 & 2\lambda \\
+                0 & 1 \\
+            \end{pmatrix}
+            \begin{pmatrix}
+                1 & -\lambda \\
+                0 & 1 \\
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                1 & \lambda \\
+                0 & 1 \\
+            \end{pmatrix}
+        \end{gather*}
+
+        В общем случае \( S_{ij} (\lambda) = D_i (\lambda) \cdot S_{12} (\lambda) \cdot D_i^{-1} (\lambda) \cdot S_{ij}^{-1} (\lambda) \)
+    \item
+        \( \Psi (D_n (\lambda)) = \lambda \).
+        Постараемся найти разложение \( D_i (\lambda) = A \cdot D_n (\lambda) \cdot A^{-1} \).
+
+        Так совпало, что \( D_i (\lambda) = U_{in} D_n (\lambda) U_{in}^{-1} \).
+
+        Тогда \( \Psi (D_i (\lambda)) = \Psi ( U_{in} ) \Psi( D_n (\lambda) ) \Psi ( U_{in}^{-1} ) = \Psi( D_n (\lambda) ) = \lambda \)
+    \item
+        Опять разберем на примере \( 2 \times 2 \)
+        \begin{gather*}
+            \begin{pmatrix}
+                0 & 1 \\
+                1 & 0 \\
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                -1 & 0 \\
+                0 & 1 \\
+            \end{pmatrix}
+            \begin{pmatrix}
+                1 & 0 \\
+                1 & 1 \\
+            \end{pmatrix}
+            \begin{pmatrix}
+                1 & -1 \\
+                0 & 1 \\
+            \end{pmatrix}
+            \begin{pmatrix}
+                1 & 0 \\
+                1 & 1 \\
+            \end{pmatrix}
+            \\
+            U_{12} = D_1 (-1) \cdot S_{21} (1) \cdot S_{12} (-1) \cdot S_{21} (1)
+            \\
+            U_{ij} = D_i (-1) \cdot S_{ji} (1) \cdot S_{ij} (-1) \cdot S_{ji} (1)
+        \end{gather*}
+\end{enumerate}
+
+\begin{thrm}{}{} 
+    \begin{enumerate}
+        \item
+            \( \Psi (E) = 1 \)
+        \item
+            \( A \in M_n ( \RR ) \) --- обратима \( \Rightarrow \Psi(A^{-1}) = \Psi(A)^{-1} \)
+    \end{enumerate}
+
+    Тогда \( \Psi (A) = \det (A) \)
+\end{thrm}
+
+\begin{itemize}
+    \item 
+        \( A \) --- невырожденная
+
+        Поскольку \( \Psi \) уважает умножение, а так же совпадет с определителем на элементарных функциях:
+        \[
+            \Psi (A) = \Psi(U_1) \ldots \Psi(U_k) = \det(U_1) \ldots \det(U_k) = \det A
+        \]
+    \item
+        \( A \) --- вырожденная
+
+        Надо показать, что \( \Psi (A) = 0 \).
+
+        Пусть \( A' \) --- ступенчатый вид \( A \)
+
+        \( \Psi (A) = \Psi (U_1) \ldots \Psi (U_2) \Psi (A') \)
+
+        Покажем, что \( \Psi (A') = 0 \)
+
+        В ней мы можем умножить последнюю строчку на \( 2 \), и матрица не поменяется, поэтому
+        \begin{gather*}
+            A' = D_n (2) \cdot A' \Rightarrow \Psi (A') = \Psi (D_n (2)) \Psi (A')
+            \\
+            \Psi(A') = 2 \Psi(A')
+            \\
+            \Psi(A') = 0
+        \end{gather*}
+\end{itemize}
+
+\subsection{Миноры}
+
+\( M_{ij} \) --- определитель матрицы, если в ней выкинуть \( i \)-й столбец и \( j \)-ю строку
+
+\( \mathcal{A}_{ij} = (-1)^{i + j} M_{ij} \) --- алгебраическое дополнение.
+
+\begin{lemma}{}{}
+    \begin{gather*}
+        A \in M_n (\RR)
+        \\
+        \det A = a_{i1} \mathcal{A}_{i1} + a_{i2} \mathcal{A}_{i2} + \ldots + a_{in} \mathcal{A}_{in}
+        \\
+        \det A = a_{1i} \mathcal{A}_{1i} + a_{2i} \mathcal{A}_{2i} + \ldots + a_{ni} \mathcal{A}_{ni}
+    \end{gather*}
+
+    Называется разложению по строке (столбцу)
+\end{lemma}
+
+Для доказательства через полилинейность сделаем кучу матриц, где в \( i \)-й строке есть только \( a_{ij} \).
+Потом свапами загоним \( a_{ij} \) на позицию \( 1, 1 \).
+Получится блочная нижнетреугольная матрица.
+Теперь определитель этой матрицы --- \( \det (a_{ij}) \det M_{ij} \).
+Но свапы дали знак \( (-1)^{(i - 1) + (j - 1)} = (-1)^{i + j} \).
+Значит суммируем \( (-1)^{i + j} \cdot \det (a_{ij}) \det M_{ij} = a_{ij} \mathcal{A}_{ij} \).
+
+Пусть есть \( A \in M_n (\RR) \).
+
+Заменим элементы \( A : a_{ij} \to \mathcal{A}_{ij} \).
+Назовем полученную матрицу \( A^* \).
+
+\( \widehat{A} = (A^{*})^T \) --- присоединенная матрица (\( \widehat{A}_{ij} = \mathcal{A}_{ji} \))
+
+\begin{lemma}{}{}
+    \( A \in M_n(\RR) \)
+
+    Тогда \( A \widehat{A} = \widehat{A} A = \det (A) \cdot E \)
+\end{lemma}
+
+\begin{coroll}{}{}
+    Если \( A \) невырожденная, то \( A^{-1} = \frac{\widehat{A}}{\det (A)} \)
+\end{coroll}
+
+Покажем, что \( A \widehat{A} = \det (A) E \)
+\begin{gather*}
+    (A \widehat{A})_{ii} = \sum\limits_{j = 1}^{n} A_{ij} \widehat{A}_{ji} = \sum\limits_{j = 1}^{n} a_{ij} \mathcal{A}_{ij} = \det (A)
+    \\
+    i \neq j : (A \widehat{A})_{ij} = \sum\limits_{k = 1}^{n} A_{ik} \widehat{A}_{kj} = \sum\limits_{j = 1}^{n} a_{ik} \mathcal{A}_{jk}
+\end{gather*}
+
+Давайте заметим, что это определитель матрицы (разложили по \( j \)-й строке):
+\[
+    A' =
+    \begin{pmatrix}
+        \ & \ & \ & \ & \ \\
+        a_{i 1} & \ & \ldots & \ & a_{i n} \\
+        \ & \ & \ & \ & \ \\
+        a_{j 1} & \ & \ldots & \ & a_{j n} \\
+        \ & \ & \ & \ & \ \\
+    \end{pmatrix}
+\]
+
+Но он равен \( 0 \), так как в \( A' \) есть две равные строчки.
+
+\subsection{Формула Крамера}
+\begin{gather*}
+    A \in M_n ( \RR ), b \in \RR^n
+    \\
+    \exists A^{-1} \Rightarrow x = A^{-1} b = \frac{\widehat{A}}{\det A} b
+\end{gather*}
+
+\begin{lemma}{Формула Крамера}{}
+    \[
+        A \in M_n (\RR) \ x, b \in \RR^n
+        \\
+        Ax = b \Rightarrow \Delta \cdot x_i = \Delta_i
+    \]
+
+    Где \( \Delta = \det A \), а \( \Delta_i \) --- определитель \( A \), если в ней поменять \( i \)-й столбец на \( b \)
+\end{lemma}
+
+Доказательство:
+\[
+    x_1 A_1 + x_2 A_2 + \ldots + x_n A_n = b
+\]
+
+Тогда
+\[
+    \Delta_i 
+    =
+    \det \begin{pmatrix}
+        \ & \ \vline & & \vline \ & \ \\ 
+        \ & \ \vline & & \vline \ & \ \\ 
+        \ & \ \vline & \sum\limits_{j = 1}^{n} x_j A_j & \vline \ & \ \\ 
+        \ & \ \vline & & \vline \ & \ \\ 
+        \ & \ \vline & & \vline \ & \ \\ 
+    \end{pmatrix}
+    =
+    \sum\limits_{j = 1}^{n} x_j \det
+    \begin{pmatrix}
+        \ & \ \vline & & \vline \ & \ \\ 
+        \ & \ \vline & & \vline \ & \ \\ 
+        \ & \ \vline & A_j & \vline \ & \ \\ 
+        \ & \ \vline & & \vline \ & \ \\ 
+        \ & \ \vline & & \vline \ & \ \\ 
+    \end{pmatrix}
+    =
+\]
+
+При \( i \neq j \) \( A_j \) так же будет стоять в другом месте,
+поэтому определитель равен \( 0 \), значит все кроме одного слагаемых равно \( 0 \).
+Итого:
+\[
+    \Delta_i = 
+    x_i \det
+    \begin{pmatrix}
+        \ & \ \vline & & \vline \ & \ \\ 
+        \ & \ \vline & & \vline \ & \ \\ 
+        \ & \ \vline & A_i & \vline \ & \ \\ 
+        \ & \ \vline & & \vline \ & \ \\ 
+        \ & \ \vline & & \vline \ & \ \\ 
+    \end{pmatrix}
+    = x_i \det A = x_i \Delta
+\]
+
+\subsection{Характеристический многочлен}
+
+\begin{defn}{Характеристический многочлен}{}
+    \begin{gather*}
+        A \in M_n (\RR)
+        \\
+        \det ( \lambda E - A ) = \mathcal{X}_A
+    \end{gather*}
+
+    \begin{remark}{}{}
+        \[
+            \mathcal{X}_A = \lambda^{n} + a_{n - 1} \lambda^{n - 1} + \ldots + a_0
+        \]
+    \end{remark}
+\end{defn}
+
+Fun fact:
+\( a_0 = \det(0 \cdot E - A) = \det(-A) = (-1)^n \det A \)
+
+Степень \( n - 1 \) можно достать только из \( (\lambda - a_{1 1}) \ldots (\lambda - a_{n n}) \)
+
+Поэтому \( a_{n - 1} = -\tr A \)
+
+\begin{remark}{}{}
+    \begin{gather*}
+        A \in M_n (\RR)
+        \\
+        \lambda \in \spec_\RR A \Leftrightarrow \lambda \in \RR \ A - \lambda E - \text{необратима} \Leftrightarrow
+        \\
+        \Leftrightarrow \lambda \in \RR \ \det(A - \lambda E) = 0 \Leftrightarrow
+        \\
+        \Leftrightarrow \lambda - \text{корень} \ \mathcal{X}_A \ \text{в} \ \RR
+    \end{gather*}
+\end{remark}
+
+\begin{lemma}{}{}
+    \( R_{i_1, \ldots, i_k} \) --- матрица \( A \), 
+    если из нее вычеркнуть столбцы и строки \( i_1, \ldots, i_k \)
+
+    Тогда
+    \begin{gather*}
+        a_k = (-1)^{n - k} \sum\limits_{1 \leq i_1 < \ldots < i_k \leq n} \det R_{i_1, \ldots, i_k}
+        \\
+        a_k = \sum\limits_{1 \leq i_1 < \ldots < i_k \leq n} \det (-R_{i_1, \ldots, i_k})
+    \end{gather*}
+\end{lemma}
+
+Доказываем:
+
+Надо раскрыть скобки.
+Тогда получим матрицу со столбцами либо \( \lambda E_i \), либо \( -A_i \).
+Разложим по очереди по столбцам, где находятся \( \lambda E_i \).
+Получим \( \lambda^k \det (-R_{i_1, \ldots, i_k}) \).
+Остается сложить такое по всем слагаемым.
+
+\begin{thrm}{}{}
+    \[
+        \mathcal{X}_A - \text{зануляющий для} \ A
+    \]
+\end{thrm}
+
+Для это выйдем из \( \RR [\lambda] \) в \( M_n(\RR) [\lambda] \).
+Произведение/сумму там опеределим как и в обычном умножении.
+
+Fun fuct:
+\begin{gather*}
+    \RR [t] \subseteq M_n (\RR) [t]
+    \\
+    \sum\limits_{k} a_k t^k \mapsto \sum\limits_{k} a_k E t^k
+\end{gather*}
+
+Определим левую и правую подстановку:
+\[
+    D \in M_n (\RR)
+    \\
+    f(D) = \sum\limits_{k = 0}^n A_k D^k
+    \\
+    (D)f = \sum\limits_{k = 0}^n D^k A_n
+\]
+
+Свойства:
+\[
+    f, g \in M_n (\RR) [t]
+    \\
+    D \in M_n (\RR)
+\]
+\begin{enumerate}
+    \item
+        \( (f + g)(D) = f(D) + g(D) \)
+    \item
+        Чаще всего \( (f \cdot g)(D) \neq f(D) \cdot g(D) \)
+
+        \( BD \neq DB, f = t, g = B \)
+        
+        \( (f \cdot g)(B) = B \cdot D \neq D \cdot B = f(D) \cdot g(D) \)
+    \item
+        \( D \) коммутирует с коэффициентами \( g \Rightarrow (f \cdot g) (D) = f(D) \cdot g(D) \)
+\end{enumerate}
+
+\begin{lemma}{}{}
+    \( \mathcal{X}_A (A) = 0 \) в \( M_n (\RR) \)
+\end{lemma}
+
+План:
+\begin{gather*}
+    \mathcal{X}_A \in M_n (\RR) [t]
+    \\
+    \mathcal{X}_A = f(t) \cdot g(t)
+\end{gather*}
+\begin{enumerate}
+    \item
+        \( A \) коммутирует с коэффициентами \( g \)
+    \item
+        \( g(A) = 0 \)
+\end{enumerate}
+
+\( \widehat{t E - A} = R(t) \).
+Нетрудно понять, что \( R(t) \in M_n( \RR [t] ) \).
+Тогда 
+\begin{gather*}
+    R(t) = R_k t^k + \ldots + R_0
+    \\
+    \\
+    (tE - A) (\widehat{tE - A}) = \det(tE - A) \cdot E
+    \\
+    \Downarrow
+    \\
+    \mathcal{X}_A(t) \cdot E = R(t) (tE - A)
+\end{gather*}
+
+Нетрудно видеть, что такое разбиение на множители подходит.

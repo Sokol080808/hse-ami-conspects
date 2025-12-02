@@ -1,0 +1,703 @@
+\section{Дифференциал и производная}
+
+\subsection{Определение и связь}
+
+\begin{defn}{}{}
+    Функция дифферинцируема (\( \in D(a) \)),
+    если
+    \(
+        \exists \mathring{U}(a), \ \alpha: \mathring{U}(0) : \lim\limits_{h \to 0} \alpha(h) = 0
+    \)
+    и
+    \(
+        \exists A \in \RR : f(a + h) - f(a) = Ah + h \alpha(h) \ \forall h \in \mathring{U}(0)
+    \)
+\end{defn}
+
+\begin{defn}{Дифференциал}{}
+    \( df(a)(h) = Ah \) --- дифференциал \( f \) в точке \( a \)
+\end{defn}
+
+Тогда \( \forall h_1, h_2 \in \RR: df(a)(\alpha h_1 + \beta h_2) = \alpha df(a)(h_1) + \beta df(a)(h_2) \)
+
+Иными словами, \( df(a) \) --- линейная функция.
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( f(x) = x \)
+
+            \( f(a + h) - f(a) = (a + h) - a = 1 \cdot h + 0 \cdot h \Rightarrow A = 1, \ \alpha(h) = 0 \)
+
+            \( df(a)(h) = h \ \forall h \in \RR \), поэтому такой дифференциал обозначают \( dx \)
+        \item
+            \( f(x) = x \)
+
+            \( f(a + h) - f(a) = (a + h)^3 - a^3 = 3a^2 \cdot h + h(3ah + h^2) \)
+    \end{itemize}
+\end{example}
+
+\begin{defn}{Производная}{}
+    Если \( \exists \lim\limits_{h \to 0} \frac{f(a + h) - f(a)}{h} \),
+    то он называется производной в \( f \) в точке \( a \) и обозначается \( f'(a) \)
+\end{defn}
+
+\begin{thrm}{}{}
+    \[
+        f \in D(a) \Leftrightarrow \exists f'(a)
+    \]
+\end{thrm}
+
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+
+        \( f(a + h) - f(a) = h(A + \alpha(h)) \Rightarrow \frac{f(a + h) - f(a)}{h} = A + \alpha(h) \to A \) при \( h \to 0 \)
+    \item
+        \( \Leftarrow \)
+
+        \( f'(a) + \alpha(h) = \frac{f(a + h) - f(a)}{h} \Rightarrow f(a + h) - f(h) = f'(a) h + \alpha(h) \cdot h \)
+\end{itemize}
+
+\begin{defn}{Касательная 1}{}
+    Пусть \( f \in D(a)( \), тогда \( y = f'(x - a) + f(a) \) --- касательная к графику \( y = f(x) \)
+    в точке \( a \)
+\end{defn}
+
+\begin{defn}{Касательная 2}{}
+    Если
+    \(
+        \exists U(a) : \forall x \in U(a) \ f(x) - (A(x - a) + f(a)) = o(x - a), x \to a
+    \),
+    то \( y  = A(x - a) + f(a) \) называется касательной в точке \( a \)
+\end{defn}
+
+\begin{thrm}{}{}
+    \[
+        f \in D(a) \Rightarrow f \in C(a)
+    \]
+\end{thrm}
+
+\( f(a + h) = f(a) + f'(a)h + h \cdot \alpha(h) \to f(a) \) при \( h \to 0 \)
+
+\begin{example}{}{}
+    В обратную сторону неверно: \( f(x) = |x| \)
+
+    \( \not\exists f(0) \Rightarrow f \notin D(0) \)
+\end{example}
+
+Получим производную, как отношение двух дифференциалов:
+\begin{gather*}
+    df(a)(h) = f'(a) h
+    \\
+    f'(a) dx(\cdot) = df(a)(\cdot)
+    \\
+    \frac{df}{dx} (a) = f'(a)
+\end{gather*}
+
+\subsection{Равномерная сходимость}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \begin{gather*}
+                f_n(x) = x^n
+                \\
+                x \in (-1, 1]:
+                \lim\limits_{x \to 0} = \begin{cases}
+                    0, \ x \in (-1, 1)
+                    \\
+                    1, \ x = 1
+                \end{cases}
+            \end{gather*}
+        \item
+            \begin{gather*}
+                f_n(x) = \frac{x^n}{n}
+                \\
+                x \in [0, 1]: \left| \frac{x^n}{n} \right| \leq \frac{1}{n}
+            \end{gather*}
+    \end{enumerate}
+\end{example}
+
+\newpage
+
+\begin{defn}{Равномерная сходимость}{}
+    Пусть \( \{ f_n(x) \} \) сходится на \( X \),
+    то есть \( \forall x \in X \ \exists \lim\limits_{n \to \infty} f_n(x) \),
+    и \( \forall \varepsilon > 0 \ \exists N : \forall n > N \land x \in X \ |f_n(x) - f(x)| < \varepsilon \).
+
+    Тогда говорят, что \( f_n \) равномерно сходятся к \( f \)
+    на множестве \( X \) и обозначают это так \( f_n(x) \underset{X}{\rightrightarrows} f(x) \)
+\end{defn}
+
+\begin{thrm}{}{}
+    Пусть \( \{ f_n(x) \} \) равномерно сходится на \( X \) к \( f(x) \)
+
+    Пусть \( \forall n \in \NN \ f_n \in C(x_0), x_0 \in X \Rightarrow f \in C(x_0) \)
+\end{thrm}
+
+\begin{exercise}{}{}
+    \begin{gather*}
+        f_n(x) = \frac{nx}{1 + n^2 x^2}
+        \\
+        f_n(x) \underset{\RR}{\not\rightrightarrows} 0
+    \end{gather*}
+
+    (сходится, но неравномерно)
+\end{exercise}
+
+Пример, который недифференцируем в множестве точек, однако непрерывен.
+\[
+    r(x) = \sum\limits_{n = 1}^{\infty} \frac{\cos(n^2 x)}{n^2}
+\]
+
+\newpage
+
+\subsection{Производная}
+
+Пусть \( f, g \in D(a) \), тогда:
+\begin{enumerate}
+    \item
+        \( \forall \alpha, \beta \in \RR \ (\alpha f + \beta g)'(a) = \alpha f'(a) + \beta g'(a) \)
+    \item
+        \( (fg)'(a) = f'(a) g(a) + f(a) g'(a) \)
+    \item
+        \( g(a) \neq 0 \Rightarrow \left( \frac{f}{g} \right)' (a) = \frac{f'(a) g(a) - f(a) g'(a)}{g^2(a)} \)
+\end{enumerate}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \(
+                \displaystyle
+                (e^x)' = \lim\limits_{h \to 0} \frac{e^{x + h} - e^x}{h}
+                =
+                e^x \lim\limits_{h \to 0} \frac{e^h - 1}{h} = e^x
+            \)
+        \item
+            \(
+                \displaystyle
+                (\sin x)' = \lim\limits_{h \to 0} \frac{\sin (x + h) - \sin x}{h}
+                =
+                \lim\limits_{h \to 0} \frac{2 \sin \frac{h}{2} \cos (a + \frac{h}{2})}{h}
+                =
+                \cos x
+            \)
+        \item
+            \(
+                \displaystyle
+                (\tan x)'
+            \)
+    \end{itemize}
+\end{example}
+
+\begin{thrm}{}{}
+    Пусть \( f \in D(a), \ g \in D(f(a)) \), тогда \( (g \cdot f)' (a) = g'(f(a)) \cdot f(a) \)
+\end{thrm}
+
+Неправильно, потому что \( f(a + h) \) может быть \( f(a) \)
+\[
+    \lim\limits_{h \to 0} \frac{g(f(a + h)) - g(f(a))}{h}
+\]
+
+Правильно:
+
+\( f(a + h) - f(a) = f'(a) h + \alpha(h) h \) и \( \alpha(h) \to 0, \ h \to 0 \)
+
+\( g(f(a) + q) - g(f(a)) = g'(f(a)) q + \beta(q) q \) и \( \beta(q) \to 0, \ q \to 0 \)
+
+Доопределим \( \beta(0) = 0 \)
+
+\( q = f(a + h) - f(a) \)
+
+\begin{gather*}
+    g(f(a + h) - f(a))
+    \\
+    =
+    g'(f(a)) (f'(a) h + \alpha(h) h) + \beta(f'(a) h + \alpha(h) h) (f'(a) h + \alpha(h) h)
+    =
+    \\
+    =
+    g'(f(a)) f'(a) h + \gamma(h)
+\end{gather*}
+
+Отсюда \( d (g \circ f)(a) = dg(f(a)) \circ df(a) \).
+
+\textbf{Инвариантность формы 1-го дифференциала:}
+\begin{gather*}
+    dg(y) = g'(y) dy
+    \\
+    dg(f(x)) = g'(f(x)) f'(x) dx = g'(f(x)) df
+\end{gather*}
+
+\newpage
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \(
+                \displaystyle
+                (a^x)' = e^{x \ln a} = e^y y' = e^{x \ln a} \ln a = a^x \ln a
+            \)
+        \item
+            \( \sh x = \frac{e^x - e^{-x}}{2} \), \( \ch x = \frac{e^x + e^{-x}}{2} \)
+
+            Тогда \( \ch^2 x - \sh^2 x = 1 \)
+
+            \( arsh \ x = \ln ( x + \sqrt{1 + x^2} ) \)
+
+            \( arch \ x = \ln ( x + \sqrt{x^2 - 1} ), \ x \geq 1 \)
+            \begin{gather*}
+                (\ch x)' =\frac{e^x + e^{-x}}{2} = \frac{e^x - e^{-x}}{2} = \sh x
+                \\
+                (\sh x)' =\frac{e^x - e^{-x}}{2} = \frac{e^x + e^{-x}}{2} = \ch x
+            \end{gather*}
+    \end{enumerate}
+\end{example}
+
+
+\begin{thrm}{}{}
+    Пусть \( \exists U(a) : f \) строго монотонна и непрерывна на \( U(a) \).
+
+    Пусть \( f \in D(a) \) и \( f'(a) \neq 0 \)
+
+    Тогда \( f^{-1} \in D(a) \) и \( (f^{-1})'(f(a)) = \frac{1}{f'(a)} \)
+\end{thrm}
+
+Доказательство:
+
+На \( f(U(a)) \) существует \( f^{-1} \)
+\begin{gather*}
+    \lim\limits_{q \to 0} \frac{f^{-1} (f(a) + q) - f^{-1}(f(a))}{q}
+    =
+    \lim\limits_{h \to 0} \frac{f^{-1} (f(a) + f(a + h) - f(a)) - f^{-1}(f(a))}{f(a + h) - f(a)}
+    =
+    \\
+    =
+    \lim\limits_{h \to 0} \frac{a + h - a}{f(a + h) - f(a)}
+    =
+    \lim\limits_{h \to 0} \frac{h}{f(a + h) - f(a)}
+    =
+    \frac{1}{f'(a)}
+\end{gather*}
+
+%TODO
+
+
+\newpage
+
+\subsection{Таблица производных}
+
+\begin{enumerate}
+    \item
+        \( C' = 0 \)
+    \item
+        \( (x^\alpha)' = \alpha x^{\alpha - 1} \)
+    \item
+        \( (e^x)' = e^x \)
+    \item
+        \( (a^x)' = a^x \ln a \) (\(a > 0, a \neq 1 \))
+    \item
+        \( (\ln x)' = \frac{1}{x} \) (\( x > 0 \))
+    \item
+        \( (\log_a x)' = \frac{1}{x \ln a} \) (\( a > 0, a \neq 1, x > 0\))
+    \item
+        \( (\sin x)' = \cos x \)
+    \item
+        \( (\cos x)' = -\sin x \)
+    \item
+        \( (\tan x)' = \frac{1}{\cos^2 x} = 1 + \tan^2 x \)
+    \item
+        \( (\cot x)' = -\frac{1}{\sin^2 x} = 1 - \cot^2 x \)
+    \item
+        \( \)
+\end{enumerate}
+
+\newpage
+
+\subsection{IDK}
+
+\begin{defn}{}{}
+    Пусть \( f : E \to R \), \( a \in E \)
+
+    Если \( \exists U(a) : \forall x \in U(a) \cap E \ f(x) \geq f(a) \),
+    то \( a \) называется точкой локального минимума.
+
+    (Аналогично для максимума)
+\end{defn}
+
+\begin{thrm}{Теорема Ферма}{}
+    \( f : (a, b) \to \RR \), \( c \in (a, b) \) , \( f \in D(c) \), \( c \) --- локальный экстремум.
+
+    Тогда \( f'(c) = 0 \).
+\end{thrm}
+
+Доказательство:
+
+Пусть \( x_1 < c \), \( x_1 \in (a, b) \).
+
+Тогда \( \frac{f(x_1) - f(c)}{x_1 - c} \geq 0 \) (если \( c \) --- точка локального максимума).
+
+Аналогично для \( x_2 > c \), \( x_2 \in (a, b) \): \( \frac{f(x_2) - f(c)}{x_2 - c} \leq 0 \)
+
+Отсюда очевидно, что \( f'(c) = 0 \).
+
+\begin{thrm}{Теорема Ролля}{}
+    Пусть \( f \in C[a, b], D(a, b) \) и \( f(a) = f(b) \)
+
+    Тогда \( \exists c \in (a, b) : f'(c) = 0 \)
+\end{thrm}
+
+Доказательство:
+
+Либо функция --- константа на отрезке,
+либо на \( (a, b) \) есть локальный экстремум \( \Rightarrow \) в нем производная \( 0 \).
+
+\begin{thrm}{}{}
+    Пусть \( f \in C[a, b] \) и \( f \in D(a, b) \)
+
+    Тогда \( \exists c \in (a, b) : f(b) - f(a) = f'(c)(b - a) \)
+\end{thrm}
+
+%TODO
+[TODO]
+
+\begin{coroll}{}{}
+    Пусть \( f(c) \in D(a, b) \) и \( \forall c \in (a, b) \ f'(c) = 0 \) \( \Rightarrow f(x) = C \ \forall x \in (a, b) \)
+\end{coroll}
+
+Пусть \( x_1, x_2 \in (a, b) \Rightarrow f \in C[x_1, x_2] \).
+
+\( f \in D(x_1, x_2) \Rightarrow f(x_2) - f(x_1) = f'(c) (x_2 - x_1) = 0 \)
+
+\begin{coroll}{}{}
+    Пусть \( f \in D(a, b) \)
+
+    Тогда \( f \uparrow \) на \( (a, b) \) \( \Leftrightarrow \forall c \in (a, b) \ f'(c) \geq 0 \)
+\end{coroll}
+
+\begin{itemize}
+    \item
+        Пусть \( x_1 > x_2 \in (a, b) \).
+
+        Тогда \( \frac{f(x_1) - f(x_2)}{x_1 - x_2} \geq 0 \)
+
+        Значит \( f'(x_2) = \lim\limits_{x_1 \to x_2} \frac{f(x_1) - f(x_2)}{x_1 - x_2} \geq 0 \)
+    \item
+        Пусть \( x_1, x_2 \in (a, b) \Rightarrow f \in C[x_1, x_2] \).
+
+        По теореме Лагранжа
+        \(
+            f \in D(x_1, x_2) \Rightarrow f(x_2) - f(x_1) = f'(c) (x_2 - x_1) \geq 0 \Rightarrow f(x_1) > f(x_2)
+        \)
+\end{itemize}
+
+\begin{thrm}{Теорема Коши}{}
+    Пусть
+    \begin{enumerate}
+        \item
+            \( f, g \in C[a, b] \)
+        \item
+            \( f, g \in D(a, b) \)
+        \item
+            \( \forall x \in (a, b) \ g'(x) \neq 0 \)
+    \end{enumerate}
+
+    Тогда \( \exists c \in (a, b) : \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(c)}{g'(c)} \)
+\end{thrm}
+
+\( g(a) \neq g(b) \), так как иначе \( \exists c \in (a, b) : g'(c) = 0 \) --- противоречие третьему пункту.
+
+Рассмотрим \( F(x) = (g(b) - g(a))f(x) - (f(b) - f(a))g(x) \).
+
+\( F(a) = F(b) \Rightarrow \exists c \in (a, b) : F'(c) = 0 \)
+
+Получаем:
+\begin{gather*}
+    F'(c) = 0
+    \\
+    (g(b) - g(a)) f'(c) - (f(b) - f(a)) g'(c) = 0
+    \\
+    \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(c)}{g'(c)}
+\end{gather*}
+
+Геометрический смысл:
+\(
+    \begin{pmatrix}
+        f(b) - f(a)
+        \\
+        g(b) - g(a)
+    \end{pmatrix}
+    \
+    \begin{pmatrix}
+        f'(c)
+        \\
+        g'(c)
+    \end{pmatrix}
+\)
+коллинеарны.
+
+Либо же при перемещении в какой-то момент скорость будет коллинеарна вектору перемещения.
+
+Теорема работает только в плоском пространстве:
+в трехмерном, например, есть контрпример --- винтовое движение по цилиндру.
+
+\subsection{Раскрытие неопределенностей}
+
+\begin{thrm}{Первое правило Лопиталя}{}
+    Пусть
+    \begin{enumerate}
+        \item
+            \( f, g \in D(a, b) \)
+        \item
+            \( \lim\limits_{x \to b-} f(x) = \lim\limits_{x \to b-} g(x) = 0 \)
+        \item
+            \( \forall \xi \in (a, b) \ g'(\xi) \neq 0 \)
+        \item
+            Существует бесконечный или конечный предел \( \lim\limits_{x \to b'} \frac{f'(x)}{g'(x)} \)
+    \end{enumerate}
+
+    Тогда \( \lim\limits_{x \to b-} \frac{f(x)}{g(x)} = \lim\limits_{x \to b-} \frac{f'(x)}{g'(x)} \)
+\end{thrm}
+
+Пусть \( a < x < y < b \Rightarrow \) на \( (x, y) \) \( f, g \) удовлетворяют
+теореме Коши.
+\begin{gather*}
+    \exists c \in (x, y) : \frac{-f(y) + f(x)}{-g(y) + g(x)} = \frac{f'(c)}{g'(c)}
+    \\
+    \frac{f(x)}{g(x)} = \frac{f'(c)}{g'(c)} \frac{g(x) - g(y)}{g(x)} + \frac{f(y)}{g(x)}
+    \\
+    \frac{f(x)}{g(x)} = \frac{f'(c)}{g'(c)} \left( 1 - \frac{g(y)}{g(x)} \right) + \frac{f(y)}{g(x)}
+        = \frac{f'(c)}{g'(c)} - \frac{f'(c)}{g'(c)} \cdot \frac{g(y)}{g(x)} + \frac{f(y)}{g(x)}
+\end{gather*}
+
+Пусть \( \lim\limits_{t \to b-} \frac{f'(t)}{g'(t)} = A \)
+\[
+    \left| \frac{f(x)}{g(x)} - A \right|
+        \leq \left| \frac{f'(c)}{g'(c)} - A \right|
+        + \left| \frac{f'(c)}{g'(c)} \right| \cdot \left| \frac{g(y)}{g(x)} \right|
+        + \left| \frac{f(y)}{g(x)} \right|
+\]
+
+\( \forall \varepsilon > 0 \ \exists a < x < y < b : \forall c \in (x, b) \left| \frac{f'(c)}{g'(c)} - A \right| < \varepsilon \)
+
+Зафиксируем \( x \).
+\(
+    \exists y_0 \in (x, b) :
+        \forall y \in (y_0, b) \
+        \left| \frac{g(y)}{g(x)} \right| < \varepsilon,
+        \left| \frac{f(y)}{g(x)} \right| < \varepsilon
+\)
+
+Получаем:
+\[
+    \left| \frac{f(x)}{g(x)} - A \right| \leq \varepsilon + C \varepsilon + \varepsilon = (C + 2) \varepsilon
+\]
+
+Значит \( \lim\limits_{x \to b-} \frac{f(x)}{g(x)} = A \)
+
+\newpage
+
+\begin{thrm}{Второе правило Лопиталя}{}
+    Пусть
+    \begin{enumerate}
+        \item
+            \( f, g \in D(a, b) \)
+        \item
+            \( \lim\limits_{x \to b-} g(x) = \infty \)
+        \item
+            \( \forall \xi \in (a, b) \ g'(\xi) \neq 0 \)
+        \item
+            Существует бесконечный или конечный предел \( \lim\limits_{x \to b'} \frac{f'(x)}{g'(x)} \)
+    \end{enumerate}
+
+    Тогда \( \lim\limits_{x \to b-} \frac{f(x)}{g(x)} = \lim\limits_{x \to b-} \frac{f'(x)}{g'(x)} \)
+\end{thrm}
+
+Здесь наоборот \( y < x \) и мы фиксируем \( y \) достаточно близкий к \( b \):
+\[
+    \left| \frac{f(x)}{g(x)} - A \right|
+        \leq \left| \frac{f'(c)}{g'(c)} - A \right|
+        + \left| \frac{f'(c)}{g'(c)} \right| \cdot \left| \frac{g(y)}{g(x)} \right|
+        + \left| \frac{f(y)}{g(x)} \right|
+\]
+
+\begin{example}{}{}
+    \[
+        \lim\limits_{x \to +\infty} \frac{e^x}{x^n}, \ n \in \NN
+    \]
+\end{example}
+\[
+    \lim\limits_{x \to +\infty} \frac{e^x}{x^n}
+    =
+    \lim\limits_{x \to +\infty} \frac{e^x}{nx^{n - 1}}
+    =
+    \ldots
+    =
+    \lim\limits_{x \to +\infty} \frac{e^x}{n!}
+    =
+    +\infty
+\]
+
+\begin{example}{}{}
+    \[
+        \lim\limits_{x \to +\infty} \frac{e^x}{x^\varepsilon}
+    \]
+\end{example}
+\[
+    \lim\limits_{x \to +\infty} \frac{\ln x}{x^\varepsilon}
+    =
+    \lim\limits_{x \to +\infty} \frac{\frac{1}{x}}{\varepsilon x^{\varepsilon - 1}}
+    =
+    \lim\limits_{x \to +\infty} \frac{1}{\varepsilon x^\varepsilon}
+    =
+    0
+\]
+
+\begin{example}{}{}
+    \[
+        \lim\limits_{x \to 0+} x^x
+    \]
+\end{example}
+\[
+    \lim\limits_{x \to 0+} x^x
+    =
+    e^{\lim\limits_{x \to 0+} x \ln x}
+    =
+    e^{\lim\limits_{x \to 0+} \frac{\ln x}{1 \slash x}}
+    =
+    e^{\lim\limits_{x \to 0+} \frac{1 \slash x}{-1 \slash x^2}}
+    =
+    e^{\lim\limits_{x \to 0+} -x}
+    =
+    e^0
+    =
+    1
+\]
+
+\begin{thrm}{Обобщенное правило Лейбница}{}
+    Вид \( k \)-й производной произведения
+
+    [TODO]
+    %TODO
+\end{thrm}
+
+\begin{example}{}{}
+    \begin{gather*}
+        f(x) = (x^2 + x) e^{2x}
+        \\
+        f^{(2026)}(0) = ?
+    \end{gather*}
+\end{example}
+\begin{gather*}
+    f^{(2026)}(x) = 2^{2026} e^{2x} (x^2 + x) + 2^{2025} e^{2x} \cdot 2026 (2x + 1) + 2^{2024} e^{2x} \cdot 2025 \cdot 2026
+    \\
+    f^{(2026)}(0) = 2^{2025} \cdot 1 + 2^{2024} \cdot 2025 \cdot 2026
+\end{gather*}
+
+\subsection{Формула Тейлора}
+
+\begin{defn}{Многочлен Тейлора}{}
+    Пусть \( f \in D^n (a) \)
+
+    Многочлен
+    \(
+        \displaystyle
+        T_n(x, f, a) = \sum\limits_{k = 0}^n = \frac{f^{(k)}(a)}{k!} (x - a)^k
+    \)
+    называется многочленом Тейлора функции \( f \) в точке \( a \)
+\end{defn}
+
+\begin{exercise}{}{}
+    \[
+        \forall l \in \{ 0, \ldots, n \} \ f^{(l)} (a) = T_n^{(l)} (a)
+    \]
+\end{exercise}
+
+\begin{thrm}{}{}
+    \[
+        f \in D^{n} (a) \Rightarrow f(x) - T_n (x) = o((x - a)^n), \ x \to a
+    \]
+\end{thrm}
+
+Хотим \( 0 = \lim\limits_{x \to a} \frac{f(x) - T_n (x)}{(x - a)^n} \).
+
+По правилу Лопиталя \( = \frac{f'(x) - T_n'(x)}{n (x - a)^{n - 1}} \).
+
+Сделаем так еще \( n - 2 \) раза:
+\[
+    =
+    \lim\limits_{x \to a} \frac{f^{(n - 1)} (x) - T_n^{(n - 1)} (x) }{n \cdot (n - 1) \cdot \ldots \cdot 2 (x - a)}
+    =
+    \lim\limits_{x \to a }\frac{f^{(n - 1)} (x) - f^{(n - 1)} (a) - f^{(n)} (a) (x - a) }{n \cdot (n - 1) \cdot \ldots \cdot 2 (x - a)}
+\]
+
+Больше дифференцировать не можем, потому что не в точке \( a \) \( f^{(n)} \) может не существовать.
+Исправим проблему так:
+\[
+    =
+    \frac{1}{n!} \lim\limits_{x \to a} \left( \frac{f^{(n - 1)} (x) - f^{(n - 1)}}{x - a} - f^{(n)} (a) \right)
+    =
+    0
+\]
+
+Получили \( f(x) = T_n(x) + o((x - a)^n \) --- формула в форме Пеано.
+
+\begin{example}{}{}
+    \( a = 0 \)
+
+    \begin{itemize}
+        \item
+            \(
+                \displaystyle
+                e^x = \sum\limits_{k = 0}^{n} \frac{x^k}{k!} + o(x^n)
+            \)
+        \item
+            \(
+                \displaystyle
+                \sin x = \sum\limits_{k = 0}^{n} \frac{(-1)^k x^{2k + 1}}{(2k + 1)!} + o(x^{2n + 2})
+            \)
+        \item
+            \(
+                \displaystyle
+                \cos x = \sum\limits_{k = 0}^{n} \frac{(-1)^k x^{2k}}{(2k)!} + o(x^{2n})
+            \)
+        \item
+            \(
+                \displaystyle
+                \ln x = \sum\limits_{k = 1}^{n} \frac{(-1)^{k} x^k}{k!} + o(x^n)
+            \)
+        \item
+            \(
+                \displaystyle
+                (1 + x)^\alpha = \sum\limits_{k = 0}^{n} \frac{\alpha (\alpha - 1) \ldots (\alpha - k + 1)}{k!} + o(x^n)
+            \)
+    \end{itemize}
+\end{example}
+
+\begin{thrm}{Формула Тейлора с остатком в общей форме}{}
+    Пусть \( f \in D^n [a, x] \), \( f \in D^{n + 1} (a, x) \), \( g \in C[a, x] \), \( g \in D(a, x) \),
+    \( \forall t \in (a, x) \ g'(t) \neq 0 \)
+
+    Тогда для некоторой точки \( c \in (a, x) \)
+    \[
+        f(x) - T_n(x, f, a) = \frac{f^{(n + 1)}(c)}{n! g'(c)} (g(x) - g(c)) (x - c)^{n + 1}
+    \]
+\end{thrm}
+
+\begin{gather*}
+    T_n(x, f, a) = \sum\limits_{k = 0}^{n} \frac{f^{(n)}(a)}{k!} (x - a)^k
+    \\
+    G(t) = \sum\limits_{k = 0}^{n} \frac{f^{(n)}(t)}{k!} (x - t)^k, \ t \in (a, x)
+    \\
+    G'(t)
+        = f'(t)
+        + \sum\limits_{k = 1}^{n} \left( \frac{f^{(k + 1)}(t)}{k!} (x - t)^k - \frac{f^{(k)}(t) (x - t)^{k - 1}}{(k - 1)!} \right)
+    \\
+    G'(t) = \frac{f^{(n + 1)}(t)}{n!}(x - t)^n
+    \\
+    \\
+    \frac{G(x) - G(a)}{g(x) - g(a)} = \frac{G'(c)}{g'(c)} = \frac{f^{(n + 1)}(c)}{n! g'(c)}(x - c)^n
+    \\
+    G(x) = f(x), \ G(a) = T_n(x, f, a)
+\end{gather*}

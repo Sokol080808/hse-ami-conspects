@@ -1,0 +1,197 @@
+\section{Частично упорядоченные множества}
+
+\subsection{Отношения частичного порядка}
+
+\begin{defn}{Отношение строгого частичного порядка}{}
+    Отношение \( R \) на \( A \) называется отношением строгого порядка, если:
+    \begin{enumerate}
+        \item
+            \( \lnot \ a \ R \ a \) (иррефлексивность)
+        \item
+            \( a \ R \ b \ \land \ b \ R \ c \Rightarrow a \ R \ c \) (транзитивность)
+    \end{enumerate}
+
+    \( R \: = \: < \)
+\end{defn}
+
+\begin{defn}{Отношение нестрогого частичного порядка}{}
+    Отношение \( R \) на \( A \) называется отношением нестрогого порядка, если:
+    \begin{enumerate}
+        \item
+            \( a \ R \ a \) (рефлексивность)
+        \item
+            \( a \ R \ b \ \land b \ R \ a \Rightarrow a = b \) (антисимметричность)
+        \item
+            \( a \ R \ b \ \land \ b \ R \ c \Rightarrow a \ R \ c \) (транзитивность)
+    \end{enumerate}
+
+    \( R \: = \: \leq \)
+\end{defn}
+
+\begin{lemma}{О связи строгого и нестрогого порядков}{}
+    \begin{itemize}
+        \item
+            \( \leq \) --- нестрогий порядок на \( A \)
+            \( \Rightarrow \: < \: = \: \leq \: \setminus \{ (a, a) \ \vline \ a \in A \} \)
+            - отношение строгого порядка на \( A \)
+        \item
+            \( < \) --- строгий порядок на \( A \)
+            \( \Rightarrow \: \leq \: = \: < \: \cap \{ (a, a) \ \vline \ a \in A \} \)
+            - отношение строгого порядка на \( A \)
+    \end{itemize}
+\end{lemma}
+
+Доказательство:
+\begin{itemize}
+    \item
+        \begin{enumerate}
+            \item
+                \( \lnot \ a \ R \ a \) --- очевидно.
+            \item
+                \( a \ R \ b \ \land b \ R \ c \Rightarrow a \neq b, b \neq c, a \leq b, b \leq c \Rightarrow a \leq c\)
+
+                Если \( a = c \), то \( a \leq b, b \leq a \Rightarrow a = b \) --- противоречие.
+        \end{enumerate}
+    \item
+        \begin{enumerate}
+            \item
+                \( \ a \ R \ a \) --- очевидно.
+            \item
+                Пусть \( a \leq b \land b \leq a \)
+
+                Допустим, что \( a \neq b \).
+                Тогда \( a < b \land b < a \), получили противоречие иррефлексивности.
+            \item
+                \( a \leq b \land b \leq c \)
+
+                Если \( a = b \) или \( b = c \), то очевидно.
+
+                Иначе \( a < b \land b < c \Rightarrow a < c \Rightarrow a \leq c \)
+        \end{enumerate}
+\end{itemize}
+
+\subsection{Частично упорядоченные множества}
+
+\begin{defn}{Частично упорядоченное множество}{}
+    Множество \( A \neq \varnothing \) с заданным на нем отношением
+    частичного порядка называется частично упорядоченным множеством.
+
+    \( (A, <), (A, \leq) \)
+\end{defn}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( (\NN, \leq) \)
+        \item
+            \( (\NN, |) \) (отношение делимости)
+        \item
+            \( (\ZZ \setminus \{ 0 \}, |) \) --- не ЧУМ (\( (-1) | 1, 1 | (-1) \), но \( -1 \neq 1 \))
+        \item
+            \( (2^A, \subseteq) \)
+        \item
+            \( (\BB^n, \leq) \)
+    \end{enumerate}
+\end{example}
+
+\subsection{Операции над порядками}
+\begin{enumerate}
+    \item
+        Покоординатный порядок \( (P \times Q, \leq) \):
+
+        \(
+            (p_1, q_1) \leq (p_2, q_)
+            \Leftrightarrow
+            \begin{cases}
+                p_1 \leq_P p_2
+                \\
+                q_1 \leq_Q q_2
+            \end{cases}
+        \)
+    \item
+        Лексикографический порядок \( (P \times Q, \leq) \):
+
+        \(
+            (p_1, q_1) \leq (p_2, q_)
+            \Leftrightarrow
+            p_1 < p_2 \lor (p_1 = p_2 \land q_1 \leq q_2
+        \)
+    \item
+        Считаем, что \( P \cap Q = \varnothing \)
+
+        \( P + Q = (P \sqcap Q, \leq): \)
+
+        \( x \leq y
+            \Leftrightarrow
+            \left[
+                \begin{aligned}
+                    & x \leq_P y
+                    \\
+                    & x \leq_Q y
+                    \\
+                    & x \in P, y \in Q
+                \end{aligned}
+            \right.
+        \)
+\end{enumerate}
+
+\begin{defn}{Изоморфизм}{}
+    Пусть \( (P, \leq_P), (Q, \leq_Q) \).
+
+    Тогда говорят, что они изоморфны, если существует биекция \( \varphi : P \to Q \) такая,
+    что \( \forall x, y \in P \ x \leq_P y \Leftrightarrow \varphi(x) \leq_Q \varphi(y) \).
+
+    Обозначается \( (P, \leq_P) \cong (Q, \leq_Q) \)
+\end{defn}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( (\NN, \leq) \cong (\NN \cup \{ 0 \}) \ \varphi(n) = n - 1 \)
+        \item
+            \( (\QQ, \leq) \not\cong (\RR, \leq) \), так как нет биекции.
+        \item
+            \( ([0, 1], \leq) \not\cong ((0, 1), \leq) \), так как нет наименьшего и наибольшего элементов.
+    \end{enumerate}
+\end{example}
+
+\begin{defn}{}{}
+    \( a \in P \) --- минимальный, если \( \not\exists b \in P : b < a \)
+
+    \( a \in P \) --- наименьший, если \( \forall b \in P \ a \leq b \)
+
+    \( a \in P \) --- максимальный, если \( \not\exists b \in P : b > a \)
+
+    \( a \in P \) --- наибольший, если \( \forall b \in P \ a \geq b \)
+\end{defn}
+
+\begin{example}{}{}
+    \( (Z, \leq) \not\cong (Q, \leq) \)
+\end{example}
+
+\begin{defn}{Плотный порядок}{}
+    \( \forall a < b \ \exists c : a < c \land c < b \)
+\end{defn}
+
+\( (Q, \leq) \) --- плотный порядок, а \( (Z, \leq) \) --- нет.
+
+\begin{defn}{Отрезок}{}
+    Для \( a \leq b \) \( [a, b] = \{ c \in P \ \vline \ a \leq c \land c \leq b \} \)
+\end{defn}
+
+Если \( \varphi: P \to Q \) --- изоморфизм порядков, то \( \phi([a, b]) = [\phi(a), \phi(b)] \).
+Доказательство тривиально.
+
+\begin{defn}{Фундированное множество}{}
+    ЧУМ \( (P, \leq) \) называется фундированным, если \( \forall X \subseteq P, x \neq \varnothing \)
+    имеет минимальный элемент.
+\end{defn}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( (N, \leq) \) --- фундированное
+        \item
+            \( (Z, \leq) \) --- не фундированное, возьмем \( X = \ZZ \)
+    \end{itemize}
+\end{example}

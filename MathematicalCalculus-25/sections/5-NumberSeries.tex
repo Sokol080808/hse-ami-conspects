@@ -1,0 +1,497 @@
+\section{Числовые ряды}
+
+\subsection{Что это такое?}
+
+\begin{defn}{}{}
+    Пусть дана \( \{ a_n \} \).
+
+    Формальная сумма \( a_1 + a_2 + \ldots + a_n + \ldots = \sum\limits_{n = 1}^{\infty} \)
+    называется числовым рядом.
+
+    Последовательность \( S_N = \sum\limits_{n = 1}^N a_n \)
+    называется последовательностью частичных сумм ряда.
+
+    Элементы последовательности \( \{ a_n \} \) называются элементами ряда.
+
+    Если \( \exists S = \lim\limits_{N \to \infty} S_N \),
+    то \( S \) называется суммой ряда и если \( S \) существует, то говорят,
+    что ряд сходится.
+\end{defn}
+
+\begin{example}{}{}
+    \[
+        \sum\limits_{n = 0}^{\infty} q^n
+    \]
+    \begin{enumerate}
+        \item
+            \( q = 0 \)
+
+            \( S = 0 \) (тут считаем \( \sum\limits_{n = 1}^{\infty} q^n \)
+        \item
+            \( q = 1 \)
+
+            \( S_N = N + 1 \to +\infty \)
+        \item 
+            \( S_N = \frac{1 - q^{N + 1}}{1 - q} \)
+
+            \begin{itemize}
+                \item
+                    \( |q| < 1 \Rightarrow \lim\limits_{N \to \infty} S_N = \frac{1}{1 - q} \)
+                \item
+                    \( |q| > 1 \Rightarrow \) расходится
+                \item
+                    \( q = -1 \Rightarrow \) предела тоже нет
+            \end{itemize}
+    \end{enumerate}
+\end{example}
+
+\begin{example}{}{}
+    \[
+        \sum\limits_{n = 2}^{\infty} = \ln \left( 1 - \frac{1}{n^2} \right)
+    \]
+\end{example}
+
+Суммирование по Чезаро:
+\[
+    S = \lim\limits_{n \to \infty} \frac{S_1 + S_2 + \ldots + S_n}{n}
+\]
+
+По такому суммированию
+\[
+    \lim\limits_{n \to \infty} \sum\limits_{n = 1}^{\infty} = (-1)^n = -\frac{1}{2}
+\]
+
+Суммирование по Пуассону-Абелю:
+\[
+    S = \lim\limits_{x \to 1-} \sum\limits_{n = 1}^{\infty} a_n x^n
+\]
+
+По такому суммированию
+\begin{gather*}
+    \sum\limits_{n = 0}^{\infty} (-1)^n x^n = 1 - x + x^2 - x^3 + \ldots = \frac{1}{1 + x}
+    \\
+    \lim\limits_{x \to 1-} \frac{1}{1 + x} = \frac{1}{2}
+\end{gather*}
+
+\( S_n \) имеет предел \( \Leftrightarrow \forall \varepsilon > 0 \exists N \in \NN : \forall n, m > N \ | S_n - S_m | < \varepsilon \)
+\begin{gather*}
+    m = n + p, p \in \NN
+    \\
+    \Downarrow
+    \\
+    | S_{n + p} - S_n | = \left| \sum\limits_{k = n + 1}^{n + p} a_k \right| < \varepsilon
+\end{gather*}
+
+\begin{thrm}{Критерий Коши}{}
+    Ряд \( \sum\limits_{n = 1}^{\infty} a_n \) сходится
+    тогда и только тогда, когда: 
+    \[ 
+        \forall \varepsilon > 0 \ \exists N \in \NN : \forall n > N, p \in \NN \ 
+        \left| \sum\limits_{k = n + 1}^{n + p} a_k \right| < \varepsilon
+    \]
+\end{thrm}
+
+\newpage
+
+\begin{example}{}{}
+    \[
+        \sum\limits_{n = 1}^{\infty} \frac{\arctan n}{n^3}
+    \]
+\end{example}
+
+\begin{gather*}
+    0 < \sum\limits_{k = n + 1}^{n + p} \frac{\arctan n}{n^3} 
+        < \frac{\pi}{2} \sum\limits_{k = n + 1}^{n + p} \frac{1}{n^3}
+        < \frac{\pi}{2} \sum\limits_{k = n + 1}^{n + p} \frac{1}{n^2}
+        <
+    \\
+    < \frac{\pi}{2} \sum\limits_{k = n + 1}^{n + p} \frac{1}{(k - 1)k}
+        = \frac{\pi}{2} \left( \frac{1}{n} - \frac{1}{n + p} \right)
+        < \frac{\pi}{2} \cdot \frac{1}{n}
+\end{gather*}
+
+\( N_{\varepsilon} = \left[ \frac{\pi}{2 \varepsilon} \right] \)
+
+\begin{example}{}{}
+    \[
+        \sum\limits_{n = 1}^{\infty} \frac{1}{\sqrt{n}}
+    \]
+\end{example}
+
+\[
+    \exists \varepsilon > 0 : \forall N \in \NN : \exists n > N, p \in \NN 
+    \left| \sum\limits_{k = n + 1}^{n + p} a_k \right| \geq \varepsilon
+\]
+
+Пусть \( n = N + 1, p = 2n \)
+
+\[
+    \sum\limits_{k = n + 1}^{2n} \frac{1}{\sqrt{k}} < n \cdot \frac{1}{\sqrt{2n}} = \frac{\sqrt{n}}{\sqrt{2}}
+\]
+
+
+\begin{prop}{}{}    
+    \( \sum\limits_{n = 1}^{\infty} a_n \) сходится \( \Rightarrow \lim\limits_{n \to \infty} a_n = 0 \)
+\end{prop}
+
+Пусть \( S_0 = 0 \)
+
+Тогда \( \lim\limits_{n \to \infty} a_n = \lim\limits_{n \to \infty} ( S_n - S_{n - 1} ) = S - S = 0 \)
+
+\newpage
+
+\begin{example}{}{}
+    \[
+        \sum\limits_{n = 1}^{\infty} \left( \frac{n + 5}{n + 10} \right)^n
+    \]
+\end{example}
+
+\begin{gather*}
+    \lim\limits_{n \to \infty} \left( \frac{n + 10}{n + 10} - \frac{5}{n + 10} \right)^n
+    =
+    \lim\limits_{n \to \infty} \left( 1 + \frac{1}{-\frac{n + 10}{5}} \right)^{ \left( \frac{n + 10}{5} \right) (-5) - 10}
+    =
+    \\
+    =
+    \lim\limits_{n \to \infty} \left( 1 + \frac{1}{-\frac{n + 10}{5}} \right)^{ \left( \frac{n + 10}{5} \right) (-5) }
+    \cdot
+    \left( 1 + \frac{1}{-\frac{n + 10}{5}} \right)^{-10}
+    =
+    \frac{1}{e^5}
+    \\
+    \Downarrow
+    \\
+    \lim\limits_{n \to \infty} a_n = \frac{1}{e^5}
+\end{gather*}
+
+Значит ряд расходится.
+
+\begin{thrm}{Критерий сходимости ряда \\ с неотрицательными слагаемыми}{}
+    Ряд сходится \( \Leftrightarrow S_n = \sum\limits_{k = 1}^n a_k \) --- огр
+\end{thrm}
+
+Доказательство тривиально (по теореме Вейерштрасса).
+
+\begin{prop}{Признак сравнения}{}
+    Пусть \( \exists n_0 \in \NN : \forall n > n_0 \ 0 \leq a_n \leq b_n \), 
+    где \( a_n \) --- элементы ряда \( \sum\limits_{n = 1}^{\infty} a_n \),
+    а \( b_n \) --- элементы ряда \( \sum\limits_{n = 1}^{\infty} b_n \).
+
+    Тогда если \( \sum\limits_{n = 1}^{\infty} b_n \) сходится, то и \( \sum\limits_{n = 1}^{\infty} a_n \) сходится.
+
+    если же \( \sum\limits_{n = 1}^{\infty} a_n \) расходится, то и \( \sum\limits_{n = 1}^{\infty} b_n \) расходится.
+\end{prop}
+
+Доказательство:
+
+\( \sum\limits_{n = 1}^{\infty} b_n\) сходится \( \Rightarrow S_n^{(b)} \) ограничено 
+\( \Rightarrow S_n^{(a)} \) ограничено \( \Rightarrow \sum\limits_{n = 1}^{\infty} a_n \) сходится.
+
+В другую сторону аналогично.
+
+\begin{example}{}{}
+    \[
+        \sum\limits_{n = 1}^{\infty} \frac{1}{n^{\varepsilon}}, \varepsilon < \frac{1}{2} 
+    \]
+\end{example}
+
+\begin{example}{}{}
+    \[
+        \sum\limits_{n = 1}^{\infty} \frac{1}{n^2}
+    \]
+\end{example}
+
+При \( n > 1 \):
+\[
+    \frac{1}{n^2} < \frac{1}{(n - 1)n}
+\]
+
+Ряд
+\( 
+    \sum\limits_{n = 1}^{\infty} \frac{1}{(n - 1)n} = \sum\limits_{n = 1}^{\infty} \left( \frac{1}{n - 1} - \frac{1}{n} \right) 
+\)
+сходится, значит сходится и наш.
+
+\begin{prop}{Признак разрежения Коши}{}
+    Пусть дан ряд \( \sum\limits_{n = 1}^{\infty} a_n \) и \( \{ a_n \} \) не возрастает.
+
+    Тогда 
+    \( 
+        \sum\limits_{n = 1}^{\infty} a_n \) сходится тогда и только тогда, когда сходится \( \sum\limits_{k = 1}^{\infty} 2^k a_{2^k} 
+    \)
+\end{prop}
+
+Доказательство:
+\begin{gather*}
+    2 a_4 + 4 a_8 + 8 a_{16} + \ldots \leq a_1 + a_2 + a_3 + \ldots + a_{2^n}
+    \\
+    a_1 + a_2 + a_3 + \ldots + a_{2^n} \leq a_1 + 2 a_2 + 4 a_4 + 8 a_8 + \ldots + 2^{n - 1} a_{2^{n - 1}}
+\end{gather*}
+
+Отсюда нетрудно доказать, что \( \sum\limits_{k = 1}^{\infty} 2^k a_{2^k} \) сходится
+\( \Rightarrow \sum\limits_{n = 1}^{\infty} a_n \) сходится.
+Аналогично \( \sum\limits_{k = 1}^{\infty} 2^k a_k \) расходится
+\( \Rightarrow \sum\limits_{n = 1}^{\infty} a_n \) расходится.
+
+\begin{example}{}{}
+    \[
+        \sum\limits_{n = 2}^{\infty} \frac{1}{n \ln n}
+    \]
+\end{example}
+
+\begin{thrm}{Признак сравнения в предельной форме}{}
+    Пусть
+    \begin{gather*}
+        \exists n_0 : \forall n > n_0 \ a_n \geq 0, b_n > 0
+        \\
+        \lim\limits_{n \to \infty} \frac{a_n}{b_n} = A \in (0, +\infty)
+    \end{gather*}
+
+    Тогда либо \( \sum\limits_{n = 1}^{\infty} a_n, \ \sum\limits_{n = 1}^{\infty} b_n \) оба сходятся,
+    либо оба расходятся.
+\end{thrm}
+
+Доказательство:
+
+Не умаляя общности условия выполняются с \( n = 1 \).
+\begin{gather*}
+    \varepsilon = \frac{A}{2} \Rightarrow \exists N \in \NN : \forall n > N
+    \\
+    \left| \frac{a_n}{b_n} - A \right| < \frac{A}{2} \Leftrightarrow \frac{A}{2} b_n < a_n < \frac{3A}{2} b_n
+    \\
+    \sum\limits_{n = 1}^{\infty} b_n \ \text{сх.} \Rightarrow \sum\limits_{n = 1}^{\infty} \frac{3A}{2} b_n \ \text{сх.}
+        \Rightarrow \sum\limits_{n = 1}^{\infty} a_n \text{сх. по признаку сравнения}
+    \\ 
+    \sum\limits_{n = 1}^{\infty} b_n \ \text{расх.} \Rightarrow \sum\limits_{n = 1}^{\infty} \frac{A}{2} b_n \ \text{расх.}
+        \Rightarrow \sum\limits_{n = 1}^{\infty} a_n \text{расх. по признаку сравнения}
+\end{gather*}
+
+\subsection{Абсолютная и условная сходимость ряда}
+
+\begin{defn}{Абсолютная сходимость}{}
+    \( \sum\limits_{n = 1}^{\infty} a_n \) называется абсолютной сходящейся, 
+    если сходится \( \sum\limits_{n = 1}^{\infty} |a_n| \)
+\end{defn}
+
+\begin{defn}{Условная сходимость}{}
+    \( \sum\limits_{n = 1}^{\infty} a_n \) называется условно сходящимся,
+    если он сходится, но расходится \( \sum\limits_{n = 1}^{\infty} |a_n| \)
+\end{defn}
+
+\begin{thrm}{Мажорантный признак Вейерштрасса}{}
+    Пусть \( \forall n > N \ |a_n| \leq b_n \)
+
+    \( \sum\limits_{n = 1}^{\infty} b_n \) сходится \( \Rightarrow \sum\limits_{n = 1}^{\infty} a_n \) сходится.
+\end{thrm}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( \displaystyle \sum\limits_{n = 1}^{\infty} \frac{\sin nx}{n \sqrt{n}} \)
+        \item
+            \( \displaystyle \sum\limits_{n = 1}^{\infty} \frac{x^n}{n^2} \)
+    \end{enumerate}
+\end{example}
+
+\begin{enumerate}
+    \item
+        Оценим модуль сверху \( \frac{1}{n \sqrt{n}} \)
+    \item
+        \begin{itemize}
+            \item 
+                \( \displaystyle |x| \leq 1 \Rightarrow \frac{x^n}{n^2} \leq \frac{1}{n^2} \)
+            \item
+                \( \displaystyle |x| > 1 \Rightarrow \lim\limits_{n \to \infty} \frac{x^n}{n^2} = \infty \)
+        \end{itemize}
+\end{enumerate}
+
+\begin{thrm}{Признак Д'аламбера}{}
+    Пусть \( \lim\limits_{n \to \infty} \left| \frac{a_{n + 1}}{a_n} \right| = q \).
+
+    Тогда
+    \begin{enumerate}
+        \item
+            \( q < 1 \Rightarrow \sum\limits_{n = 1}^{\infty} a_n \) сходится
+        \item
+            \( q > 1 \Rightarrow \sum\limits_{n = 1}^{\infty} a_n \) расходится
+        \item
+            \( q = 1 \Rightarrow \) может быть что угодно
+    \end{enumerate}
+\end{thrm}
+
+\begin{enumerate}
+    \item
+        \( q < 1 \)
+
+        \begin{gather*}
+            \exists \alpha < 1 : q < \alpha
+            \\
+            \exists N : \forall n > N \ \left| \frac{a_{n + 1}}{a_n} \right| < \alpha
+            \\
+            |a_n| 
+                = |a_1| \cdot \left| \frac{a_2}{a_1} \right| \cdot \ldots \cdot \left| \frac{a_n}{a_{n - 1}} \right| 
+                < |a_1| \alpha^{n - 1}
+            \\
+            0 < \alpha < 1 \Rightarrow \sum\limits_{n = 1}^{\infty} \alpha^{n - 1} \ \text{сх.}
+                \Rightarrow \sum\limits_{n = 1}^{\infty} a_n \ \text{сх.}
+        \end{gather*}
+    \item
+        \( q > 1 \)
+
+        \( \exists N : \forall n > N \ |a_{n + 1}| > |a_n| \Rightarrow \lim\limits_{n \to \infty} a_n \neq 0 \)
+    \item
+        Пристально смотрим на
+        \begin{itemize}
+            \item
+                \( \sum\limits_{n = 1}^{\infty} \frac{1}{n} \)
+            \item
+                \( \sum\limits_{n = 1}^{\infty} \frac{1}{n^2} \)
+        \end{itemize}
+\end{enumerate}
+
+
+\begin{example}{}{}
+    \[
+        \sum\limits_{n = 0}^{\infty} \frac{x^n}{n!} \ x \neq 0
+    \]
+    
+    (на самом деле это экспонента)
+\end{example}
+
+\begin{thrm}{Радикальный признак Коши}{}
+    Пусть дан \( \sum\limits_{n = 1}^{\infty} a_n \), пусть \( \overline{\lim\limits_{n \to \infty}} \sqrt[n]{|a_n|} = q \)
+
+    Тогда
+    \begin{enumerate}
+        \item
+            \( q < 1 \Rightarrow \) сходится
+        \item
+            \( q > 1 \Rightarrow \) расходится
+        \item
+            \( q = 1 \Rightarrow \) что угодно
+    \end{enumerate}
+\end{thrm}
+
+\begin{enumerate}
+    \item
+        \( q < 1 \)
+
+        \begin{gather*}
+            \exists \alpha : q < \alpha < 1
+            \\
+            \exists N : \forall n > N \ |a_n| < \alpha^n
+        \end{gather*}
+    \item
+        \( q > 1 \)
+
+        \( \overline{\lim\limits_{n \to \infty}} \sqrt[n]{|a_n|} > 1 \Rightarrow \exists \)
+        бесконечно много \( a_n : |a_n| > 1 \)
+    \item
+        Вновь пристально смотрим на
+        \begin{itemize}
+            \item
+                \( \sum\limits_{n = 1}^{\infty} \frac{1}{n} \)
+            \item
+                \( \sum\limits_{n = 1}^{\infty} \frac{1}{n^2} \)
+        \end{itemize}
+\end{enumerate}
+
+\begin{example}{}{}
+    \[
+        a_n > 0, \ \lim\limits_{n \to \infty} a_n = a \Rightarrow \lim\limits_{n \to \infty} \sqrt[n]{a_1 a_2 \ldots a_n} = a
+    \]
+
+    \begin{gather*}
+        \lim\limits_{n \to \infty} \frac{a_{n + 1}}{a_n} = a
+        \Downarrow
+        \lim\limits_{n \to \infty} \sqrt[n]{a_1 \cdot \frac{a_2}{a_1} \cdot \ldots \cdot \frac{a_n}{a_{n - 1}}}
+            = \lim\limits_{n \to \infty} \sqrt[n]{a_n} = a
+    \end{gather*}
+\end{example}
+
+Значит из применимости Д'аламбера следует применимость Коши
+
+\begin{example}{}{}
+    Пусть \( \tau(n) \) --- количество делителей
+
+    Исследовать на сходимость \( \sum\limits_{n = 1}^{\infty} \tau(n) x^n \ x > 0 \)
+\end{example}
+
+Понятно, что по Д'аламберу проверить нереально. 
+
+Проверим по Коши:
+\[
+    x \leq \sqrt[n]{\tau(n)} x \leq \sqrt[n]{n} x
+\]
+
+Штука посередине сходится к \( x \).
+
+Значит если \( x < 1 \), ряд сходится, если \( x > 1 \), то расходится, а в случае \( x = 1 \) очевидно не сходится.
+
+\begin{thrm}{Признак Гаусса}{}
+    Пусть дан ряд \( \sum\limits_{n = 1}^{\infty} a_n \) и \( a_n \geq 0 \ \forall n \in \NN \)
+
+    Пусть
+    \[
+        \exists \delta > 0 : \frac{a_n}{a_{n + 1}} = \alpha + \frac{\beta}{n} + \gamma_n \cdot \frac{1}{n^{1 + \delta}}
+    \]
+
+    причем \( \gamma_n \) --- ограниченная последовательность.
+
+    \begin{enumerate}
+        \item
+            \( \alpha < 1 \Rightarrow \) расходится
+        \item
+            \( \alpha > 1 \Rightarrow \) сходится
+        \item
+            \( \alpha = 1 \)
+
+            \begin{enumerate}
+                \item
+                    \( \beta > 1 \Rightarrow \) сходится
+                \item
+                    \( \beta \leq 1 \Rightarrow \) расходится
+            \end{enumerate}
+    \end{enumerate}
+\end{thrm}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \begin{gather*}
+                \sum\limits_{n = 1}^{\infty} \frac{1}{n}
+                \\
+                \frac{\frac{1}{n}}{\frac{1}{n + 1}} = 1 + \frac{1}{n} + 0
+                \\
+                \alpha = 1, \ \beta = 1 \Rightarrow \ \text{расходится}
+            \end{gather*}
+        \item
+            \begin{gather*}
+                \sum\limits_{n = 1}^{\infty} \frac{1}{n}
+                \\
+                \frac{\frac{1}{n}}{\frac{1}{n + 1}} = 1 + \frac{2}{n} + \frac{1}{n^2}
+                \\
+                \alpha = 1, \ \beta = 2 \Rightarrow \ \text{сходится}
+            \end{gather*}
+    \end{itemize}
+\end{example}
+
+\begin{exercise}{}{}
+    \( \sigma : \NN \to \NN \) --- перестановка
+
+    \begin{enumerate}{}{}
+        \item
+            Теорема Дирихле
+
+            Пусть \( \sum\limits_{n = 1}^{\infty} a_n \) сходится абсолютно.
+            Тогда для любой \( \sigma \) \( \sum\limits_{n = 1}^{\infty} a_{\sigma(n)} \) 
+            сходится абсолютно к тому же пределу
+        \item
+            Теорема Римана
+
+            Пусть \( \sum\limits_{n = 1}^{\infty} a_n \) сходится условно.
+            Тогда \( \forall A \in \RR \ \exists sigma : \sum\limits_{n = 1}^{\infty} a_{\sigma(n)} = A \).
+            \( A \) может быть равно \( \pm \infty, \infty \).
+            Так же можно переставить так, чтобы конечно суммы не было.
+    \end{enumerate}
+\end{exercise}

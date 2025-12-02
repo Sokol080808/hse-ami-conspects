@@ -1,0 +1,584 @@
+\section{Векторные пространства}
+
+\subsection{Определение}
+
+\( F \) --- поле.
+
+\begin{itemize}
+    \item
+        Структура:
+
+        \begin{enumerate}
+            \item
+                \( V \) --- множество
+            \item
+                \( + : V \times V \to V \)
+            \item
+                \( \cdot : F \times V \to V \)
+        \end{enumerate}
+    \item
+        Аксиомы:
+
+        \begin{enumerate}[start = 4]
+            \item
+                \( (v + u) + w = v + (u + w) \)
+            \item
+                \( \exists ! 0 \in V : v + 0 = 0 + v = v \)
+            \item
+                \( \forall v \in V \ \exists ! -v : v + (-v) = (-v) + v = 0 \)
+            \item
+                \( v + u = u + v \)
+            \item
+                \( \lambda \cdot (v + u) = \lambda \cdot v + \lambda \cdot u \)
+            \item
+                \( (\lambda + \mu) \cdot v = \lambda \cdot v + \mu \cdot v \)
+            \item
+                \( (\lambda \cdot \mu) \cdot v = \lambda \cdot (\mu \cdot v) \)
+            \item
+                \( 1 \cdot v = v \)
+        \end{enumerate}
+\end{itemize}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( \RR^n \) (на самом деле \( F^n \))
+        \item
+            \( M_{mn} (F) \)
+        \item
+            \( F[x] \)
+        \item
+            \( \{ f : \RR \to \RR \} \)
+    \end{itemize}
+\end{example}
+
+\begin{remark}{}{}
+    \begin{enumerate}
+        \item
+            \( 0 \in F, v \in V \Rightarrow 0 \cdot v = 0 \in V \)
+        \item
+            \( \alpha \in F, 0 \in V \Rightarrow \alpha \cdot 0 = 0 \in V \)
+        \item
+            \( -1 \in F, v \in V \Rightarrow (-1) \cdot v = -v \)
+    \end{enumerate}
+\end{remark}
+
+\subsection{Подпространство}
+
+\( V \) --- векторное пространство над \( F \)
+
+Если выполнено:
+\begin{itemize}
+    \item
+        \( U \subseteq V \)
+    \item
+        \( \forall u_1, u_2 \in U \ u_1 + u_2 \in U \)
+    \item
+        \(
+            \begin{cases}
+                \lambda \in F
+                \\
+                u \in U
+            \end{cases}
+            \Rightarrow
+            \lambda \cdot u \in U
+        \)
+\end{itemize}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( V = F^n \) и \( A \in M_mn(F) \)
+
+            \( U = \{ y \in F^n \ \vline \ Ay = 0 \} \)
+        \item
+            \( U = 0 \)
+
+            \( U = V \)
+
+            (тривиальные подпространства)
+        \item
+            \( V = \{ f : \RR \to \RR \} \)
+
+            \( U = R[x] \)
+    \end{enumerate}
+\end{example}
+
+\subsection{Линейные комбинации}
+
+\( \alpha_1 v_1 + \ldots + \alpha_k v_k \in V \) --- линейная комбинация.
+
+Если \( \alpha_1 = \ldots = \alpha_k \), комбинация называется тривиальной.
+
+\begin{defn}{}{}
+    \( v_1, v_2, \ldots, v_k \in V \)
+    \begin{enumerate}
+        \item
+            Если
+            \(
+                \exists (\alpha_1, \ldots, \alpha_k) \neq 0 : \alpha_1 v_1 + \ldots + \alpha_k v_k = 0
+            \),
+            то вектора называют линейно зависимыми.
+        \item
+            Вектора называют линейно независимыми (ЛНЗ), если
+            \(
+                (\alpha_1 v_1 + \ldots + \alpha_k v_k = 0 \Rightarrow \alpha_1 = \ldots = \alpha_k = 0
+            \)
+    \end{enumerate}
+\end{defn}
+
+\newpage
+
+\begin{defn}{}{}
+    \( E \subseteq V \)
+    \begin{enumerate}
+        \item
+            \( E \) --- линейно зависимо, если существует конечный набор линейно зависимых векторов из \( E \).
+        \item
+            \( E \) --- ЛНЗ, если любой конечный набор векторов из \( E \) --- ЛНЗ.
+    \end{enumerate}
+\end{defn}
+
+\begin{example}{}{}
+    \( V = \RR[x] \)
+
+    \( E = \{ 1, x, x^2, \ldots, x^n, \ldots \} \) --- ЛНЗ
+\end{example}
+
+\begin{defn}{}{}
+    \begin{itemize}
+        \item
+            \( v_1, \ldots, v_k \in V \) порождают \( V \), если
+            \( \forall v \in V \ \exists \alpha_1, \ldots, \alpha_k : v = \alpha_1 v_1 + \ldots + \alpha_k v_k \)
+        \item
+            \( E \subseteq V \) --- порождающее, если
+            \(
+                \forall v \in V \ \exists v_1, \ldots, v_k \in E :
+                \exists \alpha_1, \ldots, \alpha_k : v = \alpha_1 v_1 + \ldots + \alpha_k v_k
+            \)
+    \end{itemize}
+\end{defn}
+
+\begin{defn}{}{}
+    \begin{itemize}
+        \item
+            \( v_1, v_2, \ldots, v_k \in V \)
+
+            Линейная оболочка \( < v_1, \ldots, v_k > \)
+        \item
+            \( E \subseteq V \)
+
+            Линейная оболочка
+            \(
+                <E> = \{ \alpha_1 v_1 + \ldots + \alpha_k v_k
+                \ \vline \
+                \forall v_1, \ldots, v_k \in E, \ \alpha_1, \ldots, \alpha_k \in F
+            \)
+    \end{itemize}
+\end{defn}
+
+\begin{remark}{}{}
+    Линейная оболочка является векторным подпространством
+\end{remark}
+
+\begin{thrm}{}{}
+    \( V \) --- векторное пространство над \( F \)
+
+    \( E \subseteq V \)
+
+    Тогда эквивалентны следующие утверждения:
+    \begin{enumerate}
+        \item
+            \( E \) --- максимальное ЛНЗ (нельзя добавить еще вектор с сохранением ЛНЗ).
+        \item
+            \( E \) --- минимальное порождающее (нельзя убрать вектора).
+        \item
+            \( E \) --- ЛНЗ и порождающее.
+    \end{enumerate}
+\end{thrm}
+
+\begin{defn}{Базис}{}
+    Если \( E \) удовлетворяет свойствам выше, его называют базисом \( V \).
+\end{defn}
+
+\begin{itemize}
+    \item
+        \( (1) \Rightarrow (3) \)
+
+        Рассмотрим \( v \in V \)
+        \begin{enumerate}
+            \item
+                \( v \in E \Rightarrow \) можем получить \( v \) линейной комбинацией из \( E \)
+            \item
+                \( v \notin E \Rightarrow E \cup \{ v \} \) --- линейно зависимо.
+                Тогда существует конечная линейная комбинация векторов из \( E \),
+                равная \( 0 \), где участвует \( v \):
+                \[
+                    \alpha_1 v_1 + \ldots + \alpha_k v_k + \alpha v = 0
+                \]
+
+                Если \( \alpha = 0 \), то \( E \) было линейно зависимым --- противоречие.
+
+                Значит \( \displaystyle v = \frac{\alpha_1 v_1 + \ldots + \alpha_k v_k}{-\alpha} \).
+        \end{enumerate}
+
+        Значит \( E \) --- порождающее, что и требовалось доказать.
+    \item
+        \( (3) \Rightarrow (1) \)
+
+        \( V \) --- порождающее \( \Rightarrow \) существует конечная линейная комбинация,
+        равная \( v \in V \).
+        Поэтому \( E \cup \{ v \} \) --- линейно зависимое.
+    \item
+        \( (2) \Rightarrow (3) \)
+
+        Пусть \( E \) --- линейно зависимое.
+        Тогда \( \exists v_1, \ldots, v_k \in E, \ (\alpha_1, \ldots, \alpha_k) \neq 0 \).
+
+        Не умаляя общности, \( \alpha_1 \neq 0 \).
+        Тогда \( \displaystyle v_1 = \frac{\alpha_2 v_2 + \ldots + \alpha_k v_k}{-\alpha_1} \)
+
+        Давайте заменим \( v_1 \) во всех комбинациях на линейную комбинацию выше.
+        Тогда \( E \setminus \{ v_1 \} \) --- тоже порождающее --- противоречие.
+
+        Значит \( E \) --- ЛНЗ, что и требовалось доказать.
+    \item
+        \( (3) \Rightarrow (2) \)
+
+        Пусть \( E \) --- не минимальное порождающее.
+
+        Значит \( \exists v \in V : E \setminus \{ v \} \) --- тоже порождающее.
+
+        Тогда \( v \) можно представить линейной комбинацией из \( E \setminus \{ v \} \).
+
+        Но тогда \( E = (E \setminus \{ v \}) \cup \{ v \} \) --- линейно зависимо --- противоречие.
+\end{itemize}
+
+\begin{remark}{}{}
+    Как быстро записывать линейные комбинации:
+    \begin{gather*}
+        v = \begin{pmatrix}
+            v_1, \ldots, v_k
+        \end{pmatrix}
+        \quad
+        \alpha = \begin{pmatrix}
+            \alpha_1
+            \\
+            \vdots
+            \\
+            \alpha_k
+        \end{pmatrix}
+        \\
+        \alpha_1 v_1 + \ldots \alpha_k v_k = v \cdot \alpha
+    \end{gather*}
+\end{remark}
+
+\subsection{Базис}
+
+\( V \) --- векторное пространство.
+
+Вопросы:
+\begin{enumerate}
+    \item
+        Существует ли базис?
+    \item
+        Существует ли конечный базис?
+    \item
+        \( e \) и \( f \) --- базисы.
+
+        Правда ли, что \( |e| = |f| \)?
+\end{enumerate}
+
+Ответы:
+\begin{enumerate}
+    \item
+        Если вы верите в аксиому выбора, то можно показать существование базиса в любом векторном пространстве.
+        Если же нет, то в некоторых пространствах нельзя ни доказать, ни опровергнуть существование базиса:
+        \[
+            V = \{ f : \RR \to \RR \}
+        \]
+    \item
+        Если \( V \) имеет конечный базис, то и \( U \subseteq V \) тоже имеет конечный базис.
+    \item
+        Это правда, но докажем только для конечных базисов.
+\end{enumerate}
+
+Доказательство последнего:
+\begin{enumerate}
+    \item
+        Пусть \( v_1, \ldots, v_k \) --- порождающее \( V \).
+        Тогда \( u_1, \ldots, u_{k + 1} \in V \) --- линейно зависимые.
+    \item
+        Пусть \( e_1, \ldots, e_n \) --- базис.
+
+        Тогда \( E \subseteq V \) базис \( \Rightarrow |E| < \infty, \ |E| = n \)
+\end{enumerate}
+
+\begin{gather*}
+    u_i
+    =
+    \begin{pmatrix}
+        v_1, \ldots, v_k
+    \end{pmatrix}
+    \cdot
+    \begin{pmatrix}
+        \alpha_1,
+        \\
+        \vdots
+        \\
+        \alpha_k
+    \end{pmatrix}
+    \\
+    \\
+    \begin{pmatrix}
+        u_1, \ldots, u_{k + 1}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        v_1, \ldots, v_k
+    \end{pmatrix}
+    \begin{pmatrix}
+        \alpha_{1 \: 1} & \ldots & \alpha_{1 \: {k + 1}}
+        \\
+        \vdots & & \vdots
+        \\
+        \alpha_{k \: 1} & \ldots& \alpha_{k \: {k + 1}}
+    \end{pmatrix}
+\end{gather*}
+
+Назовем матрицу \( A \). Давайте найдем ненулевое решение \( Ax = 0\)
+(такое есть, потому \( A \) --- широкая).
+
+Умножим последнее равенство на \( x \) справа.
+Тогда справа получится \( 0 \),
+а слева \( ux \).
+
+Но это значит, что \( u \) --- линейно зависимое.
+
+Теперь пусть у нас есть базисы \( e \) и \( f \), причем \( e \) конечный.
+По предыдущему утверждению \( |f| \leq |e| \), то есть \( f \) тоже конечный.
+Но тогда аналогично \( |e| \leq |f| \). Значит \( |e| = |f| \).
+
+\begin{defn}{}{}
+    \( V \) --- векторное пространство над \( F \).
+
+    \( \dim V = |E| \), где \( E \) --- базис.
+\end{defn}
+
+
+\begin{lemma}{}{}
+    \( V \) --- векторное пространство над \( F \), причем \( \dim V < \infty \).
+
+    \( U \subseteq V \) --- подпространство.
+
+    Тогда
+    \begin{enumerate}
+        \item
+            \( \dim U < \dim V \)
+        \item
+            \( U = V \Leftrightarrow \dim U = \dim V \)
+    \end{enumerate}
+\end{lemma}
+
+Рассмотрим \( E \) --- базис \( U \).
+\( E \) --- ЛНЗ в \( V \) \( \Rightarrow \) \( |E| \leq \dim V \).
+Но \( \dim U = |E| \).
+
+Докажем вторую часть утверждения.
+
+Слева направо очевидно.
+
+Пусть \( \dim U = \dim V = n \).
+Теперь рассмотрим \( e_1, \ldots, e_n \) --- базис \( U \).
+Тогда \( U = < e_1, \ldots, e_n > \).
+Но с другой стороны \( E \) --- максимальное ЛНЗ в \( V \), поэтому \( E \) является и базисом \( V \).
+Но тогда \( V = < e_1, \ldots, e_n > = U \).
+
+\newpage
+
+\subsection{Координаты}
+
+\( V \) --- векторное пространство над \( F \).
+
+\( e_1, \ldots, e_n \) --- базис (фиксированный)
+
+Пусть \( v \in V \)
+
+\( v = x_1 e_1 + \ldots + x_n e_n \), тогда \( x_1, \ldots, x_n \) определяются однозначно.
+
+Иначе
+\(
+    y_1 e_1 + \ldots + y_n e_n = v = x_1 e_1 + \ldots + x_n v_n \Rightarrow (x_1 - y_1) v_1 + \ldots (x_n - y_n) v_n = 0
+\)
+
+откуда по линейной независимости базиса получаем, что \( x_i = y_i \).
+
+Тогда \( x_1, \ldots, x_n \) --- координаты \( v \) в базисе \( e_1, \ldots, e_n \).
+
+Теперь можно заменить \( V \) на \( F^n \)
+
+Пусть есть базисы \( e_1, \ldots, e_n \) и \( f_1, \ldots, f_n \)
+
+\( (e_1, \ldots, e_n) x = v = (f_1, \ldots, f_n) y \), \( x, y \in F^n \).
+
+Для того, чтобы понять, как меняются координаты, нужно понять как связаны два базиса.
+В этом поможет матрица перехода:
+\[
+    f_1
+    =
+    \begin{pmatrix}
+        e_1, \ldots, e_n
+    \end{pmatrix}
+    \begin{pmatrix}
+        c_{1 \: 1}
+        \\
+        \vdots
+        \\
+        c_{n \: 1}
+    \end{pmatrix}
+    \quad \ldots \quad
+    f_n
+    =
+    \begin{pmatrix}
+        e_1, \ldots, e_n
+    \end{pmatrix}
+    \begin{pmatrix}
+        c_{1 \: n}
+        \\
+        \vdots
+        \\
+        c_{n \: n}
+    \end{pmatrix}
+\]
+
+Теперь объединим это все в одну матрицу:
+\begin{gather*}
+    \begin{pmatrix}
+        f_1, \ldots, f_n
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        e_1, \ldots, e_n
+    \end{pmatrix}
+    \begin{pmatrix}
+        c_{1 \: 1} & \ldots & c_{1 \: n}
+        \\
+        \vdots & & \vdots
+        \\
+        c_{n \: 1} & \ldots & c_{n \: n}
+    \end{pmatrix}
+    \\
+    \\
+    \begin{pmatrix}
+        f_1, \ldots, f_n
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        e_1, \ldots, e_n
+    \end{pmatrix}
+    C
+\end{gather*}
+
+Покажем, что \( C \) --- невырожденная.
+
+Аналогично можем получить
+\(
+    \begin{pmatrix}
+        e_1, \ldots, e_n
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        f_1, \ldots, f_n
+    \end{pmatrix}
+    D
+\)
+
+Значит
+\(
+    \begin{pmatrix}
+        e_1, \ldots, e_n
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        e_1, \ldots, e_n
+    \end{pmatrix}
+    CD
+    \Rightarrow
+    \begin{pmatrix}
+        e_1, \ldots, e_n
+    \end{pmatrix}
+    (E - CD)
+    = 0
+\)
+
+В силу линейной независимости \( e_1, \ldots, e_n \),
+каждый столбец \( E - CD \) является нулевым.
+Значит \( C \) имеет обратную справа, а значит является обратимой.
+
+Отсюда можно получить, что при умножении базиса на обратимую матрицу получается другой базис.
+
+Пусть
+\(
+    \begin{pmatrix}
+        e_1, \ldots, e_n
+    \end{pmatrix}
+    C
+    =
+    \begin{pmatrix}
+        f_1, \ldots, f_n
+    \end{pmatrix}
+\)
+
+Покажем, что \( f_1, \ldots, f_n \) --- ЛНЗ.
+
+Пусть
+\(
+    \begin{pmatrix}
+        f_1, \ldots, f_n
+    \end{pmatrix}
+    x
+    =
+    0
+    \Rightarrow
+    \begin{pmatrix}
+        e_1, \ldots, e_n
+    \end{pmatrix}
+    Cx
+    =
+    0
+\)
+
+По аналогичным рассуждениям (как с \( E - CD \)), \( Cx = 0 \).
+Но \( C \) --- обратимая, значит \( x = 0 \).
+
+Теперь наконец-то научимся менять координаты:
+\begin{gather*}
+    \begin{pmatrix}
+        e_1, \ldots, e_n
+    \end{pmatrix}
+    C
+    =
+    \begin{pmatrix}
+        f_1, \ldots, f_n
+    \end{pmatrix}
+    \\
+    \\
+    \begin{pmatrix}
+        e_1, \ldots, e_n
+    \end{pmatrix}
+    x
+    =
+    v
+    =
+    \begin{pmatrix}
+        f_1, \ldots, f_n
+    \end{pmatrix}
+    y
+    =
+    \begin{pmatrix}
+        e_1, \ldots, e_n
+    \end{pmatrix}
+    Cy
+\end{gather*}
+
+Поскольку координаты определяются однозначно, \( x = Cy \).

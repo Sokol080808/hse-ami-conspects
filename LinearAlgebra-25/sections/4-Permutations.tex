@@ -1,0 +1,270 @@
+\section{Перестановки}
+
+\subsection{Что это вообще такое}
+
+\begin{defn}{}{}
+    \begin{gather*}
+        \sigma : \{ 1, \ldots, n \} \xrightarrow{\sim} \{ 1, \ldots, n \}
+        \\
+        S_n = \{ \sigma - \text{перестановка на } \{ 1, \ldots, n \} \}
+    \end{gather*}
+\end{defn}
+
+\subsubsection{Способы задания}
+
+\begin{itemize}
+    \item
+        Явно задать отображения
+    \item
+        Нарисовать табличкой
+
+        \(
+            \begin{pmatrix}
+                1 & 2 & 3 \\
+                3 & 1 & 2
+            \end{pmatrix}
+        \)
+    \item
+        Нарисовать стрелки между точками на плоскости
+\end{itemize}
+
+\subsubsection{Операция}
+
+Перестановки можно перемножать.
+
+\begin{gather*}
+    \\
+\end{gather*}
+
+
+\subsubsection{Свойства}
+
+\begin{enumerate}
+    \item
+        Ассоциативность
+
+        \(
+        \begin{aligned}
+            & \sigma, \tau, p \in S_n
+            \\
+            & \sigma \circ ( \tau \circ p ) = ( \sigma \circ \tau ) \circ p
+        \end{aligned}
+        \)
+    \item
+        \( id : \{ 1, \ldots, n \} \xrightarrow{\sim} \{ 1, \ldots, n \} \)
+        \begin{gather*}
+            k \mapsto k
+            \\
+            \sigma \circ id = id \circ \sigma = \sigma
+        \end{gather*}
+    \item
+        \(
+            \sigma \circ \sigma^{-1} = id = \sigma^{-1} \circ \sigma
+        \)
+\end{enumerate}
+
+\subsubsection{Переименование}
+
+Переименуем \( i \mapsto \tau_i \)
+
+\( \sigma_{\text{нов}} = \tau \sigma \tau^{-1} \)
+
+\subsubsection{Циклы}
+
+\begin{defn}{Цикл}{}
+    \begin{gather*}
+        \{ 1, \ldots, n \} = \{ i_1, \ldots, i_k \} \sqcup \{ j_1, \ldots, j_{n - k} \}, \ |i| \geq 2
+        \\
+        \sigma
+        =
+        \begin{pmatrix}
+            i_1 & i_2 & i_3 & \cdots & i_{k - 1} & i_k & j_1 & j_2 & \cdots j_{n - k} \\
+            i_2 & i_3 & i_4 & \cdots & i_k & i_1 & j_1 & j_2 & \cdots j_{n - k}
+        \end{pmatrix}
+    \end{gather*}
+\end{defn}
+
+Краткая запись: \( \sigma = ( i_1, i_2, \ldots, i_k ) = ( i_2, i_3, \ldots, i_k, i_1 ) \)
+
+\begin{defn}{Транспозиция}{}
+    \( \sigma = ( i, j ) \) --- транспозиция
+\end{defn}
+
+\begin{defn}{Независимые циклы}{}
+    Циклы \( \{ i_1, \ldots, i_k \}, \{ j_1, \ldots, j_l \} \) являются независимыми,
+    если \( \{ i_1, \ldots, i_k \} \cap \{ j_1, \ldots, j_l \} = \varnothing \)
+\end{defn}
+
+\begin{remark}{}{}
+    \( p_1, p_2 \) --- независимые циклы \( \Rightarrow p_1 p_2 = p_2 p_1 \)
+\end{remark}
+
+По сути композиция двух независимых циклов просто делает перестановку, 
+в которой у нас два ``цикла'', если рисовать стрелочками.
+
+\begin{lemma}{}{}
+    \begin{enumerate}
+        \item
+            \( \sigma = p_1 \cdot \ldots \cdot p_k \) --- независимые циклы,
+            причем разложение единственно с точностью до порядка
+        \item
+            \( p \) --- цикл \( p = \tau_1 \cdot \ldots \cdot \tau_{k - 1} \),
+            где \( \tau_i \) --- транспозиция.
+    \end{enumerate}
+\end{lemma}
+
+\subsection{Знак перестановки}
+
+Хотим чтобы было так:
+
+\(
+    \begin{cases}
+        \text{Ч \( \cdot \) Ч \( = \) Ч}
+        \\
+        \text{Ч \( \cdot \) Н \( = \) Н}
+        \\
+        \text{Н \( \cdot \) Ч \( = \) Н}
+        \\
+        \text{Н \( \cdot \) Н \( = \) Ч}
+    \end{cases}
+\)
+
+\(
+    \begin{aligned}
+        & \phi : S_n \to \{ \pm 1 \}
+        \\
+        & \begin{cases}
+            \phi ( \sigma \tau ) = \phi ( \sigma ) \phi ( \tau )
+            \\
+            \phi \not\equiv 1
+        \end{cases}
+    \end{aligned}
+\)
+
+\begin{thrm}{}{}
+    \(
+        \begin{aligned}
+            & \exists ! \phi : S_n \to \{ \pm 1 \} :
+            \\
+            & \begin{cases}
+                \phi ( \sigma \tau ) = \phi ( \sigma ) \phi ( \tau )
+                \\
+                \phi \not\equiv 1
+            \end{cases}
+        \end{aligned}
+    \)
+\end{thrm}
+
+Доказательство:
+
+Сначала покажем существование:
+
+\( d_{i j} ( \sigma ) \) --- правда ли, что \( (i, j) \) --- инверсия.
+
+Пусть \( d ( \sigma ) \) --- количество инверсий (\( i < j : \sigma(i) > \sigma(j) \)) \( \sigma \).
+
+Возьмем \( \phi = (-1)^(d(\sigma)) \)
+
+Нужно показать, что \( d(\sigma \tau) = d(\sigma) + d(\tau) \mod 2 \).
+
+Нетрудно убедиться, что \( d_{i j} ( \tau ) + d_{ \tau(i) \tau(j) } = d_{i j} ( \sigma \tau )\)
+
+\begin{thrm}{Единственность знака}{}
+    \( 
+        \begin{aligned}
+            & \phi : S_n \to \{ \pm 1 \}
+            \\
+            & \begin{cases}
+                \phi ( \sigma \tau ) = \phi ( \sigma ) \phi ( \tau )
+                \\
+                \phi \not\equiv 1
+            \end{cases}
+        \end{aligned}
+    \)
+    Тогда
+
+    \begin{enumerate}
+        \item
+            \( \phi(id) = 1 \)
+        \item
+            \( \phi(\sigma^{-1}) = \phi(\sigma)^{-1} = \phi(\sigma) \)
+        \item
+            \( \phi(\tau \sigma \tau^{-1}) = \phi(\sigma) \)
+        \item
+            \( \phi( (i, j) ) = -1, \forall i, j \)
+        \item
+            \( \phi ! \)
+    \end{enumerate}
+\end{thrm}
+
+\newpage
+
+Доказательство:
+\begin{enumerate}
+    \item \ \\
+        \(
+        \begin{aligned}
+            & id \circ id = id
+            \\
+            & \phi(id \circ id) = \phi(id)
+            \\
+            & \phi(id)^2 = \phi(id)
+            \\
+            & \phi(id) = 1
+        \end{aligned}
+        \)
+    \item \ \\
+        \(
+            \begin{aligned}
+                & \sigma \circ \sigma^{-1} = id
+                \\
+                & \phi(\sigma) \phi (\sigma^{-1}) = \phi(\sigma \sigma^{-1}) = \phi(id) = 1
+                \\
+                & \phi(\sigma^{-1}) = \phi(\sigma)^{-1} = \phi(\sigma)
+            \end{aligned}
+        \)
+    \item
+        \(
+            \phi (\tau \sigma \tau^{-1}) 
+            = 
+            \phi(\tau) \phi(\sigma) \phi(\tau^{-1})
+            = 
+            \phi(\tau) \phi(\sigma) \phi(\tau)^{-1}
+            =
+            \phi (\sigma)
+        \)
+    \item
+        \(
+            (i, j) = \tau (1, 2) \tau^{-1} = ( \tau(1), \tau(2) )
+        \)
+
+        Значит все транспозиции имеют один и тот же знак.
+
+        Перестановка раскладывается в произведение циклов, а цикл в произведение транспозиций.
+        Значит перестановка --- это произведение транспозиций. 
+        Если знак всех транспозиций равен \( 1 \), то знак всех перестановок равен \( 1 \) --- противоречие.
+        Значит знак всех перестановок равен \( -1 \).
+
+    \item
+        Пусть есть \( \phi, \phi' \).
+
+        \begin{gather*} 
+            \phi(\sigma) 
+            = 
+            \phi(\tau_1 \cdot \tau_2 \cdot \ldots \cdot \tau_k)
+            =
+            \phi(\tau_1) \phi(\tau_2) \ldots \phi(\tau_k)
+            =
+            \\
+            =
+            (-1)^k
+            =
+            \\
+            =
+            \phi'(\tau_1) \phi'(\tau_2) \ldots \phi'(\tau_k)
+            =
+            \phi'(\tau_1 \cdot \tau_2 \cdot \ldots \cdot \tau_k)
+            =
+            \phi'(\sigma)
+        \end{gather*}
+\end{enumerate}

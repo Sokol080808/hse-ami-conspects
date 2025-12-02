@@ -1,0 +1,1087 @@
+\section{Предел функции}
+
+\subsection{Определение}
+
+\begin{defn}{Предел функции по Коши}{}
+    Пусть \( f : E \to \RR \).
+
+    Пусть \( a \in E \). 
+    Тогда \( \lim\limits_{x (\in E) \to a} f(x) = A \)
+
+    \[
+        \Updownarrow
+    \]
+
+    \[
+        \forall \varepsilon > 0 \ \exists \delta > 0 : \forall x : x \in E \land 0 < |x - a| < \delta \ |f(x) - A| < \varepsilon
+    \]
+
+    Через окрестности:
+    \[
+        \forall V_{\varepsilon}(A) \ \exists \mathring{U_\delta} (a) : 
+        \forall x \in E \cap \mathring{U_\delta} (a) \ f(x) \in V_{\varepsilon} (A)
+    \]
+\end{defn}
+
+\begin{defn}{Предел функции по Гейне}{}
+    \[
+        \lim\limits_{x (\in E) \to a} f(x) = A
+        \Leftrightarrow
+        \forall \{ a_n \} \in E : ( \ \lim\limits_{n \to \infty} a_n = a \land a_n \neq a \ \forall n \in \NN ) 
+        \ \lim\limits_{n \to \infty} f(a_n) = A
+    \]
+\end{defn}
+
+\begin{example}{}{}
+    \( \lim\limits_{x \to a} x^2 = a^2 \)
+\end{example}
+\begin{gather*}
+    \forall \varepsilon > 0 \ \exists \delta > 0 : \forall x : 0 < |x - a| < \delta |x - a| < \varepsilon
+    \\
+    |x^2 - a^2| = |x - a||x + a| < \delta |x - a + 2a| < \delta(\delta + 2|a|) < \varepsilon
+\end{gather*}
+
+Последнее неравенство очевидно имеет положительные корни.
+\begin{example}{Функция Дирихле}{}
+    \[
+        D(x) 
+        =
+        \begin{cases}
+            1, x \in \QQ
+            \\
+            0, x \in \II
+        \end{cases}
+    \]
+\end{example}
+
+Не имеет предела ни в какой точке.
+
+\begin{thrm}{}{}
+    Определение по Коши \( \Leftrightarrow \) определение по Гейне
+\end{thrm}
+
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+
+        Рассмотрим \( \forall \)-ю \( \{ a_n \} : a_n \neq a \ \forall n \in \NN \) и \( a_n \to a \)
+
+        Тогда 
+        \( 
+            \forall \mathring{U_{\varepsilon}} (a) \ \exists N \in \NN : 
+            \forall n > N \ a_n \in \mathring{U_{\varepsilon}} (a) \Rightarrow f(a_n) \in V_{\varepsilon} (A)
+        \)
+    \item
+        \( \Leftarrow \)
+
+        От противного
+
+        \( 
+            \exists \varepsilon > 0 : \forall \delta > 0 : \exists x : 
+            0 < |x - a| < \varepsilon \land |f(x) - A| \geq \varepsilon 
+        \)
+
+        При
+        \(
+            \delta = \frac{1}{n} \exists x_n \in \mathring{U_{\frac{1}{n}}} : |f(a_n) - A| \geq \varepsilon
+        \)
+
+        Имеем \( \{ x_n \} : \lim\limits_{n \to \infty} x_n = a \) и \( x_n \neq a \ \forall n \in \NN \).
+
+        Тогда \( \lim\limits_{n \to \infty} f(x_n) = A \), но \( 0 = \lim\limits_{n \to \infty} |f(x_n) - A| \geq eps > 0 \)
+\end{itemize}
+
+\begin{thrm}{Свойства пределов}{}
+    Пусть \( f, g, h : E \to \RR \).
+
+    \( a \in E, \lim\limits_{x \to a} f(x) = A, \lim\limits_{x \to b} g(x) = B \).
+
+    Тогда
+    \begin{enumerate}
+        \item
+            \( A \) --- единственный предел функции \( f \)
+        \item
+            \( \forall \alpha, \beta \in \RR \ \lim\limits_{x \to a} (\alpha f(x) + \beta g(x)) = \alpha A + \beta B \)
+        \item
+            \( \lim\limits_{x \to a} f(x)g(x) = AB \)
+        \item
+            Пусть 
+            \( 
+                B \neq 0, g(x) \neq 0 \ \forall x \in E \Rightarrow \lim\limits_{x \to a} \frac{f(x)}{g(x)} = \frac{A}{B} 
+            \)
+        \item
+            \( \exists \mathring{U} (a) : \forall x \in \mathring{U}(a) \ f(x) \leq g(x) \Rightarrow A \leq B \)
+        \item
+            \( \exists C > 0, \mathring{U}(a) : \forall x \in \mathring{U}(a) \ |f(x)| \leq C \)
+        \item
+            Если \( \exists \mathring{U}(a) : \forall x \in \mathring{U}(a) \ f(x) \leq h(x) \leq g(x) \)
+            и \( A = B \), то \( \lim\limits_{x \to a} = h(x) = A = B \)
+        \item
+            Если \( B \neq 0 \), то \( \exists \mathring{U}(a) : \forall x \in \mathring{U}(a) \ |g(x)| \geq \frac{|B|}{2} \)
+    \end{enumerate}
+\end{thrm}
+
+\( 1-5, 7 \) следуют из свойств пределов последовательности и определения по Гейне
+
+\( 6, 8 \) следуют из определения по Коши
+
+\begin{thrm}{}{}
+    \begin{gather*}
+        g : D \to \RR,  b \in D
+        \\
+        f : E \to D, a \in E
+        \\
+        \exists \mathring{U}(a) : \forall x \in \mathring{U}(a) \ f(x) \neq b
+        \\
+        \\
+        \lim\limits_{x \to a} f(x) = b, \lim\limits_{y \to b} g(y) = c \Rightarrow \lim\limits_{x \to a} g(f(x)) = c
+    \end{gather*}
+\end{thrm}
+
+\(
+    \forall \{ a_n \} \subset E : a_n \to a, a_n \neq a \ \forall n \in \NN \ f(a_n) \to b, f(a_n) \neq b \ \forall n \in \NN
+\)
+при достаточно больших \( n \)
+
+Можно считать, что \( \forall n \in \NN \ f(a_n) \neq b \)
+
+Тогда \( g(f(a_n)) \to c \) верно по определению по Гейне
+
+Ну по Коши там тоже чето получится.
+
+\begin{example}{}{}
+    \begin{gather*}
+        \lim\limits_{y \to \infty} g(y) = A, f(x) = \frac{1}{x}
+        \\
+        \lim\limits_{x \to 0+} g \left( \frac{1}{x} \right) = A
+    \end{gather*}
+\end{example}
+
+
+\begin{thrm}{Первый замечательный предел}{}
+    \[
+        \lim\limits_{x \to 0} \frac{\sin x}{x} = 1
+    \]
+\end{thrm}
+
+Доказательство:
+
+Покажем, что
+\[
+    \forall x \in \left[ 0, \frac{\pi}{2} \right) \ x \cos x \leq \sin x \leq x
+\]
+
+Длина окружности --- супремум длин вписанных в нее ломанных.
+Длина ломанной больше или равна длины хорды, стягивающей дугу.
+Отсюда длина дуги (\( x \)) больше или равна хорды, которая больше равна \( \sin(x) \).
+
+%TODO рисунок вставить
+
+Тогда \( 2 \tan x \geq 2x \)
+
+\( 0 < \sin x \leq x \Rightarrow \) по лемме о зажатом пределе \( \lim\limits_{x \to 0+} \sin x = 0 \)
+
+\( \lim\limits_{x \to 0+} \cos x = \lim\limits_{x \to 0+} (1 - 2 \sin \frac{x}{2}) = 1 \) 
+\begin{gather*}
+    x \cos x \leq \sin x \leq x
+    \\
+    \cos x \leq \frac{\sin x}{x} \leq 1
+\end{gather*}
+
+Возьмем \( \lim\limits_{x \to 0+} \), по лемме о зажатом пределе получим 
+\( \lim\limits_{x \to 0+} \frac{\sin x}{x} = 1 \)
+
+Для отрицательных \( x \) верно в силу четности всех функций.
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( \displaystyle \lim\limits_{x \to 0} \cos x = 1 \)
+
+            \( \displaystyle \lim\limits_{x \to 0} \sin x = 0 \)
+        \item
+            \( \displaystyle \lim\limits_{x \to 0} \frac{\sin 7x}{x} = 7 \)
+        \item
+            \( 
+                \displaystyle
+                \lim\limits_{x \to 0} \frac{\tan x}{x} 
+                = \lim\limits_{x \to 0} \frac{\sin x}{x} \cdot \frac{1}{\cos x} = 1
+            \)
+        \item
+            \(
+                \displaystyle
+                \lim\limits_{x \to 0} \frac{\arctan x}{x} =
+                \left[
+                    \begin{gathered}
+                        \arctan x = t
+                        \\
+                        x = \tan t
+                        \\
+                        t \to 0
+                    \end{gathered}
+                \right] =
+                \lim\limits_{t \to 0} \frac{t}{\tan t} = 1
+            \)
+        \item
+            \(
+                \displaystyle
+                \lim\limits_{x \to 0} \frac{\arcsin x}{x} =
+                \left[
+                    \begin{gathered}
+                        \arcsin x = t
+                        \\
+                        x = \sin t
+                        \\
+                        t \to 0
+                    \end{gathered}
+                \right] =
+                \lim\limits_{t \to 0} \frac{t}{\sin t} = 1
+            \)
+        \item
+            \(
+                \displaystyle
+                \lim\limits_{x \to 0} \frac{1 - \cos x}{x^2} =
+                \lim\limits_{x \to 0} \frac{2 \sin^2 \frac{x}{2}}{x^2} =
+                \frac{1}{2} \lim\limits_{x \to 0} 
+                    \frac{\sin \frac{x}{2} \cdot \sin \frac{x}{2}}{\frac{x}{2} \cdot \frac{x}{2}} =
+                \frac{1}{2}
+            \)
+    \end{enumerate}
+\end{example}
+
+\begin{defn}{}{}
+    Функция \( f \) эквивалентна функции \( g \), 
+    если \( \exists \gamma : \) при \( x \to a \) верно \( f(x) = \gamma(x) g(x) \) и 
+    \( \lim\limits_{x \to a} \gamma (x) = 1 \)
+
+    При \( g(x) \neq 0 \) при \( x \to a \) это равносильно \( \lim\limits_{x \to a} \frac{f(x)}{g(x)} = 1 \)
+\end{defn}
+
+\begin{example}{}{}
+    При \( x \to 0 \):
+    \begin{gather*}
+        \tan x \sim \sin x \sim x \sim \arcsin x \sim \arctan x
+        \\
+        1 - \cos x \sim \frac{x^2}{2}
+    \end{gather*}
+\end{example}
+
+Теперь можем посчитать:
+\begin{gather*}
+    \lim\limits_{x \to 0} \frac{\sin 3x}{\arctan 10x} = \lim\limits_{x \to 0} \frac{3x}{10x} = \frac{3}{10}
+    \\
+    \\
+    \lim\limits_{x \to 0} \frac{\tan x - \sin x}{x^3}
+        = \lim\limits_{x \to 0} \frac{\sin x}{x} \cdot \frac{1 - \cos x}{x^2} \cdot \frac{1}{\cos x}
+            = \frac{1}{2}
+\end{gather*}
+
+\textbf{Важно:} во втором пределе нельзя заменить \( \tan x \) и \( \sin x \) на \( x \) --- получится бред.
+
+\begin{thrm}{Второй замечательный предел}{}
+    \begin{enumerate}
+        \item
+            \( \displaystyle \lim\limits_{x \to +\infty} \left( 1 + \frac{1}{x} \right)^x = e \)
+        \item
+            \( \displaystyle \lim\limits_{x \to -\infty} \left( 1 + \frac{1}{x} \right)^x = e \)
+        \item 
+            \( \displaystyle \lim\limits_{x \to 0} (1 + x)^{\frac{1}{x}} = e \)
+    \end{enumerate}
+\end{thrm}
+
+Доказательство:
+\begin{gather*}
+    \lim\limits_{n \to \infty} \left( 1 + \frac{1}{n} \right)^{n + 1} = e
+    \\
+    \lim\limits_{n \to \infty} \left( 1 + \frac{1}{n + 1} \right)^{n} = e
+\end{gather*}
+
+\begin{gather*}
+    \forall \varepsilon > 0 \ \exists N \in \NN :
+    \\
+    \left| \left( 1 + \frac{1}{n + 1} \right)^{n} - e \right| < \varepsilon
+    \\
+    \left| \left( 1 + \frac{1}{n} \right)^{n + 1} - e \right| < \varepsilon
+\end{gather*}
+
+Пусть \( x > N + 100 \)
+\[
+    e - \varepsilon 
+    < 
+    \left( 1 + \frac{1}{[x] + 1} \right)^{[x]} 
+    \leq
+    \left( 1 + \frac{1}{x} \right)^x
+    \leq
+    \left( 1 + \frac{1}{[x]} \right)^{[x] + 1}
+\]
+
+Пусть \( x \to -\infty \), сделаем \( t = -x, t \to +\infty \)
+\[
+    \left( 1 + \frac{1}{x} \right)^x = \left( 1 + \frac{1}{-t} \right)^{-t} = \left( 1 + \frac{1}{t - 1} \right)^t 
+\]
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \(
+                \displaystyle
+                \lim\limits_{x \to 0} \frac{\ln (1 + x)}{x} = \lim\limits_{x \to 0} \ln (1 + x)^{\frac{1}{x}} = \ln e = 1
+            \)
+        \item
+            \(
+                \displaystyle
+                \lim\limits_{x \to 0} \frac{e^x - 1}{x} = 
+                \left[
+                    \begin{gathered}
+                        e^x - 1 = t
+                        \\
+                        x = \ln (1 + t)
+                        \\
+                        t \to 0
+                    \end{gathered}
+                \right]
+                =
+                \lim\limits_{t \to 0}\frac{t}{\ln (1 + t)} = 1
+            \)
+        \item
+            \begin{gather*}
+                \lim\limits_{x \to 0} \frac{(1 + x)^{\alpha} - 1}{x}
+                =
+                \lim\limits_{x \to 0} \frac{e^{\alpha \ln (1 + x)} - 1}{x}
+                =
+                \\
+                =
+                \alpha \lim\limits_{x \to 0} \frac{e^{\alpha \ln (1 + x)} - 1}{\alpha \ln (1 + x)}
+                =
+                \alpha \lim\limits_{t \to 0} \frac{e^t - 1}{t} = \alpha
+            \end{gather*}
+    \end{itemize}
+\end{example}
+
+\subsection{Асимптотика}
+
+\begin{defn}{}{}
+    Пусть \( f, g : E \to \RR \) и \( a \) --- предельная точка \( E \) и существует 
+    \( \mathring{U}(a) : \forall x \in \mathring{U}(a) \cap E \ f(x) = h(x) \cdot g(x) \),
+    где \( h : \mathring{U}(a) \cap E \to  \RR \)
+
+    Тогда:
+    \begin{enumerate}
+        \item
+            Если \( h(x) \to 1 \) при \( x \to a \), то \( f \sim g, x \to a \)
+        \item
+            Если \( \lim\limits_{x \to a} h(x) = 0 \), то \( f = o(g), x \to a \)
+        \item
+            Если \( h \) ограничено на \( \mathring{U}(a) \cap E \), то \( f = O(g) \)
+    \end{enumerate}
+
+    Если в \( \mathring{U}(a) \cap E \ g(x) \neq 0 \), то
+    \begin{enumerate}
+        \item
+            \( \Leftrightarrow \lim\limits_{x \to a} \frac{f(x)}{g(x)} = 1 \)
+        \item
+            \( \Leftrightarrow \lim\limits_{x \to a} \frac{f(x)}{g(x)} = 0 \)
+        \item
+            \( \Leftrightarrow \frac{f(x)}{g(x)} \) --- ограниченная функция в \( \mathring{U}(a) \cap E \)
+    \end{enumerate}
+\end{defn}
+
+\newpage
+
+\begin{example}{}{}
+    \( f \sim g, x \to a \Leftrightarrow f - g = o(f), f - g = o(g), x \to a \)
+\end{example}
+
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+        \begin{gather*}
+            f ~ g, x \to a \Rightarrow f(x) = h(x) \cdot g(x) \Rightarrow f(x) - g(x) = (h(x) - 1) \cdot g(x)
+            \\
+            \lim\limits_{x \to a} h(x) = 1 \Rightarrow \lim\limits_{x \to a} (h(x) - 1) = 0
+        \end{gather*}
+    \item
+        \( \Leftarrow \)
+        \begin{gather*} 
+            f - g = o(g), x \to a \Rightarrow f(x) - g(x) = h(x) \cdot g(x) \Rightarrow f(x) = (h(x) + 1) \cdot g(x)
+            \\
+            \lim\limits_{x \to a} h(x) = 0 \Rightarrow \lim\limits_{x \to a} (h(x) + 1) = 1
+        \end{gather*}
+\end{itemize}
+
+\begin{example}{}{}
+    Пусть \( m > n > 0 \)
+    \begin{enumerate}
+        \item
+            \( x \to 0 \Rightarrow x^m = o(x^n) \)
+        \item
+            \( x \to +\infty \Rightarrow x^n = o(x^m) \)
+        \item
+            \( f(x) = x + \sin x = O(x), x \to +\infty \)
+        \item
+            \( f(x) = x + \sin x = O(x), x \to 0 \)
+
+            Так как \( \lim\limits_{x \to 0} \frac{\sin x}{x} = 1 \)
+    \end{enumerate}
+\end{example}
+
+\begin{defn}{}{}
+    Бесконечно малая функция при \( x \to a \) обозначается \( o(1) \)
+    \\
+    Ограниченная функция при \( x \to a \) (в \( \mathring{U}(a) \)) обозначается \( O(1) \)
+\end{defn}
+
+\newpage
+
+Асимптотические равенства:
+\begin{enumerate}
+    \item
+        \( \sin x = x + o(x), \ x \to 0 \)
+    \item
+        \( \tan x = x + o(x), \ x \to 0 \)
+    \item
+        \( \arctan x = x + o(x), \ x \to 0 \)
+    \item
+        \( \arcsin x = x + o(x), \ x \to 0 \)
+    \item
+        \( \ln (1 + x) = x + o(x), \ x \to 0 \)
+    \item
+        \( e^x = 1 + x + o(x), \ x \to 0 \)
+    \item
+        \( \cos x = 1 - \frac{x^2}{2} + o(x), \ x \to 0 \)
+    \item 
+        \( (1 + x)^\alpha = 1 + \alpha x + o(x), \ x \to 0 \)
+\end{enumerate}
+
+\begin{example}{}{}
+    \[
+        \lim\limits_{x \to 0} \frac{\ln ( \cos x ) }{e^{\sin^2 x} - 1}
+    \]
+\end{example}
+\[
+    \lim\limits_{x \to 0} \frac{\ln ( \cos x ) }{e^{\sin^2 x} - 1}
+    =
+    \lim\limits_{x \to 0} \frac{\ln ( 1 - 2 \sin^2 \frac{x}{2} ) }{\sin^2 x}
+    =
+    \lim\limits_{x \to 0} \frac{-2 \sin^2 \frac{x}{2}}{\sin^2 x}
+    =
+    -2 \lim\limits_{x \to 0} \frac{\frac{x^2}{4}}{x^2}
+    =
+    -\frac{1}{2}
+\]
+
+Также можно использовать точные равенства:
+\begin{gather*}
+    \lim\limits_{x \to 0} \frac{\ln ( \cos x ) }{e^{\sin^2 x} - 1}
+    =
+    \lim\limits_{x \to 0} \frac{\ln ( 1 - \frac{x^2}{2} + o(x) ) }{e^{( x + o(x) )^2} - 1}
+    =
+    \lim\limits_{x \to 0} \frac{\frac{x^2}{2} + o(x) + o(\frac{x^2}{2} + o(x))}{( x + o(x) )^2 + o(( x + o(x) )^2)}
+    =
+    \\
+    =
+    \lim\limits_{x \to 0} 
+        \frac{ x^2 (-\frac{1}{2} + o(1) + o(-\frac{1}{2} + o(1))}{x^2 (1 + 2o(1) + (o(1)^2) + o(1 + 2o(1) + (o(1))^2)}
+    =
+    -\frac{1}{2}
+\end{gather*}
+
+\begin{example}{}{}
+    \[
+        \lim\limits_{x \to 0} \frac{\sin x - x}{x^2}
+    \]
+\end{example}
+\[
+    \lim\limits_{x \to 0} \frac{\sin x - x}{x^2}
+    =
+    \lim\limits_{x \to 0} \frac{x + o(x) - x}{x^3}
+    =
+    \lim\limits_{x \to 0} \frac{o(x)}{x^3}
+\]
+
+\newpage
+
+Формулы Тейлора при \( x \to 0 \):
+\begin{enumerate}
+    \item
+        \( 
+            \displaystyle
+            e^x = \sum\limits_{k = 0}^n \frac{x^k}{k!} + o(x^n) 
+        \)
+    \item
+        \( 
+            \displaystyle
+            \sin x = \sum\limits_{k = 0}^n (-1)^k \frac{x^{2k + 1}}{(2k + 1)!} + o(x^{2n + 1}) 
+        \)
+    \item
+        \( 
+            \displaystyle
+            \cos x = \sum\limits_{k = 0}^n (-1)^k \frac{x^{2k}}{(2k)!} + o(x^{2n}) 
+        \)
+    \item
+        \( 
+            \displaystyle
+            \ln (1 + x) = \sum\limits_{k = 1}^n (-1)^k \frac{x^k}{k} + o(x^n) 
+        \)
+    \item
+        \(
+            \displaystyle
+            (1 + x)^\alpha = \sum\limits_{k = 0}^n \frac{\alpha (\alpha - 1) \ldots (\alpha - k + 1)}{k!} x^k + o(x^n)
+        \)
+\end{enumerate}
+
+Теперь можем решить тот предел.
+\begin{gather*}
+    \lim\limits_{x \to 0} \frac{\sin x - x}{x^2}
+    =
+    \lim\limits_{x \to 0} \frac{x - \frac{x^3}{6} + o(x^3) - x}{x^3}
+    =
+    \lim\limits_{x \to 0} \frac{-\frac{x^3}{6} + o(x^3)}{x^3}
+    =
+    \\
+    =
+    \lim\limits_{x \to 0} \frac{x^3 ( -\frac{1}{6} + o(1) ) }{x^3}
+    =
+    -\frac{1}{6}
+\end{gather*}
+
+Например, из
+\[
+    \lim\limits_{x \to 0} \frac{\tan x - \sin x}{x^3} = \frac{1}{2}
+\]
+
+понятно, что \( \tan x = x + \frac{x^3}{3} + o(x^3) \) при \( x \to 0 \)
+
+(кажется нам просто этот предел дали, или я что-то пропустил)
+
+\newpage
+
+\subsection{Важные теоремы}
+
+\begin{thrm}{Критерий Коши}{}
+    \[
+        A = \lim\limits_{x \to a} f(x) 
+        \Leftrightarrow 
+        \forall \varepsilon > 0 \ \exists \delta > 0 :
+        \forall x_1, x_2 \in \mathring{U}_\delta(a) \ | f(x_1) - f(x_2) | < \varepsilon
+    \]
+\end{thrm}
+
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+        \begin{gather*}
+            \forall \varepsilon > 0 \ \exists \delta > 0 : \forall x \in \mathring{U}_\delta(a) \ |f(x) - A| < \frac{\varepsilon}{2}
+            \\
+            \Downarrow
+            \\
+            \forall x_1, x_2 \in \mathring{U}_\delta(a) \
+                |f(x_1) - f(x_2)| \leq |f(x_1) - A| + |f(x_2) - A| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+        \end{gather*}
+    \item
+        \( \Leftarrow \)
+
+        Пусть \( \{ a_n \} : \lim\limits_{n \to \infty} a_n = a, \ a_n \neq a \ \forall n \in \NN \).
+        Тогда \( \{ f(a_n) \} \) --- фундаментальная.
+        Значит \( \exists B = \lim\limits_{n \to \infty} f(a_n) \).
+
+        Пусть \( \{ b_n \} : \lim\limits_{n \to \infty} b_n = a, \ b_n \neq a \ \forall n \in \NN \).
+        По аналогичным рассуждениям \( \exists C = \lim\limits_{n \to \infty} f(b_n) \).
+
+        Аналогично для
+        \[
+            c_n = \begin{cases}
+                a_k, n = 2k - 1
+                \\
+                b_k, n = 2k
+            \end{cases}
+        \]
+
+        Откуда получим, что \( B = C \)
+\end{itemize}
+
+\begin{defn}{}{}
+    Пусть \( f : E \to \RR \) и \( \forall x_1, x_2 \in E : x_1 < x_2 \)
+    \begin{enumerate}
+        \item
+            \( f(x_1) \leq f(x_2) \Rightarrow f \uparrow \)
+        \item
+            \( f(x_1) < f(x_2) \Rightarrow f \uparrow \uparrow \)
+        \item
+            \( f(x_1) \geq f(x_2) \Rightarrow f \downarrow \)
+        \item
+            \( f(x_1) > f(x_2) \Rightarrow f \downarrow \downarrow \)
+    \end{enumerate}
+\end{defn}
+
+\newpage
+
+\begin{defn}{}{}
+    \begin{gather*}
+        E_a^+ = \{ x \in E : x > a \}
+        \\
+        E_a^- = \{ x \in E : x < a \}
+    \end{gather*}
+
+    Если смотреть пределы для \( a \) на таких областях, получим предел сверху / снизу
+\end{defn}
+
+\begin{thrm}{Теорема Вейерштрасса}{}
+    Пусть \( f : E \to \RR \)
+    \begin{enumerate}
+        \item
+            Если \( f \uparrow \) и ограничена сверху на \( E_a^- \),
+            а \( a \) --- предельная точка \( E_a^- \),
+            то \( \exists \lim\limits_{x \to a-} f(x) \)
+        \item
+            Если \( f \downarrow \) и ограничена снизу \( E_a^+ \),
+            а \( a \) --- предельная точка \( E_a^+ \),
+            то \( \exists \lim\limits_{x \to a+} f(x) \)
+    \end{enumerate}
+\end{thrm}
+
+Доказательство:
+
+Пусть \( f \downarrow \) и ограниченно снизу на \( E_a^+ \).
+
+Значит
+\begin{gather*}
+    \exists \inf\limits_{x \in E_a^+} f(x) = A
+    \\
+    \Downarrow
+    \\
+    \forall \varepsilon > 0 \ \exists x_0 \in E_a^+ : \forall x < x_0 \land x \in E_a^+
+        \ A \leq f(f)x < A + \varepsilon
+\end{gather*}
+
+\subsection{Предел по базе}
+
+\begin{defn}{База}{}
+    Пусть \( E \) --- область определения функции, а \( B = \{ b \} \) 
+    --- бесконечная система непустых подмножеств \( E \)
+    и \( \forall b_1, b_2 \in B \) и \( b_1 \cap b_2 = \varnothing \ \exists b_3 \in B : b_3 \subset b_1 \cap b_2 \).
+
+    Тогда \( B \) называется базой множеств множества \( E \).
+
+    \( b \) --- окончание базы \( B \).
+\end{defn}
+
+\begin{defn}{}{}
+    Пусть \( B \) --- база множеств на \( E \)
+
+    \[
+        \lim\limits_B f(x) = A 
+        \Leftrightarrow 
+        \forall \varepsilon > 0 \ \exists b \in B : \forall x \in b \ |f(x) - A| < \varepsilon
+    \]
+\end{defn}
+
+\subsection{Непрерывность}
+
+\begin{defn}{Непрерывность}{}
+    Дана \( f : E \to \RR \)
+
+    \begin{enumerate}
+        \item
+            \( 
+                f \in C(a) \Leftrightarrow \forall \varepsilon > 0 \ \exists \delta > 0 : 
+                \forall x : | x - a | < \delta, \ x \in E \ | f(x) - f(a) | < \varepsilon
+            \)
+        \item
+            \( f \in C(a) \Leftrightarrow \) \( a \) --- изолированная точка
+            или \( a \) --- предельная точка и \( \lim\limits_{x \to a} f(x) = f(a) \)
+        \item
+            \( f \in C(a) \Leftrightarrow \) \( a \) --- изолированная точка
+            или \( a \) --- предельная точка и \( \lim\limits_{x \to a} f(x) = f( \lim\limits_{x \to a} x) \)
+        \item
+            \( f \in C(a) \Leftrightarrow \) \( a \) --- изолированная точка
+            или \( a \) --- предельная точка и 
+            \( \exists \alpha : E \to \RR :  f(x) = f(a) + \alpha(x) \)
+        \item
+            \( f \in C(a) \Leftrightarrow \) \( a \) --- изолированная точка
+            или \( a \) --- предельная точка и 
+            \( \forall V(f(a)) \ \exists U(a) : \forall x \in U(a) \cap E \ f(x) \in V(f(a)) \)
+        \item
+            \( f \in C(a) \Leftrightarrow \forall \{ a_n \} \subset E, \ a_n \to a, \ f(a_n) \to f(a) \)
+    \end{enumerate}
+\end{defn}
+
+\begin{exercise}{}{}
+    Пусть \( a \) --- предельная точка \( E \).
+
+    \( \lim\limits_{x \to a-} f(x) = A \)
+
+    \( \lim\limits_{x \to a+} f(x) = B \)
+
+    \( f \in C(a) \Leftrightarrow A = B \)
+\end{exercise}
+
+Пусть \( f, g \in C(a) \).
+Тогда
+\begin{enumerate}
+    \item
+        \( \forall \alpha, \beta \in \RR \ \ \alpha f(x) + \beta g(x) \in C(a) \)
+    \item
+        \( f(x)g(x) \in C(a) \)
+    \item
+        Если \( g(x) \neq 0 \) (\( x \in E \)), то \( \frac{f(x)}{g(x)} \in C(a) \)
+    \item
+        \( \exists C > 0, \ \exists U(a) : \forall x \in U(a) \cap E \ | f(x) | \leq C \)
+    \item
+        Если \( f(a) \neq 0 \), то \( \exists U(a) : \forall x \in U(a) \ | f(x) | > \frac{| f(a) |}{2} \)
+\end{enumerate}
+
+Если \( a \) --- изолированная точка, то очевидно.
+
+Иначе \( a \) --- предельная точка.
+Вышеописанные свойства следуют из ранее доказанных свойств пределов.
+
+\begin{thrm}{Непрерывность композиции}{}
+    Пусть \( f : E \to D, \ a \in E, f \in C(a) \)
+
+    Пусть \( g : D \to \RR, \ g \in C(f(a)) \)
+
+    Тогда \( g(f(a)) \in C(a) \).
+\end{thrm}
+
+Доказательство:
+
+\( \{ a_n \} \subset E, \ a_n \to a \).
+
+Тогда \( f(a_n) \to f(a) \).
+
+\( g \in C(f(a)) \Rightarrow g(f(a_n)) \to g(f(a)) \)
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( \sqrt{y} \in C(1) \)
+        \item
+            \( \sin x \in C \left( \frac{\pi}{2} + 2 \pi k \right), \ k \in \ZZ \)
+    \end{itemize}
+
+    Следствие:
+
+    \( \sqrt{\sin x} \in C \left( \frac{\pi}{2} + 2 \pi k \right), \ k \in \ZZ \)
+\end{example}
+
+\begin{defn}{Функция, непрерывная на множестве}{}
+    \( f \in C(E) \Leftrightarrow \forall x \in E \ f \in C(x) \)
+\end{defn}
+
+\begin{thrm}{}{}
+    Пусть \( f \in C[a, b] \) и \( f(a) \cdot f(b) < 0 \).
+
+    Тогда \( \exists c \in (a, b) : f(c) = 0 \)
+\end{thrm}
+
+Доказательство:
+
+Пусть \( I_0 = [a, b] \).
+Поделим \( [a, b] \) пополам.
+
+Если в точке \( \frac{a + b}{2} \) функция принимает нулевое значение, то нашли корень.
+
+Иначе либо на \( [a, \frac{a + b}{2}] \), либо на \( [\frac{a + b}{2}, b] \)
+функция принимает разные значения на концах.
+Пусть это \( I_1 = [a_1, b_1] \).
+Тогда \( f(a_1) \cdot f(b_1) < 0 \).
+
+Поделим \( I_1 \) пополам и продолжаем процедуру.
+
+Либо найдем корень, либо построим последовательность стягивающихся отрезков \( \{ I_n \} \).
+Значит \( \exists c = \bigcap\limits_{n = 0}^\infty \)
+\begin{gather*}
+    \lim\limits_{n \to \infty} f(a_n) = f(c)
+    \\
+    \lim\limits_{n \to \infty} f(b_n) = f(c)
+\end{gather*}
+
+По предельному переходу в неравенстве:
+\[
+    f^2(c) = \lim\limits_{n \to \infty} f(a_n) f(b_n) \leq 0 \Rightarrow f(c) = 0
+\]
+
+\begin{example}{}{}
+    Докажите, что \( x^3 - 3x + 1 \) имеет \( 3 \) действительных корня.
+\end{example}
+
+\( f(x) = x^3 - 3x + 1 \in C(\RR) \)
+
+\( f(2) < 0, f(0) > 0, f(1) < 0, f(2) > 0 \).
+
+Значит \( \exists c_1 \in (-2, 0), c_2 \in (0, 1), c_3 \in (1, 2) : f(c_1) = f(c_2) = f(c_3) = 0 \).
+
+\begin{thrm}{Первая теорема Вейерштрасса}{}
+    \( f \in C[a, b] \Rightarrow f \) ограничена на \( [a, b] \).
+\end{thrm}
+
+Доказательство:
+
+Пусть \( f \) неограничена на \( [a, b] \).
+
+Тогда \( \exists x_n \in [a, b] : |f(x_n)| > n \).
+
+\( \{ x_n \} \in [a, b] \Rightarrow \) 
+по теореме Больцано-Вейерштрасса существует подпоследовательность такая, что
+\( \lim\limits_{k \to \infty} x_{n_k} = x_0 \in [a, b] \).
+
+\( f \in C[a, b] \Rightarrow \lim\limits_{k \to \infty} f(x_{n_k}) = f(x_0) \).
+
+Но \( |f(x_{n_k})| > n_k \Rightarrow \not\exists \lim\limits_{k \to \infty} f(x_{n_k}) \) --- противоречие.
+
+Значит \( f \) ограничена на \( [a, b] \)
+
+\begin{thrm}{Вторая теорема Вейерштрасса}{}
+    Пусть \( f \in C[a, b] \).
+
+    Тогда
+    \begin{gather*}
+        \exists x_1 \in [a, b] : \inf\limits_{[a, b]} f(x) = f(x_1)
+        \\
+        \exists x_2 \in [a, b] : \sup\limits_{[a, b]} f(x) = f(x_2)
+    \end{gather*}
+\end{thrm}
+
+Доказательство:
+
+Пусть, например, \( \not\exists x_2 \).
+
+По первой теореме Вейерштрасса 
+\( \exists C : \forall x \in [a, b] \ |f(x)| < C \Rightarrow \exists M = \sup\limits_{[a, b]} f(x) \)
+
+Но \( x_2 \) не существует, значит \( M > f(x) \ \forall x \in [a, b] \).
+
+\( M - f(x) > 0 \ \forall x \in [a, b] \Rightarrow g(x) = \frac{1}{M - f(x)} \in C[a, b] \Rightarrow g \) 
+ограничена на \( [a, b] \).
+
+Но \( \forall \varepsilon > 0 \ \exists x : M - f(x) < \varepsilon \Rightarrow g \) 
+неограничена на \( [a, b] \) --- противоречие.
+
+Значит \( x_2 \) существует, для \( x_1 \) аналогично.
+
+\begin{exercise}{}{}
+    Доказать эти две теоремы для компактов.
+\end{exercise}
+
+\begin{thrm}{Теорема Больцано-Коши}{}
+    Пусть \( f \in C[a, b], \ M = \max\limits_{[a, b]} f(x), m = \min\limits_{[a, b]} f(x) \)
+
+    Тогда \( \forall C \in [m, M] \ \exists c \in [a, b] : f(c) = C \)
+\end{thrm}
+
+Доказательство:
+
+Если \( C = m \) или \( C = M \), то уже доказали (вторая теорема Вейерштрасса).
+
+Иначе по второй теореме Вейерштрасса найдем \( x_1, x_2 \).
+Введем \( g(x) = f(x) - C \).
+
+Получим, что \( g(x_1) = f(x_1) - C < 0, \ g(x_2) = f(x_2) - C > 0 \).
+Ранее доказали, что у такой функции существует корень \( c \in [a, b] \).
+
+\( g(c) = 0 \Rightarrow f(c) - C = 0 \Rightarrow f(c) = C \).
+
+\begin{defn}{Точка разрыва}{}
+    Пусть \( f : E \to \RR \) и \( a \) --- предельная точка \( E \), \( a \in E \).
+
+    Тогда \( a \) --- точка разрыва \( f \), если \( f \notin C(a) \)
+\end{defn}
+
+\begin{example}{}{}
+    \( f(x) = \frac{1}{x} \in C(\RR \setminus \{ 0 \}) \)
+
+    Но если определить в \( 0 \), то \( f \notin C(\RR) \)
+\end{example}
+
+\begin{defn}{Точка устранимого разрыва}{}
+    Пусть \( \exists \lim\limits_{x \to a} \neq f(a) \).
+
+    Тогда \( a \) --- точка устранимого разрыва \( f \), если \( f \notin C(a) \)
+\end{defn}
+
+\begin{example}{}{}
+    \begin{gather*}
+        f(x)
+        =
+        \begin{cases}
+            \frac{\sin x}{x}, x \neq 0
+            \\
+            0, x = 0
+        \end{cases}
+        \\
+        \lim\limits_{x \to 0} f(x) = 1 \neq 0 = f(0)
+    \end{gather*}
+\end{example}
+
+\begin{defn}{Точка разрыва I рода (скачок)}{}
+    Пусть \( a \) --- предельная точка \( E_a^- \) и \( E_a^+ \).
+
+    Если \( A = \lim\limits_{x \to a-} \neq \lim\limits_{x \to a+} = B \),
+    то \( a \) --- точка устранимого разрыва.
+\end{defn}
+
+\begin{example}{}{}
+    \[
+        f(x)
+        =
+        \begin{cases}
+            -1, x \leq 0
+            \\
+            1, x > 0
+        \end{cases}
+    \]
+\end{example}
+
+\begin{defn}{Точка разрыва II рода}{}
+    Пусть \( a \) --- предельная точка \( E_a^+ \) или \( E_a^- \), 
+    и не существует соответствующего одностороннего предела.
+
+    Тогда \( a \) --- точка разрыва II рода.
+\end{defn}
+
+\begin{example}{}{}
+    \[
+        f(x)
+        =
+        \begin{cases}
+            \frac{1}{x}, x \neq 0
+            \\
+            2025, x = 0
+        \end{cases}
+    \]
+\end{example}
+
+\begin{thrm}{}{}
+    Пусть \( f \) монотонна и ограничена на \( ( a, b ) \).
+
+    Тогда \( f \) имеет не более чем счетное множество точек разрыва, причем все они I рода.
+\end{thrm}
+
+Доказательство:
+
+\( c \in (a, b) \Rightarrow c \) --- предельная точка \( (a, b) \).
+
+По теореме Вейрштрасса для функций \( \exists A = \lim\limits_{x \to c-} f(x) \)
+и \( B = \lim\limits_{x \to c+} f(x) \).
+
+Если \( A = B \), то \( f \in C(c) \).
+В противном случае \( c \) --- точка разрыва первого рода по определению.
+
+Но тогда каждой точке разрыва можно сопоставить интервал \( (A, B) \).
+В силу монотонности интервалы не пересекаются, поэтому их счетно
+(в каждом можно выбрать уникальную рациональную точку)
+
+\begin{defn}{Равномерная непрерывность}{}
+    \(
+        f \in UC(E) \Leftrightarrow \forall \varepsilon > 0 \ \exists \delta > 0 :
+        \forall x_1, x_2 \in E : |x_1 - x_2| < \delta \ |f(x_1) - f(x_2)| < \varepsilon
+    \)
+\end{defn}
+
+\begin{example}{}{}
+    \[
+        \frac{\sin x}{x} \notin UC(0, 1)
+    \]
+\end{example}
+
+\newpage
+
+\begin{thrm}{Теорема Гейне-Кантора}{}
+    \[
+        f \in C[a, b] \Rightarrow f \in UC[a, b]
+    \]
+\end{thrm}
+
+Доказательство:
+\[
+    f \in C[a, b] \Rightarrow \forall x \in [a, b] \ \exists U_{\delta(x)} (x) :
+    \forall x', x'' \in U_{\delta(x)} (x) \ | f(x') - f(x'') | < \varepsilon
+\]
+
+для какого-то заранее заданного \( \varepsilon \).
+
+\( U_{\frac{\delta(x)}{2}} (x) \) --- окрестности все еще покрывают весь отрезок,
+поэтому по принципу Бореля-Лебега существует конечное подпокрытие \( U_{\frac{\delta(x_i)}{2}} (x_i) \).
+
+Присвоим \( \delta = \min \left\{ \frac{\delta(x_i)}{2} \ \vline \ i = 1, \ldots, n \right\} \)
+
+Докажем, что \( \forall x', x'' \in [a, b] : |x' - x''| < \delta \ |f(x') - f(x'')| < \varepsilon \).
+
+\( \exists k : x' \in U_{\frac{\delta(x_k)}{2}} (x_k) \).
+
+Поэтому \( |x'' - x_k| \leq |x'' - x'| + |x' - x_k| < \delta + \frac{\delta(x_k)}{2} \leq \delta(x_k) \)
+
+\begin{exercise}{}{}
+    \begin{itemize}
+        \item
+            Обобщить на компакты.
+        \item
+            Верна ли обратная теорема?
+    \end{itemize}
+\end{exercise}
+
+\subsection{Обратная функция}
+
+\begin{defn}{Обратная функция}{}
+    Пусть \( f : E \to D \) --- биекция.
+
+    Это значит, что \( \forall y \in D \ \exists ! x \in E : f(x) = y \).
+
+    Поэтому \( \exists g : D \to E : \forall x \in E \ \exists ! y \in D : g(y) = x \).
+
+    \( g \) --- обратная к \( f \) функция, обозначается \( g = f^{-1} \)
+\end{defn}
+
+\begin{thrm}{}{}
+    Пусть \( f \) монотонна на отрезке \( [a, b] \).
+
+    Тогда \( f \in C[a, b] \Leftrightarrow f([a, b]) \) --- это отрезок.
+\end{thrm}
+
+Доказательство:
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+
+        \( f \) принимает все значения на отрезке \( [f(a), f(b)] \) по теореме Больцано-Коши.
+    \item
+        \( \Leftarrow \)
+
+        Пусть \( f([a, b]) \) --- отрезок, но \( f \notin C[a, b] \).
+
+        Пусть \( c \in [a, b] \) --- точка разрыва.
+
+        Если \( c \in (a, b) \), то это разрыв I рода
+        и весь интервал с концами \( \lim\limits_{x \to c-} f(x) \) и \( \lim\limits_{x \to c+} f(x) \)
+        пересекается со значениями функции не более чем по одной точке.
+
+        Если \( c = a \), то \( f(a) \neq \lim\limits_{x \to a+} f(x) \).
+
+        Значит интервал с концами \( f(a) \) и \( \lim\limits_{x \to a+} f(x) \) 
+        не пересекается с \( f[a, b] \).
+
+        \( c = b \) аналогично.
+\end{itemize}
+
+\begin{thrm}{Теорема об обратной функции}{}
+    Пусть \( f \in C[a, b] \), а также \( \uparrow \uparrow \) или \( \downarrow \downarrow \).
+
+    Тогда \( \exists f^{-1} \) на отрезке \( [f(a), f(b)] \),
+    а также либо \( f^{-1} \uparrow \uparrow \), либо \( f^{-1} \downarrow \downarrow \).
+\end{thrm}
+
+Доказательство:
+
+\( f \) --- биекция \( [a, b] \) на \( [f(a), f(b)] \),
+так как она является строго монотонной.
+
+Поэтому существует \( f^{-1} \).
+
+\( f^{-1} ( [f(a), f(b)] ) = [a, b] \).
+
+\( f^{-1} \uparrow \uparrow \), если \( f \uparrow \uparrow \), 
+так как \( f^{-1} ( f(x_1) ) = x_1 < x_2 = f^{-1} ( f(x_2) ) \)
+
+Получили, что образ \( f^{-1} \) --- \( [a, b] \), \( f^{-1} \) строго монотонна,
+а также \( f^{-1} \in C[f(a), f(b)] \)

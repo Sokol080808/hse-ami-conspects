@@ -1,0 +1,174 @@
+\section{Отношения}
+
+\begin{defn}{Отношение}{}
+    Отношение на множествах \( A, \ B \) --- это \( R \subseteq A \times B \)
+
+    \( a \ R \ b \Leftrightarrow (a, b) \in R \)
+\end{defn}
+
+\begin{example}{}{}
+    Функция --- частный пример отношения
+\end{example}
+
+\begin{defn}{}{}
+    Пусть \( R \subseteq A \times B, \ S \subseteq B \times C \) --- отношения.
+
+    Тогда \( S \circ R \) --- это отношение на \( A, \ C \).
+
+    \( a \ (S \circ R ) \ b \Leftrightarrow \exists b \in B : a \ R \ b \land b \ S \ c \)
+\end{defn}
+
+\begin{example}{}{}
+    \( A = B = C \) --- множество людей.
+
+    \( x \ R \ y \) --- \( x \) сын \( y \)
+
+    \( x \ S \ y \) --- \( x \) брат \( y \)
+
+    Тогда:
+    \begin{enumerate}
+        \item
+            \( a \ ( S \circ R ) \ c \) \( \Rightarrow \) \( c \) дядя \( a \)
+
+            (причем работает в обе стороны)
+        \item
+            \( a \ ( R \circ S ) \ c \) \( \Rightarrow \) \( c \) отец \( a \)
+
+            (работает только в одну сторону)
+        \item
+            \( a \ ( R \circ R ) \ c \) \( \Rightarrow \) \( c \) дедушка \( a \)
+    \end{enumerate}
+\end{example}
+
+\begin{thrm}{}{}
+    Пусть \( R \subseteq A \times B, \ S \subseteq B \times C, \ T \subseteq C \times D \) --- отношения.
+
+    Тогда \( ( T \circ S ) \circ R = T \circ ( S \circ R ) \)
+\end{thrm}
+
+Доказательство:
+
+Левая и правая части --- отношения на \( A , D \)
+
+Левая часть:
+\begin{gather*}
+    a \ (( T \circ S ) \circ R) \ d
+    \\
+    \exists b \in B : a \ R \ b \land b \ (T \circ S) \ d
+    \\
+    \exists b \in B, \ c \in C : a \ R \ b \land b \ S \ c \land c \ T \ d
+\end{gather*}
+
+Правая часть:
+\begin{gather*}
+    a \ ( T \circ (S \circ R)) \ d
+    \\
+    \exists c \in C : a \ (S \circ R) \ c \land c \ T \ d
+    \\
+    \exists b \in B, \ c \in C : a \ R \ b \land b \ S \ c \land c \ T \ d
+\end{gather*}
+
+\begin{defn}{Отношение эквивалентности}{}
+    \( R \subseteq A \times A \)
+
+    Отношение \( R \) на множестве \( A \) --- отношение эквивалентности,
+    если оно удовлетворяет следующим условиям:
+    \begin{enumerate}
+        \item
+            Рефлексивность
+
+            \( \forall a \in A \ (a \ R \ a) \)
+        \item
+            Симметричность
+
+            \( \forall a, b \in A \ ( a \ R \ b \Rightarrow b \ R \ a) \)
+        \item
+            Транзитивность
+
+            \( \forall a, b, c \in A \ ( a \ R \ b \land b \ R \ c \Rightarrow a \ R \ c ) \)
+    \end{enumerate}
+\end{defn}
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            \( A \) --- множество людей, \( x \ R \ y \Leftrightarrow \) \( x \) и \( y \) имеют одинаковые имена
+        \item
+            \( A = \ZZ, \ x \ R \ y \Leftrightarrow x \equiv_n y \)
+        \item
+            \( A = \NN^2, \ (x, y) \ R \ (p, q) \Leftrightarrow xq = yp \)
+    \end{itemize}
+\end{example}
+
+\begin{example}{}{}
+    \( A = \bigsqcup\limits_{i \in I} A_i \).
+
+    Есть \( R \) на \( A \).
+
+    \( x \ R \ y \Leftrightarrow \exists i \in I : x, y \in A_i \).
+
+    Тогда \( R \) --- отношение эквивалентности.
+\end{example}
+
+\newpage
+
+\begin{thrm}{}{}
+    Пусть \( A \neq \varnothing \) и \( R \) --- отношение эквивалентности.
+
+    Тогда существует разбиение \( A = \bigsqcup\limits_{i \in I} A_i \) такое, что
+    \[
+        \forall x, y \in A \ x \ R \ y \Leftrightarrow \exists i \in I : x, y \in A_i
+    \]
+
+    \( A_i \) называют классами эквивалентностями.
+\end{thrm}
+
+Доказательство:
+
+\( a \in A \), определим \( [a] = \{ x \in A \ \vline \ a \ R \ x \} \)
+
+Тогда
+\begin{enumerate}
+    \item
+        \( \forall a \in A \ a \in [a] \Rightarrow A = \bigcup\limits_{a \in A} [a] \)
+    \item
+        \(
+        \forall a, b \in A \ [a] \cap [b] =
+        \begin{cases}
+            \varnothing
+            \\
+            [a] = [b]
+        \end{cases}
+        \)
+
+        Докажем это.
+
+        Пусть \( x \in [a] \cap [b] \)
+
+        \( a \ R \ x \land x \ R \ b \Rightarrow a \ R \ b \Rightarrow b \in [a] \).
+
+        Но тогда \( \forall y \in [b] \ a \ R \ b \land b \ R \ y \Rightarrow a \ R \ y \Rightarrow y \in [a] \)
+
+        Значит \( [b] \subseteq [a] \).
+
+        Аналогично \( [a] \subseteq [b] \), поэтому \( [a] = [b] \)
+    \item
+        Если выкинем повторы, то получим \( A = \bigcup\limits_{i \in I} [a_i] \)
+    \item
+        Покажем, что \( x \ R \ y \Leftrightarrow \exists i \in I : x, y \in [a_i] \)
+
+        \begin{itemize}
+            \item
+                \( \Rightarrow \)
+
+                \( x \ R \ y \Rightarrow x \in [x], \ y \in [x] \)
+            \item
+                \( \Leftarrow \)
+
+                \( x, y \in [a_i] \Rightarrow x \ R \ a_i \land a_i \ R \ y \Rightarrow x \ R \ y \)
+        \end{itemize}
+\end{enumerate}
+
+\begin{remark}
+    \( \{ A_i \ \vline \ i \in I \} = A \slash R \) --- фактор множество \( A \) по \( R \)
+\end{remark}

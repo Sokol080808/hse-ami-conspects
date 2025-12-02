@@ -1,0 +1,122 @@
+\section{Множества}
+
+\[
+    X = \{ a, b, c \} 
+\] 
+
+Принятно, что множества упорядочены, а их элементы не повторяются, то есть
+\[ 
+    \{ a, b, c \} = \{ a, b, a, c, c, b \} = \{ b, c, a \}
+\]
+
+\begin{itemize}
+    \item 
+        \( a \in X \) --- \( a \) принадлежит \( X \) 
+
+        \( a \notin X \) --- \( a \) не принадлежит \( X \) 
+    \item
+        \( X \subseteq Y \) --- \( X \) является подмножеством \( Y \)
+
+        \( \forall x \ ( x \in X \Rightarrow x \in Y ) \)
+    \item
+        \( X = Y \Leftrightarrow ( X \subseteq Y \land Y \subseteq X ) \)
+\end{itemize}
+
+\begin{example}{}{}
+    Примеры множеств:
+    \begin{itemize}
+        \item
+            \( \NN, \ZZ, \QQ, \RR, \CC, \ldots \)
+        \item 
+            \( \{ 1, 2, 3, 5, 7 \} \)
+        \item
+            \( \varnothing \) --- пустое множество
+    \end{itemize}
+\end{example}
+
+
+\begin{example}{}{}
+    Определение натуральных чисел через множества:
+    \begin{gather*} 
+        0 = \varnothing
+        \\
+        n + 1 = n \cup \{ n \}
+    \end{gather*}
+\end{example}
+
+\subsection{Операции с множествами}
+\begin{enumerate}
+    \item
+        Выделение условием
+
+        \( X \) --- множество
+
+        \( Y = \{ x \in X \ \vline \ \phi(x) \} \)
+    \item
+        Объединение
+
+        \( A, B \) --- множества
+
+        \( A \cup B = \{ x \ \vline \ x \in A \lor x \in B \} \)
+    \item
+        Пересечение
+
+        \( A, B \) --- множества
+
+        \( A \cap B = \{ x \ \vline \ x \in A \land x \in B \} \)
+    \item 
+        Разность множеств
+
+        \( A, B \) --- множества
+
+        \( A \setminus B = \{ x \ \vline \ x \in A \land x \notin B \} \)
+    \item 
+        Симметрическая разность
+
+        \( A, B \) --- множества
+
+        \( A \oplus B = \{ x \ \vline \ \text{\( x \) лежит в ровно одном из \( A, B \)} \} \)
+    \item
+        Взятие всех подмножеств \( X \)
+
+        \( 2^X = \{ Y \ \vline \ Y \subseteq X \} \)
+    \item
+        Дополнение
+
+        \( \overline{A} = U \setminus A \)
+\end{enumerate}
+
+\subsection{Парадокс Рассела}
+
+\( R = \{ x \ \vline \ x \notin x \} \)
+
+Лежит ли \( R \) в \( R \)
+\begin{itemize}
+    \item
+        \( R \in R \Rightarrow R \notin R \)
+    \item
+        \( R \notin R \Rightarrow R \in R \)
+\end{itemize}
+
+Получили парадокс.
+
+Мы использовали выделение условием, но мы можем выделять только из другого множества.
+Но на самом деле ``множество'' всех множеств не является множеством.
+
+Чтобы такого не происходило, существует аксиоматика Цермело-Френкеля --- \( ZF \) или \( ZFC \) (с аксиомой выбора)
+
+\subsection{Базовые тождества}
+\begin{enumerate}
+    \item
+        \( A \cup B = B \cup A \)
+    \item
+        \( (A \cup B) \cup C = A \cup (B \cup C) \)
+    \item
+        \( A \cap \varnothing = \varnothing \)
+    \item
+        \( A \cup \varnothing = A \)
+    \item
+        \( A \cap B = B \cap A \)
+    \item
+        \( (A \cup B) \setminus C = (A \setminus C) \cup (B \setminus C) \)
+\end{enumerate}
