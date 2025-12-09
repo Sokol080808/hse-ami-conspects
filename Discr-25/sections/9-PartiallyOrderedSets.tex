@@ -182,6 +182,10 @@
 Если \( \varphi: P \to Q \) --- изоморфизм порядков, то \( \phi([a, b]) = [\phi(a), \phi(b)] \).
 Доказательство тривиально.
 
+\newpage
+
+\subsection{Фундированные подмножества}
+
 \begin{defn}{Фундированное множество}{}
     ЧУМ \( (P, \leq) \) называется фундированным, если \( \forall X \subseteq P, x \neq \varnothing \)
     имеет минимальный элемент.
@@ -195,3 +199,151 @@
             \( (Z, \leq) \) --- не фундированное, возьмем \( X = \ZZ \)
     \end{itemize}
 \end{example}
+
+\begin{thrm}{}{}
+    Для ЧУМ-а \( (P, \leq) \) эквивалентны следующие условия:
+    \begin{enumerate}
+        \item
+            \( \forall X \subseteq P, x \neq \varnothing \Rightarrow X \) имеет минимальный элемент.
+        \item
+            \( \not\exists \) бесконечно убывающей цепи \( p_1 > p_2 > p_3 > \ldots \)
+        \item
+            Для \( P \) справедлив принцип индукции:
+
+            \( 
+                \forall p \in P ( ( \forall q < p \ A(q) - \text{ист} ) \Rightarrow A(p) - \text{ист} ) 
+                \Rightarrow
+                \forall p \in P A(p) - \text{ист}
+            \)
+    \end{enumerate}
+\end{thrm}
+
+Доказательство:
+\begin{enumerate}
+    \item
+        \( 1 \Rightarrow 2 \)
+
+        Докажем от противного: есть бесконечная цепь \( \Rightarrow \) нет минимального
+    \item
+        \( 2 \Rightarrow 1 \)
+
+        Построим бесконечную цепь:  в \( X \subseteq P \) нет минимального,
+        значит всегда можем найти новый элемент для цепи.
+    \item
+        \( 1 \Rightarrow 3 \)
+
+        Пусть \( X = \{ p \in P \ \vline \ A(p) - \text{ложно} \} \neq \varnothing \).
+
+        Рассмотрим \( p' \) --- минимальный элемент в \( X \).
+
+        Но тогда \( \forall q < p' \) \( A(q) \) --- ист.
+        Значит \( A(p') \) --- ист \( \Rightarrow \) противоречие \( \Rightarrow X = \varnothing \).
+    \item
+        \( 3 \Rightarrow 1 \)
+
+        Пусть \( X \subseteq P, X \neq \varnothing \), и \( A(p) = p \notin x \)
+
+        Допустим, что \( X \neq \varnothing \) не имеет минимальных элементов.
+
+        \( \forall p \in P ( ( \forall q < p \ q \notin x) \Rightarrow p \notin X ) \) --- верно,
+        так как иначе \( p \) --- минимальный элемент.
+
+        Но тогда \( \forall p \ p \notin X \Rightarrow X = \varnothing \), что и требовалось доказать.
+\end{enumerate}
+
+\subsection{Что-то про изоморфизмы}
+
+\begin{thrm}{}{}
+    Пусть \( (P, \leq_P), \ (Q, \leq_Q) \) --- счетные плотные линейные порядки без наименьшего и наибольшего элементов.
+
+    Тогда \( (P, \leq_P) \cong (Q, \leq_Q) \)
+\end{thrm}
+
+Доказательство:
+\begin{gather*}
+    P = \{ p_1, p_2, p_3, \ldots \}
+    \\
+    Q = \{ q_1, q_2, q_3, \ldots \}
+\end{gather*}
+
+Строим изоморфизм \( \varphi : P \to Q \)
+
+Возьмем наименьший невзятый элемент из \( P \), пусть это \( p \).
+
+Пусть отсортированные уже взятые \( p_i \) --- \( a_1, \ldots, a_k \),
+а \( q_i \) --- \( b_1, \ldots, b_k \).
+
+Он расположен между какими-то двумя уже взятыми \( a_i \leq q \leq a_{i + 1} \) (или перед \( a_0 \) / после \( a_{k - 1} \))
+
+Но засчет плотности и отсутствия наибольшего (и наименьшего элемента) у нас найдется элемент из \( Q \),
+который находится между \( b_i \) и \( b_{i + 1} \).
+
+Давайте продолжать выбирать так пары элементов, поочередно беря то минимальный по номеру невзятый \( p_i \), то \( q_i \).
+
+\subsection{Цепи и антицепи}
+
+Пусть \( (P, \leq) \) --- ЧУМ
+
+\begin{defn}{}{}
+    Цепь в \( P \) --- это \( \varnothing \neq C \subseteq P : \forall x, y \in C \ x \leq y \lor y \leq x \)
+
+    Антицепь в \( P \) --- это \( \varnothing \neq A \subseteq P : \forall x \neq y \in A \) \( x, y \) не сравнимы
+\end{defn}
+
+\begin{exercise}{}{}
+    Если \( C \) --- цепь в \( P \), а \( A \) --- антицепь в \( P \), то \( | A \cap C | \leq 1 \)
+\end{exercise}
+
+\begin{exercise}{}{}
+    Пусть \( P \) --- конечный ЧУМ
+
+    Пусть множество разбивается на \( k \) цепей.
+
+    Тогда \( \max |A| \leq k \)
+
+    Пусть множество разбивается на \( l \) антицепей.
+
+    Тогда \( \max |C| \leq l \)
+\end{exercise}
+
+\begin{thrm}{Теорема Мирского}{}
+    Пусть \( P \) --- конечный ЧУМ
+
+    Пусть \( P \) можно разбить на \( l \) антицепей и нельзя разбить на меньшее число.
+
+    Тогда \( \max |C| = l \)
+\end{thrm}
+
+Учитывая упражнения выше, достаточно показать, что можно разбить множество на \( \max |C| = l \) антицепей.
+
+\( \min X =  \{ x \in X \ \vline \ x - \text{минимальный в} \ X \} \)
+
+\begin{gather*}
+    P_1 = \min P
+    \\
+    P_2 = \min ( P \setminus P_1)
+    \\
+    P_3 = \min ( P \setminus (P_1 \cup P_2) )
+    \\
+    \vdots
+    \\
+    P_k = \min ( P \setminus (P_1 \cup \ldots \cup P_{k - 1}) )
+    \\
+    \vdots
+\end{gather*}
+
+\( P_1, \ldots, P_m \) --- антицепи, причем не пересекаются.
+
+\( p_m \in P_m \Rightarrow \exists p_{m - 1} \in P_{m - 1} : p_m > p_{m - 1} \).
+
+Значит можем так достать цепь \( p_m > p_{m - 1} > \ldots > p_1 \).
+
+Отсюда \( m \leq \max |C| = l \leq m \Rightarrow l = m \), что и требовалось доказать.
+
+\begin{thrm}{Теорема Дилуорса}{}
+    Пусть \( P \) --- конечный ЧУМ
+
+    Пусть \( P \) можно разбить на \( k \) цепей и нельзя разбить на меньшее число.
+
+    Тогда \( \max |A| = k \)
+\end{thrm}
