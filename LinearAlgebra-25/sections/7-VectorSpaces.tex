@@ -1107,15 +1107,275 @@
     \item
         \( \Leftarrow \)
 
-        \( 
-            \Phi(v_1) = \Phi(v_2) 
+        \(
+            \Phi(v_1) = \Phi(v_2)
             \Rightarrow
-            \Phi(v_1) - \Phi(v_2) = 0 
+            \Phi(v_1) - \Phi(v_2) = 0
             \Rightarrow
-            \Phi(v_1 - v_2) = 0 
+            \Phi(v_1 - v_2) = 0
             \Rightarrow
             v_1 - v_2 = 0
             \Rightarrow
             v_1 = v_2
         \)
 \end{itemize}
+
+\subsection{Неравенства на ранги}
+
+\subsubsection{Сумма}
+
+\begin{lemma}{}{}
+    \( A, B \in M_{mn} (F) \)
+
+    Тогда \( | rk \: A - rk \: B | \leq rk \: (A + B) \leq rk \: A + rk \: B \)
+\end{lemma}
+
+Пусть \( rk \: A = r, rk \: B = d \).
+
+Заметим, что из тензорного ранга сразу следует, что \( A + B \) можно
+представить в нужной форме из \( r + d \) слагаемых,
+поэтому \( rk \: (A + B) \leq r + d = rk \: A + rk \: B \)
+
+Для другого неравенства воспользуемся трюком:
+\begin{gather*}
+    rk \: ((A + B) - (-B)) \leq rk \: (A + B) + rk \: (-B)
+    \\
+    rk \: A \leq rk \: (A + B) + rk \: B
+    \\
+    rk \: A - rk \: B \leq rk \: (A + B)
+\end{gather*}
+
+Сделав такое же неравенство на \( rk \: B - rk \: A \) получим желаемое.
+
+\subsubsection{Произведение}
+
+\begin{lemma}{}{}
+    \( A \in M_{mk} (F) \), \( B \in M_{kn} (F) \)
+
+    Тогда \( rk \: A + rk \: B - k \leq rk \: (AB) \leq \min (rk \: A, rk \: B) \)
+\end{lemma}
+
+\( rk \: A = r \)
+
+Тогда \( A = A_1 \cdot A_2 \) и \( A_1 \in M_{mr} (F) \)
+
+Значит \( AB = A_1 \cdot (A_2 B) \Rightarrow rk \: AB \leq r = rk \: A \).
+
+Аналогично можно получить неравенство с \( rk \: B \)
+
+Для оценки снизу рассмотрим линейные отображения:
+\begin{enumerate}
+    \item
+        \( B: F^n \to F^k \)
+
+        \( x \mapsto Bx \)
+    \item
+        \( A: F^k \to F^m \)
+
+        \( x \mapsto Ax \)
+    \item
+        \( AB: F^n \to F^m \)
+
+        \( x \mapsto ABx \)
+\end{enumerate}
+
+\( Im \: A \) = <столбцы \( A \)>
+
+\( \ker A = \{ x \in F^k \ \vline \ x \in F^k \} \)
+
+\( Im \: A = \{ Ax \in F^m \ \vline \ x \in F^k \} \)
+
+Поэтому \( rk \: A = \dim Im \: A \)
+
+Хотим доказать:
+\[
+    \dim Im \: A + \dim Im \: B - k \leq \dim Im \: AB
+\]
+
+Рассмотрим \( A \: \vline_{\: Im \: B} \).
+Оно переводит вектор из \( Im \: B \) в \( F^m \),
+причем:
+\[
+    Im \: A \: \vline_{\: Im \: B} = Im \: AB
+\]
+
+Из суммы размерностей ядра и образа:
+\[
+    \dim Im \: A \: \vline_{\: Im \: B} + \dim \ker A \: \vline_{\: Im \: B} = \dim Im \: B
+\]
+
+Из соображений здравого смысла:
+\begin{gather*}
+    \ker A \: \vline_{\: Im \: B} = Im \: B \cap \ker A \subseteq \ker A
+    \\
+    \Downarrow
+    \\
+    \dim \ker A \: \vline_{\: Im \: B} \leq \dim \ker A
+\end{gather*}
+
+Тогда:
+\begin{gather*}
+    \dim Im \: A \: \vline_{\: Im \: B} + \dim \ker A \: \vline_{\: Im \: B} = \dim Im \: B
+    \\
+    \dim Im \: AB + \dim \ker A \: \vline_{\: Im \: B} = \dim Im \: B
+    \\
+    \dim Im \: AB
+        = \dim Im \: B - \dim \ker A \: \vline_{\: Im \: B}
+        \leq \dim Im \: B - \dim \ker A
+        = \\
+        = \dim Im \: B - (k - \dim Im \: A)
+        = \dim Im \: A + \dim Im \: B - k
+\end{gather*}
+
+Что и требовалось доказать.
+
+\subsection{Суммы и пересечения}
+
+\( V \) --- векторное пространство над \( F \)
+
+\( U, W \subseteq V \) --- подпространства.
+
+Очевидно, что \( U \cap W \) --- тоже подпространство.
+
+К сожалению про \( U \cup W \) такого мы сказать не можем,
+поэтому определим сумму:
+\( U + W \) --- наименьшее векторное подпространство \( V \),
+содержащие и \( U \), и \( W \). Иными словами:
+\[
+    U + W = \{ u + w \ \vline \ u \in U, w \in W \}
+\]
+
+Отсюда следует, что такие штуки тоже векторные подпространства:
+\begin{gather*}
+    \bigcap\limits_{ \alpha \in A } U_\alpha
+    \\
+    \sum\limits_{ \alpha \in A } U_\alpha = \{ u_{\alpha_1} + \ldots + u_{\alpha_k} \ \vline \ \alpha_1, \ldots, \alpha_k \in A \}
+\end{gather*}
+
+\begin{lemma}{}{}
+    \[
+        \dim ( U + W ) + \dim ( U \cap W ) = \dim U + \dim W
+    \]
+\end{lemma}
+
+Рассмотрим \( e_1, \ldots, e_k \in U \cap W \) --- базис.
+Его можно дополнить до базиса \( U \) векторами \( f_1, \ldots, f_s \)
+
+Аналогично можно дополнить до базиса \( W \) векторами \( g_1, \ldots, g_t \)
+
+Если мы докажем, что \( e_1, \ldots, e_k, f_1, \ldots, f_s, g_1, \ldots, g_t \) --- базис \( U + W \),
+то докажем и равенство.
+В силу определения \( U + W \),
+такой набор векторов является порождающим.
+Значит нужно показать линейную независимость:
+\begin{gather*}
+    \sum \alpha_i e_i + \sum \beta_i f_i + \sum \gamma_i g_i = 0
+    \\
+    \sum \alpha_i e_i + \sum \beta_i f_i = - \sum \gamma_i g_i = z \in U \cap W
+\end{gather*}
+
+Значит \( z = \sum \delta_i e_i \)
+\begin{gather*}
+     - \sum \gamma_i g_i = \sum \delta_i e_i
+     \\
+     \sum \delta_i e_i + \sum \gamma_i g_i = 0
+\end{gather*}
+
+Но это базис \( W \), поэтому \( \gamma_i = 0 \), вернемся к изначальному равенству:
+\[
+    \sum \alpha_i e_i + \sum \beta_i f_i = 0
+\]
+
+Но это базис \( U \),
+поэтому \( e_i = 0 \) и \( f_i = 0 \).
+Что и требовалось доказать.
+
+\begin{defn}{}{}
+    \( V \) --- векторное пространство над \( F \).
+
+    \( U_1, \ldots, U_k \subseteq V \) --- подпространства.
+
+    \( U_1, \ldots, U_k \) --- ЛНЗ,
+    если \( \forall u_1 \in U_1, \ldots, u_k \in U_k \) выполнено:
+    \[
+        u_1 + \ldots + u_k = 0 \Leftrightarrow u_1 = \ldots = u_k = 0
+    \]
+\end{defn}
+
+\begin{example}{}{}
+    Если в \( \RR^3 \) взять базис \( e_1, e_2, e_3 \),
+    то \( <e_1, e_2> \) и \( <e_3> \) --- ЛНЗ.
+\end{example}
+
+\begin{thrm}{}{}
+    \( V \) --- векторное пространство над \( F \)
+
+    \( U_1, \ldots, U_k \subseteq V \)
+
+    Тогда эквивалентны:
+    \begin{enumerate}
+        \item
+            \( U_1, \ldots, U_k \) --- ЛНЗ
+        \item
+            \( \forall v \in U_1 + \ldots + U_k \ \exists! \: v = u_1 + \ldots + u_k \)
+        \item
+            \( U_i = < e_i > \) (базис) \( \Rightarrow \)
+            \( e_i \cap e_j = \varnothing \)
+            и \( \bigcup e_i \) --- базис \( U_1 + \ldots + U_k \)
+        \item
+            \( \sum\limits_{i = 1}^{k} \dim U_i = \dim (U_1 + \ldots + U_k) \)
+        \item
+            \( \forall i : U_i \cap \sum\limits_{j \neq i} U_j = 0 \)
+        \item
+            \( U_1 \times \ldots \times U_k \to U_1 + \ldots + U_k \)
+
+            \( (u_1, \ldots, u_k) \mapsto u_1 + \ldots + u_k \) --- изоморфизм
+
+            Иными словами \( U_1 \oplus \ldots \oplus U_k = U_1 + \ldots + U_k \)
+    \end{enumerate}
+\end{thrm}
+
+\begin{itemize}
+    \item
+        \( (1) \Rightarrow (2) \)
+
+        Очевидно
+    \item
+        \( (2) \Rightarrow (3) \)
+
+        Если бы в каких-то базисах был общий элемент,
+        то \( 0 \) можно было бы получить более чем одним способом --- противоречие.
+        Значит осталось доказать то, что объединение базисов --- базис суммы.
+        Понятно, что он порождающий, значит нужно показать что он ЛНЗ.
+        Рассмотрим \( e_1 \alpha_1 + \ldots + e_k \alpha_k = 0 \).
+        Так как \( e_i \alpha_i \) лежит в \( U_i \),
+        каждое такое слагаемое должно быть нулем из \( (2) \).
+        Но также \( e_i \) --- базис, поэтому \( \alpha_i = 0 \)
+    \item
+        \( (3) \Rightarrow (4) \)
+
+        Очевидно
+    \item
+        \( (4) \Rightarrow (5) \)
+
+        % TODO
+    \item
+        \( (5) \Rightarrow (1) \)
+
+        \( u_1 + \ldots + u_k = 0 \)
+
+        \( u_2 + \ldots + u_k = -u_1 \in U_1 \)
+
+        \( u_1 \in U_1 \cap (U_2 + \ldots + U_k) = 0 \Rightarrow u_1 = 0 \)
+
+        Аналогично для всех остальных получим \( u_i = 0 \)
+    \item
+        \( (6) \)
+
+        Такое отображение является сюръективным и линейным по определению.
+        Значит остается доказать инъективность.
+        Но мы знаем, что это равносильно тому, что ядро равно нулю.
+
+        Но это просто переформулировка первого пункта.
+\end{itemize}
+
