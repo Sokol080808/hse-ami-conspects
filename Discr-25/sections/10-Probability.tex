@@ -1,0 +1,254 @@
+\section{Дискретная теория вероятностей}
+
+\subsection{Вероятность}
+
+\begin{defn}{Вероятностное пространство}{}
+    Вероятностное пространство --- \( (\Omega, P) \),
+    где \( \Omega = \{ \omega_1, \omega_2, \ldots, \omega_n \} \) --- множество элементарных исходов,
+    а \( P \) --- функция \( \Omega \to \RR \),
+    обладающая свойствами:
+    \begin{itemize}
+        \item
+            \( 0 \leq P(\omega_i) \leq 1 \)
+        \item
+            \( \sum\limits_{i = 1}^{n} P(\omega_i) = 1 \)
+    \end{itemize}
+\end{defn}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            Подбрасывание монетки: \( \Omega = \{ \text{О}, \text{Р} \} \), вероятности --- \( \frac{1}{2} \)
+        \item
+            Подбрасывание кубика: \( \Omega = \{ 1, 2, 3, 4, 5, 6 \} \), вероятности --- \( \frac{1}{6} \)
+    \end{enumerate}
+\end{example}
+
+\begin{defn}{Событие}{}
+    Событие \( A \) --- подмножество \( \Omega \)
+
+    Вероятность события \( P(A) = \sum\limits_{\omega_i \in A} P(\omega_i) \)
+\end{defn}
+
+\begin{example}{}{}
+    \begin{enumerate}[start=3]
+        \item
+            Подбрасывание нечестной монетки \( t \) раз
+
+            Решка падает с вероятностью \( p \), орел с \( 1 - p \)
+
+            Тогда \( \Omega = \{ 0, 1 \}^t \)
+
+            \( P( \{ a_1, \ldots, a_t \} ) = p^{|a|} \cdot (1 - p)^{t - |a|} \)
+        \item
+            Равновероятный случай
+
+            \( P(\omega_i) = \frac{1}{n} \)
+
+            Тогда \( P(A) = \frac{|A|}{n} \)
+    \end{enumerate}
+\end{example}
+
+\subsection{Дерево событий}
+
+Не повезло, мне лень это рисовать в tikz.
+
+Условно, если хотим как-то описать все события вида ``случайная перестановка из символов \( (1, 2, 3) \)''
+можно просто сделать бор, написав на ребрах вероятности.
+
+\subsection{Свойства вероятности}
+
+\begin{enumerate}
+    \item
+        \( P(\varnothing) = 0, P(\Omega) = 1 \)
+    \item
+        \( P(A \sqcup B) = P(A) + P(B) \)
+    \item
+        \( P(\overline{A}) = 1 - P(A) \)
+    \item
+        \( A \subseteq B \Rightarrow P(A) \leq P(B) \)
+    \item
+        Формула включений-исключений
+
+        \begin{thrm}{}{}
+            Пусть \( (\Omega, P) \) --- вероятностное пространство, \( A_1, \ldots, A_n \) --- события.
+            Тогда выполнено
+            \[
+                P(A_1 \cup \ldots \cup A_n)
+                =
+                \sum\limits_{k = 1}^n (-1)^{k + 1} \sum\limits_{1 \leq i_1 < \ldots < i_k \leq n} P(A_{i_1} \cap \ldots \cap A_{i_k})
+            \]
+        \end{thrm}
+
+        Введем индикаторную функцию \( I_A : \Omega \to R \), \( I_A(x) = (x \in A) \).
+
+        Отсюда следует несколько очевидных свойств:
+        \begin{itemize}
+            \item
+                \( I_{A \cap B} = I_A \cdot I_B \)
+            \item
+                \( I_{\overline{A}} = 1 - I_A \)
+            \item
+                \( I_{A \cup B} = I_A + I_B - I_{A \cap B}  \)
+        \end{itemize}
+
+        \begin{gather*}
+            I_{\overline{A_1 \cup \ldots \cup A_n}} = I_{\overline{A_1} \cap \ldots \cap \overline{A_n}} = 
+                I_{\overline{A_1}} \cdot \ldots \cdot I_{\overline{A_n}} = (1 - I_{A_1}) \ldots (1 - I_{A_n})
+            \\
+            \Downarrow
+            \\
+            I_{A_1 \cup \ldots \cup A_n} = 1 - (1 - I_{A_1}) \ldots (1 - I_{A_n})
+        \end{gather*}
+
+        Раскрыв скобочки в последнем равенстве получим искомое.
+\end{enumerate}
+
+\begin{example}{Задача о беспорядках}{}
+    \( \Omega = S_n \), перестановки равновероятны.
+
+    \( \sigma \in S_n \) --- беспорядок, если \( \forall i \: \sigma(i) \neq i \)
+
+    Необходимо посчитать \( P(\text{\( \sigma \) --- беспорядок}) \)
+\end{example}
+
+\( Y_i = \{ \sigma \in S_n \: \vline \: \sigma(i) = i \} \)
+
+\( P(\text{\( \sigma \) --- не беспорядок}) = P(Y_1 \cup \ldots \cup Y_n) \)
+
+\begin{gather*}
+    P(Y_{i_1} \cap \ldots \cap Y_{i_k}) = \frac{(n - k)!}{n!}
+    \\
+    \Downarrow
+    \\
+    P(Y_1 \cup \ldots \cup Y_n) = \sum\limits_{k = 1}^{n} (-1)^{k + 1} C_n^k \frac{(n - k)!}{n!}
+    =
+    \sum\limits_{k = 1}^{n} \frac{(-1)^{k + 1}}{k!}
+    \\
+    \Downarrow
+    \\
+    P(\text{\( \sigma \) --- беспорядок})
+    =
+    1 - \sum\limits_{k = 1}^{n} \frac{(-1)^{k + 1}}{k!}
+    =
+    \sum\limits_{k = 0}^{n} \frac{(-1)^{k}}{k!}
+\end{gather*}
+
+При большом \( n \) такая штука стремится к \( \displaystyle \frac{1}{e} \)
+
+\subsection{Условная вероятность}
+
+\( P(A | B) \) --- вероятность события \( A \) при условии \( B \)
+
+\[
+    P(A | B) = \frac{P(A \cap B)}{P(B)}
+\]
+
+\begin{example}{}{}
+    Есть коробки, пронумерованные от \( 1 \) до \( 4 \), и один шарик.
+
+    Сначала равновероятно выбирается коробка, а потом подбрасывается монетка,
+    и с вероятностью \( \frac{1}{2} \) шарик кладется в выбранную коробку.
+
+    Ведущий показал, что в первых трех коробках нет шара,
+    какова вероятность, что он в четвертой?
+\end{example}
+
+\( P(B) = \frac{5}{8} \) и \( P(A \cap B) = \frac{1}{8} \)
+
+Получаем, что ответ равен \( \frac{1}{5} \)
+
+\subsection{Формулы полной вероятности и Байеса}
+
+\begin{thrm}{Формула полной вероятности}{}
+    Пусть \( (\Omega, P) \) --- вероятностное пространство и \( \Omega = \bigsqcup\limits_{i = 1}^m A_i \),
+    причем \( P(A_i) > 0 \)
+
+    Тогда \( P(B) = \sum\limits_{i = 1}^{n} P(B | A_i) \cdot P(A_i) \)
+\end{thrm}
+
+\[
+    \sum\limits_{i = 1}^{n} P(B | A_i) \cdot P(A_i)
+    =
+    \sum\limits_{i = 1}^{n} P(A_i \cap B)
+    =
+    P(B \cap (A_1 \cup \ldots \cup A_n))
+    =
+    P(B)
+\]
+
+\begin{thrm}{Формула Байеса}{}
+    Пусть \( (\Omega, P) \) --- вероятностное пространство.
+
+    Есть события \( A, B \) ненулевой вероятности.
+
+    Тогда \( \displaystyle P(B | A)= \frac{P(A | B) \cdot P(B)}{P(A)} \)
+\end{thrm}
+
+\begin{gather*}
+    P(B | A) \cdot P(A) = P(A \cap B) = P(A | B) \cdot P(B)
+    \\
+    \Downarrow
+    \\
+    P(B | A)= \frac{P(A | B) \cdot P(B)}{P(A)}
+\end{gather*}
+
+\begin{example}{}{}
+    Болеет \( 1\% \) населения.
+
+    Тест на болезнь ошибается в \( 1\% \) случаев.
+\end{example}
+
+Посчитаем \( P(\text{человек болен (A) | тест положительный (B)}) \)
+
+\begin{gather*}
+    P(A | B)
+    =
+    \frac{P(B | A) \cdot P(A)}{P(B)}
+    =
+    \frac{99\% \cdot 1\%}{P(B | A) \cdot P(A) + P(B | \overline{A}) \cdot P(\overline{A})}
+    =
+    \\
+    =
+    \frac{99\% \cdot 1\%}{99\% \cdot 1\% + 1\% \cdot 99\%}
+    =
+    0.5
+\end{gather*}
+
+\subsection{Независимые события}
+
+Пусть \( (\Omega, P) \) --- вероятностное пространство.
+
+\begin{defn}{}{}
+    \begin{itemize}
+        \item
+            \( A \) и \( B \) --- независимые события, если \( P(A \cap B) = P(A) \cdot P(B) \)
+        \item
+            \( A_1, \ldots, A_m \) --- независимые в совокупности,
+            если для любого подмножества \( A_{i_1}, \ldots, A_{i_k} \)
+            выполнено
+            \[
+                P(A_{i_1} \cap \ldots \cap A_{i_k}) = P(A_{i_1}) \cdot \ldots \cdot P(A_{i_k})
+            \]
+    \end{itemize}
+\end{defn}
+
+Приведем пример, показывающий недостаточность попарной независимости для независимости в совокупности:
+\begin{example}{}{}
+    Подбросим монетку дважды.
+
+    \( A_1 \) --- в первом броске выпал орел
+
+    \( A_2 \) --- во втором броске выпал орел
+
+    \( B \) --- выпал ровно один орел
+
+    Нетрудно убедиться, что события попарно независимы, но при этом
+    \[
+        P(A_1 \cap A_2 \cap B) = 0 \neq \frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{2}
+    \]
+\end{example}
+
+\begin{exercise}{}{}
+    Докажите, что при подбрасывании монетке события вида \( A_i = (\text{в \( i \)-м броске выпал орел}) \) независимы в совокупности. 
+\end{exercise}
