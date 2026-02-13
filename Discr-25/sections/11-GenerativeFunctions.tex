@@ -1,0 +1,165 @@
+\section{Производящие функции}
+
+\subsection{что-то}
+
+\begin{gather*}
+    a_n = 0 + 1 + \ldots + n
+    \\
+    A(x) = \frac{x}{(1 - x)^3}
+    \\
+    a_n = \left. \frac{A^{(n)} (x) }{n!} \right|_{x = 0}
+    \\
+    B(x) = (1 - x)^{-3}
+    \\
+    B^{(n)} (x) = 3 \cdot 4 \cdot \ldots \cdot (n + 2) \cdot (1 - x)^{-n - 3}
+\end{gather*}
+
+\( \frac{B^{(n)} (0)}{n!} = \frac{3 \cdot 4 \cdot \ldots \cdot (n + 2)}{n!} = \frac{(n + 2)(n + 1)}{2} = b_n \)
+
+\( a_n = \frac{(n + 1)n}{2} \)
+
+\subsection{Связь ПФ с неупорядоченными выборками}
+
+\( S, T \) --- множества, \( S \cap T \neq \varnothing \)
+
+\( A(x) \) --- ПФ неупорядоченных выборок из \( S \)
+
+\( B(x) \) --- ПФ неупорядоченных выборок из \( T \)
+
+Тогда \( A(x) B(x) \) --- ПФ неупорядоченных выборок из \( S \cup T \)
+
+\begin{example}{}{}
+    \begin{itemize}
+        \item
+            Бином Ньютона
+
+            \( \{ a_1, \ldots, a_n \} : \binom{n}{k} \) способов выбрать \( k \) элементов
+
+            \( C(x) = \sum\limits \binom{n}{k} x^k = (1 + x)^n \)
+
+            Поскольку изначальный набор представлялся в виде объединения \( \{ a_i \} \)
+            этот же результат можно было получить, сразу возведя \( (1 + x) \) в степень \( n \).
+        \item
+            Количество салатов
+
+            перец: \( 0 \) или \( 1 \)
+
+            редиска: \( 0, 2, 4, \ldots \)
+
+            помидор: любое
+
+            баклажан: \( \leq 3 \)
+
+            Какое есть число салатов из \( n \) овощей при данных ограничениях?
+
+            \( (1 + x)(1 + x^2 + x^4 + \ldots)(1 + x + x^2 + \ldots)(1 + x + x^2 + x^3) = \frac{(1 + x)(1 + x + x^2 + x^3)}{(1 - x^2)(1 - x)} \)
+    \end{itemize}
+\end{example}
+
+\begin{defn}{}{}
+    Пусть \( \alpha \in \CC \), \( k \in \NN_0 \)
+
+    Тогда \( \binom{\alpha}{k} = \frac{\alpha \cdot (\alpha - 1) \cdot \ldots \cdot (\alpha - k + 1)}{k!} \)
+\end{defn}
+
+\begin{remark}{}{}
+    \begin{gather*}
+        \binom{-n}{k}
+        =
+        \frac{(-n) \cdot (-n - 1) \cdot \ldots \cdot (-n - k + 1)}{k!}
+        =
+        \\
+        =
+        (-1)^k \cdot \frac{n \cdot (n + 1) \cdot \ldots \cdot (n + k - 1)}{k!}
+        =
+        (-1)^k \binom{n + k - 1}{k}
+    \end{gather*}
+\end{remark}
+
+\begin{thrm}{}{}
+    \[
+        (1 + x)^n = \sum\limits_{k = 0}^{\infty} \binom{n}{k} x^k \quad \forall n \in \ZZ
+    \]
+\end{thrm}
+
+Рассмотрим \( (1 - x)^{-n} \), \( n \in \NN \).
+
+\( (1 - x)^{-n} = (1 + x + x^2 + \ldots)^n \).
+
+Тогда коэффициент при \( k \) степени --- число разбиений числа \( k \) на неотрицательные целые слагаемые, то есть \( \binom{n + k - 1}{k} \).
+
+Поменяв \( x \) на \( -x \) получим:
+\[
+    (1 + x)^{n} = \sum\limits_{k = 0}^{\infty} (-1)^k \binom{n + k - 1}{k} x^k = \sum\limits_{k = 0}^{\infty} \binom{-n}{k} x^k
+\]
+
+Что и требовалось доказать.
+
+\subsection{Степень}
+
+\begin{defn}{}{}
+    \[
+        (1 + x)^{\alpha} = \sum\limits_{k = 0}^{\infty} \binom{\alpha}{k} x^k
+    \]
+\end{defn}
+
+\begin{lemma}{}{}
+    \[
+        (1 + x)^{\alpha} \cdot (1 + x)^{\beta} = (1 + x)^{\alpha + \beta}
+    \]
+\end{lemma}
+
+\begin{gather*}
+    \left[ (1 + x)^{\alpha} \cdot (1 + x)^{\beta} \right]_n
+    =
+    \sum\limits_{\substack{s + t = n \\ s, t \geq 0}} \binom{\alpha}{t} \binom{\beta}{s}
+    \\
+    \\
+    \left[ (1 + x)^{\alpha + \beta} \right]_n = \binom{\alpha + \beta}{n}
+\end{gather*}
+
+Мы знаем, что при всех натуральных \( \alpha, \beta \) равенство верно.
+
+Зафиксируем \( \tilde{\alpha} \in \NN \).
+Тогда ЛЧ(\( \tilde{\alpha}, \beta \)) и ПЧ(\( \tilde{\alpha}, \beta \)) --- многочлены от \( \beta \).
+Они равны во всех натуральных точках, а значит совпадают во всех комплексных \( \beta \).
+Аналогично можем зафиксировать \( \tilde{\beta} \in \CC \) и повторить идею.
+Во всех натуральных точках части снова будут совпадать, а значит доказали.
+
+\begin{defn}{}{}
+    Последовательность \( (a_0, \ldots, a_n) \) --- линейное рекуррентное соотношение порядка \( k \) с постоянными коэффициентами,
+    если
+    \[
+        \exists c_1, \ldots, c_k \in \CC : c_k \neq 0, \ \forall n \geq 0 \ a_{n + k} = c_1 a_{n + k - 1} + c_2 a_{n + k - 2} + \ldots + c_k a_n
+    \]
+\end{defn}
+
+\begin{thrm}{}{}
+    Пусть \( A(x) \) --- ПФ линейного рекуррентного соотношения с постоянными коэффициентами порядка \( k \).
+
+    Тогда существуют \( P(x), Q(x) \in \CC[x] : \deg P < k, \deg Q = k, Q(0) \neq 0 \) и \( A(x) = \frac{P(x)}{Q(x)} \)
+\end{thrm}
+
+Рассмотрим \( A(x) (c_1 x + c_2 x^2 + \ldots + c_k x^k) \)
+
+Банальным раскрытием скобочек получим, что \( A(x) = A(x) (c_1 x + c_2 x^2 + \ldots + c_k x^k) + P(x) \).
+
+Мы добавляем \( P(x) \), чтобы подправить первые \( k \) коэффициентов (отсюда \( \deg P < k \), которые могли неправильно посчитаться.
+
+Тогда \( A(x) = \frac{P(x)}{1 - c_1 x - \ldots - c_k x^k} \)
+
+\subsection{Явная формула для линейных рекуррент}
+
+\begin{gather*}
+    A(x)
+    =
+    \frac{P(x)}{Q(x)}
+    =
+    \frac{P(x)}{(x - a_1)^{t_1} \cdot \ldots \cdot (x - a_s)^{t_s}}
+    =
+    \\
+    =
+    \sum\limits_{j = 1}^{s} \sum\limits{l = 1}^{t_j} \frac{C_{jl}}{(x - a_j)^l}
+\end{gather*}
+
+А явные значения коэффициента у степени \( n \) у таких дробей мы умеем считать через бином Ньютона.
