@@ -112,14 +112,14 @@
         Лексикографический порядок \( (P \times Q, \leq) \):
 
         \(
-            (p_1, q_1) \leq (p_2, q_)
+            (p_1, q_1) \leq (p_2, q_2)
             \Leftrightarrow
-            p_1 < p_2 \lor (p_1 = p_2 \land q_1 \leq q_2
+            p_1 < p_2 \lor (p_1 = p_2 \land q_1 \leq q_2)
         \)
     \item
         Считаем, что \( P \cap Q = \varnothing \)
 
-        \( P + Q = (P \sqcap Q, \leq): \)
+        \( P + Q = (P \sqcup Q, \leq): \)
 
         \( x \leq y
             \Leftrightarrow
@@ -242,11 +242,11 @@
     \item
         \( 3 \Rightarrow 1 \)
 
-        Пусть \( X \subseteq P, X \neq \varnothing \), и \( A(p) = p \notin x \)
+        Пусть \( X \subseteq P, X \neq \varnothing \), и \( A(p) = p \notin X \)
 
         Допустим, что \( X \) не имеет минимальных элементов.
 
-        \( \forall p \in P ( ( \forall q < p \ q \notin x) \Rightarrow p \notin X ) \) --- верно,
+        \( \forall p \in P ( ( \forall q < p \ q \notin X) \Rightarrow p \notin X ) \) --- верно,
         так как иначе \( p \) --- минимальный элемент.
 
         Но тогда \( \forall p \ p \notin X \Rightarrow X = \varnothing \) --- противоречие.
