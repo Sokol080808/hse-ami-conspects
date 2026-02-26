@@ -229,6 +229,10 @@
 
 Решив такое квадратное уравнение получим \( C_{12} (x) = \frac{1 \pm \sqrt{1 - 4x}}{2x} \).
 
+\begin{thrm}{}{}
+    \( C(x) = \dfrac{1 - \sqrt{1 - 4x}}{2x} \)
+\end{thrm}
+
 Немного (нестрогой) магии:
 \begin{gather*}
     x C^2 (x) - C(x) + 1 = x \left( C(x) - \frac{1}{2x} \right)^2 - \frac{1}{4x} + 1
@@ -255,4 +259,39 @@
 
 Подставим \( x = 0 \) получим, что \( Y(0) = -1 \), а значит \( Y(x) = -\sqrt{1 - 4x} \)
 
+\begin{coroll}{}{}
+    \[
+        C_n = \dfrac{1}{n + 1} C_{2n}^{n}.
+    \]
+\end{coroll}
 
+\( \sqrt{1 - 4x} \) раскладывается по Тейлору:
+
+\begin{gather*}
+    1 - \sqrt{1 - 4x} = 1 - \sum\limits_{n=0}^{\infty} \binom{1/2}{n} (-4x)^n
+    =
+    \\
+    =
+    -\sum\limits_{n=1}^{\infty} \dfrac{\frac{1}{2} \cdot \left( \frac{1}{2} - 1 \right) \cdot \ldots
+    \cdot \left( \frac{1}{2} - 1 \right)}{n!} (-4x)^n
+    =
+    -\sum\limits_{n=1}^{\infty} \dfrac{1 (-1) (-3) \ldots (-2n + 3)}{2^n \cdot k!} (-4x)^n
+    =
+    \\
+    =
+    \sum\limits_{n=1}^{\infty} \dfrac{2 \cdot 3 \cdot \ldots \cdot (2n - 3)}{2^n \cdot n!} 4^n x^n
+    =
+    \sum\limits_{n=1}^{\infty} \dfrac{(2n - 2)! \cdot 2^n}{n! \cdot 2 \cdot 4 \cdot \ldots \cdot (2n-2)} x^n
+    =
+    \\
+    =
+    \sum\limits_{n=1}^{\infty} \dfrac{(2n - 2)! \cdot 2}{n! \cdot (n - 1)!} x^n
+    \\
+    C(x)
+    =
+    \dfrac{1 - \sqrt{1 - 4x}}{2x}
+    =
+    \sum\limits_{n=1}^{\infty} \dfrac{(2n - 2)!}{n! \cdot (n - 1)!} x^{n-1}
+    =
+    \sum\limits_{n=0}^{\infty} \dfrac{(2n)!}{(n + 1) \cdot (n!)^2} x^{n}
+\end{gather*}
