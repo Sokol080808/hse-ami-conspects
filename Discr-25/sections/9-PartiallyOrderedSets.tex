@@ -211,9 +211,9 @@
             Для \( P \) справедлив принцип индукции:
 
             \(
-                \forall p \in P ( ( \forall q < p \ A(q) - \text{ист} ) \Rightarrow A(p) - \text{ист} )
+                \forall p \in P \ ( ( \forall q < p \ A(q) - \text{ист} ) \Rightarrow A(p) - \text{ист} )
                 \Rightarrow
-                \forall p \in P A(p) - \text{ист}
+                \forall p \in P \ A(p) - \text{ист}
             \)
     \end{enumerate}
 \end{thrm}
@@ -246,7 +246,7 @@
 
         Допустим, что \( X \) не имеет минимальных элементов.
 
-        \( \forall p \in P ( ( \forall q < p \ q \notin X) \Rightarrow p \notin X ) \) --- верно,
+        \( \forall p \in P \ ( ( \forall q < p \ q \notin X) \Rightarrow p \notin X ) \) --- верно,
         так как иначе \( p \) --- минимальный элемент.
 
         Но тогда \( \forall p \ p \notin X \Rightarrow X = \varnothing \) --- противоречие.
@@ -448,7 +448,7 @@
 
         Ответ: \( n! \)
     \item
-        Сколько есть цепей размера \( n + 1 \) в \( \BB^n \) проходят через \( \tilde{a} \)
+        Сколько есть цепей размера \( n + 1 \) в \( \BB^n \) проходят через \( \tilde{a} \) на уровне \( k \)?
 
         Ответ: \( k! (n - k)! \)
 \end{enumerate}
@@ -477,8 +477,6 @@
 \begin{defn}{}{}
     Пусть \( (P, \leq) \) --- конечный ЧУМ.
     Его графом сравнимости называется граф \( G_P \): \( V = P, \ \{ x, y \} \in E \Leftrightarrow x < y \lor y < x \)
-
-    Граф сравнимости \( G \)
 \end{defn}
 
 \begin{defn}{}{}

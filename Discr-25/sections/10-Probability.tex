@@ -107,7 +107,7 @@
 \begin{example}{Задача о беспорядках}{}
     \( \Omega = S_n \), перестановки равновероятны.
 
-    \( \sigma \in S_n \) --- беспорядок, если \( \forall i \: \sigma(i) \neq i \)
+    \( \sigma \in S_n \) --- беспорядок, если \( \forall i \ \sigma(i) \neq i \)
 
     Необходимо посчитать \( P(\text{\( \sigma \) --- беспорядок}) \)
 \end{example}
@@ -153,6 +153,8 @@
     Ведущий показал, что в первых трех коробках нет шара,
     какова вероятность, что он в четвертой?
 \end{example}
+
+\( A \) --- шарик в четвертой коробке, \( B \) --- шарик не в первых трех коробках.
 
 \( P(B) = \frac{5}{8} \) и \( P(A \cap B) = \frac{1}{8} \)
 
@@ -403,7 +405,7 @@
 \subsection{Дисперсия}
 
 \begin{defn}{}{}
-    Дисперсия случайную величие \( f : \Omega \to \RR \) --- это \( D(f) = E \left( (f - E(f))^2 \right) \)
+    Дисперсия случайной величины \( f : \Omega \to \RR \) --- это \( D(f) = E \left( (f - E(f))^2 \right) \)
 \end{defn}
 
 \begin{thrm}{}{}
@@ -597,7 +599,7 @@
 \begin{thrm}{}{}
     Пусть \( G = (V, E) \) --- простой неориентированный граф,
     тогда существует разрез величины хотя бы \( \frac{|E|}{2} \).
-\end{thrm}a
+\end{thrm}
 
 \( \Omega = 2^V, \quad | \Omega | = 2^n \), каждый разрез равновероятен.
 
@@ -708,9 +710,7 @@
 \subsection{Теорема Эрдеша}
 
 \begin{thrm}{}{}
-    \( \forall{k} \in \NN \)
-
-    Существует граф \( G \) такой, что:
+    \( \forall{k} \in \NN \) существует граф \( G \) такой, что:
     \begin{enumerate}
         \item
             \( S(G) > k \) (нет циклов длины \( k \) и меньше)
@@ -719,11 +719,113 @@
     \end{enumerate}
 \end{thrm}
 
-План доказательства:
-\begin{enumerate}
-    \item
-        Используем модель Эрдеша-Реньи случайных графовв \( G(n, p), p \in [0, 1] \):
-        каждое ребро проводится с вероятностью \( p \)
-    \item
-        Воспользуемся тем, что \( \mathcal{X}(G) \geq \frac{|V|}{\alpha(G)} \)
-\end{enumerate}
+Модель Эрдеша-Реньи: каждое ребро проводится с вероятностью \( p \).
+
+Положим \( p = \frac{\ln n}{n} \).
+
+Давайте докажем, что \( P \left( \alpha(G) \geq \frac{n}{2k} \right) \) стремится к нулю.
+
+Положим \( r = \lceil \frac{n}{2k} \rceil \).
+
+\begin{gather*}
+    P \left( \alpha(G) \geq \frac{n}{2k} \right)
+    =
+    P \left( \bigcup\limits_{\substack{X \subseteq V  \\ |X| = r}} (X \text{ --- антиклика}) \right)
+    \leq
+    \\
+    \leq
+    \sum\limits_{\substack{X \subseteq V  \\ |X| = r}} P \left( X \text{ --- антиклика} \right)
+    =
+    \binom{n}{r} (1 - p)^{\binom{r}{2}}
+\end{gather*}
+
+Воспользуемся тем, что \( \binom{n}{r} \leq \left( \frac{ne}{r} \right)^r \) и \( e^{-p} \geq 1 - p \):
+\[
+    \binom{n}{r} (1 - p)^{\binom{r}{2}}
+    \leq
+    \left( \frac{ne}{r} \right)^r \cdot e^{-p \cdot \frac{r(r - 1)}{2}}
+    =
+    \left( \frac{ne}{r} \cdot e^{-p \cdot \frac{r - 1}{2}} \right)^r
+\]
+
+Поскольку \( r \to \infty \) при \( n \to \infty \),
+достаточно показать, что выражение внутри скобок стремится к нулю:
+\[
+    \frac{ne}{r} \cdot e^{-p \cdot \frac{r - 1}{2}}
+    \leq
+    2ke \cdot n^{-\frac{r - 1}{2n}}
+    \leq 
+    2ke \cdot n^{-\frac{n}{2k \cdot 2n}}
+    \leq
+    2ke \cdot n^{-\frac{1}{4k}}
+\]
+
+Очевидно, что последнее выражение стремится к нулю.
+
+Теперь покажем, что вероятность того, что у нас графе более \( \frac{n}{2} \) циклов длины \( \leq k \) тоже стремится к нулю.
+
+По неравенству Маркова:
+\(
+    P \left( \text{\# плохих циклов \( \geq \frac{n}{2} \)} \right) \leq \frac{2 \cdot E(\text{\# число плохих циклов})}{n}
+\)
+
+Давайте оценим нужное нам математическое ожидание.
+
+Сколько существует циклов на \( i \geq 3 \) вершинах?
+
+Ответ: \( \frac{i!}{2i} \)
+
+Используя это, оценим математическое ожидание:
+\begin{gather*}
+    E(\text{\# число плохих циклов})
+    \leq
+    \sum\limits_{i = 3}^{k} \binom{n}{i} \cdot \frac{i!}{2i} \cdot p^i
+    \leq
+    \\
+    \leq
+    \sum\limits_{i = 3}^{k} n \cdot (n - 1) \cdot \ldots \cdot (n - i + 1) \cdot p^i
+    \leq
+    \sum\limits_{i = 3}^{k} (np)^i
+    \leq
+    \\
+    \leq
+    \frac{(np)^{k + 1} - 1}{np - 1}
+    =
+    \frac{(\ln n)^{k + 1} - 1}{\ln n - 1}
+    <
+    (\ln n)^{k + 1}
+\end{gather*}
+
+Подставим в неравенство Маркова выше:
+\[
+    P \left( \text{\# плохих циклов \( \geq \frac{n}{2} \)} \right) \leq \frac{2 (\ln n)^{k + 1}}{n}
+\]
+
+Выражение справа стремится к нулю --- доказали.
+
+Выберем \( n \) такое, что:
+\[
+    \begin{cases}
+        P \left( \alpha(G) \geq \frac{n}{2k} \right) < \frac{1}{2}
+        \\
+        P(\text{\# плохих циклов \( \geq \frac{n}{2} \)}) < \frac{1}{2}
+    \end{cases}
+\]
+
+Тогда найдется граф такой, что \( \alpha(G) < \frac{n}{2k} \), и в \( G \) не более \( \frac{n}{2} \)
+циклов длины не больше \( k \). Давайте выкинем из каждого такого цикла по вершине.
+Тогда в \( \tilde{G} \) не менее \( \frac{n}{2} \) вершин, в нем нет циклов длины меньше \( k \),
+а также \( \alpha(\tilde{G}) < \frac{n}{2k} \).
+
+Но тогда \( \mathcal{X}(\tilde{G}) \geq \frac{n}{2 \alpha(\tilde{G})} > \frac{n}{2 \cdot \frac{n}{2k}} = k \).
+
+То есть граф \( \tilde{G} \) является искомым для заданного \( k \) --- доказали.
+
+% План доказательства:
+% \begin{enumerate}
+%     \item
+%         Используем модель Эрдеша-Реньи случайных графов \( G(n, p), p \in [0, 1] \):
+%         каждое ребро проводится с вероятностью \( p \)
+%     \item
+%         Воспользуемся тем, что \( \mathcal{X}(G) \geq \frac{|V|}{\alpha(G)} \)
+% \end{enumerate}

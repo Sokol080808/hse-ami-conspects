@@ -2,21 +2,25 @@
 
 \subsection{что-то}
 
-\begin{gather*}
-    a_n = 0 + 1 + \ldots + n
-    \\
-    A(x) = \frac{x}{(1 - x)^3}
-    \\
-    a_n = \left. \frac{A^{(n)} (x) }{n!} \right|_{x = 0}
-    \\
-    B(x) = (1 - x)^{-3}
-    \\
-    B^{(n)} (x) = 3 \cdot 4 \cdot \ldots \cdot (n + 2) \cdot (1 - x)^{-n - 3}
-\end{gather*}
+\begin{example}{}{}    
+    \begin{gather*}
+        a_n = 0 + 1 + \ldots + n
+        \\
+        A(x) = \frac{x}{(1 - x)^3}
+        \\
+        a_n = \left. \frac{A^{(n)} (x) }{n!} \right|_{x = 0}
+        \\
+        B(x) = (1 - x)^{-3}
+        \\
+        B^{(n)} (x) = 3 \cdot 4 \cdot \ldots \cdot (n + 2) \cdot (1 - x)^{-n - 3}
+    \end{gather*}
 
-\( \frac{B^{(n)} (0)}{n!} = \frac{3 \cdot 4 \cdot \ldots \cdot (n + 2)}{n!} = \frac{(n + 2)(n + 1)}{2} = b_n \)
-
-\( a_n = \frac{(n + 1)n}{2} \)
+    \(
+        \frac{B^{(n)} (0)}{n!} = \frac{3 \cdot 4 \cdot \ldots \cdot (n + 2)}{n!} = \frac{(n + 2)(n + 1)}{2} = b_n
+        \Rightarrow
+        a_n = \frac{(n + 1)n}{2}
+    \)
+\end{example}
 
 \subsection{Связь ПФ с неупорядоченными выборками}
 
