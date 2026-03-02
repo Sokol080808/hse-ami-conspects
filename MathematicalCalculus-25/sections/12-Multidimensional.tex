@@ -1,0 +1,665 @@
+\section{Многомерный анализ?}
+
+\subsection{Метрика, норма и скалярное произведение}
+
+\begin{defn}{}{}
+    Пусть \( X \) --- некоторое множество.
+
+    Функция \( \rho : X \times X \to R_{\geq 0} \) называется метрикой, если:
+    \begin{enumerate}
+        \item
+            \( \rho(x, y) = 0 \Leftrightarrow x = y \)
+        \item
+            \( \rho(x, y) = \rho(y, x) \)
+        \item
+            \( \rho(x, y) \leq \rho(x, z) + \rho(z, y) \quad \forall x, y, z \in X \)
+    \end{enumerate}
+
+    Пара \( (X, \rho) \) называется метрическим пространством.
+\end{defn}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( X \) --- множество все точек плоскости
+
+            \(
+                \rho(x, y)
+                =
+                \begin{cases}
+                    1, x \neq y 
+                    \\
+                    0, x = y
+                \end{cases}
+            \)
+
+            Это называется дискретной метрикой.
+        \item
+            \( X \) --- плоскость.
+
+            \( x = \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}, y = \begin{pmatrix} y_1 \\ y_2 \end{pmatrix} \)
+
+            \( \rho_1 (x, y) = |x_1 - y_1| + |x_2 - y_2| \)
+
+            \( \rho_2 (x, y) = \sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2} \)
+        \item
+            \( l^\infty = \{ a_n \} \), причем \( \exists c(a) : \forall n \in \NN \: |a_n| \leq c \)
+
+            \( \rho(a, b) = \sup\limits_{n \in \NN} |a_n - b_n| \)
+    \end{enumerate}
+\end{example}
+
+\begin{defn}{}{}
+    Пусть \( V \) --- векторное пространство над \( \RR \).
+
+    Функция \( || \cdot || : V \to \RR_{\geq 0} \) называется нормой, если:
+    \begin{enumerate}
+        \item
+            \( || \ol{x} || = 0 \Leftrightarrow \ol{x} = \ol{0} \)
+        \item
+            \( \forall \alpha \in \RR \: || \alpha \ol{x} || = | \alpha | \cdot || \ol{x} || \)
+        \item
+            \( || \ol{x} + \ol{y} || \leq || \ol{x} || + || \ol{y} || \)
+    \end{enumerate}
+
+    Пара \( (V, || \cdot ||) \) --- нормированное пространство.
+\end{defn}
+
+\begin{example}{}{}
+    \( V = \RR^2 \)
+
+    \begin{itemize}
+        \item
+            \( || \ol{x} ||_1 = |x_1| + |x_2| \) --- Манхеттенская норма
+        \item
+            \( || \ol{x} ||_2 = \sqrt{x_1^2 + x_2^2} \) --- Евклидова норма
+    \end{itemize}
+\end{example}
+
+\begin{defn}{}{}
+    Пусть \( V \) --- векторное пространство над \( \RR \).
+
+    Функция \( (\cdot, \cdot) V \times V \to V \) называется скалярным произведением над \( V \), если:
+    \begin{enumerate}
+        \item
+            \( (\ol{x}, \ol{x}) \geq 0 \) и \( (\ol{x}, \ol{x}) = 0 \Leftrightarrow \ol{x} = \ol{0} \)
+        \item
+            \( (\ol{x}, \ol{y}) = (\ol{y}, \ol{x}) \)
+        \item
+            \( \alpha, \beta \in \RR \) верно
+            \( (\alpha \ol{x} + \beta \ol{y}, \ol{z}) = \alpha (\ol{x}, \ol{z}) + \beta (\ol{y}, \ol{z}) \)
+    \end{enumerate}
+
+    Пара \( (V, (\cdot, \cdot)) \) --- Евклидово пространство.
+\end{defn}
+
+\begin{thrm}{Неравенство Коши-Буняковского}{}
+    \[
+        \forall \ol{x}, \ol{y} \in V \quad |(\ol{x}, \ol{y})| \leq \sqrt{(\ol{x}, \ol{x})} \sqrt{(\ol{y}, \ol{y})}
+    \]
+\end{thrm}
+
+\begin{gather*}
+    (\ol{x} - t \ol{y}, \ol{x} - t \ol{y}) \geq 0
+    \\
+    (\ol{x}, \ol{x}) - 2t (\ol{x}, ol{y}) + t^2 (\ol{y}, \ol{y}) \geq 0
+\end{gather*}
+
+\begin{enumerate}
+    \item
+        \( (\ol{y}, \ol{y}) = 0 \)
+
+        Тогда \( \ol{y} = 0 \).
+
+        \( (\ol{x}, \ol{0}) = (\ol{x}, \ol{0} + \ol{0}) = 2 (\ol{x}, \ol{0}) \).
+
+        Значит скалярное произведение с \( \ol{0} \) --- нулевое,
+        неравенство верно.
+    \item
+        \( (\ol{y}, \ol{y}) \neq 0 \)
+
+        Тогда \( D \leq 0 \)
+        \[
+            D = 4 (\ol{x}, \ol{y})^2 - 4(\ol{x}, \ol{x})(\ol{y}, \ol{y}) \leq 0
+        \]
+
+        А это и есть нужное неравенство.
+\end{enumerate}
+
+\newpage
+
+\begin{thrm}{}{}
+    \( || \ol{x} || = \sqrt{(\ol{x}, \ol{x})} \) задает норму \( V \)
+\end{thrm}
+
+Остается проверить только третье свойство нормы (остальные два очевидны):
+\begin{gather*}
+    || \ol{x} + \ol{y} ||^2 = (\ol{x} + \ol{y}, \ol{x} + \ol{y}) = (\ol{x}, \ol{x}) + 2(\ol{x}, \ol{y}) + (\ol{y}, \ol{y})
+    \leq
+    \\
+    \leq
+    2 \sqrt{(\ol{x}, \ol{x})} \sqrt{(\ol{y}, \ol{y})} = \left( \sqrt{(\ol{x}, \ol{x})} + \sqrt{(\ol{y}, \ol{y})} \right)^2
+\end{gather*}
+
+\begin{defn}{}{}
+    \[
+        \cos \varphi = \frac{(\ol{x}, \ol{y})}{||\ol{x}|| \cdot ||\ol{y}||}
+    \]
+
+    При этом считаем, что нулевой вектор ортогонален всем остальным.
+\end{defn}
+
+\begin{example}{}{}
+    Пусть \( V = \RR^d \)
+
+    \(
+        \ol{x} = \begin{pmatrix}
+            x_1
+            \\
+            \vdots
+            \\
+            x_d
+        \end{pmatrix}
+    \),
+    \(
+        \ol{y} = \begin{pmatrix}
+            y_1
+            \\
+            \vdots
+            \\
+            y_d
+        \end{pmatrix}
+    \)
+
+    \begin{itemize}
+        \item
+            \(
+                \displaystyle
+                (\ol{x}, \ol{y}) = \sum\limits_{j = 1}^{d} x_j y_j
+            \)
+
+            Тогда
+            \(
+                \displaystyle
+                \sqrt{(\ol{x}, \ol{x})} = \sqrt{\sum\limits_{j = 1}^{d} x_j^2}
+            \)
+        \item
+            \(
+                \displaystyle
+                || \ol{x} ||_1 = \sum\limits_{j = 1}^d |x_j|
+            \)
+    \end{itemize}
+\end{example}
+
+\begin{thrm}{(Йордан -- Фон Нейман)}{}
+    \begin{gather*}
+        \text{\( || \cdot || \) на \( V \) задается скалярным произведением}
+        \\
+        \Updownarrow
+        \\
+        \forall \ol{x}, \ol{y} \in V \quad 2 ||\ol{x}||^2 + 2 ||\ol{y}||^2 = || \ol{x} + \ol{y} ||^2 + || \ol{x} - \ol{y} ||^2 
+    \end{gather*}
+\end{thrm}
+
+\subsection{Предел последовательности}
+
+\begin{defn}{}{}
+    \begin{enumerate}
+        \item
+            Множество \( B_r(a) = \{ x \in X : \rho(x, a) < r \} \) называется открытым шаром в \( X \)
+            радиуса \( r \) с центром в точке \( a \).
+        \item
+            Множество \( \ol{B}_r(a) = \{ x \in X : \rho(x, a) \leq r \} \) называется замкнутым шаром в \( X \)
+            радиуса \( r \) с центром в точке \( a \).
+        \item
+            \( B_{\varepsilon}'(x) = \mathring{B_{\varepsilon}} (x) \) --- проколотая окрестность
+    \end{enumerate}
+\end{defn}
+
+Научимся делать так, чтобы шар с большим радиусом был внутри шара с меньшим радиусом.
+
+Возьмем три точки \( A, B, C \), образующие прямоугольный треугольник:
+\begin{itemize}
+    \item
+        \( AB = 3 \)
+    \item
+        \( BC = 4 \)
+    \item 
+        \( AC = 5 \)
+\end{itemize}
+
+Возьмем \( B_{4.1}(B) = \{ A, B, C \} \) и \( B_{4.9} = \{ B, C \} \) --- ура.
+
+\begin{exercise}{}{}
+    Доказать, что в нормированном пространстве шар с большим радиусом не может содержать в шаре с меньшим радиусом.
+\end{exercise}
+
+\begin{defn}{}{}
+    Пусть \( (X, \rho) \) --- метрическое пространство.
+
+    Функция \( f : \NN \to X \) называется последовательностью элементов из \( X \).
+
+    Будем обозначать \( f(n) = x_n \in X \).
+
+    \( \lim x_n = x \Leftrightarrow \exists \varepsilon > 0 \ \exists N : \forall n > N \rho(x_n, x) < \varepsilon \)
+\end{defn}
+
+\begin{defn}{}{}
+    Пусть множество \( M \subset X \)
+
+    \begin{itemize}
+        \item
+            \( a \) --- предельная точка \( M \), если \( \forall \varepsilon > 0 \ M \cap B_{\varepsilon}'(a) \neq \varnothing \)
+        \item
+            \( a \in M \) --- изолированная точка множества \( M \), если не является предельной.
+        \item
+            \( a \) --- граничная точка, если в любой ее окрестности есть точки и из \( M \), и из \( X \setminus M \)
+    \end{itemize}
+\end{defn}
+
+\begin{defn}{}{}
+    \begin{itemize}
+        \item
+            Множество \( B \subset X \) открыто, если \( \forall a \in B \ \exists \varepsilon > 0 : B_{\varepsilon} (a) \subset B \)
+        \item
+            Множество \( C \subset X \) замкнуто, если \( X \setminus C \) открыто.
+    \end{itemize}
+\end{defn}
+
+\begin{thrm}{}{}
+    Множество \( C \subset X \) замкнуто тогда и только тогда, когда оно содержит все свои предельные точки.
+\end{thrm}
+
+Доказательство такое же, как и в первом семестре.
+
+\begin{thrm}{}{}
+    Пусть \( (X, \rho) \) --- метрическое пространство и \( x_n \to x, y_n \to y \) в \( X \)
+
+    Тогда:
+    \begin{enumerate}
+        \item
+            \( \lim\limits_{n \to \infty} \rho(x_n, y_n) = \rho(x, y) \)
+        \item
+            \( \exists! \lim\limits_{n \to \infty} x_n \)
+        \item
+            \( \{ x_n \} \) ограничено, то есть содержится в некотором шаре.
+    \end{enumerate}
+\end{thrm}
+
+\begin{enumerate}
+    \item
+        \begin{gather*}
+            | \rho(x_n, y_n) - \rho(x, y) |
+            \leq
+            | \rho(x_n, y_n) - \rho(x_n, y) | + | \rho(x_n, y) - \rho(x, y) |
+            \leq
+            \\
+            \leq
+            \rho(y_n, y) + \rho(x_n, x)
+            <
+            2 \varepsilon
+        \end{gather*}
+    \item
+        Если есть два предела, то по предыдущему между ними нулевое расстояние,
+        то есть они равны.
+    \item
+        Доказательство такое же, как и с обычными пределами (суффикс ограничиваем по определению предела,
+        расширяем шар так, чтобы префикс тоже в него попал).
+\end{enumerate}
+
+\begin{thrm}{}{}
+    Пусть \( (V, || \cdot ||) \) --- нормированное пространство.
+
+    Пусть \( \ol{x_n} \to \ol{x}, \ol{y_n} \to \ol{y} \).
+
+    Пусть \( \{ \alpha_n \} \subset \RR : \alpha_n \to \alpha \in \RR \).
+
+    Тогда
+    \begin{enumerate}
+        \item
+            \( \lim\limits_{n \to \infty} (\ol{x_n} + \ol{y_n}) = \ol{x} + \ol{y} \)
+        \item
+            \( \lim\limits_{n \to \infty} \alpha_n \ol{x_n} = \alpha \ol{x} \)
+    \end{enumerate}
+\end{thrm}
+
+\begin{enumerate}
+    \item
+        Тривиально
+    \item
+        \(
+            \forall \varepsilon > 0 \ \exists N : \forall n > N \
+            |\alpha_n - \alpha| < \varepsilon, || \ol{x_n} - \ol{x} || < \varepsilon
+        \)
+
+        \begin{gather*}
+            || \alpha_n \ol{x_n} - \alpha \ol{x} ||
+            \leq
+            || \alpha_n \ol{x_n} - \alpha_n \ol{x} || + || \alpha_n \ol{x} - \alpha \ol{x} ||
+            =
+            \\
+            =
+            | \alpha_n | \cdot || \ol{x_n} - \ol{x} || + |\alpha_n - \alpha| \cdot || \ol{x} ||
+            \leq
+        \end{gather*}
+\end{enumerate}
+
+\begin{thrm}{}{}
+    \( V \) --- Евклидово пространство, \( || \cdot || \) порождает скалярное произведение.
+
+    Пусть \( \lim\limits_{n \to \infty} \ol{x_n} = \ol{x} \) и \( \lim\limits_{n \to \infty} \ol{y_n} = \ol{y} \)
+
+    Тогда \( \lim\limits_{n \to \infty} (\ol{x_n}, \ol{y_n}) = (\ol{x}, \ol{y}) \)
+\end{thrm}
+
+Тривиально.
+
+\begin{thrm}{}{}
+    Пусть \( \ol{x_n} \to x \) в \( \RR^d \) (в евклидовой норме)
+
+    Тогда \( x_j^n \to x_j \) (\( x_j^n \) --- \( j \)-я координата \( \ol{x_n} \))
+
+    (верно в обе стороны)
+\end{thrm}
+
+\[
+    || \ol{x_n} - \ol{x} || = \sqrt{\sum\limits_{j = 1}^{d} (x_j^n - x_j)^2}
+\]
+
+Пусть \( C_n = \max\limits_{j = 1, \ldots, d} (x_j^n - x_j)^2 \)
+
+\[
+    C_n \leq || \ol{x_n} - \ol{x} || \leq \sqrt{d} \cdot \sqrt{C_n} 
+\]
+
+Значит из поокоординатной сходимости следует просто сходимость и обратно.
+
+\begin{thrm}{}{}
+    Пусть \( \{ \ol{x_n} \} \subset \RR^d \)
+
+    Пусть \( \{ \ol{x_n} \} \) ограничен \( \Rightarrow \) есть сходящаяся подпоследовательность.
+\end{thrm}
+
+По очереди для каждой координате применяем Больцано Вейерштрасса.
+
+\begin{defn}{}{}
+    Пусть \( (X, \rho_x) \) и \( (Y, \rho_y) \) --- метрические пространства.
+
+    \( a \) --- предельная точка \( X \).
+
+    \( f : X \setminus \{ a \} \to Y \)
+
+    \( \lim\limits_{x \to a} f(x) = A \Leftrightarrow \forall \varepsilon > 0 \: \exists \delta > 0 : \forall x \in X : 0 < \rho_x(a, x) < \delta \: \rho_y(A, f(x)) < \varepsilon \)
+\end{defn}
+
+Аналогично есть определение по Гейне + они равносильны.
+
+\begin{enumerate}
+    \item
+        \( \Rightarrow \)
+
+        Тривиально.
+    \item
+        \( \Leftarrow \)
+
+        От противного.
+\end{enumerate}
+
+\begin{thrm}{}{}
+    Пусть \( f, g : (X, \rho_x) \to (V, || \cdot ||) \) и \( \alpha : (X, \rho_x) \to \RR \)
+
+    \begin{enumerate}
+        \item
+            \( \lim\limits_{x \to a} f(x) = A \)
+        \item
+            \( \lim\limits_{x \to a} g(x) = B \)
+        \item
+            \( \lim\limits_{x \to a} g(x) = \alpha_0 \)
+    \end{enumerate}
+
+    Тогда:
+    \begin{enumerate}
+        \item 
+            \( \lim\limits_{x \to a} f(x) + g(x) = A + B \)
+        \item 
+            \( \lim\limits_{x \to a} \alpha(x) \cdot f(x) = \alpha_0 \cdot A \)
+    \end{enumerate}
+\end{thrm}
+
+
+\begin{thrm}{}{}
+    Пусть \( f, g : (X, \rho_x) \to (V, (\cdot, \cdot) ) \)
+
+    \begin{enumerate}
+        \item
+            \( \lim\limits_{x \to a} f(x) = A \)
+        \item
+            \( \lim\limits_{x \to a} g(x) = B \)
+    \end{enumerate}
+
+    Тогда \( \lim\limits_{x \to a} (f(x), g(x)) = (A, B) \)
+\end{thrm}
+
+Доказывается по Гейне.
+
+\begin{thrm}{}{}
+    Пусть \( f : (X, \rho_x) \to (y, \rho_y) \)
+
+    \( \lim\limits_{x \to a} f(x) = A \)
+
+    \begin{enumerate}
+        \item
+            \( \exists \delta > 0 : \forall x \in \mathring{B}_\delta(a) \: f(x) \in B(A) \)
+        \item
+            \( \forall B \neq A \: \exists \delta > 0 : \forall x \in \mathring{B}_\delta(a) \: f(x) \notin B_{\frac{r}{2}}(B) \),
+            где \( r = \rho_y(B, A) \)
+    \end{enumerate}
+\end{thrm}
+
+\begin{enumerate}
+    \item
+        По Коши
+    \item
+        Пусть \( \frac{r}{2} = \varepsilon \).
+
+        Дальше понятно.
+\end{enumerate}
+
+\begin{defn}{}{}
+    Пусть \( f : (X, \rho_x) \to (y, \rho_y) \)
+
+    \( a \in X \)
+
+    \( f \in C(a) \), если \( \forall \{ a_n \} \subset X : \{ a_n \} \to a \) \( \lim\limits_{n \to \infty} f(a_n) = f(a) \)
+\end{defn}
+
+
+%TODO
+[TODO]
+
+\begin{defn}{}{}
+    \( V \subseteq \RR^D \)
+
+    Множество \( E \subseteq V \) связно, если \( \not\exists A, B \subset V \) таких,
+    что \( A \cap E \neq \varnothing \), \( B \cap E \neq \varnothing \), \( A \cap B = \varnothing \),
+    \( E \subseteq A \cup B \).
+\end{defn}
+
+\begin{defn}{}{}
+    \( V \subseteq \RR^D \)
+
+    Множество \( D \subseteq V \) линейно связно,
+    если \( \forall a, b \in D \) \( \exists \alpha \in C([0, 1], D) \)
+    такая, что \( \alpha(0) = a, \alpha(1) = b \)
+\end{defn}
+
+\begin{exercise}{}{}
+    \begin{enumerate}
+        \item
+            Если множество \( D \subseteq V \) линейно связно, то \( D \) связно
+        \item
+            Если \( E \subseteq V \) открыто и связно, то \( E \) линейно связно
+        \item
+            Пусть \( E \subseteq \RR^2 \) задается так:
+            \[
+                \left\{ \left( x, \sin \frac{1}{x} \right), x \neq 0 \right\} \cup \{ (x, y) : x = 0, y \in [-1, 1] \}
+            \]
+
+            \( E \) связно, но не линейно связно
+    \end{enumerate}
+\end{exercise}
+
+\begin{defn}{}{}
+    Пусть \( c_1, c_2 \in (0, +\infty) \)
+
+    Пусть \( V \) --- линейное пространство и \( || \cdot ||_1 \), \( || \cdot ||_2 \) заданы на \( V \)
+
+    Если \( \forall \ol{x} \in V \) выполнено
+    \(
+        c_1 || \ol{x} ||_1 \leq || \ol{x} ||_2 \leq c_2 || \ol{x} ||_1
+    \),
+    то \( || \cdot ||_1 \) и \( || \cdot ||_2 \) эквивалентны
+\end{defn}
+
+\begin{thrm}{}{}
+    Все нормы на конечномерном пространстве \( V \) эквивалентны.
+\end{thrm}
+
+Пусть \( V = <\ol{e}_1, \ldots, \ol{e}_d> \),
+где \( \ol{e}_1, \ldots, \ol{e}_d \) --- линейно независимы.
+
+Пусть \( \ol{x} = \sum\limits_{j = 1}^d x_j \ol{e}_j \)
+
+Пусть \( p(\ol{x}) = |x_1| + \ldots + |x_d| \)
+
+Пусть \( q \) --- другая норма на \( V \) и пусть \( c_2 = \max\limits_{j = 1, \ldots, d} q(\ol{e}_j) \).
+
+Тогда \( q(\ol{x}) \leq \sum\limits_{j = 1}^{d} |x_j| q(\ol{e}_j) \leq c_2 p(\ol{x}) \)
+
+По неравенству треугольника:
+\( | q(\ol{x}) - q(\ol{y}) | \leq q(\ol{x} - \ol{y}) \)
+
+Итак: \( q : (V, p) \to \RR \Rightarrow \) \( q \) непрерывна \( V \),
+а значит непрерывна и на сфере \( S \) радиуса \( 1 \).
+Но \( S \) --- компакт, а значит \( \exists c_1 = \min\limits_{\ol{x} \in S} q(\ol{x}) > 0 \).
+
+Значит \( \forall \ol{x} \neq \ol{0} \) верно
+\( q \left( \frac{ol{x}}{p(\ol{x})} \right) \geq c_1 p \left( \frac{\ol{x}}{p(\ol{x})} \right) \)
+
+Значит \( \forall \ol{x} \neq \ol{0} \) верно \( c_1 p(\ol{x}) \leq q(\ol{x}) \leq c_2 p(\ol{x}) \).
+
+\begin{exercise}{}{}
+    В бесконечномерном пространстве найдутся две неэквивалентные нормы.
+
+    (использовать базис Гамеля)
+\end{exercise}
+
+\newpage
+
+\section{Функции от многих переменных}
+
+\( f : \RR^d \to \RR^m \)
+
+\(
+    f(\ol{x}) = \begin{pmatrix}
+        f_1 (\ol{x})
+        \\
+        \vdots
+        \\
+        f_m (\ol{x})
+    \end{pmatrix}
+\)
+
+\(
+    f_j : \RR^d \to \RR
+\)
+
+\subsection{Дифференциал}
+
+\begin{defn}{}{}
+    Пусть \( f : \RR^d \to \RR^m \)
+
+    \( f \in D(\ol{a}) \),
+    если \( \exists \mathring{U}(\ol{0}) \subset \RR^d \),
+    \( \exists L_{\ol{a}} : \RR^d \to \RR^m \) такие,
+    что
+    \begin{gather*}
+        \forall h \in \mathring{U}(\ol{0}) \
+            f(\ol{a} + \ol{h}) - f(\ol{a}) = L_{\ol{a}} \ol{h} + || \ol{h} || \cdot \alpha(\ol{h})
+        \\
+        \alpha : \mathring{V}(\ol{0}) \to \RR^m \quad \lim\limits_{\ol{h} \to \ol{0}} \alpha(\ol{h}) = \ol{0} \in \RR^m
+    \end{gather*}
+
+    \( L_{\ol{a}} \) называет дифференциалом \( f \) в точке \( \ol{a} \) и обозначается \( df(\ol{a}) \)
+\end{defn}
+
+\begin{lemma}{}{}
+    \( f \in D(\ol{a}) \Rightarrow f \in C(\ol{a}) \)
+\end{lemma}
+
+\begin{gather*}
+    ||f(\ol{a} + \ol{h} ) - f(\ol{a})||
+    =
+    || L_{\ol{a}} \ol{h} + || \ol{h} || \alpha(\ol{h}) ||
+    \leq
+    \\
+    \leq
+    \sum\limits_{j = 1}^{d} |h_j| \cdot || L_{\ol{a}} \ol{e}_j ||
+        + || \ol{h} || \cdot || \alpha(h) ||
+    \to \ol{0} \quad (\ol{h} \to \ol{h})
+\end{gather*}
+
+\begin{lemma}{}{}
+    Пусть \( f \in D(\ol{a}) \)
+
+    Тогда \( \exists! \: df(\ol{a}) \)
+\end{lemma}
+
+Пусть \( \exists L_1, L_2 \) такие, что
+\begin{enumerate}
+    \item
+        \( f(\ol{a} + \ol{h}) - f(\ol{a}) = L_1 \ol{h} + ||\ol{h} || \alpha_1 (\ol{h}) \)
+    \item
+        \( f(\ol{a} + \ol{h}) - f(\ol{a}) = L_2 \ol{h} + ||\ol{h} || \alpha_2 (\ol{h}) \)
+\end{enumerate}
+
+Пусть \( L = L_2 - L_1 \).
+\begin{gather*}
+    L \ol{h} = (\alpha_1(\ol{h}) -\alpha_2(\ol{h}) || \ol{h} ||
+    \\
+    L \frac{\ol{h}}{||h||} = \alpha_1(\ol{h}) -\alpha_2(\ol{h})
+\end{gather*}
+
+Если взять предел \( \ol{h} \to \ol{0} \),
+то величина справа стремится к нулю.
+Но тогда \( L \) равно \( \ol{0} \) на любом векторе единичной длины,
+а значит \( L = 0 \).
+
+\begin{lemma}{}{}
+    \[
+        f \in D(\ol{a})
+        \Leftrightarrow
+        \exists L_{\ol{a}} : \ \lim\limits_{|| \ol{h} || \to 0} \frac{||f(\ol{a} + \ol{h}) - f(\ol{a}) - L_{\ol{a}} \ol{h}||}{||\ol{h}||} = 0
+    \]
+\end{lemma}
+
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+
+        Следует из определения дифференцируемости в точке
+    \item
+        \( \Leftarrow \)
+
+        \( \frac{f(\ol{a} + \ol{h}) - f(\ol{a}) - L_{\ol{a}} \ol{h}}{||\ol{h}||} = \alpha(\ol{h}) \)
+
+        Тогда \( \lim\limits_{|| \ol{h} || \to 0} \alpha(\ol{h}) = \ol{0} \).
+
+        Домножим на \( || \ol{h} || \), получим искомое
+\end{itemize}
+
+\begin{remark}{}{}
+    Строчки матрицы дифференциалов --- дифференциалы координатных функций.
+\end{remark}
+
+\subsection{Производная по направлению}

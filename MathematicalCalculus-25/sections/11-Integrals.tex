@@ -54,3 +54,523 @@ Fun facts:
             \left( \int f(x) dx \right)' = f(x)
         \]
 \end{enumerate}
+
+\newpage
+
+\subsection{Таблица интегралов}
+
+\begin{enumerate}
+    \item
+        \(
+            \displaystyle
+            \int A \: dx = Ax + C 
+        \)
+    \item
+        \( 
+            \displaystyle
+            \int x^{\alpha + 1} \: dx = \frac{x^{\alpha + 1}}{\alpha + 1} + C 
+        \), \( \alpha \neq -1 \)
+    \item
+        \(
+            \displaystyle
+            \int \frac{dx}{x} = \ln |x| + C 
+        \)
+    \item
+        \(
+            \displaystyle
+            \int e^x \: dx = e^x + C 
+        \)
+    \item
+        \(
+            \displaystyle
+            \int a^x \: dx = \frac{a^x}{\ln a} + C 
+        \)
+    \item
+        \(
+            \displaystyle
+            \int \sin x \: dx = -\cos x + C 
+        \)
+    \item
+        \(
+            \displaystyle
+            \int \cos x \: dx = \sin x + C 
+        \)
+    \item
+        \(
+            \displaystyle
+            \int \frac{dx}{\cos^2 x}= \tan x + C 
+        \), \( x \neq \frac{\pi}{2} + \pi k, k \in \ZZ \) 
+    \item
+        \(
+            \displaystyle
+            \int \frac{dx}{\sin^2 x} = - \cot x + C 
+        \), \( x \neq \pi k, k \in \ZZ \)
+    \item
+        \(
+            \displaystyle
+            \int \frac{dx}{\sqrt{1 - x^2}} = \arcsin x + c_1 = \arccos x + c_2 
+        \)
+    \item
+        \(
+            \displaystyle
+            \int \frac{dx}{1 + x^2} = \arctan x + c_1 = -arccot \: x + c_2 
+        \)
+    \item
+        \(
+            \displaystyle
+            \int \sh x \: dx = \ch x
+        \)
+    \item
+        \(
+            \displaystyle
+            \int \ch x \: dx = \sh x
+        \)
+    \item
+        \(
+            \displaystyle
+            \int \frac{dx}{\sqrt{x^2 + 1}} = \ln (x + \sqrt{x^2 + 1})
+        \)
+    \item
+        \(
+            \displaystyle
+            \int \frac{dx}{x^2 - 1} = \frac{1}{2} \ln \left| \frac{x - 1}{x + 1} \right|
+        \)
+\end{enumerate}
+
+\newpage
+
+\subsection{Свойства}
+
+\begin{enumerate}
+    \item
+        Линейность
+
+        Пусть \( f, g \) имеют первообразные \( F, G \) на \( (a, b) \) 
+        \( \Rightarrow \forall \alpha, \beta \in \RR \)
+        выполнено
+        \[
+            (\alpha F + \beta G)' (x) = \alpha f(x) + \beta g(x)
+        \]
+
+        Получаем такое свойство интегралов:
+        \[
+            \int (\alpha f(x) + \beta g(x)) \: dx = \alpha \int f(x) dx + \beta \int g(x) dx + C
+        \]
+    \item
+        Интегрирование по частям
+
+        Пусть \( f, g \in D(\alpha, \beta) \)
+
+        Пусть у \( f'g \) на \( (\alpha, \beta) \) существует первообразная.
+        Тогда \( g'f \) имеет первообразную на \( (\alpha, \beta) \) и справедлива формула
+        интегрирования по частям:
+        \[
+            \int g'(x) f(x) dx = f(x) g(x) - \int f'(x) g(x) dx + C
+        \]
+
+        Доказательство:
+
+        \(f \cdot g \in D(\alpha, \beta) \Rightarrow (f \cdot g)' = f' g + g' f \)
+
+        Откуда получаем, что \( g'f \) имеет первообразную. После интегрирования следует искомое.
+\end{enumerate}
+
+\begin{example}{}{}
+    \[
+        \int \ln x \: dx
+    \]
+\end{example}
+
+\begin{gather*}
+    \int \ln x \: dx
+        = \left[
+            \begin{gathered}
+                \ln x = f(x)
+                \\
+                dx = \varphi' (x) dx
+                \\
+                \varphi (x) = x
+            \end{gathered}
+        \right] =
+    x \ln x - \int x \cdot \frac{1}{x} dx + C = x \ln x - x + C
+\end{gather*}
+
+\begin{example}{}{}
+    \[
+        \int x e^x \: dx
+    \]
+\end{example}
+
+\begin{gather*}
+    \int x e^x \: dx
+        = \left[
+            \begin{gathered}
+                \ln x = f(x)
+                \\
+                e^x dx = \varphi' (x) dx
+                \\
+                \varphi (x) = e^x
+            \end{gathered}
+        \right] =
+    x e^x - \int e^x dx + C = x e^x - e^x + C
+\end{gather*}
+
+\begin{example}{}{}
+    \[
+        \int e^x \sin x \: dx
+    \]
+\end{example}
+
+\begin{gather*}
+    \int e^x \sin x \: dx
+        = \left[
+            \begin{gathered}
+                e^x = f(x)
+                \\
+                \sin x \: dx = \varphi' (x) dx
+                \\
+                \varphi(x) = - \cos (x)
+            \end{gathered}
+        \right] =
+    - e^x \cos x + \int e^x \cos x \: dx + C =
+    \\
+    = \left[
+        \begin{gathered}
+            e^x = f(x)
+            \\
+            \varphi(x) = \sin x
+        \end{gathered}
+    \right] = 
+    - e^x \cos x + e^x \sin x - \int e^x \sin x \: dx + C
+\end{gather*}
+
+Откуда получаем, что искомый интеграл равен
+\[
+    \frac{1}{2} e^x (\sin x - \cos x) + C
+\]
+
+\begin{enumerate}[start=3]
+    \item
+        Замена переменной
+
+        Пусть \( \varphi \in D(\alpha, \beta) \), \( \varphi(t) \in (a, b) \ \forall t \in (\alpha, \beta) \)
+
+        Пусть \( f \) имеет первообразную \( F \) на \( (a, b) \)
+
+        Тогда
+        \(
+            \displaystyle
+            \int f(\varphi(t)) \varphi'(t) dt = F(\varphi(t)) + C
+        \)
+
+        Это явно следует из \( F(\varphi(t))' = F'(\varphi(t)) \cdot \varphi'(t) = f(\varphi(t)) \varphi'(t) \)
+\end{enumerate}
+
+\begin{example}{}{}
+    Пусть \( F \) --- первообразная \( f \) на \( (a, b) \) и \( A \neq 0 \)
+
+    \[
+        \int f(Ax + B) dx
+        = \left[
+            \begin{gathered}
+                x = \frac{t - B}{A}
+                \\
+                dx = \frac{1}{A} dt
+            \end{gathered}
+        \right] =
+        \frac{1}{A} \int f(t) dt = \frac{1}{A} F(t) + C = \frac{1}{A} F(Ax + B) + C
+    \]
+\end{example}
+
+\newpage
+
+\begin{example}{}{}
+    \[
+        \int \sqrt{1 - x^2} dx
+\]
+\end{example}
+
+\begin{gather*}
+    \int \sqrt{1 - x^2} dx
+    = \left[
+        \begin{gathered}
+            x = \sin t
+            \\
+            t \in \left[ -\frac{\pi}{2}, \frac{\pi}{2} \right]
+            \\
+            dx = \cos t \: dt
+        \end{gathered}
+    \right] =
+    \int \cos^2 t \: dt
+    = 
+    \int \frac{1 + \cos 2t}{2} dt
+    =
+    \\
+    =
+    \frac{t + \frac{\sin 2t}{2}}{2}
+    =
+    \frac{t + \sin t \cos t}{2}
+    =
+    \frac{\arcsin x}{2} + \frac{1}{4} x \sqrt{1 - x^2}
+\end{gather*}
+
+\begin{enumerate}
+    \item[3.2]
+        Подведение под знак дифференциала
+\end{enumerate}
+
+\begin{example}{}{}
+    \[
+        \int \tan x \: dx
+    \]
+\end{example}
+
+\begin{gather*}
+    \int \tan x \: dx
+    =
+    \int \frac{\sin x \: dx}{\cos x}
+    =
+    - \int \frac{1}{\cos x} (- \sin x) \: dx
+    =
+    \\
+    =
+    - \int \frac{d(\cos x)}{\cos x} = - \ln | \cos x | + C
+\end{gather*}
+
+\begin{example}{}{}
+    \[
+        \int \frac{\sin ( \sqrt{\ln x} ) }{2x \sqrt{\ln x}} \: dx
+    \]
+\end{example}
+
+\begin{gather*}
+    \int \frac{\sin ( \sqrt{\ln x} ) }{2x \sqrt{\ln x}} \: dx
+    =
+    \int \frac{\sin ( \sqrt{\ln x} ) }{2 \sqrt{\ln x}} \: d (\ln x)
+    =
+    \int \sin ( \sqrt{\ln x} ) \: d (\sqrt{\ln x})
+    =
+    - \cos (\sqrt{\ln x}) + C
+\end{gather*}
+
+Не все интегралы выражаются через элементарные функции:
+\begin{enumerate}
+    \item
+        \(
+            \displaystyle
+            Si \: x = \int \frac{\sin x}{x} dx
+        \)
+    \item
+        \(
+            \displaystyle
+            li \: x = \int \frac{dx}{\ln x} dx
+        \)
+    \item
+        \(
+            \displaystyle
+            \int \frac{e^x}{x} dx
+        \)
+    \item
+        \(
+            \displaystyle
+            \int e^{-x^2} dx
+        \)
+    \item
+        \(
+            \displaystyle
+            \int \sin (x^2) dx, \quad \int \cos (x^2) dx
+        \)
+\end{enumerate}
+
+\( f(x) = \frac{P(x)}{Q(x)} \), где \( P, Q \) --- многочлены от одной переменной, называются рациональными функциями.
+Мы покажем, что интеграл от любой рациональной функции выражается в элементарных функциях.
+
+\begin{example}{}{}
+    \[
+        \int \frac{dx}{x^2 - 1}
+    \]
+\end{example}
+
+\begin{gather*}
+    \int \frac{dx}{x^2 - 1}
+    =
+    \frac{1}{2} \int \left( \frac{1}{x - 1} + \frac{1}{x + 1} \right) dx
+    =
+    \frac{1}{2} \ln \left| \frac{x - 1}{x + 1} \right| + C
+\end{gather*}
+
+Типы элементарных дробей:
+\begin{enumerate}
+    \item
+        \(
+            \displaystyle
+            \int \frac{A \: dx}{x - a} = A \ln |x - a| + C
+        \)
+    \item
+        \(
+            \displaystyle
+            k \in \NN, k > 1 \quad \int \frac{A \: dx}{(x - a)^k} = A \frac{1}{(x - a)^{k - 1}} \frac{1}{k - 1} + C
+        \)
+    \item
+        \(
+            \displaystyle
+            \frac{Ax + B}{x^2 + Cx + D} \quad C^2 - 4D < 0
+        \)
+
+        \begin{gather*}
+            \frac{Ax + B}{x^2 + Cx + D}
+            =
+            \frac{Ax + B}{\left(x + \frac{C}{2} \right)^2 + D - \frac{C^2}{4}}
+            =
+            \frac{A(x + \frac{C}{2}) + B - \frac{AC}{2}}{\left(x + \frac{C}{2} \right)^2 + D - \frac{C^2}{4}}
+            \\
+            \int \frac{\left( Ax + B \right) dx}{x^2 + Cx + D}
+            =
+            \\
+            =
+            \frac{A}{2} \int \frac{d \left( \left(x + \frac{C}{2} \right)^2 + \frac{4D - C^2}{4} \right)}{\left(x + \frac{C}{2} \right)^2 + D - \frac{C^2}{4}}
+            +
+            \frac{2B - AC}{2} \int \frac{d \left(x + \frac{C}{2} \right)}{\left( x + \frac{C}{2} \right) + \frac{4D - C^2}{4}}
+            =
+            \\
+            =
+            \frac{A}{2} \ln (x^2 + Cx + D) + \frac{2B - AC}{2} \cdot \frac{1}{\sqrt{\frac{4D - C^2}{4}}} \cdot \arctan \frac{x + \frac{C}{2}}{\sqrt{\frac{4D - C^2}{4}}}
+        \end{gather*}
+
+    \newpage
+
+    \item
+        \(
+            \displaystyle
+            k \in \NN, k > 1 \quad \frac{Ex + F}{(x^2 + Hx + J)^k} \quad 4J - H^2 > 0
+        \)
+
+        Для начала найдем более ``простой'' интеграл:
+        \begin{gather*}
+            I_1 = \int \frac{dt}{t^2 + 1}= \arctan x + C
+            \\
+            I_k = \int \frac{dt}{t^2 + 1} 
+                = \left|
+                    \begin{gathered}
+                        dt = g'(t) dt
+                        \\
+                        f(t) = \frac{1}{(t^2 + 1)^k}
+                    \end{gathered}
+                \right|
+            =
+            \\
+            =
+            \frac{t}{(t^2 + 1)^k} + 2k \int \frac{(t^2 + 1) - 1}{(t^2 + 1)^{k + 1}} dt
+            =
+            \frac{t}{(t^2 + 1)^k} + 2k(I_k - I_{k - 1})
+            \\
+            I_{k + 1} \frac{1}{2k} \cdot \frac{t}{(t^2 + 1)^k} + \frac{2k - 1}{2k} I_k
+        \end{gather*}
+
+        Значит любой \( I_k \) выражается в элементарных. Теперь вернемся к нашему интегралу:
+        \begin{gather*}
+            \int \frac{\left( Ex + F \right) dx}{\left( \left( x + \frac{H}{2} \right)^2 + \frac{4J - H^2}{4} \right)^k}
+            =
+            \\
+            =
+            \int \frac{(at + b) dt}{(t^2 + 1)^k}
+            =
+            \frac{a}{2} \int \frac{d(t^2 + 1)}{(t^2 + 1)^k} + b \int \frac{dt}{(t^2 + 1)^k}
+            =
+            \frac{a}{2} \cdot \frac{1}{1 - k} \cdot \frac{1}{(t^2 + 1)^{k - 1}} + b \cdot I_k
+        \end{gather*}
+\end{enumerate}
+
+\begin{thrm}{}{}
+    Любой многочлен можно разложить на двучлены и неприводимые трехчлены, возможно умноженные на константу.
+
+    (потому что корни разбиываются на пары \( a + bi \) и \( a - bi \))
+\end{thrm}
+
+\begin{example}{}{}
+    Рассмотрим, например, \( x^4 + 1 \):
+    \begin{gather*}
+        x^4 + 1 = x^4 + 2x^2 + 1 - 2x^2 = (x^2 + 1)^2 - 2x^2 = (x^2 - \sqrt{2}x + 1)(x^2 + \sqrt{2}x + 1)
+    \end{gather*}
+\end{example}
+
+\begin{example}{}{}
+    \[
+        \int \frac{2x^2 + 2x + 13}{(x - 2)(x^2 + 1)^2} dx
+    \]
+\end{example}
+
+\begin{gather*}
+    \frac{2x^2 + 2x + 13}{(x - 2)(x^2 + 1)^2}
+    =
+    \frac{A}{x - 2} + \frac{Bx + C}{x^2 + 1} + \frac{Dx + E}{(x^2 + 1)^2}
+    \\
+    2x^2 + 2x + 13 = A(x^2 + 1)^2 + (Bx + C)(x - 2)(x^2 + 1) + (Dx + E)(x - 2)
+    \\
+    \begin{cases}
+        A + B = 0
+        \\
+        2B + C = 0
+        \\
+        2A + B - 2C + D = 2
+        \\
+        -2B + C - 2D + E = 2
+        \\
+        A - 2C - 2E = 13
+    \end{cases}
+    \\
+    \begin{cases}
+        A = 1
+        \\
+        B = -1
+        \\
+        C = -2
+        \\
+        D = -3
+        \\
+        E = -4
+    \end{cases}
+    \\
+    \int \frac{2x^2 + 2x + 13}{(x - 2)(x^2 + 1)^2} dx
+    =
+    \int \frac{dx}{x - 2} + \int \frac{-x-2}{x^2 + 1} dx + \int \frac{-3x - 4}{(x^2 + 1)^2} dx
+    =
+    \ln |x - 2| - \frac{1}{2} \ln (x^2 + 1) - 2 \arctan x + \frac{3}{2} \cdot \frac{1}{x^2 + 1}
+        - 4 \left( \frac{1}{4} \frac{x}{(x^2 + 1)} + \frac{3}{4} \arctan x \right) + C
+\end{gather*}
+
+\begin{example}{}{}
+    \[
+        \int \frac{\sqrt{x - 1} - 2}{(x - 1)^2 - \sqrt{x - 1}} dx
+    \]
+\end{example}
+
+Нетрудно понять, что это рациональное выражение вида
+\(
+    \displaystyle R \left( \left( \frac{ax + b}{cx + d} \right)^{\frac{p}{q}}, \ldots \right)
+\)
+
+\begin{gather*}
+    \int \frac{\sqrt{x - 1} - 2}{(x - 1)^2 - \sqrt{x - 1}} dx
+    =
+    \left|
+        \begin{gathered}
+            \sqrt{x - 1} = t
+            \\
+            2t \: dt = dx
+        \end{gathered}
+    \right|
+    =
+    2 \int \frac{(t - 2) t}{t^4 - t} dt
+    =
+    2 \int \frac{t - 2}{t^3 - 1} dt
+\end{gather*}
+
+Раскладываем на элементарные дроби, решаем, делаем обратную замену, радуемся жизни
+
+\subsection{я не понял про что это было}
+
+Есть рациональное выражение \( R(x, y) \), причем \( y = \sqrt{ax^2 + bx + c} \).
+Тогда как-то можно сделать замену, чтобы получить рациональные функции от \( t \).
+
+Если есть \( R(\sin x, \cos x) \), то можно сделать универсальную тригонометрическую подстановку \( \tan \frac{x}{2} \)
