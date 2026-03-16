@@ -663,3 +663,90 @@
 \end{remark}
 
 \subsection{Производная по направлению}
+
+\begin{defn}{}{}
+    Если существует предел \( \lim\limits_{t \to 0} \frac{f(\ol{a} + t \cdot \ol{v}) - f(\ol{a})}{t} \),
+    то он называется производной \( f \) по вектору \( \ol{v} \).
+
+    Если \( ||\ol{v}|| = 1 \), то этот предел называется производной по направлению \( \ol{v} \)
+    и обозначается \( f_t ' (\ol{a} + t \cdot \ol{v}) \: \vline_{\: t = 0} \)
+    или \( \frac{\partial f}{\partial \ol{v}} (\ol{a}) \)
+\end{defn}
+
+\begin{thrm}{}{}
+    \[
+        f \in D(\ol{a}) \Rightarrow \lim\limits_{t \to 0} \frac{f(\ol{a} + t \ol{v}) - f(\ol{a})}{t} = df(\ol{a}) \cdot \ol{v}
+    \]
+\end{thrm}
+
+\begin{gather*}
+    f(\ol{a} + t \ol{v}) - f(\ol{a}) = df(\ol{a}) (t \ol{v}) + \alpha(t \ol{v}) \cdot || t \ol{v} ||
+    \\
+    \frac{f(\ol{a} + t \ol{v}) - f(\ol{a})}{t} = df(\ol{a}) (\ol{v}) + sign(t) \cdot \alpha(t \ol{v}) \cdot || \ol{v} ||
+\end{gather*}
+
+\subsection{Частная производная и запись дифференциала с их помощью}
+
+\begin{defn}{}{}
+    \( f : \RR^d \to \RR \)
+
+    Если \( \exists \lim\limits_{t \to 0} \frac{f(\ol{a} + t e_j)  - f(\ol{a})}{t} \),
+    где \( e_j \) --- элемент стандартного базиса, то его называют частной производной \( f \) в точке \( \ol{a} \)
+    по переменной \( x_j \).
+
+    Обозначается \( f_{x_j}' (\ol{a}) \) или \( \displaystyle \frac{\partial f}{\partial x_j} (\ol{a}) \)
+\end{defn}
+
+\begin{example}{}{}
+    \[
+        f(x, y) = \begin{cases}
+            0, \quad x = 0 \lor y = 0
+            \\
+            1, \quad \text{иначе}
+        \end{cases}
+    \]
+
+    У этой функции есть обе частные производные в нуле,
+    однако ни по какому другому направлению производной не существует.
+\end{example}
+
+\begin{defn}{Градиент}{}
+    \[
+        \nabla f (\ol{a}) = \left( \frac{\partial f}{\partial x_1}, \ldots, \frac{\partial f}{\partial x_d} \right)
+    \]
+\end{defn}
+
+\begin{thrm}{}{}
+    Пусть \( f \in D(\ol{a}) \).
+
+    Тогда максимальное значение производной по направлению \( \frac{\partial f}{\partial \ol{l}} (\ol{a}) \)
+    достигается при \( \ol{l} = \frac{\nabla f(\ol{a})}{|| \nabla f(\ol{a}) ||} \) (\( \nabla f(\ol{a}) \neq 0 \))
+\end{thrm}
+
+\[
+    \frac{\partial f}{\partial \ol{l}} (\ol{a}) = df(\ol{a}) \ol{l} = (\nabla f(\ol{a}), \ol{l})
+    \leq
+    || \nabla f(\ol{a}) || \cdot || \ol{l} ||
+    =
+    || \nabla f(\ol{a}) ||
+\]
+
+А равенство по КБШ достигается как раз при коллинеарности.
+
+\begin{defn}{}{}
+    \( \{ c \: \vline \: f(x, y) = c \} \) --- множество \( c \)-уровня.
+\end{defn}
+
+\begin{defn}{Матрица Якоби}{}
+    \[
+        J_f (\ol{a}) = \begin{pmatrix}
+            \frac{\partial f_1}{\partial x_1} (\ol{a}) & \ldots & \frac{\partial f_1}{\partial x_d} (\ol{a})
+            \\
+            \vdots & & \vdots
+            \\
+            \frac{\partial f_m}{\partial x_1} (\ol{a}) & \ldots & \frac{\partial f_m}{\partial x_d} (\ol{a})
+        \end{pmatrix}
+    \]
+
+    Если \( f \in D(\ol{a}) \), то \( J_f (\ol{a}) = df(\ol{a}) \)
+\end{defn}
