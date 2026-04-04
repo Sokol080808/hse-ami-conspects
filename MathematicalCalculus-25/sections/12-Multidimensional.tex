@@ -1,4 +1,4 @@
-\section{Многомерный анализ?}
+\section{Многомерный анализ}
 
 \subsection{Метрика, норма и скалярное произведение}
 
@@ -27,13 +27,11 @@
                 \rho(x, y)
                 =
                 \begin{cases}
-                    1, x \neq y 
+                    1, x \neq y
                     \\
                     0, x = y
                 \end{cases}
-            \)
-
-            Это называется дискретной метрикой.
+            \) --- дискретная метрика
         \item
             \( X \) --- плоскость.
 
@@ -41,7 +39,7 @@
 
             \( \rho_1 (x, y) = |x_1 - y_1| + |x_2 - y_2| \)
 
-            \( \rho_2 (x, y) = \sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2} \)
+            \( \rho_2 (x, y) = \sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2} \) --- Евклидова метрика
         \item
             \( l^\infty = \{ a_n \} \), причем \( \exists c(a) : \forall n \in \NN \: |a_n| \leq c \)
 
@@ -79,7 +77,7 @@
 \begin{defn}{}{}
     Пусть \( V \) --- векторное пространство над \( \RR \).
 
-    Функция \( (\cdot, \cdot) V \times V \to V \) называется скалярным произведением над \( V \), если:
+    Функция \( (\cdot, \cdot) : V \times V \to \RR \) называется скалярным произведением над \( V \), если:
     \begin{enumerate}
         \item
             \( (\ol{x}, \ol{x}) \geq 0 \) и \( (\ol{x}, \ol{x}) = 0 \Leftrightarrow \ol{x} = \ol{0} \)
@@ -102,7 +100,7 @@
 \begin{gather*}
     (\ol{x} - t \ol{y}, \ol{x} - t \ol{y}) \geq 0
     \\
-    (\ol{x}, \ol{x}) - 2t (\ol{x}, ol{y}) + t^2 (\ol{y}, \ol{y}) \geq 0
+    (\ol{x}, \ol{x}) - 2t (\ol{x}, \ol{y}) + t^2 (\ol{y}, \ol{y}) \geq 0
 \end{gather*}
 
 \begin{enumerate}
@@ -110,6 +108,8 @@
         \( (\ol{y}, \ol{y}) = 0 \)
 
         Тогда \( \ol{y} = 0 \).
+
+        Покажем, что \( (\ol{x}, \ol{y}) = 0 \).
 
         \( (\ol{x}, \ol{0}) = (\ol{x}, \ol{0} + \ol{0}) = 2 (\ol{x}, \ol{0}) \).
 
@@ -138,7 +138,13 @@
     \leq
     \\
     \leq
-    2 \sqrt{(\ol{x}, \ol{x})} \sqrt{(\ol{y}, \ol{y})} = \left( \sqrt{(\ol{x}, \ol{x})} + \sqrt{(\ol{y}, \ol{y})} \right)^2
+    (\ol{x}, \ol{x}) + 2 \sqrt{(\ol{x}, \ol{x})} \sqrt{(\ol{y}, \ol{y})} + (\ol{y}, \ol{y})
+    =
+    \left( \sqrt{(\ol{x}, \ol{x})} + \sqrt{(\ol{y}, \ol{y})} \right)^2
+    =
+    \\
+    =
+    \left( || \ol{x} || + || \ol{y} || \right)^2
 \end{gather*}
 
 \begin{defn}{}{}
@@ -187,7 +193,7 @@
             \(
                 \displaystyle
                 || \ol{x} ||_1 = \sum\limits_{j = 1}^d |x_j|
-            \)
+            \) --- не порождается скалярным произведением
     \end{itemize}
 \end{example}
 
@@ -197,11 +203,11 @@
         \\
         \Updownarrow
         \\
-        \forall \ol{x}, \ol{y} \in V \quad 2 ||\ol{x}||^2 + 2 ||\ol{y}||^2 = || \ol{x} + \ol{y} ||^2 + || \ol{x} - \ol{y} ||^2 
+        \forall \ol{x}, \ol{y} \in V \quad 2 ||\ol{x}||^2 + 2 ||\ol{y}||^2 = || \ol{x} + \ol{y} ||^2 + || \ol{x} - \ol{y} ||^2
     \end{gather*}
 \end{thrm}
 
-\subsection{Предел последовательности}
+\subsection{Предел, непрерывность и связность}
 
 \begin{defn}{}{}
     \begin{enumerate}
@@ -212,26 +218,26 @@
             Множество \( \ol{B}_r(a) = \{ x \in X : \rho(x, a) \leq r \} \) называется замкнутым шаром в \( X \)
             радиуса \( r \) с центром в точке \( a \).
         \item
-            \( B_{\varepsilon}'(x) = \mathring{B_{\varepsilon}} (x) \) --- проколотая окрестность
+            \( B_{\varepsilon}'(a) = \mathring{B_{\varepsilon}} (a) = \{ x \in X : 0 < \rho(x, a) < \varepsilon \} \)
+            --- проколотая окрестность точки \( a \)
     \end{enumerate}
 \end{defn}
 
 Научимся делать так, чтобы шар с большим радиусом был внутри шара с меньшим радиусом.
-
 Возьмем три точки \( A, B, C \), образующие прямоугольный треугольник:
 \begin{itemize}
     \item
         \( AB = 3 \)
     \item
         \( BC = 4 \)
-    \item 
+    \item
         \( AC = 5 \)
 \end{itemize}
 
-Возьмем \( B_{4.1}(B) = \{ A, B, C \} \) и \( B_{4.9} = \{ B, C \} \) --- ура.
+Возьмем \( B_{4.1}(B) = \{ A, B, C \} \) и \( B_{4.9}(C) = \{ B, C \} \) --- ура.
 
 \begin{exercise}{}{}
-    Доказать, что в нормированном пространстве шар с большим радиусом не может содержать в шаре с меньшим радиусом.
+    Доказать, что в нормированном пространстве шар с большим радиусом не может содержаться в шаре с меньшим радиусом.
 \end{exercise}
 
 \begin{defn}{}{}
@@ -241,7 +247,7 @@
 
     Будем обозначать \( f(n) = x_n \in X \).
 
-    \( \lim x_n = x \Leftrightarrow \exists \varepsilon > 0 \ \exists N : \forall n > N \rho(x_n, x) < \varepsilon \)
+    \( \lim x_n = x \Leftrightarrow \exists \varepsilon > 0 \ \exists N : \forall n > N \: \rho(x_n, x) < \varepsilon \)
 \end{defn}
 
 \begin{defn}{}{}
@@ -249,9 +255,9 @@
 
     \begin{itemize}
         \item
-            \( a \) --- предельная точка \( M \), если \( \forall \varepsilon > 0 \ M \cap B_{\varepsilon}'(a) \neq \varnothing \)
+            \( a \) --- предельная точка \( M \), если \( \forall \varepsilon > 0 \ M \cap \mathring{B}_{\varepsilon}(a) \neq \varnothing \)
         \item
-            \( a \in M \) --- изолированная точка множества \( M \), если не является предельной.
+            \( a \in M \) --- изолированная точка множества \( M \), если \( a \) не является предельной.
         \item
             \( a \) --- граничная точка, если в любой ее окрестности есть точки и из \( M \), и из \( X \setminus M \)
     \end{itemize}
@@ -310,16 +316,16 @@
 \begin{thrm}{}{}
     Пусть \( (V, || \cdot ||) \) --- нормированное пространство.
 
-    Пусть \( \ol{x_n} \to \ol{x}, \ol{y_n} \to \ol{y} \).
+    Пусть \( \ol{x}_n \to \ol{x}, \ol{y}_n \to \ol{y} \).
 
     Пусть \( \{ \alpha_n \} \subset \RR : \alpha_n \to \alpha \in \RR \).
 
     Тогда
     \begin{enumerate}
         \item
-            \( \lim\limits_{n \to \infty} (\ol{x_n} + \ol{y_n}) = \ol{x} + \ol{y} \)
+            \( \lim\limits_{n \to \infty} (\ol{x}_n + \ol{y}_n) = \ol{x} + \ol{y} \)
         \item
-            \( \lim\limits_{n \to \infty} \alpha_n \ol{x_n} = \alpha \ol{x} \)
+            \( \lim\limits_{n \to \infty} \alpha_n \ol{x}_n = \alpha \ol{x} \)
     \end{enumerate}
 \end{thrm}
 
@@ -329,33 +335,76 @@
     \item
         \(
             \forall \varepsilon > 0 \ \exists N : \forall n > N \
-            |\alpha_n - \alpha| < \varepsilon, || \ol{x_n} - \ol{x} || < \varepsilon
+            |\alpha_n - \alpha| < \varepsilon, || \ol{x}_n - \ol{x} || < \varepsilon
         \)
 
         \begin{gather*}
-            || \alpha_n \ol{x_n} - \alpha \ol{x} ||
+            || \alpha_n \ol{x}_n - \alpha \ol{x} ||
             \leq
-            || \alpha_n \ol{x_n} - \alpha_n \ol{x} || + || \alpha_n \ol{x} - \alpha \ol{x} ||
+            || \alpha_n \ol{x}_n - \alpha_n \ol{x} || + || \alpha_n \ol{x} - \alpha \ol{x} ||
             =
             \\
             =
-            | \alpha_n | \cdot || \ol{x_n} - \ol{x} || + |\alpha_n - \alpha| \cdot || \ol{x} ||
+            | \alpha_n | \cdot || \ol{x}_n - \ol{x} || + |\alpha_n - \alpha| \cdot || \ol{x} ||
             \leq
+            (| \alpha_n | + || \ol{x} ||) \cdot \varepsilon
         \end{gather*}
+
+        Заметим, что \( |\alpha_n| \) ограничено в силу сходимости, а \( || \ol{x} || \) --- константа.
+        А значит существует \( C > 0 : | \alpha_n | + || \ol{x} || < C \):
+        \[
+            || \alpha_n \ol{x}_n - \alpha \ol{x} ||
+            \leq
+            (| \alpha_n | + || \ol{x} ||) \cdot \varepsilon
+            <
+            C \cdot \varepsilon
+        \]
+
+        Сделав \( \varepsilon \) достаточно маленьким, докажем нужное неравенство.
 \end{enumerate}
 
 \begin{thrm}{}{}
-    \( V \) --- Евклидово пространство, \( || \cdot || \) порождает скалярное произведение.
+    \( V \) --- Евклидово пространство, \( || \cdot || \) порождена скалярным произведением.
 
-    Пусть \( \lim\limits_{n \to \infty} \ol{x_n} = \ol{x} \) и \( \lim\limits_{n \to \infty} \ol{y_n} = \ol{y} \)
+    Пусть \( \lim\limits_{n \to \infty} \ol{x}_n = \ol{x} \) и \( \lim\limits_{n \to \infty} \ol{y}_n = \ol{y} \)
 
-    Тогда \( \lim\limits_{n \to \infty} (\ol{x_n}, \ol{y_n}) = (\ol{x}, \ol{y}) \)
+    Тогда \( \lim\limits_{n \to \infty} (\ol{x}_n, \ol{y}_n) = (\ol{x}, \ol{y}) \)
 \end{thrm}
 
-Тривиально.
+\begin{gather*}
+    | (\ol{x}_n, \ol{y}_n) - (\ol{x}, \ol{y}) |
+    \leq
+    | (\ol{x}_n, \ol{y}_n) - (\ol{x}, \ol{y}_n)| + | (\ol{x}, \ol{y}_n) - (\ol{x}, \ol{y}) |
+    =
+    \\
+    =
+    | (\ol{x}_n - \ol{x}, \ol{y}_n) | + | (\ol{x}, \ol{y}_n - \ol{y}) |
+    \leq
+    || \ol{x}_n - \ol{x} || \cdot || \ol{y}_n || + || \ol{x} || \cdot || \ol{y}_n - \ol{y} ||
+\end{gather*}
+
+\( \forall \varepsilon > 0 \: \exists N : \forall n > N \: || \ol{x}_n - \ol{x} || < \varepsilon \)
+и \( || \ol{y}_n - \ol{y} || < \varepsilon \)
+
+\( || \ol{x} || \) --- константа, а \( || \ol{y}_n || \) ограничено, так как имеет предел.
+Значит их сумма тоже ограничена некоторой константой \( C > 0 \).
+
+\begin{gather*}
+    | (\ol{x}_n, \ol{y}_n) - (\ol{x}, \ol{y}) |
+    \leq
+    || \ol{x}_n - \ol{x} || \cdot || \ol{y}_n || + || \ol{x} || \cdot || \ol{y}_n - \ol{y} ||
+    <
+    \\
+    <
+    ( || \ol{y}_n || + || \ol{x} || ) \cdot \varepsilon
+    <
+    C \cdot \varepsilon
+\end{gather*}
+
+Что и требовалось доказать.
 
 \begin{thrm}{}{}
-    Пусть \( \ol{x_n} \to x \) в \( \RR^d \) (в евклидовой норме)
+    Пусть \( \ol{x_n} \to x \) в \( V = \RR^d \) (в евклидовой норме)
 
     Тогда \( x_j^n \to x_j \) (\( x_j^n \) --- \( j \)-я координата \( \ol{x_n} \))
 
@@ -369,40 +418,98 @@
 Пусть \( C_n = \max\limits_{j = 1, \ldots, d} (x_j^n - x_j)^2 \)
 
 \[
-    C_n \leq || \ol{x_n} - \ol{x} || \leq \sqrt{d} \cdot \sqrt{C_n} 
+    C_n \leq || \ol{x_n} - \ol{x} || \leq \sqrt{d} \cdot \sqrt{C_n}
 \]
 
-Значит из поокоординатной сходимости следует просто сходимость и обратно.
+Значит из поокоординатной сходимости следует просто сходимость, и наоборот.
 
-\begin{thrm}{}{}
+\begin{thrm}{(Больцано-Вейерштрасса)}{}
     Пусть \( \{ \ol{x_n} \} \subset \RR^d \)
 
     Пусть \( \{ \ol{x_n} \} \) ограничен \( \Rightarrow \) есть сходящаяся подпоследовательность.
+
+    Считаем, что у нас Евклидова норма, но позже поймем, что это неважно.
 \end{thrm}
 
-По очереди для каждой координате применяем Больцано Вейерштрасса.
+Очевидно, что последовательность каждой из координат ограничена.
+Применим ``одномерную'' теорему Больцано-Вейерштрасса для первой координаты.
+Так мы выделим подпоследовательность, у которой сходится первая координата.
+Теперь на этой подпоследовательности вновь применим данную теорему,
+получим подпоследовательность изначальной последовательности,
+у которой сходится уже две первых координаты.
+Сделав так для всех оставшихся координат, докажем теорему.
 
-\begin{defn}{}{}
+\begin{defn}{(предел по Коши)}{}
     Пусть \( (X, \rho_x) \) и \( (Y, \rho_y) \) --- метрические пространства.
 
     \( a \) --- предельная точка \( X \).
 
     \( f : X \setminus \{ a \} \to Y \)
 
-    \( \lim\limits_{x \to a} f(x) = A \Leftrightarrow \forall \varepsilon > 0 \: \exists \delta > 0 : \forall x \in X : 0 < \rho_x(a, x) < \delta \: \rho_y(A, f(x)) < \varepsilon \)
+    Приведем две равносильных формулировки:
+    \begin{itemize}
+        \item
+            \(
+                \lim\limits_{x \to a} f(x) = A
+                \Leftrightarrow
+                \forall \varepsilon > 0 \: \exists \delta > 0 : \forall x \in X : 0 < \rho_x(a, x) < \delta \: \rho_y(A, f(x)) < \varepsilon
+            \)
+        \item
+            \(
+                \lim\limits_{x \to a} f(x) = A
+                \Leftrightarrow
+                \forall \varepsilon > 0 \: \exists \delta > 0 : \forall x \in \mathring{B}_{\delta}(a) \: f(x) \in B_{\varepsilon}(A)
+            \)
+    \end{itemize}
 \end{defn}
 
-Аналогично есть определение по Гейне + они равносильны.
+\begin{defn}{(предел по Гейне)}{}
+    Пусть \( (X, \rho_x) \) и \( (Y, \rho_y) \) --- метрические пространства.
+
+    \( a \) --- предельная точка \( X \).
+
+    \( f : X \setminus \{ a \} \to Y \)
+
+    \(
+        \lim\limits_{x \to a} f(x) = A
+        \Leftrightarrow
+        \forall \{ a_n \} \subset X : \forall n \in \NN \: a_n \neq a, \lim\limits_{n \to \infty} a_n = a
+        \text{ верно } \lim\limits_{n \to \infty} f(a_n) = A
+    \)
+\end{defn}
+
+\begin{thrm}{}{}
+    Определения по Коши и Гейне равносильны.
+\end{thrm}
+
+\newpage
 
 \begin{enumerate}
     \item
         \( \Rightarrow \)
 
-        Тривиально.
+        Пусть \( \{ a_n \} \subset X : \forall n \in \NN \: a_n \neq a, \lim\limits_{n \to \infty} a_n = a \).
+
+        То есть
+        \(
+            \forall \delta > 0 \: \exists N > 0 : \forall n > N \: 0 < \rho_x (a, a_n) < \delta
+            \Rightarrow
+            \rho_y (A, f(a_n)) < \varepsilon
+        \)
     \item
         \( \Leftarrow \)
 
-        От противного.
+        Пусть определение по Коши не выполнено.
+
+        \( \exists \varepsilon > 0 : \forall \delta > 0 \exists x \in \mathring{B}_{\delta} : \rho_y(f(x), A) \geq \varepsilon \)
+
+        Выберем при \( \delta = 1 \) \( x_1 : \rho_y (f(x_1), A) \geq \varepsilon \)
+
+        При \( \delta = \frac{1}{2} \) возьмем \( x_2 : \rho_y (f(x_2), A) \geq \varepsilon \)
+
+        И так далее
+
+        Но тогда для \( \{ x_n \} \) неверно определение предела по Гейне --- противоречие.
 \end{enumerate}
 
 \begin{thrm}{}{}
@@ -419,9 +526,9 @@
 
     Тогда:
     \begin{enumerate}
-        \item 
-            \( \lim\limits_{x \to a} f(x) + g(x) = A + B \)
-        \item 
+        \item
+            \( \lim\limits_{x \to a} (f(x) + g(x)) = A + B \)
+        \item
             \( \lim\limits_{x \to a} \alpha(x) \cdot f(x) = \alpha_0 \cdot A \)
     \end{enumerate}
 \end{thrm}
@@ -440,16 +547,14 @@
     Тогда \( \lim\limits_{x \to a} (f(x), g(x)) = (A, B) \)
 \end{thrm}
 
-Доказывается по Гейне.
+Мгновенно доказывается через определение по Гейне.
 
 \begin{thrm}{}{}
-    Пусть \( f : (X, \rho_x) \to (y, \rho_y) \)
-
-    \( \lim\limits_{x \to a} f(x) = A \)
+    Пусть \( f : (X, \rho_x) \to (Y, \rho_y) \) и \( \lim\limits_{x \to a} f(x) = A \)
 
     \begin{enumerate}
         \item
-            \( \exists \delta > 0 : \forall x \in \mathring{B}_\delta(a) \: f(x) \in B(A) \)
+            \( \exists \delta, r > 0 : \forall x \in \mathring{B}_\delta(a) \: f(x) \in B_r(A) \).
         \item
             \( \forall B \neq A \: \exists \delta > 0 : \forall x \in \mathring{B}_\delta(a) \: f(x) \notin B_{\frac{r}{2}}(B) \),
             где \( r = \rho_y(B, A) \)
@@ -458,38 +563,93 @@
 
 \begin{enumerate}
     \item
-        По Коши
+        Явно следует из определение предела по Коши.
     \item
-        Пусть \( \frac{r}{2} = \varepsilon \).
+        Возьмем \( \varepsilon = \frac{r}{2} \).
 
-        Дальше понятно.
+        Из определения предела по Коши существует \( \delta : \forall x \in \mathring{B}_{\delta} \ f(x) \in B_{\frac{r}{2}} (A) \).
+
+        Понятно, что \( B_{\frac{r}{2}} (A) \cap B_{\frac{r}{2}} (B) = \varnothing \).
 \end{enumerate}
 
-\begin{defn}{}{}
-    Пусть \( f : (X, \rho_x) \to (y, \rho_y) \)
+\begin{defn}{Непрерывность в точке по Гейне}{}
+    Пусть \( f : (X, \rho_x) \to (Y, \rho_y) \), \( a \in X \)
 
-    \( a \in X \)
-
-    \( f \in C(a) \), если \( \forall \{ a_n \} \subset X : \{ a_n \} \to a \) \( \lim\limits_{n \to \infty} f(a_n) = f(a) \)
+    \( f \in C(a) \Leftrightarrow \forall \{ a_n \} \subset X : \lim\limits_{n \to \infty} a_n = a \)
+    выполнено \( \lim\limits_{n \to \infty} f(a_n) = f(a) \)
 \end{defn}
 
+\begin{defn}{Непрерывность композиции}{}
+    Пусть \( f : (X, \rho_x) \to (Y, \rho_y) \), \( g : (Y, \rho_y) \to (Z, \rho_z) \)
 
-%TODO
-[TODO]
+    Также \( f \in C(a), g \in C(f(a)) \).
 
-\begin{defn}{}{}
-    \( V \subseteq \RR^D \)
-
-    Множество \( E \subseteq V \) связно, если \( \not\exists A, B \subset V \) таких,
-    что \( A \cap E \neq \varnothing \), \( B \cap E \neq \varnothing \), \( A \cap B = \varnothing \),
-    \( E \subseteq A \cup B \).
+    Тогда \( (g \circ f) \in C(a) \).
 \end{defn}
 
-\begin{defn}{}{}
-    \( V \subseteq \RR^D \)
+\( \forall \{ a_n \} \subset X : a_n \to a \lim\limits_{n \to \infty} f(a_n) = f(a) \)
 
+Тогда \( \lim\limits_{n \to \infty} g(f(a_n)) = g(f(a)) \)
+
+Что и требовалось доказать.
+
+\begin{defn}{Непрерывность в точке по Коши}{}
+    Пусть \( f : (X, \rho_x) \to (Y, \rho_y) \), \( a \in X \)
+
+    \( f \in C(a) \Leftrightarrow \forall \varepsilon > 0 \: \exists \delta > 0 : \forall x \in B_{\delta} (x) \: f(x) \in B_{\varepsilon} (f(a)) \)
+\end{defn}
+
+\begin{defn}{Непрерывность на множестве}{}
+    Пусть \( f : (X, \rho_x) \to (Y, \rho_y) \), \( M \subset X \)
+
+    \( f \) непрерывна на \( M \),
+    если она непрерывна в каждой точке этого множества.
+\end{defn}
+
+\newpage
+
+\begin{defn}{Компакт}{}
+    Множество \( K \subset X \) называется компактом тогда и только тогда,
+    когда из любого его покрытия открытыми множествами можно выбрать конечное подпокрытие.
+\end{defn}
+
+\begin{thrm}{Критерий компактности в \( R^d \)}{}
+    Множество \( K \subset R^d \) --- компакт тогда и только тогда,
+    когда оно замкнуто и ограничено.
+\end{thrm}
+
+\begin{thrm}{}{}
+    Пусть \( K \subset \RR^d \) --- компакт, \( f : \RR^d \to \RR^m, f \in C(K) \),
+    тогда \( f(K) \) --- тоже компакт (верно и для произвольных метрических пространств).
+\end{thrm}
+
+\begin{defn}{Равномерная непрерывность}{}
+    \( f : (X, \rho_x) \to (Y, \rho_y) \)
+
+    \( f \) равномерно непрерывна на множестве \( M \) тогда и только тогда,
+    когда \( \forall \varepsilon > 0 \: \exists \delta > 0 : \forall x, y \in M : \rho_x(x, y) < \delta \)
+    выполнено \( \rho_y (f(x), f(y)) < \varepsilon \)
+\end{defn}
+
+\begin{thrm}{(Гейне-Кантора)}{}
+    Функция, непрерывная на компакте \( K \subset R^d \), равномерно непрерывна на нем
+    (верно для произвольных метрических пространств).
+\end{thrm}
+
+\begin{defn}{}{}
+    Множество \( E \subset V \) называется связным,
+    если не существует открытых множеств \( A, B \subset V \) таких,
+    что \( A \cap M \neq \varnothing, B \cap M \neq \varnothing \) и \( M \subset A \sqcup B \).
+\end{defn}
+
+\begin{thrm}{(Больцано-Коши)}{}
+    Пусть \( f : \RR^d \to \RR^m \), \( f \in C(M) \), причем \( M \) связно.
+    Тогда \( f(M) \) тоже связно.
+\end{thrm}
+
+\begin{defn}{}{}
     Множество \( D \subseteq V \) линейно связно,
-    если \( \forall a, b \in D \) \( \exists \alpha \in C([0, 1], D) \)
+    если \( \forall a, b \in D \) существует непрерывная функция \( \alpha : [0, 1] \to D \)
     такая, что \( \alpha(0) = a, \alpha(1) = b \)
 \end{defn}
 
@@ -510,53 +670,60 @@
 \end{exercise}
 
 \begin{defn}{}{}
-    Пусть \( c_1, c_2 \in (0, +\infty) \)
 
     Пусть \( V \) --- линейное пространство и \( || \cdot ||_1 \), \( || \cdot ||_2 \) заданы на \( V \)
 
-    Если \( \forall \ol{x} \in V \) выполнено
+    Нормы называются эквивалентными, если \( \exists c_1, c_2 > 0 \) такие,
+    что \( \forall \ol{x} \in V \) выполнено
     \(
         c_1 || \ol{x} ||_1 \leq || \ol{x} ||_2 \leq c_2 || \ol{x} ||_1
-    \),
-    то \( || \cdot ||_1 \) и \( || \cdot ||_2 \) эквивалентны
+    \)
 \end{defn}
 
 \begin{thrm}{}{}
     Все нормы на конечномерном пространстве \( V \) эквивалентны.
 \end{thrm}
 
-Пусть \( V = <\ol{e}_1, \ldots, \ol{e}_d> \),
+Понятно, что определение действительно дает нам отношение эквивалентности.
+Будем доказывать эквивалентность всех норм манхеттенской.
+
+Пусть \( V = \langle \ol{e}_1, \ldots, \ol{e}_d \rangle \),
 где \( \ol{e}_1, \ldots, \ol{e}_d \) --- линейно независимы.
 
 Пусть \( \ol{x} = \sum\limits_{j = 1}^d x_j \ol{e}_j \)
 
 Пусть \( p(\ol{x}) = |x_1| + \ldots + |x_d| \)
 
-Пусть \( q \) --- другая норма на \( V \) и пусть \( c_2 = \max\limits_{j = 1, \ldots, d} q(\ol{e}_j) \).
+Пусть \( q \) --- другая норма на \( V \), и пусть \( c_2 = \max\limits_{j = 1, \ldots, d} q(\ol{e}_j) > 0 \).
 
-Тогда \( q(\ol{x}) \leq \sum\limits_{j = 1}^{d} |x_j| q(\ol{e}_j) \leq c_2 p(\ol{x}) \)
+Тогда \( q(\ol{x}) \leq \sum\limits_{j = 1}^{d} |x_j| \cdot q(\ol{e}_j) \leq c_2 \cdot p(\ol{x}) \)
 
 По неравенству треугольника:
-\( | q(\ol{x}) - q(\ol{y}) | \leq q(\ol{x} - \ol{y}) \)
-
-Итак: \( q : (V, p) \to \RR \Rightarrow \) \( q \) непрерывна \( V \),
+\( | q(\ol{x}) - q(\ol{y}) | \leq q(\ol{x} - \ol{y}) \leq c_2 \cdot p(\ol{x} - \ol{y}) \),
+поэтому \( q : (V, p) \to \RR \) непрерывна на \( V \),
 а значит непрерывна и на сфере \( S \) радиуса \( 1 \).
 Но \( S \) --- компакт, а значит \( \exists c_1 = \min\limits_{\ol{x} \in S} q(\ol{x}) > 0 \).
 
 Значит \( \forall \ol{x} \neq \ol{0} \) верно
-\( q \left( \frac{ol{x}}{p(\ol{x})} \right) \geq c_1 p \left( \frac{\ol{x}}{p(\ol{x})} \right) \)
+\(
+    q \left( \frac{\ol{x}}{p(\ol{x})} \right) \geq c_1 = c_1 p \left( \frac{\ol{x}}{p(\ol{x})} \right)
+    \Rightarrow
+    q ( \ol{x} ) \geq c_1 p ( \ol{x} )
+\)
 
-Значит \( \forall \ol{x} \neq \ol{0} \) верно \( c_1 p(\ol{x}) \leq q(\ol{x}) \leq c_2 p(\ol{x}) \).
+То есть \( \forall \ol{x} \neq \ol{0} \) верно \( c_1 p(\ol{x}) \leq q(\ol{x}) \leq c_2 p(\ol{x}) \),
+а для \( \ol{x} = 0 \) это неравенство, очевидно, верно \( \Rightarrow \)
+любая норма эквивалентна \( p \), а значит все нормы эквивалентны.
 
 \begin{exercise}{}{}
     В бесконечномерном пространстве найдутся две неэквивалентные нормы.
 
-    (использовать базис Гамеля)
+    (нужно использовать базис Гамеля)
 \end{exercise}
 
 \newpage
 
-\section{Функции от многих переменных}
+\subsection{Дифференциал}
 
 \( f : \RR^d \to \RR^m \)
 
@@ -572,9 +739,7 @@
 
 \(
     f_j : \RR^d \to \RR
-\)
-
-\subsection{Дифференциал}
+\) --- координатная функция
 
 \begin{defn}{}{}
     Пусть \( f : \RR^d \to \RR^m \)
@@ -590,30 +755,93 @@
         \alpha : \mathring{V}(\ol{0}) \to \RR^m \quad \lim\limits_{\ol{h} \to \ol{0}} \alpha(\ol{h}) = \ol{0} \in \RR^m
     \end{gather*}
 
-    \( L_{\ol{a}} \) называет дифференциалом \( f \) в точке \( \ol{a} \) и обозначается \( df(\ol{a}) \)
+    \( L_{\ol{a}} \) называется дифференциалом \( f \) в точке \( \ol{a} \) и обозначается \( df(\ol{a}) \)
 \end{defn}
 
-\begin{lemma}{}{}
+\begin{example}{}{}
+    \[
+        f \begin{pmatrix}
+            x_1
+            \\
+            x_2
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            x_1^2
+            \\
+            x_2^3
+        \end{pmatrix}
+        \quad
+        f : \RR^2 \to \RR^2
+    \]
+
+    Подставим:
+    \begin{gather*}
+        f \begin{pmatrix}
+            \ol{a} + \ol{h}
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            (a_1 + h_1)^2
+            \\
+            (a_2 + h_2)^3
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            a_1^2 + 2 a_1 h_1 + h_1^2
+            \\
+            a_2^3 + 3 a_2^2 h_2 + 3 a_2 h_2^2 + h_2^3
+        \end{pmatrix}
+        =
+        \\
+        =
+        \begin{pmatrix}
+            a_1^2
+            \\
+            a_2^3
+        \end{pmatrix}
+        +
+        \begin{pmatrix}
+            2a_1 & 0
+            \\
+            0 & 3a_2^2
+        \end{pmatrix}
+        \begin{pmatrix}
+            h_1
+            \\
+            h_2
+        \end{pmatrix}
+        +
+        \sqrt{h_1^2 + h_2^2}
+        \begin{pmatrix}
+            \frac{h_1^2}{\sqrt{h_1^2 + h_2^2}}
+            \\
+            \frac{3 a_2 h_2^2 + h_2^3}{\sqrt{h_1^2 + h_2^2}}
+        \end{pmatrix}
+    \end{gather*}
+\end{example}
+
+\begin{prop}{}{}
     \( f \in D(\ol{a}) \Rightarrow f \in C(\ol{a}) \)
-\end{lemma}
+\end{prop}
 
 \begin{gather*}
-    ||f(\ol{a} + \ol{h} ) - f(\ol{a})||
+    ||f( \ol{a} + \ol{h} ) - f(\ol{a})||
     =
-    || L_{\ol{a}} \ol{h} + || \ol{h} || \alpha(\ol{h}) ||
+    || L_{\ol{a}} \ol{h} + || \ol{h} || \cdot \alpha(\ol{h}) ||
     \leq
     \\
     \leq
     \sum\limits_{j = 1}^{d} |h_j| \cdot || L_{\ol{a}} \ol{e}_j ||
-        + || \ol{h} || \cdot || \alpha(h) ||
-    \to \ol{0} \quad (\ol{h} \to \ol{h})
+        + || \ol{h} || \cdot || \alpha(\ol{h}) ||
+    \to \ol{0} \quad (\ol{h} \to \ol{0})
 \end{gather*}
 
-\begin{lemma}{}{}
+\begin{prop}{}{}
     Пусть \( f \in D(\ol{a}) \)
 
     Тогда \( \exists! \: df(\ol{a}) \)
-\end{lemma}
+\end{prop}
 
 Пусть \( \exists L_1, L_2 \) такие, что
 \begin{enumerate}
@@ -625,7 +853,7 @@
 
 Пусть \( L = L_2 - L_1 \).
 \begin{gather*}
-    L \ol{h} = (\alpha_1(\ol{h}) -\alpha_2(\ol{h}) || \ol{h} ||
+    L \ol{h} = ( \alpha_1(\ol{h}) -\alpha_2(\ol{h}) ) || \ol{h} ||
     \\
     L \frac{\ol{h}}{||h||} = \alpha_1(\ol{h}) -\alpha_2(\ol{h})
 \end{gather*}
@@ -635,13 +863,13 @@
 Но тогда \( L \) равно \( \ol{0} \) на любом векторе единичной длины,
 а значит \( L = 0 \).
 
-\begin{lemma}{}{}
+\begin{prop}{}{}
     \[
         f \in D(\ol{a})
         \Leftrightarrow
         \exists L_{\ol{a}} : \ \lim\limits_{|| \ol{h} || \to 0} \frac{||f(\ol{a} + \ol{h}) - f(\ol{a}) - L_{\ol{a}} \ol{h}||}{||\ol{h}||} = 0
     \]
-\end{lemma}
+\end{prop}
 
 \begin{itemize}
     \item
@@ -659,15 +887,16 @@
 \end{itemize}
 
 \begin{remark}{}{}
-    Строчки матрицы дифференциалов --- дифференциалы координатных функций.
+    Строчки матрицы дифференциалов являются дифференциалами координатных функций.
 \end{remark}
+
+\newpage
 
 \subsection{Производная по направлению}
 
-\begin{defn}{}{}
+\begin{defn}{Производная по направлению (вектору)}{}
     Если существует предел \( \lim\limits_{t \to 0} \frac{f(\ol{a} + t \cdot \ol{v}) - f(\ol{a})}{t} \),
     то он называется производной \( f \) по вектору \( \ol{v} \).
-
     Если \( ||\ol{v}|| = 1 \), то этот предел называется производной по направлению \( \ol{v} \)
     и обозначается \( f_t ' (\ol{a} + t \cdot \ol{v}) \: \vline_{\: t = 0} \)
     или \( \frac{\partial f}{\partial \ol{v}} (\ol{a}) \)
@@ -675,7 +904,7 @@
 
 \begin{thrm}{}{}
     \[
-        f \in D(\ol{a}) \Rightarrow \lim\limits_{t \to 0} \frac{f(\ol{a} + t \ol{v}) - f(\ol{a})}{t} = df(\ol{a}) \cdot \ol{v}
+        f \in D(\ol{a}) \Rightarrow \lim\limits_{t \to 0} \frac{f(\ol{a} + t \ol{v}) - f(\ol{a})}{t} = df(\ol{a})(\ol{v})
     \]
 \end{thrm}
 
@@ -687,7 +916,7 @@
 
 \subsection{Частная производная и запись дифференциала с их помощью}
 
-\begin{defn}{}{}
+\begin{defn}{Частная производная}{}
     \( f : \RR^d \to \RR \)
 
     Если \( \exists \lim\limits_{t \to 0} \frac{f(\ol{a} + t e_j)  - f(\ol{a})}{t} \),
@@ -696,6 +925,20 @@
 
     Обозначается \( f_{x_j}' (\ol{a}) \) или \( \displaystyle \frac{\partial f}{\partial x_j} (\ol{a}) \)
 \end{defn}
+
+\begin{example}{}{}
+    \( f(x_1, x_2, x_3) = e^{x_1 x_2} \sin x_3 \).
+
+    Найдем все частные производные:
+    \begin{itemize}
+        \item
+            \( f_{x_1}' (x_1, x_2, x_3) = x_1 e^{x_1 x_2} \sin x_3 \)
+        \item
+            \( f_{x_2}' (x_1, x_2, x_3) = x_2 e^{x_1 x_2} \sin x_3 \)
+        \item
+            \( f_{x_3}' (x_1, x_2, x_3) = e^{x_1 x_2} \cos x_3 \)
+    \end{itemize}
+\end{example}
 
 \begin{example}{}{}
     \[
@@ -710,9 +953,78 @@
     однако ни по какому другому направлению производной не существует.
 \end{example}
 
+В случае функции \( f : \RR^d \to \RR \),
+\( df(\ol{a}) = (A_1, \ldots, A_d) \).
+Поэтому по определению дифференциала:
+\[
+    f(\ol{a} + \ol{h}) - f(\ol{a}) = A_1 h_1 + \ldots + A_d h_d + o(\ol{h})
+\]
+
+Если подставить \( h \) такое, что все его координаты кроме \( h_i \) равны \( 0 \),
+то получим
+\(
+    f(a_1, \ldots, a_{i - 1}, a_i + h_i, a_{i + 1}, \ldots a_d) - f(a_1, \ldots, a_{i - 1}, a_i, a_{i + 1}, \ldots a_d)
+    =
+    A_i h_i + o(\ol{h})
+\).
+Откуда \( A_i = \frac{\partial f}{\partial x_i} (\ol{a}) \).
+
+А значит \( df(\ol{a}) = \left( \frac{\partial f}{\partial x_1} (\ol{a}), \ldots, \frac{\partial f}{\partial x_d} (\ol{a}) \right) \)
+
+\begin{remark}{}{}
+    \(
+        \displaystyle
+        \ol{h}_j (\ol{e}_j) = \delta_{ji} = \begin{cases}
+            1, j = i
+            \\
+            0, j \neq i
+        \end{cases}
+    \)
+
+    \(
+        d \ol{h}_j (\ol{x}) (\ol{h}) = x_j + h_j - x_j = h_j
+    \)
+
+    Такие дифференциалы обозначаются \( dx_j \)
+
+    То есть \( \forall h \in \RR^d \ dx_j (\ol{h}) = h_j \)
+\end{remark}
+
+\begin{remark}{}{}
+    \[
+        df (\ol{a}) \ol{h}
+        =
+        \sum\limits_{j = 1}^d \frac{\partial f}{\partial x_j} (\ol{a}) (dx_j (\ol{h}))
+        =
+        \sum\limits_{j = 1}^d \frac{\partial f}{\partial x_j} (\ol{a}) h_j
+    \]
+\end{remark}
+
+\begin{example}{}{}
+    \( f(x, y) = \sqrt{ |xy| } \)
+
+    \( f_x'(0, 0) = \lim\limits_{h_1 \to 0} \frac{\sqrt{h_1 \cdot 0} - 0}{h_1} = 0 \)
+
+    \( f_y'(0, 0) = \lim\limits_{h_2 \to 0} \frac{\sqrt{0 \cdot h_2} - 0}{h_2} = 0 \)
+
+    \( f(\ol{0} + \ol{h}) - f(\ol{0}) = df(\ol{0}) \ol{h} + o(\ol{h}) = o(\ol{h}) \)
+
+    Пусть
+    \(
+        \ol{h} = \begin{pmatrix}
+            h
+            \\
+            h
+        \end{pmatrix},
+        h > 0
+        \Rightarrow
+        f(\ol{0} + \ol{h}) - f(\ol{0}) = h \neq o(\ol{h})
+    \) --- противоречие.
+\end{example}
+
 \begin{defn}{Градиент}{}
     \[
-        \nabla f (\ol{a}) = \left( \frac{\partial f}{\partial x_1}, \ldots, \frac{\partial f}{\partial x_d} \right)
+        \nabla f (\ol{a}) = \left( \frac{\partial f}{\partial x_1} (\ol{a}), \ldots, \frac{\partial f}{\partial x_d} (\ol{a}) \right)
     \]
 \end{defn}
 
@@ -720,7 +1032,7 @@
     Пусть \( f \in D(\ol{a}) \).
 
     Тогда максимальное значение производной по направлению \( \frac{\partial f}{\partial \ol{l}} (\ol{a}) \)
-    достигается при \( \ol{l} = \frac{\nabla f(\ol{a})}{|| \nabla f(\ol{a}) ||} \) (\( \nabla f(\ol{a}) \neq 0 \))
+    будет достигаться при \( \ol{l} = \frac{\nabla f(\ol{a})}{|| \nabla f(\ol{a}) ||} \) (\( \nabla f(\ol{a}) \neq 0 \))
 \end{thrm}
 
 \[
@@ -731,13 +1043,21 @@
     || \nabla f(\ol{a}) ||
 \]
 
-А равенство по КБШ достигается как раз при коллинеарности.
+А равенство здесь по КБШ достигается как раз при сонаправленности.
+Поскольку \( || \ol{l} || = 1 \), доказали теорему.
 
 \begin{defn}{}{}
-    \( \{ c \: \vline \: f(x, y) = c \} \) --- множество \( c \)-уровня.
+    \( f : \RR^2 \to \RR \)
+
+    \( \{ (x, y) \: \vline \: f(x, y) = c \} \) --- множество \( c \)-уровня.
 \end{defn}
 
+Из теоремы понятна идея градиентного спуска: нужно на ``немного'' сдвигать точку
+по вектору, противоположному градиенту (однако можем попасть в локальный минимум).
+
 \begin{defn}{Матрица Якоби}{}
+    Пусть существуют \( \frac{\partial f_j}{\partial x_i} (\ol{a}) \),
+    где \( j = 1, \ldots, m \), а \( i = 1, \ldots, d \).
     \[
         J_f (\ol{a}) = \begin{pmatrix}
             \frac{\partial f_1}{\partial x_1} (\ol{a}) & \ldots & \frac{\partial f_1}{\partial x_d} (\ol{a})
@@ -748,5 +1068,513 @@
         \end{pmatrix}
     \]
 
-    Если \( f \in D(\ol{a}) \), то \( J_f (\ol{a}) = df(\ol{a}) \)
+    Если \( f \in D(\ol{a}) \), то \( J_f (\ol{a}) \) --- матрица \( df(\ol{a}) \)
 \end{defn}
+
+\newpage
+
+\subsection{Достаточное условие дифференцируемости}
+
+\begin{thrm}{}{}
+    Пусть \( f : \RR^d \to \RR \)
+
+    Пусть в некоторой окрестности \( U(\ol{a}) \)
+    существуют \( \frac{\partial f}{\partial x_j} (\ol{x}) \ \forall j = 1, \ldots, d \),
+
+    Причем \( \frac{\partial f}{\partial x_j} \in C(\ol{a}) \).
+
+    Тогда \( f \in D(\ol{a}) \).
+\end{thrm}
+
+\begin{example}{}{}
+    \[
+        f(x, y) = \begin{cases}
+            (x^2 + y^2) \sin \frac{1}{x^2 + y^2}, x^2 + y^2 \neq 0
+            \\
+            0, x = y = 0
+        \end{cases}
+    \]
+
+    \( f \in D(\ol{0}) \), но не удовлетворяет условиям теоремы.
+\end{example}
+
+Приведем доказательство для \( d = 2 \):
+\begin{gather*}
+    f(a_1 + h_1, a_2 + h_2) - f(a_1, a_2)
+    =
+    \\
+    =
+    f(a_1 + h_1, a_2 + h_2) - f(a_1, a_2 + h_2) + f(a_1, a_2 + h_2) - f(a_1, a_2)
+    =
+    \\
+    =
+    f_1'(a_1 + \theta_1 h_1, a_2 + h_2) \cdot h_1 + f_2'(a_1, a_2 + \theta h_2) \cdot h_2
+    =
+    \\
+    =
+    f_1'(a_1, a_2) h_1 + f_2'(a_1, a_2) h_2
+        + \\
+        + ( f_1'(a_1 + \theta_1 h_1, a_2 + h_2) - f_1'(a_1, a_2) ) \cdot h_1
+        + ( f_2'(a_1, a_2 + \theta h_2) - f_2'(a_1, a_2) ) \cdot h_2
+    =
+    \\
+    =
+    df(\ol{a}) \ol{h} + || \ol{h} || \alpha(\ol{h})
+\end{gather*}
+
+Для большего числа переменных нужно повторить рассуждение,
+представив функцию как сумму изменений по каждой координате по очереди.
+
+\subsection{Дифференцируемость сложного отображения и инвариантность формы первого дифференциала}
+
+\begin{prop}{}{}
+    Пусть \( L : \RR^d \to \RR^m \) --- линейное отображение.
+
+    Тогда \( \exists C > 0 : \forall \ol{x} \in \RR^d \: || L \ol{x} || \leq C || \ol{x} || \)
+\end{prop}
+
+Пусть \( \ol{e}_1, \ldots, \ol{e}_d \) --- базис в \( \RR^d \),
+а \( \ol{e}_1', \ldots, \ol{e}_m' \) --- базис в \( \RR^m \).
+Пусть \( \ol{x} = \sum\limits_{j = 1}^{d} x_j \ol{e}_j \):
+\[
+    || L \ol{x} ||
+    \leq
+    \sum\limits_{j = 1}^{d} |x_j| \cdot || L \ol{e}_j ||
+    \leq
+    \max\limits_{j = 1, \ldots, d} |x_j| \cdot \sum\limits_{j = 1}^{d} || L \ol{e}_j ||
+    \leq
+    || \ol{x} || \cdot \sum\limits_{j = 1}^{d} || L \ol{e}_j ||
+\]
+
+Возьмем \( C = \sum\limits_{j = 1}^{d} || L \ol{e}_j || \) --- доказали.
+
+\begin{thrm}{Дифференцируемость сложного отображения}{}
+    Пусть \( f : \RR^d \to \RR^m \), \( f \in D(\ol{a}) \), \( g : \RR^m \to \RR^n \), \( g \in D(f(\ol{a})) \)
+
+    Тогда \( g \circ f \in D(a) \), причем \( d (g \circ f) (\ol{a}) = dg(f(\ol{a})) \circ df (\ol{a}) \)
+\end{thrm}
+
+\begin{gather*}
+    f(\ol{a} + \ol{h}) - f(\ol{a}) = df(\ol{a}) \ol{h} + || \ol{h} || \cdot \alpha (\ol{h})
+    \\
+    g(f(\ol{a}) + \ol{a}) - g(f(\ol{a})) = dg(f(\ol{a})) \ol{q} + || \ol{q} || \cdot \beta (\ol{q})
+\end{gather*}
+
+Доопределим \( \beta(\ol{0}) = 0 \).
+
+Теперь подставим \( \ol{q} = f(\ol{a} + \ol{h}) - f(\ol{a}) = df(\ol{a}) \ol{h} + || \ol{h} || \cdot \alpha (\ol{h}) \):
+\begin{gather*}
+    g(f(\ol{a} + \ol{h})) - g(f(\ol{a}))
+    =
+    \\
+    =
+    dg(f(\ol{a})) ( df(\ol{a}) \ol{h} + || \ol{h} || \cdot \alpha (\ol{h}) )
+        +
+        || f(\ol{a} + \ol{h}) - f(\ol{a}) || \cdot \beta (f(\ol{a} + \ol{h}) - f(\ol{a}))
+    =
+    \\
+    =
+    (dg(f(\ol{a})) \circ df (\ol{a})) ( \ol{h} )
+        +
+        || \ol{h} || \cdot dg ( f(\ol{a}) ) ( \alpha(\ol{h}) )
+        +
+        \\
+        +
+        || f(\ol{a} + \ol{h}) - f(\ol{a}) || \cdot \beta (f(\ol{a} + \ol{h}) - f(\ol{a}))
+    =
+    \\
+    =
+    (dg(f(\ol{a})) \circ df (\ol{a})) ( \ol{h} ) + || \ol{h} || \cdot \gamma (\ol{h})
+\end{gather*}
+
+Проверим:
+\[
+    \gamma(\ol{h})
+    =
+    dg ( f(\ol{a}) ) ( \alpha(\ol{h}) )
+    +
+    \frac{|| f(\ol{a} + \ol{h}) - f(\ol{a}) ||}{|| \ol{h} ||} \cdot \beta (f(\ol{a} + \ol{h}) - f(\ol{a}))
+\]
+
+По предположению выше:
+\[
+    || dg ( f(\ol{a}) ) ( \alpha(\ol{h}) ) || \leq C || \alpha ( \ol{h} ) ||
+\]
+
+Значит это слагаемое стремится к нулю при \( \ol{h} \to \ol{0} \).
+
+\begin{gather*}
+    \frac{|| df(\ol{a}) \ol{h} + || \ol{h} || \cdot \alpha(h) ||}{|| \ol{h} ||} \cdot || \beta (f(\ol{a} + \ol{h}) - f(\ol{a})) ||
+    \leq
+    \\
+    \leq
+    \frac{C_1 || \ol{h} || + || \ol{h} || \cdot || \alpha(h) ||}{|| \ol{h} ||} \cdot || \beta (f(\ol{a} + \ol{h}) - f(\ol{a})) ||
+    =
+    \\
+    =
+    (C_1 + || \alpha(\ol{h}) ||) \cdot || \beta (f(\ol{a} + \ol{h}) - f(\ol{a})) ||
+\end{gather*}
+
+Получили константу на бесконечно малую.
+
+А значит \( \gamma(\ol{h}) \to 0 \) при \( \ol{h} \to \ol{0} \)
+
+\begin{coroll}{}{}
+    \( J_g (f(\ol{a})) \cdot J_f (\ol{a}) \) --- матрица \( dg(f(\ol{a})) \circ df (\ol{a}) \)
+\end{coroll}
+
+Пусть \( f : \RR \to \RR^m \), \( g : \RR^m \to \RR \).
+
+\( (g \circ f)' (a) = g_1'(f(a)) \cdot f_1'(a) + \ldots + g_m'(f(a)) \cdot f_m'(a) \),
+где \( g_i' \) --- производная \( g \) по \( i \)-й координате, а \( f_i \) --- \( i \)-я координатная функция.
+
+\begin{thrm}{Инвариантность формы первого дифференциала}{}
+    Пусть \( f : \RR^d \to \RR^m \), \( f \in D(\ol{a}) \), \( g \RR^m \to \RR \), \( g \in D(\ol{y}) \), где \( \ol{y} = f(\ol{a}) \).
+
+    Если в \( dg(\ol{y}) = \sum\limits_{k = 1}^{m} \frac{\partial g}{\partial y_k} (\ol{y}) dy_k \)
+    вместо независимых переменных \( y_k \) подставить функции \( f_k(\ol{x}) \),
+    то при \( \ol{x} = \ol{a} \) полученное выражение является \( d(g \circ f)(\ol{a}) \).
+\end{thrm}
+
+\begin{gather*}
+    d(g \circ f)(\ol{a})
+    =
+    \sum\limits_{j = 1}^{d} (g \circ f)_j' (\ol{a}) dx_j
+    =
+    \sum\limits_{j = 1}^{d}
+        \left(
+            \sum\limits_{k = 1}^{m}
+            \left[
+                \frac{\partial g}{\partial y_k} (f(\ol{a})) \cdot \frac{\partial f_k}{\partial x_j} (\ol{a})
+            \right]
+        \right) dx_j
+    =
+    \\
+    =
+    \sum\limits_{k = 1}^{m}
+        \left(
+            \frac{\partial g}{\partial y_k} (f(\ol{a}))
+            \cdot
+            \sum\limits_{j = 1}^{d}
+                 \frac{\partial f_k}{\partial x_j} (\ol{a})
+                 dx_j
+        \right)
+    =
+    \sum\limits_{k = 1}^{m} \frac{\partial g}{\partial y_k} (f(\ol{a})) df_k (\ol{a})
+\end{gather*}
+
+\subsection{Правила дифференцирования}
+
+\begin{prop}{Правила дифференцирования}{}
+    Пусть \( f, g : \RR^d \to \RR \), и \( f, g \in D(\ol{a}) \)
+
+    \begin{itemize}
+        \item
+            \( (\alpha f + \beta g) \in D(\ol{a}) \)
+        \item
+            \( fg \in D(\ol{a}) \)
+        \item
+            При \( g(\ol{a}) \neq 0 \) \( \frac{f}{g} \in D(\ol{a}) \)
+    \end{itemize}
+
+    Сами правила:
+    \begin{itemize}
+        \item
+            \( d (\alpha f + \beta g) ( \ol{a} ) = \alpha df (\ol{a}) + \beta dg (\ol{a}) \)
+        \item
+            \( d (fg) ( \ol{a} ) = f(\ol{a}) dg(\ol{a}) + g(\ol{a}) df (\ol{a}) \)
+        \item
+            \( d \left( \frac{f}{g} \right) ( \ol{a} ) = \frac{g(\ol{a}) df (\ol{a}) - f(\ol{a}) dg (\ol{a}) }{g^2(\ol{a})} \)
+    \end{itemize}
+\end{prop}
+
+Проведем доказательство на примере произведения.
+
+Пусть \( \varphi(x, y) = xy \Rightarrow d \varphi (x, y) = x dy + y dx \).
+
+Если \( x = f(\ol{a}) \), \( y = g(\ol{a}) \),
+то \( d (fg) (\ol{a}) = f (\ol{a}) dg (\ol{a}) + g (\ol{a}) df (\ol{a}) \).
+
+\begin{example}{}{}
+    \( g \in \RR^m \to \RR \), \( g \in D(\ol{b}) \).
+
+    Пусть \( \ol{v} \in \RR^m \) и
+    \(
+        \ol{v} = \begin{pmatrix}
+            \cos \alpha_1
+            \\
+            \vdots
+            \\
+            \cos \alpha_m
+        \end{pmatrix}
+    \), где \( \alpha_j \) --- угол между \( \ol{v} \) и осью \( y_j \).
+
+    В таком случае \( || \ol{v} || = 1 \).
+
+    \begin{gather*}
+        g(\ol{b} + t \ol{v}) = g(b_1 + t v_1, \ldots, b_d + t v_m) = u(t)
+        \\
+        f(t) = \begin{pmatrix}
+            b_1 + t \cos \alpha_1
+            \\
+            \vdots
+            \\
+            b_d + t \cos \alpha_m
+        \end{pmatrix}
+    \end{gather*}
+
+    \begin{gather*}
+        \frac{\partial g}{\partial \ol{v}} ( \ol{b} )
+        =
+        u' (0)
+        =
+        \frac{\partial g}{\partial y_1} (f(0)) \cdot (b_1 + t \cos \alpha_1)'
+            +
+            \ldots
+            +
+            \frac{\partial g}{\partial y_m} (f(0)) \cdot (b_m + t \cos \alpha_m)'
+        \\
+        \frac{\partial g}{\partial \ol{v}} ( \ol{b} )
+        =
+        \frac{\partial g}{\partial y_1} (f(0)) \cos \alpha_1
+            +
+            \ldots
+            +
+            \frac{\partial g}{\partial y_m} (f(0)) \cos \alpha_m
+        =
+        dg (\ol{b})(\ol{v})
+        =
+        (\nabla g(\ol{b}), \ol{v})
+    \end{gather*}
+\end{example}
+
+\begin{example}{}{}
+    \( g(y_1, y_2, \ldots, y_m) = g(f_1(x_1, \ldots, x_d), \ldots, f_m(x_1, \ldots, x_d)) \)
+
+    \( g_{x_1}' = g_1' \cdot {f_1}_{x_1}' + \ldots + g_m' \cdot {f_m}_{x_1}' \)
+
+    \( g : \RR^3 \to \RR \), \( f : \RR^2 \to \RR^3 \)
+
+    \(
+        f = \begin{pmatrix}
+            x_1 + x_2
+            \\
+            x_1 x_2
+            \\
+            x_2 \sin x_1
+        \end{pmatrix}
+    \)
+    \begin{gather*}
+        d (g \circ f) (\ol{x})
+        =
+        g_{y_1}' dy_1 + g_{y_2}' dy_2 + g_{y_3} dy_3
+        =
+        \\
+        =
+        g_1' (dx_1 + dx_2) + g_2' (x_1 dx_2 + x_2 dx_1) + g_3' (x_2 \cos x_1 dx_1 + \sin x_1 dx_2)
+        =
+        \\
+        =
+        dx_1 (g_1' + x_2 g_2' + g_3' \cdot x_2 \cos x_1) + dx_2 (g_1' + x_1 g_2' + g_3' \sin x_1)
+    \end{gather*}
+\end{example}
+
+\begin{thrm}{Дифференцируемость обратного отображения}{}
+    Пусть \( f : \RR^d \to \RR^d \) биекция \( U(\ol{a}) \) на \( V(f(\ol{a})) \).
+
+    Пусть \( f \in D(\ol{a}) \).
+
+    Пусть \( df(\ol{a}) \) обратимо.
+
+    Пусть \( \exists f^{-1} : V(f(\ol{a})) \to U(\ol{a}) \), причем \( f^{-1} \in C(\ol{a}) \).
+
+    Тогда \( f^{-1} \in D(f(\ol{a})) \), причем \( df^{-1} (f(\ol{a})) = (df(\ol{a}))^{-1} \)
+\end{thrm}
+
+Если \( f^{-1} \in D(f(\ol{a})) \), то \( \forall \ol{q} \in \RR^d \) из некоторой проколотой окрестности нуля
+выполняется следующее:
+\[
+    f^{-1} (f(\ol{a}) + \ol{q}) - f^{-1} (f(\ol{a})) = df^{-1} (\ol{a}) \ol{q} + \beta (\ol{q}) || \ol{q} ||
+    \quad
+    \beta(\ol{q}) \to \ol{0}, || \ol{q} || \to 0
+\]
+
+Покажем, что
+\[
+    \lim\limits_{|| \ol{q} || \to 0} \frac{|| f^{-1} (f(\ol{a}) + \ol{q}) - f^{-1} (f(a)) - df(\ol{a})^{-1} \ol{q} ||}{|| \ol{q} ||} \to 0
+\]
+
+Пусть \( \ol{h} = f^{-1} ( f(\ol{a}) + \ol{q} ) - f^{-1} ( f(\ol{a}) ) \).
+
+Тогда \( \ol{q} = f(\ol{a} + \ol{h}) - f(\ol{a}) = df(\ol{a}) \ol{h} + || \ol{h} || \cdot \alpha ( \ol{h} ) \).
+
+При достаточно малых \( || q || \) \( \ol{a} + \ol{h} \in U(\ol{a}) \), так как \( f^{-1} \in C(\ol{a}) \).
+
+Аналогично \( f(\ol{a}) + \ol{q} \in V(f(\ol{a})) \)
+\begin{gather*}
+    \frac
+    {|| \ol{h} - df(\ol{a})^{-1} (df(\ol{a}) \ol{h} + || \ol{h} || \alpha ( \ol{h} )) ||}
+    {|| df(\ol{a}) \ol{h} + || \ol{h} || \cdot \alpha ( \ol{h} ) ||}
+    =
+    \\
+    =
+    \frac
+    {|| \ol{h} || \cdot || df(\ol{a})^{-1} \alpha(\ol{h}) || }
+    {|| df(\ol{a}) \ol{h} + || \ol{h} || \cdot \alpha ( \ol{h} ) ||}
+\end{gather*}
+
+Ранее выясняли, что \( \exists C > 0 : || (df (\ol{a})^{-1} \ol{x} ) || \leq C || \ol{x} || \).
+
+Подставим \( \ol{x} = df (\ol{a}) \ol{h} \): \( || \ol{h} || \leq C || df(\ol{a}) \ol{h} || \).
+
+Вернемся:
+\begin{gather*}
+    \frac
+    {|| \ol{h} || \cdot || df(\ol{a})^{-1} \alpha(\ol{h}) ||}
+    {|| df(\ol{a}) \ol{h} + || \ol{h} || \cdot \alpha ( \ol{h} ) ||}
+    \leq
+    \\
+    \leq
+    \frac
+    {|| \ol{h} || \cdot C \cdot || \alpha(\ol{h}) ||}
+    {|| \ol{h} || \cdot \left| || \frac{1}{C} \frac{\ol{h}}{|| \ol{h} ||} || - || \alpha(h) || \right| }
+    =
+    \frac
+    {C \cdot || \alpha(\ol{h}) ||}
+    {\left|\frac{1}{C} - || \alpha(h) || \right| }
+\end{gather*}
+
+Нетрудно видеть, что полученная дробь стремится к нулю при \( \ol{h} \to \ol{0} \).
+
+\subsection{Теорема о неявной функции}
+
+\begin{example}{}{}
+    Пусть \( x^2 + y^2 - 1 = 0 \).
+
+    Если \( x \) фиксированно, то решим уравнение относительно \( y \): \( y = \pm \sqrt{1 - x^2} \).
+\end{example}
+
+\begin{defn}{Неявная функция}{}
+    Если дано уравнение \( F(x, y) = 0 \), из которого в окрестности некоторой точки \( (x_0, y_0) \)
+    можно явно найти \( y \) и определить его единственным образом,
+    то говорят, что \( y \) --- неявная функция от \( x \).
+\end{defn}
+
+\begin{thrm}{Теорема о неявной функции}{}
+    Пусть
+    \begin{enumerate}
+        \item
+            \( F : \RR^2 \to \RR \) непрерывна в окрестности \( \Omega \) точки \( (x_0, y_0) \).
+        \item
+            \( F(x_0, y_0) = 0 \)
+        \item
+            \( F_x', F_y' \in C(\Omega) \)
+        \item
+            \( F_y' (x_0, y_0) \neq 0 \)
+    \end{enumerate}
+
+    Тогда \( \exists! \) функция \( y = f(x) \),
+    определенная в некоторой \( U_{\delta} (x_0) \):
+    \begin{enumerate}
+        \item
+            \( f(x_0) = y_0 \)
+        \item
+            \( \forall x \in U_{\delta} (x_0) \: F(x, f(x)) = 0 \)
+        \item
+            \( f \in D(U_{\delta} (x_0)) \) и \( f'(x) = - \frac{F_x'(x, y) |_{y = f(x)} }{F_y'(x, y) |_{y = f(x)} } \)
+    \end{enumerate}
+\end{thrm}
+
+Считаем, что \( F_y' (x_0, y_0) > 0 \), так как иначе можно перейти к \( -F \).
+
+Так как \( F_y' \in C(\Omega) \) и \( F_y'(x_0, y_0) > 0 \),
+то существуют \( a > 0 \) и \( b > 0 \) такие, что \( F_y' > m > 0 \)
+в прямоугольнике \( p = [x_0 - a, x_0 + a] \times [y_0 - b, y_0 + b] \).
+
+Так как \( F_y' > 0 \) на \( p \), \( F(x_0, y) \uparrow \) на \( [y_0 - b, y_0 + b] \).
+
+Так как \( F(x_0, y_0) = 0 \), \( F(x_0, y_0 - b) < 0 \), \( F(x_0, y_0 + b) > 0 \).
+
+Можно выбрать достаточно малое \( a \) такое, что два вышеописанных утверждения
+будут верны для \( x \in [x_0 - a, x_0 + a] \).
+А значит на каждой ``вертикали'' найдется ровно одна точка \( y = f(x) \), где \( F \) обращается в ноль.
+
+Для такой \( f(x) \) верно, что \( f(x_0) = y_0 \).
+Единственна же она, так как для каждого фиксированного \( x \) нужный \( y \) единственен.
+
+Возьмем \( \delta > 0 : (x_0 - \delta, x_0 + \delta) \subset [x_0 - a, x_0 + a] \).
+Этот интервал и есть \( U_{\delta} (x_0) \).
+
+Пусть \( x, c \in U_{\delta} (x_0) \) и \( y_c = f(c), y = f(x) \).
+
+\( F(c, y_c) = F(x, y) = 0 \).
+
+Для функции \( h(t) = F(c + t(x - c), y_c + t(y - y_c)) \) имеем:
+\( h(0) = h(1) = 0 \) и \( h \in C[0, 1] \), \( h \in D(0, 1) \).
+
+\( h'(t) = F_1' \cdot (x - c) + F_2' \cdot (y - y_c) \).
+
+По теореме Ролля \( \exists \xi \in (0, 1) : h'(\xi) = 0 \)
+
+\begin{gather*}
+    0 = F_1' \cdot (x - c) + F_2' (y - y_c)
+    \\
+    \Updownarrow
+    \\
+    \frac{y - y_c}{x - c} = - \frac{F_1'(c + \xi (x - c), y_c + \xi (y - y_c))}{F_2'(c + \xi (x - c), y_c + \xi (y - y_c))}
+\end{gather*}
+
+Так как \( F_1', F_2' \) принадлежат \( C(p) \), \( \exists M = \max\limits_{p} | F_1 (x, y) | \).
+Еще \( F_y'(x, y) \geq m > 0 \).
+
+Откуда \( \left| \frac{y - y_c}{x - c} \right| \leq \frac{M}{m} \).
+
+\( y - y_c = (x - c) \frac{y - y_c}{x - c} \Rightarrow \) при \( x \to c \) выполнено \( y \to y_c \).
+То есть \( \lim\limits_{x \to c} f(x) = f(c) \), то есть функция непрерывна в любой точке окрестности.
+Если \( x \to c \), то множитель при \( \xi \) стремится к нулю, поэтому
+\[
+    \lim\limits_{x \to c} \frac{f(x) - f(c)}{x - c} = - \frac{F_x'(c, f(c))}{F_y'(c, f(c))}
+\]
+
+Можем взять в качестве \( c \) любую точку интервала \( \Rightarrow \) доказали теорему.
+
+\begin{example}{}{}
+    Вернемся к \( F(x, y) = x^2 + y^2 - 1 \)
+
+    \( F_y' = 2y \neq 0 \ \forall (x, y) : y \neq 0 \)
+
+    \( f'(x) = -\frac{F'(x, y)}{F_y'(x, y)} = -\frac{2x}{2f(x)} = -\frac{x}{f(x)} \)
+
+    \( f(x) = \pm \sqrt{1 - x^2} \)
+\end{example}
+
+Пусть \( (\ol{x}, y) = (x_1, \ldots, x_{d - 1}, y) \in \RR^d \)
+
+\begin{thrm}{Общая теорема о неявной функции}{}
+    Пусть
+    \begin{enumerate}
+        \item
+            \( F : \RR^d \to \RR \) непрерывна в окрестности \( \Omega \) точки \( (\ol{x}_0, y_0) \).
+        \item
+            \( F(\ol{x}_0, y_0) = 0 \)
+        \item
+            \( F_{x_1}', \ldots, F_{x_{d - 1}}', F_y' \in C(\Omega) \)
+        \item
+            \( F_y' (\ol{x}_0, y_0) \neq 0 \)
+    \end{enumerate}
+
+    Тогда \( \exists! \) функция \( y = f(\ol{x}) \),
+    определенная в некоторой \( U_{\delta} (\ol{x}_0) \):
+    \begin{enumerate}
+        \item
+            \( f(\ol{x}_0) = y_0 \)
+        \item
+            \( \forall \ol{x} \in U_{\delta} (\ol{x}_0) \: F(\ol{x}, f(\ol{x})) = 0 \)
+        \item
+            \( f \) имеет все частные производные по \( x_1, \ldots, x_{d - 1} \) в \( U_{\delta}(\ol{x}_0) \)
+
+            Причем \( f_{x_j}' (\ol{x}) = -\frac{F_{x_j}' (\ol{x}, f(\ol{x}))}{F_y' (\ol{x}, f(\ol{x}))} \)
+    \end{enumerate}
+\end{thrm}
+
+Идея доказательства аналогична.
