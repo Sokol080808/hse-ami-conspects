@@ -18,6 +18,7 @@
 \usepackage{enumitem}
 \usepackage{ytableau}
 \usepackage{mathdots}
+\usepackage{faktor}
 \usepackage[most]{tcolorbox}
 
 \usepackage{indentfirst}
@@ -215,7 +216,7 @@
      colframe=mygray!60
     }
     {remark}
-\newtcbtheorem[use counter from=defn]
+\newtcbtheorem[use counter from=thrm]
     {obs}{Наблюдение}
     {myboxstyle,
      colback=myteal!10,
@@ -234,6 +235,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\fc}[2]{\faktor{#1}{#2}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \fancyhead[R]{}

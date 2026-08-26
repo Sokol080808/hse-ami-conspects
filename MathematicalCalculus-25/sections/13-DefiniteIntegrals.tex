@@ -1,0 +1,379 @@
+\section{Интеграл Римана}
+
+\subsection{Введение}
+
+\begin{defn}{}{}
+    Пусть задан отрезок \( [a, b] \)
+
+    \begin{itemize}
+        \item
+            \(a = x_0 < x_1 < \ldots < x_{n - 1} < x_n = b \)
+
+            И \( T = \{ x_0, \ldots, x_n \} \) называется разбиением \( [a, b] \)
+        \item
+            \( \Delta_k = [x_{k - 1}, x_k] \) называется \( k \)-м отрезком разбиения.
+
+            \( |\Delta_k| = x_k - x_{k - 1} \) --- его длина.
+        \item
+            \( d(t) = \max\limits_{k} |\Delta_k| \) называется диаметром разбиения \( T \).
+        \item
+            \( \xi = \{ \xi_k : \xi_k \in \Delta_k \} \) называется разметкой разбиения \( T \)
+            (взяли из каждого отрезка разбиения какую-то точку).
+        \item
+            Пусть на \( [a, b] \) задана \( f : [a, b] \to \RR \).
+            Тогда \( \sigma(f, T, \xi) = \sum\limits_{k = 1}^{n} f(\xi_k) |\Delta_k| \)
+            называется интегральной суммой или суммой Римана,
+            соответственно разметки разбиения \( (T, \xi) \) и функции \( f \).
+    \end{itemize}
+\end{defn}
+
+\begin{defn}{Интеграл Римана}{}
+    Если
+    \(
+        \exists I \in \RR : \forall \varepsilon > 0 \ \exists \delta > 0 :
+        \forall T : d(T) < \delta \ \forall \xi \
+        |\sigma(f, T, \xi) - I| < \varepsilon
+    \),
+    то \( I \) называется интегралом функции \( f \) на \( [a, b] \):
+    \[
+        I = \int\limits_{a}^{b} f(x) dx
+    \]
+\end{defn}
+
+\begin{example}{}{}
+    \[
+        f(x) =_{[a, b]} c
+    \]
+\end{example}
+\[
+    \sigma(f, T, \xi)
+    =
+    \sum\limits_{k = 1}^{n} C|\Delta_k|
+    =
+    C(b - a)
+    =
+    \int\limits_{a}^{b} f(x) dx
+\]
+
+\begin{exercise}{}{}
+    \( f \) на \( [a, b] \) разбивается на конечное число отрезков,
+    на которых она константа. Найдите ее интеграл.
+\end{exercise}
+
+\begin{example}{}{}
+    \[
+        f(x) = x^2, \quad x \in [0, 1]
+    \]
+\end{example}
+
+Пусть все отрезки разбиения равны друг другу,
+то есть \( \Delta_k = \frac{1}{n} \).
+Пусть \( \xi_k = x_k \):
+\[
+    \sigma(f, T, \xi)
+    =
+    \sum\limits_{k = 1}^{n} \left( \frac{k}{n} \right)^2 \cdot \frac{1}{n}
+    =
+    \frac{1^2 + 2^2 + \ldots + n^2}{n^3}
+    =
+    \frac{n(n + 1)(2n + 1)}{n^3}
+    \xmapsto{n \to \infty}
+    \frac{1}{3}
+\]
+
+\begin{thrm}{Необходимое условие интегрируемости}{}
+    \( f \in R[a, b] \Rightarrow f \) ограничена на \( [a, b] \)
+\end{thrm}
+
+Пусть \( f \) неограничена на \( [a, b] \).
+Пусть \( T \) --- некоторое разбиение.
+Пусть \( f \) неограничена \( \Delta_r \).
+При выбранной разметке \( \xi \):
+\[
+    \sigma(f, T, \xi)
+    =
+    \sum\limits_{\substack{k = 1 \\ k \neq r}}^{n} f(\xi_k) |\delta_k| + f(\xi_r) |\xi_r|
+\]
+
+Зафиксируем все отрезки \( \Delta_k \) и все точки разметки кроме \( \xi_r \).
+
+Пусть \( \sum\limits_{\substack{k = 1 \\ k \neq r}}^{n} f(\xi_k) |\delta_k| = A \).
+Докажем, что выбором \( \xi_r \) \( |\sigma(f, T, \xi)| \) может быть сделан сколько угодно большим:
+\[
+    |\sigma(f, T, \xi)| \geq |f(\xi_r) | \delta_r | | - |A|
+\]
+
+Так как \( f \) неограничена на \( \delta_r \),
+можно сделать \( f(\xi_r) \) сколь угодно большим.
+А значит можно получить сколько угодно большую интегральную сумму.
+
+\begin{example}{}{}
+    \[
+        D(x) = \begin{cases}
+            1, x \in \QQ \cap [0, 1]
+            \\
+            0, x \in \II \cap [0, 1]
+        \end{cases}
+    \]
+
+    Интеграл взять нельзя (берем разметки только из рациональных и только из иррациональных чисел).
+\end{example}
+
+\subsection{Критерий Дарбу}
+
+\begin{defn}{Суммы Дарбу}{}
+    Пусть \( f \) задана и ограничена на \( [a, b] \), \( T \) --- разбиение.
+
+    \begin{itemize}
+        \item
+            \( s(T) = \sum\limits_{k = 1}^{n} m_k |\Delta_k| \),
+            где \( m_k = \inf\limits_{x \in \Delta_k} f(x) \) называют нижней суммой Дарбу.
+        \item
+            \( S(T) = \sum\limits_{k = 1}^{n} M_k |\Delta_k| \),
+            где \( M_k = \sup\limits_{x \in \Delta_k} f(x) \) называют верхней суммой Дарбу.
+    \end{itemize}
+\end{defn}
+
+\begin{defn}{Интегралы Дарбу}{}
+    \begin{itemize}
+        \item
+            \( \sup\limits_{T} s(T) = \ul{I} \) называют нижним интегралом Дарбу
+        \item
+            \( \inf\limits_{T} S(T) = \ol{I} \) называют верхним интегралом Дарбу
+    \end{itemize}
+\end{defn}
+
+\begin{thrm}{Свойства сумм Дарбу}{}
+    Пусть \( f \) ограничена на \( [a, b] \). Тогда
+    \begin{enumerate}
+        \item
+            \( \forall T \ \forall \xi \quad s(T) \leq \sigma(f, T, \xi) \leq S(T) \)
+        \item
+            Если задано разбиение \( T \), то
+            \begin{itemize}
+                \item
+                    \( \inf\limits_{\xi} \sigma(f, T, \xi) = s(T) \)
+                \item
+                    \( \sup\limits_{\xi} \sigma(f, T, \xi) = S(T) \)
+            \end{itemize}
+        \item
+            \( \forall T_1, T_2 \quad s(T_1) \leq S(T_2) \)
+        \item
+            \( \ul{I}, \ol{I} \) существуют, причем \( s(T) \leq \ul{I} \leq \ol{I} \leq S(T) \)
+        \item
+            \( S(T) - s(T) \geq \ol{I} - \ul{I} \geq 0 \)
+    \end{enumerate}
+\end{thrm}
+
+\begin{enumerate}
+    \item
+        \(
+            \forall \xi_k \in \Delta_k
+            \quad
+            m_k | \Delta_k | \leq f(\xi_k) | \Delta_k | \leq M_k | \Delta_k |
+        \)
+
+        Просуммируем по всем \( k \), получим искомое.
+    \item
+        Так как \( m_k = \inf\limits_{\Delta_k} \), то
+        \( \forall \varepsilon > 0 \ \exists \xi_k \in \Delta_k : f(\xi_k) < m_k + \varepsilon \)
+
+        \(
+            s(T) = \sum\limits_{k = 1}^{n} f(\xi_k) | \Delta_k |
+            \leq
+            \sum\limits_{k = 1}^{n} (m_k + \varepsilon) | \Delta_k |
+            =
+            s(T) + \varepsilon (b - a)
+        \)
+
+        Значит \( s(T) = \inf\limits_{\xi} \sigma(f, T, \xi) \) по определению, с \( S(T) \) так же.
+    \item
+        Если к разбиению добавить точки, то \( s(T) \uparrow \), а \( S(T) \downarrow \).
+
+        Если \( T_3 = T_1 \cup T_2 \), то \( s(T_1) \leq s(T_3) \leq S(T_3) \leq S(T_2) \).
+    \item
+        \( s(T) \) ограничено сверху любой \( S(T') \),
+        \( \Rightarrow \exists \ul{I} = \sup\limits_T s(T) \).
+        Аналогично с \( \ol{I} \).
+
+        Очевидно, что \( s(T) \leq \ul{I} \leq \ol{I} \leq S(T) \).
+    \item
+        Явно следует из предыдущего пункта.
+\end{enumerate}
+
+\begin{thrm}{Критерий Дарбу}{}
+    \(
+        f \in R[a, b]
+        \Leftrightarrow
+        \forall \varepsilon > 0 \ \exists \delta > 0 : \forall T \ d(T) < \delta \ S(T) - s(T) < \varepsilon
+    \)
+
+    Иначе говоря, необходимо и достаточно \( \lim\limits_{d(T) \to 0} S(T) - s(T) = 0 \)
+\end{thrm}
+
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+        \begin{gather*}
+            \exists I \in \RR : \forall \varepsilon > 0 \ \exists \delta > 0 : \forall T : d(T) < \delta
+            \forall \xi I - \frac{\varepsilon}{3} < \sigma(f, T, \xi) < I + \frac{\varepsilon}{3}
+            \\
+            \Downarrow
+            \\
+            I - \frac{\varepsilon}{e} \leq s(T) \leq S(T) \leq I + \frac{\varepsilon}{3}
+            \\
+            \Downarrow
+            \\
+            S(T) - s(T) < \varepsilon
+        \end{gather*}
+    \item
+        \( \Leftarrow \)
+
+        Если \( \lim\limits_{d(T) \to 0} S(T) - s(T) = 0 \), то \( \ul{I} = \ol{I} = I \) и \( s(T) \leq I \leq S(T) \).
+
+        \(
+            I, \sigma(f, T, \xi) \in [s(T), S(T)]
+            \Rightarrow
+            \forall \varepsilon \ \exists \delta > 0 : \forall T : d(T) < \delta \ \forall \xi \ |\sigma(f, T, \xi) - I| < \varepsilon
+        \)
+\end{itemize}
+
+\begin{thrm}{Критерий в терминах колебаний}{}
+    \( S(T) - s(T) = \sum\limits_{k = 1}^{n} (M_k - m_k) | \Delta_k | = \Omega(T) \) --- колебание
+
+    \( f \in R[a, b] \Leftrightarrow \lim\limits_{d(T) \to 0} \Omega(T) \)
+\end{thrm}
+
+\section{Какие функции интегрируемы?}
+
+\begin{thrm}{Эквивалентные условия интегрируемости}{}
+    \( f \in R[a, b] \), если выполнено одно из трех эквивалентных условий:
+    \begin{enumerate}
+        \item
+            \( \lim\limits_{d(T) \to 0} \Omega(T) = 0 \)
+        \item
+            \( \ul{I} = \ol{I} \)
+        \item
+            \( \inf\limits_T \Omega(T) = 0 \) --- инфимум-критерий
+    \end{enumerate}
+\end{thrm}
+
+\begin{exercise}{}{}
+    Докажи \( (3) \to (1) \)
+\end{exercise}
+
+\begin{exercise}{}{}
+    Пусть \( T_n \) равномерное разбиение отрезка:
+    \[
+        x_0 = a, x_1 = a + \frac{b - a}{n}, x_2 = a + 2 \cdot \frac{b - a}{n}, \ldots, x_n = b
+    \]
+
+    Докажите, что \( f \in R[a, b] \Leftrightarrow \lim\limits_{n \to \infty} \Omega(T_n) = 0 \)
+\end{exercise}
+
+\begin{defn}{Колебание}{}
+    Колебанием функции \( f \) на множестве \( A \) называется
+    \[
+        \omega(f, A) = \sup\limits_{x, y \in A} (f(x) - f(y))
+    \]
+
+    Колебанием \( f \) в точке \( x \) называется
+    \[
+        \omega(x) = \inf\limits_{\delta > 0} \omega (f, U_{\delta} (x)) = \lim\limits_{\delta \to 0} \omega(f, U_{\delta})
+    \]
+
+\end{defn}
+
+\begin{exercise}{}{}
+    \( f \in C(x) \Leftrightarrow \omega(x) = 0 \)
+\end{exercise}
+
+\begin{thrm}{}{}
+    Пусть \( L_{\alpha} = \{ x : \omega(x) \geq \alpha \} \)
+
+    Тогда \( L_{\alpha} \) --- замкнутое множество.
+\end{thrm}
+
+Пусть \( y \) --- предельная точка \( L_{\alpha} \)
+
+\(
+    \exists \{ y_n \} \subset L_{\alpha} : \lim\limits_{n \to \infty} y_n = y
+    \Rightarrow
+    \forall \delta > 0 \ \exists n \in \NN : y_n \in U_{\delta} (y)
+\)
+
+\(
+    \exists \delta_1 > 0 : U_{\delta_1} (y_n) \subset U_{\delta} (y)
+    \Rightarrow
+    \omega(f, U_{\delta}(y)) \geq \omega(f, U_{\delta_1} (y_n)) \geq \alpha
+\)
+
+Отсюда следует, что
+\(
+    \inf\limits_{\delta > 0} \omega(f, U_{\delta}(y)) \geq \alpha
+    \Rightarrow
+    y \in L_{\alpha}
+\)
+
+\begin{defn}{}{}
+    Множество \( L \) имеет меру Лебега нуль,
+    если \( \forall \varepsilon > 0 \)
+    существует не более чем счетное семейство интервалов \( \{ I_n \} \)
+    таких, что \( L \subseteq \bigcup\limits_{n = 1}^{\infty} I_n \)
+    и \( \sum\limits_{n = 1}^{\infty} | I_n | < \varepsilon \)
+
+    Обозначется \( \mu(L) = 0 \)
+\end{defn}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( L = \{ a \} \quad \mu(L) = 0 \)
+        \item
+            \( L = \{ a_1, a_2, \ldots, a_k \} \quad \mu(L) = 0 \)
+        \item
+            \( L = \{ a_k \}_{k = 1}^{\infty} \)
+
+            Пусть \( \varepsilon > 0 \) задано, \( a_k \) покрыто интервалом \( I_k \),
+            таким что \( | I_k | < \frac{\varepsilon}{2^{k + 1}} \).
+
+            Тогда \( \sum\limits_{k = 1} |I_k| < \frac{\varepsilon}{2} \).
+        \item
+            Пусть \( \{ L_m \}_{m = 1}^{\infty} \) --- семейство множеств таких, что \( \mu(L_m) = 0 \).
+
+            Тогда \( \mu \left( \bigcup\limits_{m = 1}^{\infty} L_m \right) = 0 \)
+    \end{enumerate}
+\end{example}
+
+\begin{exercise}{}{}
+    Доказать, что отрезок \( [a, b] : a \neq b \) не является
+    множеством нулевой меры Лебега.
+\end{exercise}
+
+\begin{exercise}{}{}
+    Привести пример континуального множества нулевой меры Лебега.
+\end{exercise}
+
+\begin{prop}{}{}
+    Если \( \forall m \in \NN \mu(L_m) = 0 \),
+    то \( \mu \left( \bigcup\limits_{m = 1}^{\infty} L_m \right) = 0 \).
+\end{prop}
+
+\begin{prop}{}{}
+    Если \( L_1 \subseteq L \) и \( \mu(L) = 0 \), то \( \mu(L_1) = 0 \).
+\end{prop}
+
+\begin{prop}{}{}
+    В определении множества \( L \) лебеговой меры ноль
+    покрытие интервалами можно заменить на покрытие отрезками.
+\end{prop}
+
+\begin{thrm}{Критерий Лебега}{}
+    \begin{gather*}
+        f \in R[a, b]
+        \\
+        \Updownarrow
+        \\
+        \text{\( f \) ограничена и множество точек разрыва \( f \) имеет лебегову меру \( 0 \)}
+    \end{gather*}
+\end{thrm}

@@ -1,5 +1,7 @@
 \section{Группы}
 
+\subsection{Введение}
+
 \begin{defn}{Множество с бинарной операцией}{}
     Множество \( M \), с заданным отображением \( M \times M \to M \) \( (a, b) \mapsto a \circ b \)
 
@@ -273,7 +275,7 @@
 \begin{defn}{Индекс подгруппы}{}
     Индекс подгруппы \( H \) в группе \( G \) --- это
     \[
-        [ G : H ] = | G / H | = \text{число левых смежных классов}
+        [ G : H ] = | \fc{G}{H} | = \text{число левых смежных классов}
     \]
 \end{defn}
 
@@ -371,7 +373,7 @@
         Домножим справа на \( g \): \( gH = Hg \)
 \end{itemize}
 
-\textbf{Цель}: определить факторгруппу, то есть ввести операцию на множестве левых смежных классов \( G / H \),
+\textbf{Цель}: определить факторгруппу, то есть ввести операцию на множестве левых смежных классов \( \fc{G}{H} \),
 где \( G \) --- группа, а \( H \subseteq G \) --- подгруппа.
 
 Хочется чего-нибудь интуитивного: \( (g_1 H) (g_2 H) = g_1 g_2 H \).
@@ -406,14 +408,14 @@
 
 \begin{defn}{Факторгруппа}{}
     Факторгруппа группы \( G \) по нормальной подгруппе \( H \)
-    называется множество (левых) смежных классов \( G / H \) с операцией
+    называется множество (левых) смежных классов \( \fc{G}{H} \) с операцией
     \( (g_1 H) (g_2 H) = g_1 g_2 H \)
 \end{defn}
 
 \begin{example}{}{}
     \( G = (\ZZ, +) \), \( H = n \ZZ \)
 
-    \( G / H = \{ s + H = s + n \ZZ = \ol{s} \} = \ZZ_n \)
+    \( \fc{G}{H} = \{ s + H = s + n \ZZ = \ol{s} \} = \ZZ_n \)
 \end{example}
 
 \begin{defn}{Гомоморфизм}{}
@@ -538,11 +540,11 @@
 \]
 
 \begin{thrm}{Теорема о гомоморфизме}{}
-    Для любого гомоморфизма \( \varphi : G \to F \) верно \( \Img \varphi \cong G / \ker \varphi \).
+    Для любого гомоморфизма \( \varphi : G \to F \) верно \( \Img \varphi \cong \fc{G}{\ker \varphi} \).
 \end{thrm}
 
 \begin{example}{}{}
-    \( G = (\RR, +) \), \( H = (\ZZ, +) \), \( G / H \cong S^1 \).
+    \( G = (\RR, +) \), \( H = (\ZZ, +) \), \( \fc{G}{H} \cong S^1 \).
 
     Это можно показать через такой гомоморфизм:
     \[
@@ -557,7 +559,7 @@
 \end{example}
 
 \begin{exercise}{}{}
-    \( G = (\RR^2, +) \), \( H = (\ZZ^2, +) \), \( G / H \cong T^2 \) (тор)
+    \( G = (\RR^2, +) \), \( H = (\ZZ^2, +) \), \( \fc{G}{H} \cong T^2 \) (тор)
 \end{exercise}
 
 \begin{exercise}{}{}
@@ -568,7 +570,7 @@
 
 Вернемся к доказательству теоремы.
 
-Построим отображение \( \Psi : G / \ker \varphi \to \Img \varphi \) --- \( \Psi( g \ker \varphi) = \varphi(g) \)
+Построим отображение \( \Psi : \fc{G}{\ker \varphi} \to \Img \varphi \) --- \( \Psi( g \ker \varphi) = \varphi(g) \)
 
 \begin{itemize}
     \item
@@ -682,9 +684,9 @@
     Тогда \( H_1 \times \ldots \times H_m \subseteq G_1 \times \ldots \times G_m \)
     --- тоже нормальная подгруппа, причем
     \[
-        (G_1 \times \ldots \times G_m) / (H_1 \times \ldots \times H_m)
+        \fc{G_1 \times \ldots \times G_m}{H_1 \times \ldots \times H_m}
         =
-        (G_1 / H_1) \times \ldots \times (G_m / H_m)
+        \fc{G_1}{H_1} \times \ldots \times \fc{G_m}{H_m}
     \]
 \end{thrm}
 
@@ -694,3 +696,747 @@
 \[
     (g_1, \ldots, g_m) (H_1 \times \ldots \times H_m) \mapsto (g_1 H_1, \ldots, g_m H_m)
 \]
+
+\begin{thrm}{}{}
+    Пусть \( n = ml \) и \( (m, l) = 1 \).
+
+    Тогда \( \ZZ_n \cong \ZZ_m \times \ZZ_l \).
+\end{thrm}
+
+Рассмотрим отображение \( \varphi : \ZZ_n \to \ZZ_m \times \ZZ_l \):
+\[
+    k \bmod n \to (k \bmod m, k \bmod l)
+\]
+
+\begin{itemize}
+    \item
+        Корректность
+
+        \( k' = k + ns = k + mls \)
+    \item
+        Гомоморфизм
+
+        По определению операции
+    \item
+        Инъективность
+
+        Проверим, что \( \ker \varphi = 0 \).
+
+        Пусть \( k \bmod n \to (0 \bmod m, 0 \bmod l \Rightarrow m, l \: \vline \: k \Rightarrow k \vdots ml = n \)
+    \item
+        Сюръективность
+
+        \( |\ZZ_n| = n = ml = |\ZZ_m \times \ZZ_l| \)
+
+        Поэтому из инъективности следует биекция.
+\end{itemize}
+
+\begin{coroll}{}{}
+    Пусть \( n \geq 2 \) и \( n = p_1^{\alpha_1} \cdot \ldots \cdot p_k^{\alpha_k} \) --- разложение на простые множители.
+
+    Тогда \( \ZZ_n \cong \ZZ_{p_1^{\alpha_1}} \times \ldots \times \ZZ_{p^{\alpha_k}} \)
+\end{coroll}
+
+\subsection{Теория абелевых групп}
+
+\textbf{Цель:}
+описание конечных абелевых групп.
+
+\begin{defn}{}{}
+    Пусть \( (A, +) \) --- абелева группа. Рассмотрим \( a \in \ZZ \):
+    \[
+        s \cdot a = \left\{
+            \begin{aligned}    
+                & \underbrace{a + \ldots + a}_{s} &, s > 0
+                \\
+                & 0 &, s = 0
+                \\
+                & \underbrace{ - a - \ldots - a}_{|s|} &, s < 0
+            \end{aligned}
+        \right.
+    \]
+\end{defn}
+
+\begin{defn}{Конечно порожденная абелева группа}{}
+    Абелева группа \( A \) называется конечно порожденной,
+    если
+    \[
+        \exists a_1, \ldots, a_n \in A : \forall a \in A \ a = s_1 a_1 + \ldots + s_n a_n, s_i \in \ZZ
+    \]
+\end{defn}
+
+\begin{remark}{}{}
+    \begin{itemize}
+        \item
+            Всякая конечно порождаемая абелева группа не более чем счетна.
+        \item
+            Всякая конечная абелева группа является конечно порожденной.
+    \end{itemize}
+\end{remark}
+
+\begin{defn}{Свободная абелева группа}{}
+    Конечно порожденная группа \( A \) свободна,
+    если в ней существует базис:
+    \begin{gather*}
+        \exists a_1, \ldots, a_n \in A :
+        \\
+        \forall a \in A \ a = s_1 a_1 + \ldots + s_n a_n \ \text{(единственным образом)}
+    \end{gather*}
+\end{defn}
+
+\begin{example}{}{}
+    \( \ZZ_n \) конечно порожденная, не свободна.
+
+    Можно представить \( 0 \) больше чем одним способом:
+    \[
+        0 = s_1 a_1 + \ldots + s_k a_k = (s_1 + n) a_1 + \ldots + (s_k + n) a_k
+    \]
+\end{example}
+
+\begin{example}{Свободная группы}{}
+    \( \ZZ^n = \{ (x_1, \ldots, x_n) \: \vline \: x_i \in \ZZ \} \)
+
+    Стандартный базис:
+    \begin{gather*}
+        (1, 0, 0, \ldots, 0)
+        \\
+        (0, 1, 0, \ldots, 0)
+        \\
+        \vdots
+        \\
+        (0, 0, 0, \ldots, 1)
+    \end{gather*}
+\end{example}
+
+\begin{prop}{}{}
+    Всякая свободная абелева группа изоморфна \( \ZZ^n \) 
+\end{prop}
+
+Пусть \( A \) --- свободна, а \( \{ a_1, \ldots, a_n \} \) --- ее базис:
+\[
+    a = s_1 a_1 + \ldots + s_n a_n \longleftrightarrow (s_1, \ldots, s_n) \in \ZZ^n \text{ --- биекция}
+\]
+
+То, что это гомоморфизм --- очевидно.
+
+\begin{defn}{Ранг}{}
+    Ранг свободной абелевой группы \( \rk A \) --- число элементов в базисе.
+\end{defn}
+
+\begin{prop}{Корректность ранга}{}
+    Любые два базиса свободной абелевой группы равномощны.
+\end{prop}
+
+Докажем от противного.
+Пусть нашлись два базисва \( \{ a_1, \ldots, a_n \} \) и \( \{ b_1, \ldots, b_m \} \), для удобства \( m > n \).
+Выразим \( b_i \) через \( a_j \):
+\begin{gather*}
+    b_1 = s_{11} a_1 + \ldots + s_{1n} a_n
+    \\
+    \vdots
+    \\
+    b_m = s_{m1} a_1 + \ldots + s_{mn} a_n
+\end{gather*}
+
+Рассмотрим матрицу \( S = (s_{ij}) \), \( \rk S \leq n < m \),
+а значит ее строки линейно зависимы над \( \QQ \):
+\[
+    \exists \lambda_1, \ldots, \lambda_m \in \QQ, \text{ не все равные \( 0 \)}
+    \\
+    \lambda_1 (s_{11}, \ldots, s_{1m}) + \ldots + \lambda_m (s_{m1}, \ldots, s_{mn}) = 0 
+\]
+
+Можно домножить на НОК всех знаменателей \( \lambda_i \), теперь \( \lambda_i \in \ZZ \).
+\begin{gather*}
+    \lambda_1 b_1 + \ldots + \lambda_m b_m
+    =
+    \\
+    =
+    \lambda_1 (s_{11} + a_1 + \ldots + s_{1n} a_n)
+    +
+    \ldots
+    +
+    \lambda_m (s_{m1} + a_1 + \ldots + s_{mn} a_n)
+    =
+    \\
+    =
+    \underbrace{(\lambda_1 s_{11} + \ldots + \lambda_m s_{m1})}_{0} a_1
+    +
+    \ldots
+    +
+    \underbrace{(\lambda_1 s_{1n} + \ldots + \lambda_m s_{mn})}_{0} a_n
+    =
+    0
+\end{gather*}
+
+Нашли нетривиальное представление нуля --- противоречие.
+
+Пусть \( e_1', \ldots, e_n' \) --- другой базис (любой набор векторов) в \( \ZZ^n \).
+Тогда выразим его через \( e_1, \ldots, e_n \):
+\[
+    (e_1', \ldots, e_n') = (e_1, \ldots, e_n) \cdot C \quad C = (c_{ij}), \ c_{ij} \in \ZZ 
+\]
+
+\begin{prop}{}{}
+    \( \{ e_1', \ldots, e_n' \} \) --- базис \( \Leftrightarrow \det C = \pm 1 \).
+\end{prop}
+
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+
+        Пусть \( e_1', \ldots, e_n' \) --- базис, тогда:
+        \[
+            (e_1, \ldots, e_n) = (e_1', \ldots, e_n') D = (e_1, \ldots, e_n) CD
+        \]
+
+        \( CD = E \), а значит матрица \( C \) обратима.
+        Но \( C, D \) --- целочисленные, а значит и их определитель тоже:
+        \[
+            \det E = \det (CD) = \det C \cdot \det D \Rightarrow \det C = \pm 1
+        \]
+    \item
+        \( \Leftarrow \)
+
+        Пусть \( \det C = \pm 1 \).
+
+        Тогда по формуле для присоединенной матрицы \( C^{-1} \) целочисленная.
+
+        Но тогда \( (e_1, \ldots e_n) = (e_1', \ldots, e_n') C^{-1} \).
+        А значит все вектора выражаются через \( e_1', \ldots, e_n' \).
+        Остается проверить единственность.
+
+        Докажем от противного, пусть:
+        \begin{gather*}
+            a = s_1 e_1' + \ldots + s_n e_n' = s_1' e_1' + \ldots + s_n' e_n'
+            \\
+            \begin{pmatrix}
+                e_1' & \ldots & e_n'
+            \end{pmatrix}
+            \begin{pmatrix}
+                s_1
+                \\
+                \vdots
+                \\
+                s_n
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                e_1' & \ldots & e_n'
+            \end{pmatrix}
+            \begin{pmatrix}
+                s_1'
+                \\
+                \vdots
+                \\
+                s_n'
+            \end{pmatrix}
+            \\
+            \Downarrow
+            \\
+            \begin{pmatrix}
+                e_1 & \ldots & e_n
+            \end{pmatrix}
+            C
+            \begin{pmatrix}
+                s_1
+                \\
+                \vdots
+                \\
+                s_n
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                e_1 & \ldots & e_n
+            \end{pmatrix}
+            C
+            \begin{pmatrix}
+                s_1'
+                \\
+                \vdots
+                \\
+                s_n'
+            \end{pmatrix}
+            \\
+            \Downarrow
+            \\
+            C
+            \begin{pmatrix}
+                s_1
+                \\
+                \vdots
+                \\
+                s_n
+            \end{pmatrix}
+            =
+            C
+            \begin{pmatrix}
+                s_1'
+                \\
+                \vdots
+                \\
+                s_n'
+            \end{pmatrix}
+            \\
+            \Downarrow
+            \\
+            \begin{pmatrix}
+                s_1
+                \\
+                \vdots
+                \\
+                s_n
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                s_1'
+                \\
+                \vdots
+                \\
+                s_n'
+            \end{pmatrix}
+        \end{gather*}
+\end{itemize}
+
+\begin{example}{}{}
+    \( \ZZ^1 \), \( e_1' = 2 \), \( e_2' = 3 \).
+
+    Данный набор линейно зависим (\( 2 \cdot 3 - 3 \cdot 2 = 0 \)),
+    но из него невозможно выбрать порождающее подмножество.
+\end{example}
+
+\begin{thrm}{}{}
+    Всякая подгруппа \( N \) свободной абелевой группы \( L \) ранга \( n \)
+    является свободной группой ранга \( \leq n \).
+\end{thrm}
+
+Сделаем индукцию по \( n \):
+\begin{itemize}
+    \item
+        База \( n = 0 \):
+
+        Для нулевой группы утверждение, очевидно, верно.
+    \item
+        Переход \( < n \to n \):
+
+        Пусть \( e_1, \ldots, e_n \) --- базис в \( L \).
+
+        Рассмотрим подгруппу \( L_1 = \langle e_1, \ldots, e_{n - 1} \rangle \)
+        --- она является свободной группа с базисом \( e_1, \ldots, e_{n - 1} \).
+        Пусть \( N_1 = N \cap L_1 \) --- подгруппа в \( L_1 \),
+        по предположению индукции \( N_1 \) свободно с базисом \( f_1, \ldots, f_m \) и \( m \leq n - 1 \).
+
+        Рассмотрим гомоморфизм:
+        \begin{gather*}
+            \varphi : N \to \ZZ=
+            \\
+            a = s_1 e_1 + \ldots + s_n e_n \to s_n
+            \\
+            \ker \varphi = N_1
+        \end{gather*}
+
+        \( \Img \subseteq \ZZ \Rightarrow \exists k \in \ZZ_{\geq 0} : \Img \varphi = k \ZZ \)
+
+        \begin{enumerate}
+            \item
+                \( k = 0 \)
+
+                \( \Img \varphi = 0 \), \( \ker \varphi = N_1 = N \) --- свободная абелева группа ранга \( \leq n - 1 \)
+            \item
+                \( k > 0 \)
+
+                \( \exists f_{m + 1} : \varphi(f_{m + 1}) = k \)
+
+                Докажем, что \( f_1, \ldots, f_m, f_{m + 1} \) --- базис в \( N \),
+                тем самым докажем условие теоремы.
+
+                \( \forall a \in \NN : \varphi(a) = ks \Rightarrow \varphi(a - s f_{m + 1}) = 0 \)
+
+                Поэтому \( a - s f_{m + 1} \in N_1 \), а значит выражается через \( f_1, \ldots, f_m \).
+
+                Покажем единственность, пусть
+                \[
+                    s_1 f_1 + \ldots + s_m f_m + s f_{m + 1} = s_1' f_1 + \ldots + s_m' f_m + s' f_{m + 1}
+                \]
+                Применим \( \varphi \):
+                \begin{gather*}
+                    \varphi(s f_{m + 1}) = \varphi(s' f_{m + 1})
+                    \\
+                    sk = s' k
+                    \\
+                    \Downarrow
+                    \\
+                    s = s'
+                \end{gather*}
+
+                Значит последнее слагаемое можно сократить.
+                Но тогда получили выражение некоторого вектора двумя способами через \( f_1, \ldots, f_m \) --- противоречие.
+        \end{enumerate}
+\end{itemize}
+
+\begin{remark}{Отличие от линейной алгебры}{}
+    Знаем, что если \( U \subsetneq V \), то \( \dim U < \dim V \)
+
+    У нас не так: \( 2 \ZZ \subseteq \ZZ \), но \( \rk 2 \ZZ = 1 = \rk \ZZ \)
+\end{remark}
+
+\textbf{Локальная цель:} описать все подгруппы в \( \ZZ^n \).
+
+\( n = 1 \): все подгруппы в \( \ZZ \) --- это \( k \ZZ, k \in \ZZ_{\geq 0} \)
+
+\textit{Гипотеза:}
+надо зафиксировать \( k_1, \ldots, k_n \in \ZZ_{\geq 0} \),
+\( k_1 \ZZ \times \ldots \times k_n \ZZ \subseteq \ZZ^n \).
+
+\textit{Нет:} \( \{ (a, a), a \in \ZZ \} \subseteq \ZZ \), откуда \( k_1 = k_2 = 1 \), но это не \( \ZZ \times \ZZ \).
+
+\begin{defn}{}{}
+    Для абелевых групп прямое произведение принято обозначать \( \oplus \), а не \( \times \).
+\end{defn}
+
+\begin{thrm}{Теорема о согласованных базисах}{}
+    Пусть \( L \) --- свободная абелева группа, \( N \subseteq L \) --- подгруппа.
+    Тогда существует базис \( e_1, \ldots e_n \) в \( L \),
+    \( \exists m \leq n \) и натуральные числа \( u_1, \ldots, u_m : u_i \: \vline \: u_{i + 1} \)
+    и \( u_1 e_1, \ldots, u_m e_m \) --- базис в \( N \)
+    (это означает, что в базисе \( e_1, \ldots, e_n \) подгруппа \( N \) будет иметь вид
+    \( u_1 \ZZ_1 \oplus \ldots \oplus u_m \ZZ \oplus \{ 0 \} \oplus \ldots \oplus \{ 0 \} \)). 
+\end{thrm}
+
+\begin{defn}{Целочисленные элементарные преобразования строк целочисленной матрицы}{}
+    \begin{enumerate}
+        \item
+            Прибавление к одной строки матрицы другой,
+            умноженной на число.
+        \item
+            Перестановка двух строк.
+        \item
+            Умножение строки на \( \pm 1 \).
+    \end{enumerate}
+\end{defn}
+
+\begin{prop}{}{}
+    Всякую целочисленную матрицу \( C = (c_{ij}) \) элементарными преобразованиями
+    строк и столбцов можно привести к диагональном виду.
+\end{prop}
+
+Если \( C = 0 \), то все ясно.
+Иначе переставим строки и столбцы так, чтобы \( c_{11} \neq 0 \).
+Из-за умножения на \( -1 \) можно считать, что \( c_{11} > 0 \).
+
+Хочу: \( c_{11} \) делит все \( c_{ij} \).
+Если \( c_{1i} = c_{11} q + r \), и \( 0 < r < c_{11} \),
+то сделаем \( c_{1i} = r \) вычитанием и поставим на место \( c_{11} \).
+Поскольку уменьшаем \( c_{11} \) каждый раз, процесс когда-то кончится.
+Можем занулить в первой строке все кроме \( c_{11} \).
+Аналогично сделаем со столбцом.
+
+Теперь, если же есть \( c_{ij} \), которые не делятся на \( c_{11} \),
+то прибавим \( j \)-й столбец к первому, теперь там есть элемент,
+не кратный \( c_{11} \).
+Повторим вышеописанный алгоритм.
+Поскольку каждый раз \( c_{11} \) уменьшается,
+алгоритм когда-то кончится.
+
+Теперь в матрице все числа делятся на \( c_{11} \),
+занулим первую строку и столбец,
+рекурсивно запустимся на оставшейся подматрице.
+
+\textbf{Доказательство теоремы о согласованных базисах:}
+
+Пусть \( e_1', \ldots, e_n' \) --- базис в \( L \),
+и \( f_1', \ldots, f_m' \) --- базис в \( N \), \( m \leq n \).
+Будем менять базисы:
+\[
+    (f_1', \ldots, f_m') = (e_1', \ldots, e_n') C
+\]
+
+Производим элементарные преобразования над \( C \).
+Элементарные преобразования строк \( C \) ---
+это элементарные замены базиса в \( L \),
+а элементарные преобразования столбцов \( C \)
+--- элементарные замены базиса в \( N \).
+
+Приведем \( C \) к диагональному виду,
+получатся нужные нам базисы.
+
+\begin{remark}{}{}
+    Числа \( u_1, \ldots, u_m \) называются
+    инвариантными множителями либо матрицы \( C \), либо пары \( (L, N) \).
+    Эти числа определены однозначно.
+\end{remark}
+
+\begin{coroll}{}{}
+    \[
+        \fc{L}{N} \cong \ZZ_{u_1} \oplus \ldots \oplus \ZZ_{u_m} \oplus \underbrace{\ZZ \oplus \ldots \oplus \ZZ}_{n - m}
+    \]
+\end{coroll}
+
+Зафиксируем согласованные базисы \( e_1, \ldots, e_n \) и \( u_1 e_1, \ldots, u_m e_m \).
+Тогда:
+\begin{gather*}
+    L = \ZZ^n, a = s_1 e_1 + \ldots + s_n e_n \longleftrightarrow (s_1, \ldots, s_n)
+    \\
+    N = \ZZ^m, b = c_1 u_1 e_1 + \ldots + c_m u_m e_m
+\end{gather*}
+\begin{gather*}
+    \fc{L}{N}
+    =
+    \fc{\ZZ^n}{\ZZ^m}
+    =
+    \fc{ \ZZ \oplus \ldots \oplus \ZZ }{ u_1 \ZZ \oplus \ldots \oplus u_m \ZZ \oplus \{ 0 \} \oplus \ldots \oplus \{ 0 \} }
+    \cong
+    \\
+    \cong
+    \fc{\ZZ}{u_1 \ZZ} \oplus \ldots \oplus \fc{\ZZ}{u_m \ZZ} \oplus \fc{\ZZ}{ \{ 0 \} } \oplus \ldots \oplus \fc{\ZZ}{ \{ 0 \} }
+\end{gather*}
+
+\begin{thrm}{}{}
+    Всякая конечно порожденная абелева группа изоморфна
+    \[
+        \ZZ_{p_1^{k_1}} \oplus \ldots \oplus \ZZ_{p_s^{k_s}} \oplus \ZZ \oplus \ldots \oplus \ZZ
+    \]
+    где \( p_i \) --- простые, возможно совпадающие числа,
+    \( k_1, \ldots, k_s \) --- натуральные числа.
+    Кроме того, число слагаемых \( \ZZ \), а также числа \( p_i, k_i \)
+    определены по группе \( A \) однозначно.
+\end{thrm}
+
+Пусть \( a_1, \ldots, a_n \) --- система порождающих в \( A \).
+Рассмотрим гомоморфизм:
+\[
+    \varphi : \ZZ^n \to A, (s_1, \ldots, s_n) \to s_1 a_1 + \ldots + s_n a_n
+\]
+
+Он сюръективен, так как \( a_1, \ldots, a_n \) --- порождающие.
+По теореме о гомоморфизме:
+\[
+    \Img \varphi \cong \fc{\ZZ^n}{\ker \varphi}
+    =
+    \ZZ_{u_1} \oplus \ldots \oplus \ZZ_{u_m} \oplus \ZZ \oplus \ldots \oplus \ZZ
+\]
+
+Остается разложить \( u_i \) на простые.
+
+Единственность: дополнительный материал.
+
+\begin{coroll}{}{}
+    Любая конечная абелева группа изоморфна:
+    \[
+        A \cong \ZZ_{p_1^{k_1}} \oplus \ldots \oplus \ZZ_{p_s^{k_s}} \cong \ZZ_{u_1} \oplus \ldots \ZZ_{u_m}
+    \]
+\end{coroll}
+
+Любая конечная группа, в частности, конечно порождена.
+Значит она имеет вышеописанное представление.
+Но слагаемых \( \ZZ \) быть не может, так как \( \ZZ \) бесконечно.
+
+\begin{example}{}{}
+    \[
+        \ZZ_6 \oplus \ZZ_{20}
+        \cong
+        \ZZ_2 \oplus \ZZ_3 \oplus \ZZ_{2^2} \oplus \ZZ_5
+        \cong
+        \ZZ_2 \oplus \ZZ_{2^2 \cdot 3 \cdot 5}
+    \]
+\end{example}
+
+\begin{defn}{Экспонента}{}
+    Экспонентой конечной абелевой группы \( A \)
+    называется
+    \[
+        \exp (A) = \text{НОК}( \ord(a), a \in A )
+    \]
+\end{defn}
+
+\begin{exercise}{}{}
+    \[
+        \exp A = \min \{ m \in \NN \: \vline \: ma = 0 \ \forall a \in A \}
+    \]
+\end{exercise}
+
+\begin{prop}{}{}
+    \( \exp (A) = u_m \) --- последний инвариантный множитель.
+\end{prop}
+
+\( A = \ZZ_{u_1} \oplus \ldots \oplus \ZZ_{u_m}, u_i \: \vline \: u_{i + 1} \Rightarrow u_m a = 0 \ \forall a \in A \)
+
+С другой стороны в \( (\ol{0}, \ldots, \ol{0}, \ol{1}) \in A \),
+и его порядок ровно \( u_m \)
+
+\begin{coroll}{}{}
+    \( \exp (A) \) равно наибольшему порядку элемента.
+\end{coroll}
+
+\begin{coroll}{Критерий цикличности}{}
+    Группа \( A \) циклическая \( \Leftrightarrow \exp(A) = |A| \)
+\end{coroll}
+
+\subsection{Действия групп}
+
+\begin{defn}{Действие группы}{}
+    Действие группы \( G \) на множестве \( X \)
+    это отображение \( G \times X \to X : (g, x) \to gx \),
+    такое что
+    \begin{enumerate}
+        \item
+            \( ex = x \ \forall x \in X \)
+        \item
+            \( g (hx) = (gh) x \)
+    \end{enumerate}
+
+    % \( G \) действует на \( X \): \( G \hookdownarrow X \)
+\end{defn}
+
+Задание действия определяет биекции \( \alpha_g : X \to x, x \to gx \)
+
+Пусть \( S(x) \) --- группа всех биекций на множестве \( X \).
+Например, если \( |X| = n \), то \( S(X) \cong S_n \).
+
+Действие \( G \) на \( X \) \( \Leftrightarrow \) гомоморфизм \( \alpha : G \to S(x) \)
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+
+        \( g \to \alpha_g \)
+
+        \( \alpha_{gh} (x) = (gh) (x) = g(hx) = \alpha_g ( \alpha_h x ) \)
+    \item
+        \( \Leftarrow \)
+
+        \( \alpha : G \to S(x) \Rightarrow \):
+        \[
+            \begin{aligned}
+                G \times X &\to X
+                \\
+                (g, x) &\mapsto \alpha_g (x)
+            \end{aligned}
+        \]
+
+        (Выполнены аксиомы действия)
+\end{itemize}
+
+\begin{example}{}{}
+    \( G = S_n \)
+
+    \( X = \{ 1, \ldots, n \} \)
+
+    \( (\sigma, i) \to \sigma(i) \)
+\end{example}
+
+\begin{defn}{Орбита}{}
+    Орбита точки \( x \in X \) под действием группы \( G \) это
+    \[
+        Gx = \{ y \in X \: \vline \: \exists g \in G : gx = y \}
+    \]
+\end{defn}
+
+\begin{remark}{}{}
+    ``\( x \) и \( x' \) лежат в одной \( G \)-орбите''
+    является отношением эквивалетности.
+\end{remark}
+
+\begin{defn}{}{}
+    Стабилизатор (стационарная подгруппа) точки \( x \in X \) это
+    \[
+        St(x) = \{ g \in G : gx = x \}
+    \]
+\end{defn}
+
+\begin{example}{}{}
+    \( G = S^1 \), \( X = \CC \)
+
+    \( (z, w) \to zw \)
+
+    \(
+        St(w) = \begin{cases}
+            \begin{aligned}
+                \{ 1 \}, & w \neq 0
+                \\
+                G,       & w = 0
+            \end{aligned}
+        \end{cases}
+    \)
+\end{example}
+
+\begin{example}{}{}
+    \( G = SL_n (\RR) \), \( X = \RR^n \), \( (A, v) \to Av \)
+
+    Сколько орбит?
+
+    \( n = 1 \Rightarrow \inf \) орбит
+
+    Иначе орбиты \( \{ 0 \} \) и \( \RR \setminus 0 \)
+\end{example}
+
+\begin{lemma}{}{}
+    \( G \) конечна.
+    Тогда \( \forall x \in X \ |Gx| = \frac{|G|}{St(x)} \).
+\end{lemma}
+
+Нетрудно убедиться, что есть такая биекция:
+\[
+    \begin{aligned}
+        \fc{G}{St(x)} &\to Gx
+        \\
+        g St(x) &\mapsto gx
+    \end{aligned}
+\]
+
+\begin{enumerate}
+    \item
+        Корректность
+
+        \( \forall h \in St(x) \ ghSt(x) \mapsto (gh) x = g (hx) = gx \)
+    \item
+        Сюръективность
+    \item
+        Инъективность
+
+        \(
+            g x = g' x
+            \Rightarrow
+            x = g^{-1} g' x
+            \Rightarrow
+            g^{-1} g' \in St(x)
+            \Rightarrow
+            g St(x) = g' St(x)
+        \)
+\end{enumerate}
+
+\begin{defn}{}{}
+    \begin{enumerate}
+        \item
+            Действие \( G \) на \( X \) транзитивно,
+            если есть всего одна орбита
+            \( \Leftrightarrow \exists g \in G : gx = x' \)
+        \item
+            Действие \( G \) на \( X \) свободно,
+            если \( gx = x \) для некоторого \( x \in X \)
+            влечет \( g = e \) \( \Leftrightarrow \forall x \in X \ St(x) = \{ e \} \)
+        \item
+            Действие \( G \) на \( X \) эффективно,
+            если условие \( gx = x \ \forall x \in X \) влечет \( g = e \)
+            \( \Leftrightarrow \bigcap\limits_{x \in X} St(x) = \{ e \} \)
+
+            Свободность \( \Rightarrow \) эффективность.
+    \end{enumerate}
+\end{defn}
+
+\begin{example}{}{}
+    \( S_n \) на \( \{ 1, \ldots, n \} \) транзитивно, несвободно (при \( n \geq 3 \)) и эффективно
+\end{example}
+
+\begin{example}{}{}
+    \( S^1 \) на \( \CC \) нетранзитивно, несвободно и эффективно.
+\end{example}
+
+\begin{example}{}{}
+    \( SL_n(\RR) \) на \( \RR^n \) нетранзитивно, несвободно и эффективно.
+\end{example}
+
+\begin{defn}{}{}
+    Ядро неэффективности \( K = \bigcap\limits_{x \in X} St(x) \)
+\end{defn}
+
+\( \alpha G \to S(x) \Rightarrow K = \ker \alpha \Rightarrow K \) нормально \( \Rightarrow \exists \) факторгруппа \( \fc{G}{K} \)
