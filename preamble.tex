@@ -97,6 +97,7 @@
 \definecolor{mypurple}{HTML}{b19cd9}
 \definecolor{mygray}{HTML}{cccccc}
 \definecolor{myteal}{HTML}{48d1cc}
+\definecolor{mynavy}{HTML}{5B7FA3}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -223,6 +224,13 @@
      colframe=myteal!60
     }
     {obs}
+\newtcbtheorem[use counter from=defn]
+    {assrt}{Утверждение}
+    {myboxstyle,
+     colback=mynavy!10,
+     colframe=mynavy!80
+    }
+    {assrt}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Math Operators %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
