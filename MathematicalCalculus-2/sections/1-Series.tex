@@ -1,0 +1,671 @@
+\section{Ряды}
+
+\subsection{Простейшие свойства}
+
+\begin{defn}{Основные понятия}{}
+    \( \{ a_n \}_{n = 1}^{\infty} \)
+
+    \( S_n = \sum\limits_{k = 1}^{n} a_n \) --- частичные суммы.
+
+    \( \sum\limits_{k = 1}^{\infty} a_k \) называется сходящимся,
+    если сходится \( \{ S_n \}_{n = 1}^{\infty} \)
+    и
+    \( \sum\limits_{k = 1}^{\infty} a_k = \lim\limits_{n = 1}^{\infty} S_n \)
+\end{defn}
+
+\begin{example}{}{}
+    \( \sum\limits_{n = 1}^{\infty} q^n \) сходится
+    тогда и только тогда, когда \( |q| < 1 \).
+
+    Сумма вычисляется по формуле \( \sum\limits_{n = 1}^{\infty} \frac{1}{1 - q} \).
+\end{example}
+
+\begin{assrt}{Критерий Коши}{}
+    \( \sum\limits_{n = 1}^{\infty} a_n \)
+    сходится
+    \( \Leftrightarrow \)
+    \(
+        \forall \varepsilon > 0 \ \exists N \in \NN :
+        \forall n > N, \ p \in \NN \
+        \left| \sum\limits_{k = n + 1}^{n + p} a_n \right| < \varepsilon
+    \)
+\end{assrt}
+
+Вспомним несколько простых утверждений:
+\begin{enumerate}
+    \item
+        Если \( \sum\limits_{n = 1}^{\infty} a_n \) и \( \sum\limits_{n = 1}^{\infty} \)
+        сходятся, то
+        \(
+            \sum\limits_{n = 1}^{\infty} (\alpha a_n + \beta b_n)
+            =
+            \alpha \sum\limits_{n = 1}^{\infty} a_n
+            +
+            \beta \sum\limits_{n = 1}^{\infty} b_n
+        \)
+    \item
+        \( \sum\limits_{n = 1}^{\infty} a_n \) сходится
+        \( \Leftrightarrow \)
+        \( \sum\limits_{n = p}^{\infty} a_n \) сходится.
+\end{enumerate}
+
+\begin{assrt}{Признак сравнения}{}
+    \( \{ a_n \geq 0 \}_{n = 1}^{\infty} \) \quad \( \{ b_n \geq 0 \}_{n = 1}^{\infty} \)
+
+    \( a_n \leq b_n \ \forall n \) и \( \sum\limits_{n = 1}^{\infty} b_n \) сходится
+    \( \Rightarrow \)
+    \( \sum\limits_{n = 1}^{\infty} a_n \) сходится.
+\end{assrt}
+
+\textit{Доказательство:}
+
+\[
+    \left| \sum_{k = N + 1}^{N + p} a_k \right| \leq \left| \sum\limits_{k = N + 1}^{N + p} b_k \right|
+\]
+
+Ура, критерий Коши. \qed
+
+\subsection{Неотрицательные ряды}
+
+\begin{assrt}{Признак Коши}{}
+    Рассмотрим \( \{ a_n \} \), где \( a_n \geq 0 \ \forall n \).
+    \begin{enumerate}
+        \item
+            Пусть \( \exists \delta > 0 \), что \( \sqrt[n]{a_n} \leq 1 - \delta \), начиная
+            с некоторого \( n \). Тогда \( \sum\limits_{n = 1}^{\infty} a_n \) сходится.
+        \item
+            Пусть \( \sqrt[n]{a_n} \geq 1 \), начиная с некоторого \( n \).
+            Тогда \( \sum\limits_{n = 1}^{\infty} a_n \) расходится.
+    \end{enumerate}
+\end{assrt}
+
+\textit{Доказательство:}
+\begin{enumerate}
+    \item
+        \( \sqrt[n]{a_n} \leq 1 - \delta \Rightarrow a_n \leq (1 - \delta)^n \Rightarrow \)
+        сходится по признаку сравнения.
+    \item
+        \( \sqrt[n]{a_n} \geq 1 \Rightarrow a_n > 1 \)
+\qed
+\end{enumerate}
+
+\begin{assrt}{Интегральный признак}{}
+    \( f : [1, \infty) \to \RR_{\geq 0} \) интегрируема по Риману и монотонно невозрастает.
+
+    Тогда \( \sum\limits_{n = 1}^{\infty} f(n) \) сходится
+    \( \Leftrightarrow \)
+    \( \int\limits_{1}^{\infty} f(x) dx \) сходится.
+\end{assrt}
+
+\textit{Доказательство:}
+\[
+    S_k
+    =
+    \sum\limits_{n = 1}^{k} a_n
+    =
+    \sum\limits_{n = 1}^{k} f(n)
+    \geq
+    \int\limits_{1}^{k + 1} f(x) dx
+    \geq
+    \sum\limits_{n = 2}^{k + 1} f(n)
+    =
+    \sum\limits_{n = 2}^{k + 1} a_n
+    =
+    S_{k + 1} - a_1
+\]
+
+Получили неравенство в обе стороны, а значит доказали. \qed
+
+\begin{example}{}{}
+    Ряд \( \sum\limits_{n = 1}^{\infty} \frac{1}{n^a} \) сходится
+    \( \Leftrightarrow \)
+    \( \int\limits_{1}^{\infty} \frac{1}{x^a} \) сходится,
+    то есть при \( a > 1 \).
+\end{example}
+
+\begin{thrm}{Признак Куммера}{}
+    \( \{ a_n > 0 \}_{n = 1}^{\infty} \), \( \{ c_n > 0 \}_{n = 1}^{\infty} \)
+
+    \begin{enumerate}
+        \item
+            \( \exists \delta > 0 : \frac{a_n}{a_{n + 1}} c_n - c_{n + 1} > \delta \)
+            начиная с некоторого \( n \)
+            \( \Rightarrow \)
+            \( \sum\limits_{n = 1}^{\infty} a_n \) сходится.
+        \item
+            \( \sum\limits_{n = 1}^{\infty} \frac{1}{c_n} \) расходится
+            и \( \frac{a_n}{a_{n + 1}} c_n - c_{n + 1} \leq 0 \) с некоторого \( n \)
+            \( \Rightarrow \) \( \sum\limits_{n = 1}^{\infty} a_n \) расходится.
+    \end{enumerate}
+\end{thrm}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( c_n = 1 \) --- признак Даламбера
+
+            \( \frac{a_n}{a_{n + 1}} > 1 + \delta \) начиная с некоторого \( n \)
+            \( \Rightarrow \)
+            \( \sum\limits_{n = 1}^{\infty} a_n \) сходится.
+
+            \( \frac{a_n}{a_{n + 1}} \leq 1 \) начиная с некоторого \( n \)
+            \( \Rightarrow \)
+            \( \sum\limits_{n = 1}^{\infty} a_n \) расходится.
+        \item
+            \( c_n = n \) --- признак Раабе
+
+            \( \frac{a_n}{a_{n + 1}} > 1 + \frac{1 + \delta}{n} \) начиная с некоторого \( n \)
+            \( \Rightarrow \)
+            \( \sum\limits_{n = 1}^{\infty} a_n \) сходится.
+
+            \( \frac{a_n}{a_{n + 1}} \leq 1 + \frac{1}{n} \) начиная с некоторого \( n \)
+            \( \Rightarrow \)
+            \( \sum\limits_{n = 1}^{\infty} a_n \) расходится.
+    \end{enumerate}
+\end{example}
+
+\textit{Доказательство:}
+
+\begin{enumerate}
+    \item
+        Будем считать, что условие выполняется с \( n = 1 \)
+
+        \( a_n c_n - a_{n + 1} c_{n + 1} > \delta a_{n + 1} > 0 \)
+
+        Последовательность \( \{ a_n c_n \}_{n = 1}^{\infty} \) убывает
+        \( \Rightarrow \)
+        \( \{ a_n c_n \}_{n = 1}^{\infty} \) сходится.
+
+        Значит \( \sum\limits_{n = 1}^{\infty} ( a_n c_n - a_{n + 1} c_{n + 1} ) \) сходится
+        \( \Rightarrow \)
+        \( \sum\limits_{n = 1}^{\infty} \delta a_{n + 1} \) сходится
+        \( \Rightarrow \)
+        \( \sum\limits_{n = 1}^{\infty} a_n \) сходится.
+    \item
+        Введем \( d_n = \frac{1}{c_n} \).
+
+        Тогда
+        \( \frac{a_n}{a_{n + 1}} \leq \frac{c_{n + 1}}{c_n} = \frac{d_n}{d_{n + 1}} \).
+
+        Получаем:
+        \begin{gather*}
+            \frac{a_n}{a_{n + 1}} \cdot \frac{a_{n + 1}}{a_{n + 2}} \cdot \ldots \cdot \frac{a_m}{a_{m + 1}}
+            \leq
+            \frac{d_n}{d_{n + 1}} \cdot \frac{d_{n + 1}}{d_{n + 2}} \cdot \ldots \cdot \frac{d_m}{d_{m + 1}}
+            \\
+            \frac{a_n}{a_{m + 1}} \leq \frac{d_n}{d_{m + 1}}
+            \\
+            a_{m + 1} \geq d_{m + 1} \frac{a_n}{d_n}
+        \end{gather*}
+
+        Давайте зафиксируем \( n \): возьмем любое, для которого выполняются
+        условия признака, тогда \( \frac{a_n}{d_n} \) --- какая-то константа.
+        Но \( \sum\limits_{n = 1}^{\infty} d_n = \sum\limits_{n = 1}^{\infty} \frac{1}{c_n} \)
+        расходится, а значит расходится и \( \sum\limits_{n = 1}^{\infty} a_n \).
+\qed
+\end{enumerate}
+
+\begin{lemma}{}{}
+    \( \{ a_n \geq 0 \}_{n = 1}^{\infty} \)
+
+    Ряд \( \sum\limits_{n = 1}^{\infty} a_n \) сходится
+    \( \Leftrightarrow \)
+    \( \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset N} \right\} < +\infty \)
+
+    Более того,
+    \(
+        \sum\limits_{n = 1}^{\infty} a_n
+        =
+        \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset N} \right\}
+    \)
+\end{lemma}
+
+\textit{Доказательство:}
+
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+
+        \( F \subset N \) --- конечное \( \Rightarrow \exists N : F \subset \{ 1, 2, \ldots, N \} \)
+        \( \Rightarrow \)
+        \(
+            \sum\limits_{n \in F}^{} a_n
+            \leq
+            \sum\limits_{n = 1}^{N} a_n
+            \leq
+            \sum\limits_{n = 1}^{\infty} a_n
+        \)
+
+        Из этого следует, что
+        \(
+            \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset N} \right\}
+            \leq
+            \sum\limits_{n = 1}^{\infty} a_n
+        \)
+    \item
+        \( \Leftarrow \)
+
+        \(
+            S_n
+            =
+            \sum\limits_{n = 1}^{N} a_n
+            \leq
+            \sum\limits_{ n \in \{ 1, 2, \ldots N \} }^{} a_n
+            \leq
+            \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset N} \right\}
+        \)
+
+        Отсюда явно следует, что \( \{ S_n \} \) сходится, причем
+        \[
+            \sum\limits_{n = 1}^{\infty} a_n
+            =
+            \lim\limits_{n \to \infty} S_n
+            \leq
+            \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset N} \right\}
+        \]
+\qed
+\end{itemize}
+
+\begin{coroll}{}{}
+    \( \{ a_n \geq 0 \}_{n = 1}^{\infty} \) и \( \tau : \NN \to \NN \) --- биекция.
+
+    Тогда \( \sum\limits_{n = 1}^{\infty} a_n \) сходится
+    \( \Leftrightarrow \)
+    \( \sum\limits_{n = 1}^{\infty} a_{\tau(n)} \) сходится.
+
+    Причем, если ряды сходятся, то их суммы равны.
+\end{coroll}
+
+\begin{coroll}{}{}
+    Пусть \( \{ A_n \subset \NN \}_{n = 1}^{\infty} \)
+    такие, что \( A_n \cap A_m = \varnothing \ (n \neq m) \)
+    и \( \NN = \bigcup\limits_{n = 1}^{\infty} A_n \).
+
+    \( \{ a_m \geq 0 \}_{m = 1}^{\infty} \)
+
+    Тогда
+    \(
+        \sum\limits_{m = 1}^{\infty} a_m
+        =
+        \sum\limits_{n = 1}^{\infty} \left( \sum\limits_{m \in A_n} a_m \right)
+    \)
+\end{coroll}
+
+\newpage
+
+\textit{Доказательство:}
+
+\begin{itemize}
+    \item
+        \( \leq \)
+
+        \(
+            \sum\limits_{m = 1}^{\infty} a_m
+            =
+            \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset N} \right\}
+        \)
+
+        \( F \subset N \) --- конечное,
+        \(
+            F \subset \bigcup\limits_{n = 1}^{\infty} A_n
+            \Rightarrow
+            \exists N \in \NN : F \subset \bigcup\limits_{n = 1}^{N} A_n
+        \)
+
+        \[
+            \sum\limits_{m \in F} a_m
+            =
+            \sum\limits_{n = 1}^{N} \left( \sum\limits_{m \in F \cap A_n} a_m \right)
+            \leq
+            \sum\limits_{n = 1}^{N} \left( \sum\limits_{m \in A_n} a_m \right)
+            \leq
+            \sum\limits_{n = 1}^{\infty} \left( \sum\limits_{m \in A_n} a_m \right)
+        \]
+    \item
+        \( \geq \)
+
+        Пусть \( \sum\limits_{m = 1}^{\infty} a_m = S < +\infty \)
+        (иначе бесконечность \( \geq \) чего угодно).
+
+        Давайте докажем, что
+        \(
+            \sum\limits_{n = 1}^{N} \left( \sum\limits_{m \in A_n}^{} a_m \right)
+            \leq
+            \sum\limits_{m = 1}^{\infty} a_m
+        \)
+        для всех \( N \in \NN \).
+
+        Зафиксируем \( \varepsilon > 0 \)
+        и для \( n \) от \( 1 \) до \( N \)
+        выберем конечное \( F_n \subseteq A_n \) так, что
+        \[
+            \sum\limits_{m \in F_n}^{} a_m \geq \sum\limits_{m \in A_n}^{} a_m - \frac{\varepsilon}{N}
+        \]
+
+        Просуммируем:
+        \[
+            \sum\limits_{n = 1}^{N} \left( \sum\limits_{m \in A_n}^{} a_m \right)
+            \leq
+            \sum\limits_{n = 1}^{N} \left( \sum\limits_{m \in F_n}^{} a_m + \frac{\varepsilon}{N} \right)
+            =
+            \varepsilon
+            +
+            \sum\limits_{m \in F_1 \cup \ldots \cup F_N}^{} a_n
+            \leq
+            \varepsilon
+            +
+            \sum\limits_{m = 1}^{\infty} a_m
+        \]
+
+        Поскольку \( \varepsilon \) был произвольным, доказали то, что хотели.
+
+        Остается сделать предельный переход по \( N \).
+\qed
+\end{itemize}
+
+\subsection{Знакопеременные ряды}
+
+\begin{defn}{}{}
+    Ряд \( \sum\limits_{n = 1}^{\infty} a_n \) называется сходящимся абсолютно,
+    если \( \sum\limits_{n = 1}^{\infty} |a_n| < +\infty \).
+    Если ряд сходится, но не абсолютно, он называется условно сходящимся.
+\end{defn}
+
+\begin{lemma}{}{}
+    \( \sum\limits_{n = 1}^{\infty} a_n \)
+
+    \( a_n^+ = \max \{ a_n, 0 \} \)
+
+    \( a_n^- = \max \{ -a_n, 0 \} \)
+
+    \( a_n = a_n^+ - a_n^- \)
+
+    \begin{enumerate}
+        \item
+            Ряд \( \sum\limits_{n = 1}^{\infty} a_n \) сходится абсолютно
+            \( \Leftrightarrow \)
+            \( \sum\limits_{n = 1}^{\infty}  a_n^+ < +\infty \) и  \( \sum\limits_{n = 1}^{\infty} a_n^- < +\infty \)
+        \item
+            Если ряд \( \sum\limits_{n = 1}^{\infty} a_n \) сходится условно,
+            то \( \sum\limits_{n = 1}^{\infty} a_n^+ = +\infty \)
+            и \( \sum\limits_{n = 1}^{\infty} a_n^- = +\infty \)
+    \end{enumerate}
+\end{lemma}
+
+\textit{Доказательство:}
+\begin{enumerate}
+    \item
+        \begin{itemize}
+            \item
+                \( \Rightarrow \)
+
+                \( a_n^+, a_n^- \leq |a_n| \) \( \Rightarrow \) признак сравнения
+            \item
+                \( \Leftarrow \)
+
+                Следует из \( |a_n| = a_n^+ + a_n^- \)
+        \end{itemize}
+    \item
+        \( a_n = a_n^+ - a_n^ - \)
+
+        Если два из трех рядов \( \sum\limits_{n = 1}^{\infty} a_n \),
+        \( \sum\limits_{n = 1}^{\infty} a_n^+ \) и \( \sum\limits_{n = 1}^{\infty} a_n^- \)
+        сходятся, то и третий тоже.
+        Отсюда явно следует искомое.
+\qed
+\end{enumerate}
+
+\begin{assrt}{}{}
+    \( \sum\limits_{n = 1}^{\infty} a_n \) сходится абсолютно,
+    \( \tau : \NN \to \NN \) --- биекция,
+    то \( \sum\limits_{n = 1}^{\infty}  a_{\tau(n)} \)
+    тоже сходится абсолютно, причем \( \sum\limits_{n = 1}^{\infty} a_n = \sum\limits_{n = 1}^{\infty} a_{\tau(n)} \).
+\end{assrt}
+
+Снова разобьем ряд на разность двух положительных:
+\begin{gather*}
+    a_n = a_n^+ - a_n^-
+    \\
+    a_{\tau(n)} = a_{\tau(n)}^+ - a_{\tau(n)}^-
+    \\
+    \sum\limits_{n = 1}^{\infty} a_n
+    =
+    \sum\limits_{n = 1}^{\infty} a_n^+
+    -
+    \sum\limits_{n = 1}^{\infty} a_n^-
+    =
+    \sum\limits_{n = 1}^{\infty} a_{\tau(n)}^+
+    -
+    \sum\limits_{n = 1}^{\infty} a_{\tau(n)}^-
+    =
+    \sum\limits_{n = 1}^{\infty} a_{\tau(n)}
+\end{gather*}
+
+Можно рассмотреть еще одно утверждение из неотрицательных рядов:
+\begin{assrt}{}{}
+    \( \sum\limits_{n = 1}^{\infty} a_n \) сходится абсолютно,
+    \( \NN = \bigcup\limits_{n = 1}^{\infty} A_n \),
+    \( \underset{n \neq m}{A_n \cap A_m} = \varnothing \).
+
+    Тогда \( \sum\limits_{n = 1}^{\infty} a_n = \sum\limits_{n = 1}^{\infty} \left( \sum\limits_{m \in A_n}^{} a_m \right) \)
+\end{assrt}
+
+\begin{thrm}{Теорема Римана об условной сходимости}{}
+    \( \sum\limits_{n = 1}^{\infty} a_n \) сходится условно
+    \begin{enumerate}
+        \item
+            Тогда \( \forall s \in \RR \ \exists \tau : \NN \to \NN \) биекция такая,
+            что \( \sum\limits_{n = 1}^{\infty} a_{\tau(n)} = s \)
+        \item
+            \( \exists \tau : \NN \to \NN \) биекция, такая что \( \sum\limits_{n = 1}^{\infty} a_{\tau(n)} \) расходится.
+    \end{enumerate}
+\end{thrm}
+
+\textit{Доказательство (чуть-чуть рукомахание):}
+\begin{enumerate}
+    \item
+        \( J^+ = \{ n \in \NN : a_n \geq 0 \} \)
+
+        \( J^- = \{ n \in \NN : a_n < 0 \} \)
+
+        Сначала набираем наименьшие индексы из \( J^+ \), пока сумма не больше \( s \):
+        \[
+            \sum\limits_{l = 1}^{k_1} a_{\tau(l)} > s
+        \]
+
+        Потом, набираем наименьший индексы из \( J^- \) пока сумма не меньше \( s \):
+        \[
+            \sum\limits_{l = 1}^{k_2} a_{\tau(l)} < s
+        \]
+
+        И так далее.
+
+        В целом понятно, почему мы наберем все числа.
+
+        Теперь рассмотрим частичную сумму \( S_k \).
+        Пусть \( k_n \leq k \leq k_{n + 1} \).
+        В таком случае выполнено:
+        \[
+            \left| \sum\limits_{l = 1}^{k} a_{\tau(l)} - s \right| < \max \{ | a_{\tau(k_n)} |, | a_{\tau(k_{n + 1})} | \}
+        \]
+
+        Поскольку изначальный ряд сходился, его члены стремились к нулю при увеличении \( n \),
+        а значит и при перестановке это выполнится.
+        Таким образом \( S_k \) стремится к \( s \).
+    \item
+        Давайте, как и в первом пункте разделим ряд на положительные и отрицательные члены.
+        Но положительными мы будем набирать сумму хотя бы \( 1 \),
+        а отрицательными --- не больше чем \( -1 \).
+        В таком случае, очевидно, полученный ряд разойдется.
+\qed
+\end{enumerate}
+
+\begin{defn}{}{}
+    \( \{ a_n \} \) имеет ограниченную вариацию,
+    если \( \sum\limits_{n = 1}^{\infty} |a_{n + 1} - a_n| < +\infty \)
+\end{defn}
+
+\begin{example}{}{}
+    \( \{ a_n \} \) монотонна и сходится \( \Rightarrow \) она имеет ограниченную вариацию.
+\end{example}
+
+\begin{assrt}{}{}
+    \( \{ a_n \} \) имеет ограниченную вариацию
+    \( \Leftrightarrow \)
+    \( \exists \{ b_n \}, \{ c_n \} \) --- неубывающие и сходящиеся,
+    такие что \( a_n = b_n - c_n \).
+\end{assrt}
+
+\begin{itemize}
+    \item
+        \( \Leftarrow \)
+
+        Очевидно.
+    \item
+        \( \Rightarrow \)
+
+        \( b_n = \sum\limits_{k = 1}^{n - 1} | a_{k + 1} - a_k | \), \( c_n = b_n - a_n \).
+
+        Очевидно, что \( b_n \) неубывающая и сходящаяся.
+
+        Покажем, что \( \{ c_n \} \) не убывает:
+        \[
+            c_{n + 1} - c_n = -_a{n + 1} + a_n + (b_{n + 1} - b_n)
+            =
+            -a_{n + 1} + a_n + | a_{n + 1} - a_n | \geq 0
+        \]
+
+        Заметим, что \( \{ a_n \} \) сходится.
+        Действительно, вариация ограничена, а значит ряд сходится абсолютно,
+        поэтому можно убрать модуль. А отсюда явно следует сходимость \( \{ a_n \} \).
+        \( \{ b_n \} \) тоже сходится, откуда сходится и \( \{ c_n \} \).
+\qed
+\end{itemize}
+
+\begin{thrm}{Признак Дирихле}{}
+    \begin{enumerate}
+        \item
+            \( a_n \to 0 \) и имеет ограниченную вариацию
+        \item
+            \( \exists C : \forall k \in \NN \ \left| \sum\limits_{n = 1}^{k} b_n \right| \leq C \)
+    \end{enumerate}
+
+    Тогда ряд \( \sum\limits_{n = 1}^{\infty} a_n b_n \) сходится.
+\end{thrm}
+
+\textit{Доказательство:}
+
+\( S_n = \sum\limits_{k = 1}^{n} b_k \), тогда
+\(
+    \sum\limits_{k = 1}^{n} a_k b_k
+    =
+    \sum\limits_{k = 1}^{n} a_k (s_k - s_{k - 1})
+    =
+    -\sum\limits_{k = 1}^{n} (a_{k + 1} - a_k) s_k + a_{n + 1} s_n - a_1 s_0
+\)
+
+\( a_{n + 1} s_n \) стремится к нулю, \( a_1 s_0 \) является константой,
+а \( \sum\limits_{k = 1}^{n} (a_{k + 1} - a_k) s_k \) сходится абсолютно.
+А значит искомый ряд сходится.
+\qed
+
+\begin{defn}{Признак Лейбница}{}
+    \( b_n = (-1)^n \)
+
+    \( \sum\limits_{n = 1}^{\infty} (-1)^n a_n \) сходится,
+    если \( a_n \to 0 \) и имеет ограниченную вариацию (монотонна).
+\end{defn}
+
+\begin{defn}{Признак Абеля}{}
+    \begin{enumerate}
+        \item
+            \( a_n \) имеет ограниченную вариацию ( \( a_n \) не обязательно сходится к \( 0 \)).
+        \item
+            \( \sum\limits_{n = 1}^{\infty} b_n \) сходится.
+    \end{enumerate}
+
+    Тогда \( \sum\limits_{n = 1}^{\infty} a_n b_n \) сходится.
+\end{defn}
+
+\subsection{Равномерная сходимость}
+
+\( \{ f_n : X \to \RR \} \) --- последовательность функций.
+
+\begin{defn}{}{}
+    \begin{enumerate}
+        \item
+            Последовательность \( \{ f_n \} \) сходится поточечно,
+            если для любого \( x \in X \) сходится \( \{ f_n (x) \} \).
+        \item
+            \( \{ f_n \} \) сходится равномерно,
+            если она сходится поточечно и
+            \[
+                \forall \varepsilon > 0 \ \exists N \in \NN : | f_n (x) - f(x) | < \varepsilon \ \forall x \in X \ \forall n \geq N
+            \]
+        \item
+            Ряд \( \sum\limits_{n = 1}^{\infty} f_n \) сходится поточечно (соответственно равномерно),
+            если последовательность \( \left\{ \sum\limits_{k = 1}^{n} f_k \right\} \) сходится
+            поточечно (равномерно).
+    \end{enumerate}
+\end{defn}
+
+\begin{example}{}{}
+    \( f_n (x) = \arctan (nx) \)
+
+    \( \lim f_n (x) = \frac{\pi}{2} \sgn x \)
+\end{example}
+
+\begin{assrt}{}{}
+    \( X \) --- метрическое пространство, \( f_n : X \to \RR \), \( x \in X \)
+
+    Если \( f_n \) непрерывно в \( x \) для любого \( n \)
+    и равномерно сходится к \( f \) в некоторой окрестности \( x \),
+    то \( \lim f_n = f \) непрерывно в \( x \).
+\end{assrt}
+
+\textit{Доказательство:}
+
+Хотим такое:
+\[
+    \forall \varepsilon > 0 \ \exists \delta : | f(y) - f(x) | < \varepsilon \text{ при } \rho(x, y) < \delta
+\]
+\begin{gather*}
+    |f(y) - f(x)|
+    =
+    |f(y) - f_N(y) + f_N(y) - f_N(x) + f_N(x) - f(x)|
+    \leq
+    \\
+    \leq
+    |f(y) - f_N(y)| + |f_N(y) - f_N(x)| + |f_N(x) - f(x)|
+\end{gather*}
+
+Если \( f_n \to f \) равномерно сходится на шаре \( B_\gamma(x) \), то
+\begin{gather*}
+    \exists N : | f_n(y) - f(y) | < \frac{\varepsilon}{3} \ \forall y \in B_\gamma (x) \ \forall n \geq N
+    \\
+    \exists \beta > 0 : | f_N (y) - f_N (x) | < \frac{\varepsilon}{3} \text{ при } \rho(y, x) < \beta
+\end{gather*}
+
+Положим \( \delta = \min \{ \gamma, \beta \} \), ура.
+
+\begin{assrt}{}{}
+    \( \{ f_n : [a, b] \to \RR \} \), \( f_n \to f \) равномерно, и \( f_n \) интегрируема
+    по Риману для любого \( n \).
+    Тогда \( f \) интегрируемо по Риману и \( \int\limits_{a}^{b} f dx = \lim \int\limits_{a}^{b} f_n dx \)
+\end{assrt}
+
+\begin{example}{}{}
+    Придумаем функцию на \( [0, 1] \)
+
+    Пусть \( \{ q_n \}_{n = 1}^{\infty} \) --- все рациональные числа на отрезке \( [0, 1] \).
+
+    \(
+        f_n (x) = \begin{cases}
+            1, \ x = q_j \text{ для некоторого } j \in \{ 1, 2, \ldots, n \}
+            \\
+            0, \text{ иначе}
+        \end{cases}
+    \)
+
+    \( f = \lim f_n \) --- функция Дирихле --- не интегрируема по Риману.
+\end{example}
