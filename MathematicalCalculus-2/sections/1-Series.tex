@@ -5,19 +5,19 @@
 \begin{defn}{Основные понятия}{}
     \( \{ a_n \}_{n = 1}^{\infty} \)
 
-    \( S_n = \sum\limits_{k = 1}^{n} a_n \) --- частичные суммы.
+    \( S_n = \sum\limits_{k = 1}^{n} a_k \) --- частичные суммы.
 
     \( \sum\limits_{k = 1}^{\infty} a_k \) называется сходящимся,
     если сходится \( \{ S_n \}_{n = 1}^{\infty} \)
     и
-    \( \sum\limits_{k = 1}^{\infty} a_k = \lim\limits_{n = 1}^{\infty} S_n \)
+    \( \sum\limits_{k = 1}^{\infty} a_k = \lim\limits_{n \to \infty} S_n \)
 \end{defn}
 
 \begin{example}{}{}
-    \( \sum\limits_{n = 1}^{\infty} q^n \) сходится
+    \( \sum\limits_{n = 0}^{\infty} q^n \) сходится
     тогда и только тогда, когда \( |q| < 1 \).
 
-    Сумма вычисляется по формуле \( \sum\limits_{n = 1}^{\infty} \frac{1}{1 - q} \).
+    Сумма вычисляется по формуле \( \sum\limits_{n = 0}^{\infty} q^n = \frac{1}{1 - q} \).
 \end{example}
 
 \begin{assrt}{Критерий Коши}{}
@@ -27,14 +27,14 @@
     \(
         \forall \varepsilon > 0 \ \exists N \in \NN :
         \forall n > N, \ p \in \NN \
-        \left| \sum\limits_{k = n + 1}^{n + p} a_n \right| < \varepsilon
+        \left| \sum\limits_{k = n + 1}^{n + p} a_k \right| < \varepsilon
     \)
 \end{assrt}
 
 Вспомним несколько простых утверждений:
 \begin{enumerate}
     \item
-        Если \( \sum\limits_{n = 1}^{\infty} a_n \) и \( \sum\limits_{n = 1}^{\infty} \)
+        Если \( \sum\limits_{n = 1}^{\infty} a_n \) и \( \sum\limits_{n = 1}^{\infty} b_n \)
         сходятся, то
         \(
             \sum\limits_{n = 1}^{\infty} (\alpha a_n + \beta b_n)
@@ -60,7 +60,7 @@
 \textit{Доказательство:}
 
 \[
-    \left| \sum_{k = N + 1}^{N + p} a_k \right| \leq \left| \sum\limits_{k = N + 1}^{N + p} b_k \right|
+    \left| \sum\limits_{k = N + 1}^{N + p} a_k \right| \leq \left| \sum\limits_{k = N + 1}^{N + p} b_k \right|
 \]
 
 Ура, критерий Коши. \qed
@@ -71,7 +71,7 @@
     Рассмотрим \( \{ a_n \} \), где \( a_n \geq 0 \ \forall n \).
     \begin{enumerate}
         \item
-            Пусть \( \exists \delta > 0 \), что \( \sqrt[n]{a_n} \leq 1 - \delta \), начиная
+            Пусть \( \exists \delta > 0 \) такое, что \( \sqrt[n]{a_n} \leq 1 - \delta \), начиная
             с некоторого \( n \). Тогда \( \sum\limits_{n = 1}^{\infty} a_n \) сходится.
         \item
             Пусть \( \sqrt[n]{a_n} \geq 1 \), начиная с некоторого \( n \).
@@ -85,7 +85,7 @@
         \( \sqrt[n]{a_n} \leq 1 - \delta \Rightarrow a_n \leq (1 - \delta)^n \Rightarrow \)
         сходится по признаку сравнения.
     \item
-        \( \sqrt[n]{a_n} \geq 1 \Rightarrow a_n > 1 \)
+        \( \sqrt[n]{a_n} \geq 1 \Rightarrow a_n \geq 1 \)
 \qed
 \end{enumerate}
 
@@ -119,7 +119,7 @@
 \begin{example}{}{}
     Ряд \( \sum\limits_{n = 1}^{\infty} \frac{1}{n^a} \) сходится
     \( \Leftrightarrow \)
-    \( \int\limits_{1}^{\infty} \frac{1}{x^a} \) сходится,
+    \( \int\limits_{1}^{\infty} \frac{1}{x^a} dx \) сходится,
     то есть при \( a > 1 \).
 \end{example}
 
@@ -210,13 +210,13 @@
 
     Ряд \( \sum\limits_{n = 1}^{\infty} a_n \) сходится
     \( \Leftrightarrow \)
-    \( \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset N} \right\} < +\infty \)
+    \( \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset \NN} \right\} < +\infty \)
 
     Более того,
     \(
         \sum\limits_{n = 1}^{\infty} a_n
         =
-        \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset N} \right\}
+        \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset \NN} \right\}
     \)
 \end{lemma}
 
@@ -226,7 +226,7 @@
     \item
         \( \Rightarrow \)
 
-        \( F \subset N \) --- конечное \( \Rightarrow \exists N : F \subset \{ 1, 2, \ldots, N \} \)
+        \( F \subset \NN \) --- конечное \( \Rightarrow \exists N : F \subset \{ 1, 2, \ldots, N \} \)
         \( \Rightarrow \)
         \(
             \sum\limits_{n \in F}^{} a_n
@@ -238,7 +238,7 @@
 
         Из этого следует, что
         \(
-            \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset N} \right\}
+            \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset \NN} \right\}
             \leq
             \sum\limits_{n = 1}^{\infty} a_n
         \)
@@ -246,13 +246,13 @@
         \( \Leftarrow \)
 
         \(
-            S_n
+            S_N
             =
             \sum\limits_{n = 1}^{N} a_n
             \leq
-            \sum\limits_{ n \in \{ 1, 2, \ldots N \} }^{} a_n
+            \sum\limits_{ n \in \{ 1, 2, \ldots, N \} }^{} a_n
             \leq
-            \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset N} \right\}
+            \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset \NN} \right\}
         \)
 
         Отсюда явно следует, что \( \{ S_n \} \) сходится, причем
@@ -261,7 +261,7 @@
             =
             \lim\limits_{n \to \infty} S_n
             \leq
-            \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset N} \right\}
+            \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset \NN} \right\}
         \]
 \qed
 \end{itemize}
@@ -302,10 +302,10 @@
         \(
             \sum\limits_{m = 1}^{\infty} a_m
             =
-            \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset N} \right\}
+            \sup \left\{ \sum\limits_{n \in F} a_n : \underset{\text{конечно}}{F \subset \NN} \right\}
         \)
 
-        \( F \subset N \) --- конечное,
+        \( F \subset \NN \) --- конечное,
         \(
             F \subset \bigcup\limits_{n = 1}^{\infty} A_n
             \Rightarrow
@@ -324,7 +324,7 @@
     \item
         \( \geq \)
 
-        Пусть \( \sum\limits_{m = 1}^{\infty} a_m = S < +\infty \)
+        Пусть \( \sum\limits_{m = 1}^{\infty} a_m < +\infty \)
         (иначе бесконечность \( \geq \) чего угодно).
 
         Давайте докажем, что
@@ -350,7 +350,7 @@
             =
             \varepsilon
             +
-            \sum\limits_{m \in F_1 \cup \ldots \cup F_N}^{} a_n
+            \sum\limits_{m \in F_1 \cup \ldots \cup F_N}^{} a_m
             \leq
             \varepsilon
             +
@@ -406,7 +406,7 @@
                 Следует из \( |a_n| = a_n^+ + a_n^- \)
         \end{itemize}
     \item
-        \( a_n = a_n^+ - a_n^ - \)
+        \( a_n = a_n^+ - a_n^- \)
 
         Если два из трех рядов \( \sum\limits_{n = 1}^{\infty} a_n \),
         \( \sum\limits_{n = 1}^{\infty} a_n^+ \) и \( \sum\limits_{n = 1}^{\infty} a_n^- \)
@@ -416,11 +416,13 @@
 \end{enumerate}
 
 \begin{assrt}{}{}
-    \( \sum\limits_{n = 1}^{\infty} a_n \) сходится абсолютно,
+    Если \( \sum\limits_{n = 1}^{\infty} a_n \) сходится абсолютно,
     \( \tau : \NN \to \NN \) --- биекция,
     то \( \sum\limits_{n = 1}^{\infty}  a_{\tau(n)} \)
     тоже сходится абсолютно, причем \( \sum\limits_{n = 1}^{\infty} a_n = \sum\limits_{n = 1}^{\infty} a_{\tau(n)} \).
 \end{assrt}
+
+\textit{Доказательство:}
 
 Снова разобьем ряд на разность двух положительных:
 \begin{gather*}
@@ -473,7 +475,7 @@
             \sum\limits_{l = 1}^{k_1} a_{\tau(l)} > s
         \]
 
-        Потом, набираем наименьший индексы из \( J^- \) пока сумма не меньше \( s \):
+        Потом набираем наименьшие индексы из \( J^- \), пока сумма не меньше \( s \):
         \[
             \sum\limits_{l = 1}^{k_2} a_{\tau(l)} < s
         \]
@@ -493,7 +495,7 @@
         а значит и при перестановке это выполнится.
         Таким образом \( S_k \) стремится к \( s \).
     \item
-        Давайте, как и в первом пункте разделим ряд на положительные и отрицательные члены.
+        Давайте, как и в первом пункте, разделим ряд на положительные и отрицательные члены.
         Но положительными мы будем набирать сумму хотя бы \( 1 \),
         а отрицательными --- не больше чем \( -1 \).
         В таком случае, очевидно, полученный ряд разойдется.
@@ -516,6 +518,8 @@
     такие что \( a_n = b_n - c_n \).
 \end{assrt}
 
+\textit{Доказательство:}
+
 \begin{itemize}
     \item
         \( \Leftarrow \)
@@ -530,7 +534,7 @@
 
         Покажем, что \( \{ c_n \} \) не убывает:
         \[
-            c_{n + 1} - c_n = -_a{n + 1} + a_n + (b_{n + 1} - b_n)
+            c_{n + 1} - c_n = -a_{n + 1} + a_n + (b_{n + 1} - b_n)
             =
             -a_{n + 1} + a_n + | a_{n + 1} - a_n | \geq 0
         \]
@@ -555,37 +559,37 @@
 
 \textit{Доказательство:}
 
-\( S_n = \sum\limits_{k = 1}^{n} b_k \), тогда
-\(
+\( S_n = \sum\limits_{k = 1}^{n} b_k \), тогда:
+\[
     \sum\limits_{k = 1}^{n} a_k b_k
     =
-    \sum\limits_{k = 1}^{n} a_k (s_k - s_{k - 1})
+    \sum\limits_{k = 1}^{n} a_k (S_k - S_{k - 1})
     =
-    -\sum\limits_{k = 1}^{n} (a_{k + 1} - a_k) s_k + a_{n + 1} s_n - a_1 s_0
-\)
+    -\sum\limits_{k = 1}^{n} (a_{k + 1} - a_k) S_k + a_{n + 1} S_n - a_1 S_0
+\]
 
-\( a_{n + 1} s_n \) стремится к нулю, \( a_1 s_0 \) является константой,
-а \( \sum\limits_{k = 1}^{n} (a_{k + 1} - a_k) s_k \) сходится абсолютно.
+\( a_{n + 1} S_n \) стремится к нулю, \( a_1 S_0 \) является константой,
+а \( \sum\limits_{k = 1}^{n} (a_{k + 1} - a_k) S_k \) сходится абсолютно.
 А значит искомый ряд сходится.
 \qed
 
-\begin{defn}{Признак Лейбница}{}
-    \( b_n = (-1)^n \)
+\begin{assrt}{Признак Лейбница}{}
+    Подставим \( b_n = (-1)^n \)
 
     \( \sum\limits_{n = 1}^{\infty} (-1)^n a_n \) сходится,
     если \( a_n \to 0 \) и имеет ограниченную вариацию (монотонна).
-\end{defn}
+\end{assrt}
 
-\begin{defn}{Признак Абеля}{}
+\begin{assrt}{Признак Абеля}{}
     \begin{enumerate}
         \item
-            \( a_n \) имеет ограниченную вариацию ( \( a_n \) не обязательно сходится к \( 0 \)).
+            \( a_n \) имеет ограниченную вариацию (\( a_n \) не обязательно сходится к \( 0 \)).
         \item
             \( \sum\limits_{n = 1}^{\infty} b_n \) сходится.
     \end{enumerate}
 
     Тогда \( \sum\limits_{n = 1}^{\infty} a_n b_n \) сходится.
-\end{defn}
+\end{assrt}
 
 \subsection{Равномерная сходимость}
 
@@ -618,9 +622,9 @@
 \begin{assrt}{}{}
     \( X \) --- метрическое пространство, \( f_n : X \to \RR \), \( x \in X \)
 
-    Если \( f_n \) непрерывно в \( x \) для любого \( n \)
+    Если \( f_n \) непрерывна в \( x \) для любого \( n \)
     и равномерно сходится к \( f \) в некоторой окрестности \( x \),
-    то \( \lim f_n = f \) непрерывно в \( x \).
+    то \( \lim f_n = f \) непрерывна в \( x \).
 \end{assrt}
 
 \textit{Доказательство:}
@@ -639,7 +643,7 @@
     |f(y) - f_N(y)| + |f_N(y) - f_N(x)| + |f_N(x) - f(x)|
 \end{gather*}
 
-Если \( f_n \to f \) равномерно сходится на шаре \( B_\gamma(x) \), то
+Если \( f_n \to f \) равномерно на шаре \( B_\gamma(x) \), то
 \begin{gather*}
     \exists N : | f_n(y) - f(y) | < \frac{\varepsilon}{3} \ \forall y \in B_\gamma (x) \ \forall n \geq N
     \\
@@ -647,11 +651,12 @@
 \end{gather*}
 
 Положим \( \delta = \min \{ \gamma, \beta \} \), ура.
+\qed
 
 \begin{assrt}{}{}
     \( \{ f_n : [a, b] \to \RR \} \), \( f_n \to f \) равномерно, и \( f_n \) интегрируема
     по Риману для любого \( n \).
-    Тогда \( f \) интегрируемо по Риману и \( \int\limits_{a}^{b} f dx = \lim \int\limits_{a}^{b} f_n dx \)
+    Тогда \( f \) интегрируема по Риману и \( \int\limits_{a}^{b} f dx = \lim \int\limits_{a}^{b} f_n dx \)
 \end{assrt}
 
 \begin{example}{}{}
