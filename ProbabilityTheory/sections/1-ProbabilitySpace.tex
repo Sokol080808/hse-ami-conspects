@@ -1,0 +1,761 @@
+\section{Вероятностное пространство}
+
+\subsection{1}
+
+\begin{defn}{Вероятностное пространство}{}
+    Вероятностным пространством называется тройка \( (\Omega, \mathcal{F}, P) \)
+
+    \( \Omega \) --- пространство элементарных событий
+
+    \( \mathcal{F} \) --- \( \sigma \)-алгебра событий на \( \Omega \)
+
+    \( P \) --- вероятностная мера на \( (\Omega, \mathcal{F}) \)
+\end{defn}
+
+\( \Omega \) --- некоторое множество, элементы \( \Omega \) называются элементарными
+исходами или событиями.
+Смысл: в результате эксперимента происходит один и ровно один элемент \( \Omega \).
+
+\begin{defn}{Алгебра}{}
+    Система \( \mathcal{F} \) подмножеств
+    \( \Omega \) называется алгеброй, если:
+    \begin{enumerate}
+        \item
+            \( \Omega \in \mathcal{F} \)
+        \item
+            \( A, B \in \mathcal{F} \Rightarrow A \cap B \in \mathcal{F} \)
+        \item
+            \( A \in \mathcal{F} \Rightarrow \ol{A} = \Omega \setminus A \in \mathcal{F} \)
+    \end{enumerate}
+\end{defn}
+
+\begin{defn}{Дополнение}{}
+    Событие \( \ol{A} = \Omega \setminus A \) называется
+    дополнением к \( A \).
+\end{defn}
+
+\begin{exercise}{}{}
+    Алгебра замкнута относительно всех естественных операций.
+\end{exercise}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( \{ \varnothing, \Omega \} \) --- тривиальная алгебра.
+        \item
+            \( 2^{\Omega} \) --- дискретная алгебра.
+        \item
+            \( \{ \varnothing, A, \ol{A}, \Omega \} \) --- алгебра,
+            порожденная \( A \).
+        \item
+            \( \Omega = \RR \)
+
+            \( \mathcal{F} = \) конечные объединения непересекающихся промежутков вида \( (a, b] \),
+            \( (-\infty, c] \), \( (d, +\infty) \), \( \RR \), \( \varnothing \)
+            (алгебра полуинтервалов).
+    \end{enumerate}
+\end{example}
+
+\begin{defn}{\( \sigma \)-алгебра}{}
+    Система \( \mathcal{F} \) подмножеств \( \Omega \)
+    называется \( \sigma \)-алгеброй,
+    если:
+    \begin{enumerate}
+        \item
+            \( \mathcal{F} \) --- алгебра
+        \item
+            \( \mathcal{F} \) замкнута относительно счетного объединения, то есть:
+            \[
+                \{ A_n, n \in N \}, \ A_n \in \mathcal{F} \ \forall n
+                \Rightarrow 
+                \bigcup\limits_{n = 1}^{\infty} A_n \in \mathcal{F}
+            \]
+    \end{enumerate}
+\end{defn}
+
+\begin{exercise}{}{}
+    \( \sigma \)-алгебра замкнута относительно счетного пересечения.
+\end{exercise}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            Любая конечная алгебра является \( \sigma \)-алгеброй.
+        \item
+            \( 2^{\Omega} \) --- дискретная \( \sigma \)-алгебра.
+        \item
+            Алгебра полуинтервалов не является \( \sigma \)-алгеброй:
+            \[
+                (a, b) = \bigcup\limits_{n = 1}^{\infty} \left( a, b - \frac{1}{n} \right]
+            \]
+    \end{enumerate}
+\end{example}
+
+\begin{defn}{Измеримое пространство}{}
+    Пара \( (\Omega, \mathcal{F}) \) называется измеримым пространством.
+\end{defn}
+
+\begin{defn}{}{}
+    Отображение \( P : \mathcal{F} \to [0, 1] \) называется вероятностной мерой
+    на \( ( \Omega, \mathcal{F} \), если:
+    \begin{enumerate}
+        \item
+            \( P(\Omega) = 1 \)
+        \item
+            \( P \) счетно аддитивно на \( \mathcal{F} \),
+            то есть:
+            \[
+                P \left( \bigsqcup\limits_{n = 1}^{\infty} A_n \right)
+                =
+                \sum\limits_{n = 1}^{\infty} P(A_n)
+            \]
+    \end{enumerate}
+\end{defn}
+
+\begin{lemma}{Простейшие свойства}{}
+    \begin{enumerate}
+        \item
+            \( P(\varnothing) = 0 \)
+        \item
+            \( P \) конечно аддитивно на \( \mathcal{F} \)
+        \item
+            \( P(\ol{A}) = 1 - P(A) \)
+        \item
+            \( P(A \cup B) = P(A) + P(B) - P(A \cap B) \)
+        \item
+            Формула включений и исключений.
+        \item
+            \( A \subseteq B \Rightarrow P(A) \leq P(B) \)
+        \item
+            \( P \left( \bigcup\limits_{n = 1}^{m} A_n \right) \leq \sum\limits_{n = 1}^{m} P(A_n) \)
+    \end{enumerate}
+\end{lemma}
+
+\begin{thrm}{О непрерывности вероятностной меры}{}
+    Пусть \( (\Omega, \mathcal{F}) \) --- измеримое пространство.
+
+    \( P : \mathcal{F} \to [0, 1] \) конечно аддитивна и \( P(\Omega) = 1 \).
+
+    Тогда следующие факты эквивалентны:
+    \begin{enumerate}
+        \item
+            \( P \) --- счетно аддитивно на \( \mathcal{F} \)
+        \item
+            \( P \) ``непрерывно в нуле'', то есть
+            если \( A_n \downarrow \varnothing \)
+            (\( \forall n \ A_n \supseteq A_{n + 1} \) и \( \bigcap\limits_{n = 1}^{\infty} A_n = \varnothing \)),
+            то \( P(A_n) \to P(\varnothing) = 0 \)
+        \item
+            \( P \) ``непрерывно сверху'', то есть если \( A_n \downarrow A \),
+            то \( P(A_n) \to P(A) \)
+        \item
+            \( P \) ``непрерывно снизу'', то есть если \( A_n \uparrow A \),
+            то \( P(A_n) \to P(A) \)
+    \end{enumerate}
+\end{thrm}
+
+\begin{itemize}
+    \item
+        \( 1 \Rightarrow 2 \)
+
+        Пусть \( P \) счетно аддитивно и \( A_n \downarrow \varnothing \).
+
+        Рассмотрим \( B_n = A_n \setminus A_{n + 1} \).
+        Тогда \( \bigsqcup\limits_{k = n}^{\infty} B_k = A_n \).
+
+        Докажем это:
+        очевидно, что \( \bigsqcup\limits_{k = n}^{\infty} B_k \subseteq A_n \).
+        Пусть \( \exists \omega_0 \in A_n : \forall k \geq n \ \omega_0 \notin B_k \).
+        Но тогда \( \omega_0 \in A_k \ \forall k \geq n \) --- противоречие с нулевым пересечением.
+
+        \( P(A_1) = \sum\limits_{n = 1}^{\infty} P(B_n) < +\infty \) 
+
+        \( P(A_n) = \sum\limits_{k = n}^{\infty} P(B_k) \) --- остаток сходящегося ряда,
+        а значит стремится к \( 0 \) при увеличении \( n \)
+    \item
+        \( 2 \Rightarrow 1 \)
+
+        Пусть \( A = \bigcup\limits_{n = 1}^{\infty} A_n \).
+
+        Рассмотрим \( B_n = \bigcup\limits_{k = n}^{\infty} A_k \).
+
+        Тогда \( B_n \downarrow \varnothing \).
+
+        Докажем это: предположим обратное.
+        Пусть пересечение \( B_n \) не пусто.
+        Значит \( \exists \omega_0 : \omega_0 \in B_n \ \forall n \).
+        Тогда \( \omega_0 \in B_1 = A = \bigcup\limits_{n = 1}^{\infty} A_n \).
+        Значит \( \exists k : \omega_0 \in A_k \) и \( \omega_0 \notin A_n, \ n \neq k \).
+        Но тогда \( \omega_0 \notin B_{k + 1} \) --- противоречие.
+
+        Значит \( P(B_n) \to 0 \).
+
+        Для любого \( n \) в силу конечной аддитивности:
+        \[
+            P(A) = \left( \bigsqcup\limits_{k = 1}^{n} A_k \right) \sqcup B_{n + 1}
+        \]
+    \item
+        \( 2 \Rightarrow 3 \)
+
+        Если \( A_n \downarrow A \), то \( A_n \setminus A \downarrow \varnothing \),
+        значит \( P(A_n) - P(A) = P(A_n \setminus A) = 0 \to 0 \),
+        что и требовалось доказать.
+    \item
+        \( 3 \Rightarrow 2 \)
+
+        Является частным случаем при \( A = 0 \).
+    \item
+        \( 3 \Leftrightarrow 4 \)
+
+        Заменим \( A_n \) на \( \ol{A_n} \)
+\end{itemize}
+
+\begin{remark}{}{}
+    Теорема остается верной, даже если \( \mathcal{F} \) --- это алгебра на \( \Omega \)
+    (а не \( \sigma \)-алгебра). Единственное отличие --- равенство
+    предельных вероятностей (например, равенство \( A = \bigsqcup\limits_{n = 1}^{\infty} A_n \))
+    проверяется, только если нужное событие лежит в \( \mathcal{F} \).
+\end{remark}
+
+\begin{example}{Примеры вероятностных пространств}{}
+    \begin{enumerate}
+        \item
+            Дискретное вероятностное пространство
+
+            \( \Omega \) --- конечное или счетное множество,
+            \( \mathcal{F} = 2^{\Omega} \) --- дискретная \( \sigma \)-алгебра,
+            \( P : \Omega \to [0, 1] \) с условием
+            \( \sum\limits_{\omega \in \Omega} P(\omega) = 1 \)
+
+            Частным случаем является классическая модель:
+
+            \( |\Omega| < +\infty \), \( \forall \omega \in \Omega \ P(\omega) = \frac{1}{|\Omega|} \)
+        \item
+            Геометрическая вероятность
+
+            \( \Omega \in \RR^d \), \( 0 < \mu(\Omega) < +\infty \) --- объем \( A \).
+
+            Для \( \forall A \subset \Omega \),
+            для которого определем объем, полагаем \( P(A) = \frac{\mu(A)}{\mu(\Omega)} \).
+    \end{enumerate}
+\end{example}
+
+\begin{example}{Задача ``о встрече''}{}
+    Два студента приходят на остановку в случайное время
+    между \( 9 \) и \( 10 \) часами утра.
+    Каждый ждет товарища не более \( 15 \) минут,
+    а потом уезжает.
+    С какой вероятностью они встретятся?
+\end{example}
+
+\( \Omega = [9, 10] \times [9, 10] \)
+
+\( A = \{ (x, y) \in \Omega : |x - y| \leq \frac{1}{4} \} \)
+
+Порисовав рисуночек понимаем, что
+\( P(A) = \frac{\mu(A)}{\mu(\Omega)} = \frac{1 - \left( \frac{3}{4} \right)^2}{1} = \frac{7}{16} \)
+
+\begin{defn}{}{}
+    Система \( M \) подмножеств \( \Omega \) называется \( \pi \)-системой,
+    если она замкнута относительно \( \cap \) : \( A, B \in M \Rightarrow A \cap B \in M \).
+\end{defn}
+
+\begin{defn}{}{}
+    Система \( M \) подмножеств \( \Omega \) называется \( \lambda \)-системой, если:
+    \begin{enumerate}
+        \item
+            \( \Omega \in M \)
+        \item
+            \( A, B \in M \) и \( A \subseteq B \) \( \Rightarrow B \setminus A \in M \)
+        \item
+            Если \( A_n \uparrow A \) и \( \forall n \ A_n \in M \),
+            то \( A \in M \)
+    \end{enumerate}
+\end{defn}
+
+\begin{thrm}{Первая о \( \pi \)-\( \lambda \)-системах}{}
+    Система \( \mathcal{F} \) подмножеств \( \Omega \)
+    является \( \sigma \)-алгеброй
+    \( \Leftrightarrow \)
+    она является \( \pi \)-системой и \( \lambda \)-системой.
+\end{thrm}
+
+\begin{itemize}
+    \item
+        \( \Rightarrow \)
+
+        Очевидно
+    \item
+        \( \Leftarrow \)
+
+        \( \mathcal{F} \) замкнута относительно \( \cap \) и \( \ol{\space} \), \( \Omega \in F \)
+        \( \Rightarrow \) \( \mathcal{F} \) --- алгебра.
+
+        Если \( \{ A_n, n \in \NN \} \),
+        \( A_n \in \mathcal{F} \ \forall n \), то
+        \( \forall m \ \bigcup\limits_{n = 1}^{m} = B_m \in F \),
+        потому что \( \mathcal{F} \) --- алгебра.
+        При этом \( B_m \uparrow \bigcup\limits_{n = 1}^{\infty} A_n \)
+        по свойству \( 3 \) \( \lambda \)-системы.
+        Получаем, что \( \bigcup\limits_{n = 1}^{\infty} A_n \in F \).
+\end{itemize}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            Полуинтервалы на \( \RR \): \( (a, b) \) и \( \varnothing \) --- это \( \pi \)-система.
+        \item
+            \( \Omega = \{ 1, 2, 3, 4 \} \)
+
+            \(
+                \mathcal{L}
+                =
+                \{
+                    \varnothing, \Omega, \{ 1, 2 \}, \{ 3, 4 \},
+                    \{ 1, 3 \}, \{ 2, 3 \}, \{ 1, 4 \}, \{ 2, 4 \}
+                \}
+            \) --- \( \lambda \)-система, но не алгебра.
+    \end{enumerate}
+\end{example}
+
+\begin{lemma}{О существовании минимальной системы}{}
+    Для \( \forall M \) --- система подмножеств \( \Omega \)
+    существует минимальная (по включению) \( \sigma \)-алгебра
+    (алгебра, \( \pi \)-система, \( \lambda \)-система),
+    содержащая \( M \).
+
+    Обозначения: \( \sigma(M), \alpha(M), \pi(M), \lambda(M) \)
+\end{lemma}
+
+Рассмотрим все подходящие нам системы.
+Хотя бы одна такая точно найдется, так как есть \( 2^{\Omega} \).
+Пересечем их.
+Нетрудно убедиться, что пересечение тоже будет подходить нам,
+причем поскольку изначально все системы содержали \( M \),
+результат тоже будет содержать \( M \).
+Очевидно, что по построению такая система минимальна.
+
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \( \Omega = \RR \)
+
+            \begin{defn}{}{}
+                Борелевской \( \sigma \)-алгеброй
+                на прямой называется минимальная \( \sigma \)-алгебра,
+                содержащая все интервалы:
+                \[
+                    \mathcal{B}(\RR) = \sigma( (a, b) : a < b )
+                \]
+            \end{defn}
+
+            \begin{exercise}{}{}
+                В качестве порождающей системы
+                для \( \mathcal{B}(\RR) \)
+                можно взять полуинтервалы, отрезки, лучи, открытые множества, замкнутые множества.
+            \end{exercise}
+        \item
+            \( \Omega = \RR^n \)
+
+            \begin{defn}{}{}
+                Борелевской \( \sigma \)-алгеброй на \( \RR^n \)
+                называется минимальная \( \sigma \)-алгеброй,
+                содержащая множества \( B_1 \times \ldots \times B_n \),
+                где \( B_i \in \mathcal{B}(\RR) \).
+            \end{defn}
+
+            \begin{exercise}{}{}
+                В качестве порождающей системы можно взять:
+                \begin{itemize}
+                    \item
+                        \( (a_1, b_1) \times \ldots \times (a_n, b_n) \)
+                    \item
+                        \( (a_1, b_1] \times \ldots \times (a_n, b_n] \)
+                    \item
+                        Открытые множества
+                    \item
+                        Замкнутые множества
+                \end{itemize}
+            \end{exercise}
+        \item
+            \( \Omega = \RR^{\infty} = \{ (x_1, x_2, x_3, \ldots, ), x_i \in \RR \} \) --- последовательности вещественных чисел.
+
+            Пусть \( n \in \NN \), \( B_n \in \mathcal{B}(\RR^n) \)
+
+            Введем цилиндр с основанием \( B_n \):
+            \[
+                Cyl(n, B_n) = \{ x \in \RR^{\infty} : (x_1, \ldots, x_n) \in B_n \}
+            \]
+
+            \begin{defn}{}{}
+                Борелевской (цилиндрической) \( \sigma \)-алгеброй
+                на \( \RR^\infty \) называют минимальную \( \sigma \)-алгебру,
+                содержащую все цилиндры:
+                \[
+                    \mathcal{B}(\RR^{\infty}) = \sigma( Cyl(n, B_n) : n \in \NN, B_n \in \mathcal{B}(\RR) )
+                \]
+            \end{defn}
+        \item
+            \( \Omega = S \) --- метрическое пространство.
+
+            \begin{defn}{}{}
+                Борелевской \( \sigma \)-алгеброй на \( (S, \rho) \)
+                называется минимальная \\ \( \sigma \)-алгебра,
+                содержащая все открытые множества.
+            \end{defn}
+    \end{enumerate}
+\end{example}
+
+\begin{thrm}{Вторая о \( \pi \)-\( \lambda \)-системах}{}
+    Пусть \( M \) --- \( \pi \)-система подмножеств на \( \Omega \).
+    Тогда \( \sigma(M) = \lambda(M) \).
+\end{thrm}
+
+По определению \( \lambda (M) \subseteq \sigma (M) \).
+Надо доказать обратное включение.
+Достаточно проверить, что \( \lambda(M) \) ---
+это \( \sigma \)-алгебра.
+По первой теореме о \( \pi \)-\( \lambda \)-системах
+проверим, что \( \lambda(M) \) замкнута относительно
+пересечения (то есть является \( \pi \)-системой).
+
+Рассмотрим \( \mathcal{L}_1 = \{ A \in \lambda(M) : \forall B \in M \ A \cap B \in \lambda(M) \} \).
+По условию \( M \in \mathcal{L}_1 \).
+Проверим, что \( \mathcal{L}_1 \) является \( \lambda \)-системой
+(в таком случае она совпадает с \( \lambda(M) \)).
+\begin{enumerate}
+    \item
+        \( \Omega \in \mathcal{L}_1 \)
+
+        Очевидно.
+    \item
+        \( A, C \in \mathcal{L}_1, A \subseteq C \Rightarrow C \setminus A \in \mathcal{L}_1 \)
+
+        Пусть \( B \in M \).
+        Тогда смотрим \( ( C \setminus A) \cap B = (C \cap B) \setminus (A \cap B) \).
+        \( A, C \in \mathcal{L_1} \),
+        а значит полученное множество лежит в \( \lambda(M) \).
+        Но это значит, что \( C \setminus A \) лежит в \( \mathcal{L}_1 \).
+    \item
+        Пусть \( A_n \uparrow A \), \( \forall n \ A_n \in \mathcal{L_1} \overset{?}{\Rightarrow} A \in \mathcal{L}_1 \)
+
+        Возьмем \( \forall B \in M \),
+        тогда \( A_n \cap B \uparrow A \cap B \).
+        Но \( A_N \cap B(M) \in \lambda(M) \Rightarrow A \cap B \in \lambda(M) \)
+        по свойству \( 3 \) \( \lambda \)-системы \( \Rightarrow A \in \mathcal{L}_1 \).
+\end{enumerate}
+
+Вывод \( \mathcal{L}_1 \) --- это \( \lambda \)-система,
+содержащая \( M \) \( \Rightarrow \) \( \lambda(M) \subseteq \mathcal{L}_1 \Rightarrow \mathcal{L}_1 = \lambda(M) \).
+Мы доказали, что \( \forall A \in \lambda (M) \ \forall B \in M \ A \cap B \in \lambda(M) \).
+
+Рассмотрим \( \mathcal{L}_2 = \{ A \in \lambda(M) : \forall B \in \lambda(M) \ A \cap B \in \lambda(M) \} \).
+В силу доказанного \( M \subset \mathcal{L}_2 \). Точно так же проверим, что \( \mathcal{L}_2 \) --- это
+\( \lambda \)-система
+
+
+Тогда \( \lambda(M) \subset \mathcal{L}_2 \Rightarrow \forall A, B \in \lambda(M) \ A \cap B \in \lambda(M) \)
+\qed
+
+\subsection{Независимость}
+
+Пусть \( ( \Omega, \mathcal{F}, P ) \) --- вероятностное пространство.
+
+\begin{defn}{}{}
+    События \( A, B \in \mathcal{F} \) называются независимыми,
+    если \( P(A \cap B) = P(A) \cdot P(B) \).
+\end{defn}
+
+\begin{exercise}{}{}
+    Если \( A \) и \( B \) независимы,
+    то независимыми будут \( A \) с \( \ol{B} \),
+    \( \ol{A} \) с \( B \), \( \ol{A} \) с \( \ol{B} \).
+\end{exercise}
+
+\begin{defn}{}{}
+    События \( A_1, \ldots, A_n \)
+    попарно независимы, если \( \forall i \neq j \)
+    \( A_i \) и \( A_j \) независимы.
+\end{defn}
+
+\begin{defn}{}{}
+    События \( A_1, \ldots, A_n \)
+    независимы в совокупности,
+    если
+    \begin{gather*}
+        \forall 1 \leq k \leq n \quad \forall 1 \leq i_1 < \ldots < i_k \leq n
+        \\
+        P(A_{i_1} \cap \ldots \cap A_{i_k}) = \prod\limits_{j = 1}^{k} P (A_{i_j})
+    \end{gather*}
+\end{defn}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            Бросок \( 6 \)-гранного кубика
+
+            \( A = \{ \text{выпало четное} \} \)
+
+            \( B = \{ \text{выпало кратное 3} \} \)
+
+            \( P(A \cap B) = P(\text{выпало \( 6 \)}) = \frac{1}{6} = \frac{1}{2} \cdot \frac{1}{3} = P(A) \cdot P(B) \)
+            \( \Rightarrow \) независимые
+        \item
+            Задача про сумашедшую старушку
+
+            \( A = \{ \text{последний сел на свое место} \} \)
+
+            \( B = \{ \text{предпоследний сел на свое  место} \} \)
+
+            Можно показать, что \( A \) и \( B \) независимы.
+        \item
+            Пример Бернштейна
+
+            Бросается тетраэдр, грани раскрашены в К, С, З, КСЗ
+
+            \( A_{\text{К}} = \{ \text{выпала грань с К} \} \)
+
+            \( A_{\text{С}} = \{ \text{выпала грань с С} \} \)
+
+            \( A_{\text{З}} = \{ \text{выпала грань с З} \} \)
+
+            \( P(A_i \cap A_j) = \frac{1}{4} = \frac{1}{2} \cdot \frac{1}{2} = P(A_i) \cdot P(A_j) \)
+
+            Но \( P(A_{\text{К}} \cap A_{\text{С}} \cap A_{\text{З}}) = \frac{1}{4} \neq \frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{2} \)
+    \end{enumerate}
+\end{example}
+
+\begin{exercise}{}{}
+    Привести пример событий \( A_1, \ldots, A_n \)
+    такой, что все они зависимы, но любые \( n - 1 \) события независимы в совокупности.
+\end{exercise}
+
+\begin{defn}{}{}
+    Системы событий \( M_1, \ldots, M_n \) (\( M_i \in \mathcal{F} \))
+    независимы в совокупности, еесли \( \forall A_1 \in M_1, \ldots, A_n \in M_n \)
+    события \( A_1, \ldots, A_n \) независимы в совокупности.
+\end{defn}
+
+\begin{thrm}{}{}
+    Пусть \( M_1, \ldots, M_n \) --- \( \pi \)-система
+    событий. Тогда \( M_1, \ldots, M_n \) независимы в совокупности
+    \( \Leftrightarrow \) \( \sigma(M_1), \ldots, \sigma(M_n) \)
+    независимы в совокупности.
+\end{thrm}
+
+\begin{itemize}
+    \item
+        \( \Leftarrow \)
+
+        Явно следует из \( M_i \subseteq \sigma(M_i) \)
+    \item
+        \( \Rightarrow \)
+
+        Докажем для \( n = 2 \),
+        для \( n > 2 \) доказательство аналогично.
+
+        Проверим, что \( \sigma(M_1), M_2, \ldots, M_n \) независимы.
+
+        Рассмотрим \( \mathcal{L_1} = \{ A \in \mathcal{F} : A \text{ независима с } M_2 \} \)
+
+        По условия \( M_1 \subseteq \mathcal{L}_1 \).
+        Докажем, что \( \mathcal{L}_1 \) --- это \( \lambda \)-система.
+
+        \begin{enumerate}
+            \item
+                \( \Omega \in \mathcal{L}_1 \) ?
+
+                Очевидно, верно.
+            \item
+                \( A, B \in \mathcal{L}_1 \), \( A \subseteq B \overset{?}{\Rightarrow} B \setminus A \in \mathcal{L}_1 \)
+
+                Пусть \( C \in M_2 \). Тогда
+                \begin{gather*}
+                    P ( ( B \setminus A ) \cap C )
+                    =
+                    P ( (B \cap C) \setminus (A \cap C) )
+                    =
+                    P( B \cap C ) - P( A \cap C )
+                    =
+                    \\
+                    =
+                    P(B) P(C) - P(A) P(C)
+                    =
+                    P(C) ( P(B) - P(A) )
+                    =
+                    P(C) P( B \setminus A )
+                \end{gather*}
+
+                Значит \( B \setminus A \) независимо с \( C \),
+                а значит \( B \setminus A \in \mathcal{L}_1 \).
+            \item
+                Пусть \( A_n \uparrow A \), \( \forall n \ A_n \in \mathcal{L}_1 \ \overset{?}{\Rightarrow} A \in \mathcal{L_1} \)
+
+                Пусть \( C \in M_2 \). Тогда \( A_n \cap C \uparrow A \cap C \). Тогда
+                \[
+                    P(A \cap C)
+                    =
+                    \lim\limits_{n \to \infty}
+                    P(A_n \cap C)
+                    =
+                    P(C) \cdot \lim\limits_{n \to \infty} P(A_n)
+                    =
+                    P(C) \cdot P(A)
+                \]
+
+                Значит \( A \) независимо с \( C \), то есть \( A \in \mathcal{L_1} \).
+        \end{enumerate}
+
+        Вывод: \( \mathcal{L}_1 \) --- это \( \lambda \)-система.
+        По второй теореме о \( \pi \)-\( \lambda \)-системах получаем,
+        что \( \sigma(M_1) \subseteq \mathcal{L}_1 \),
+        то есть \( \sigma(M_1) \) независима с \( M_2 \).
+
+        Рассмотрим \( \mathcal{L}_2 = \{ A \in \mathcal{F} : A \text{ независима с } \sigma(M_1) \} \).
+        Из доказанного следует, что \( M_2 \subseteq \mathcal{L}_2 \).
+        Точно так же проверям, что \( \mathcal{L}_2 \) --- это \( \lambda \)-система.
+        Получаем, что \( \sigma(M_2) \subseteq \mathcal{L}_2 \),
+        то есть \( \sigma(M_2) \) независима с \( \sigma(M_1) \).
+\end{itemize}
+
+\begin{defn}{}{}
+    Пусть \( \{ M_{\alpha}, \alpha \in \mathfrak{A} \} \)
+    --- произвольный набор систем событий.
+    Он независим в совокупности, если независим в совокупности любой конечный поднабор систем.
+\end{defn}
+
+\subsection{Вероятностные меры на \( (\RR, \mathcal{B}(\RR) ) \)}
+
+Пусть \( P \) --- вероятностная мера на \( (\RR, \mathcal{B}(\RR)) \)
+
+\begin{defn}{}{}
+    Функция \( F(x) = P ((-\infty, x]) \), \( x \in \RR \) называется
+    функцией распределения вероятностной меры \( P \).
+\end{defn}
+
+\begin{remark}{}{}
+    Распределение (вероятность) = вероятностная мера.
+\end{remark}
+
+\begin{example}{}{}
+    \begin{enumerate}
+        \item
+            \(
+                F(x) = \begin{cases}
+                    0, x < 0
+                    \\
+                    1, x \geq 0
+                \end{cases}
+            \)
+
+            Соответствует \( P : P( \{ 0 \} ) = 1, P( \RR \ \{ 0 \} ) = 0 \)
+        \item
+            \(
+                F(x) = \begin{cases}
+                    0, x < 0
+                    \\
+                    x, x \in [0, 1]
+                    \\
+                    1, x > 1
+                \end{cases}
+            \)
+
+            Соответствует \( P : P( [a, b] ) = F(b) = F(a) = b - a \), если \( a, b \in [0, 1] \)
+    \end{enumerate}
+\end{example}
+
+\begin{lemma}{Свойства функции распределения}{}
+    \begin{enumerate}
+        \item
+            \( F(x) \) не убывает
+        \item
+            \( \lim\limits_{x \to \infty} F(x) = 1 \), \( \lim\limits_{x \to -\infty} F(x) = 0 \)
+        \item
+            \( F(x) \) непрерывно справа.
+    \end{enumerate}
+\end{lemma}
+
+\begin{enumerate}
+    \item
+        Если \( x < y \),
+        то \( (-\infty, x] \subseteq (-\infty, y] \Rightarrow F(x) = P( (-\infty, x] ) \leq P( (-\infty, y] ) = F(y) \)
+    \item
+        Если \( x_n \uparrow +\infty \),
+        то \( (-\infty, x_n] \uparrow \RR \),
+        в силу непрерывности вероятностной меры
+        \[
+            F(x_n) = P( (\infty, x_n] ) \to P(\RR) = 1
+        \]
+
+        Второе равенство аналогично.
+    \item
+        Если \( x_n \downarrow x \), то \( (\infty, x_n] \downarrow (-\infty x] \),
+        то в силу непрерывности вероятностной меры
+        \[
+            F(x_n) = P( (-\infty, x_n] ) \to P ( (-\infty, x] ) = F(x)
+        \]
+\end{enumerate}
+
+\begin{defn}{}{}
+    Функция \( F(x) \), \( X \in \RR \),
+    удовлетворяющая свойствам 1) - 3) из леммы называется функцией распределения на \( \RR \)
+\end{defn}
+
+\begin{thrm}{Каратеодори о продолжении меры}{}
+    Пусть \( P_0 \) --- вероятностная мера на \( (\Omega, \mathcal{A}) \),
+    где \( \mathcal{A} \) --- алгебра подмножеств в \( \Omega \).
+    Тогда существует единственное продолжение \( P \) меры \( P_0 \) на \( \sigma(\mathcal{A}) \).
+    То есть \( P \) --- вероятностная мера на \( (\Omega, \sigma(\mathcal{A}) \) такая,
+    что \( \forall A \in \mathcal{A} \ P_0(A) = P(A) \)
+\end{thrm}
+
+\begin{thrm}{о взаимно однозначном соответствии вероятностных мер и функций распределения}{}
+    Пусть \( F(x) \) --- функция распределения на \( \RR \).
+    Тогда существует единственная вероятностная мера \( P \) на \( (\RR, \mathcal{B}(\RR)) \),
+    такая, что \( F \) --- ее функция распределения.
+\end{thrm}
+
+Рассмотрим \( \mathcal{A} \) --- алгебра полуинтервалов на \( \RR \),
+то есть \( \forall A \in \mathcal{A} \) имеет вид
+\begin{gather*}
+    A = \bigsqcup\limits_{k = 1}^{n} (a_k, b_k] \quad (\ast)
+    \\
+    -\infty \leq a_1 < b_1 < a_2 < \ldots < a_n < b_n \leq +\infty
+\end{gather*}
+
+Зададим меру \( P_0 \) на \( \mathcal{A} \) по правилу:
+если \( A \in \mathcal{A} \) имеет вид \( ( \ast ) \), то
+\[
+    P_0 (A) = \sum\limits_{k = 1}^{n} ( F(b_k) - F(a_k) ),
+\]
+где \( F (-\infty) = 0 \), \( F(+\infty) = 1 \).
+Легко видеть, что \( P_0 (\RR) = 1 \),
+\( P_0 \) конечно аддитивна на \( \mathcal{A} \).
+Если мы покажем,
+что \( P_0 \) счетно аддитивна на \( \mathcal{A} \),
+то ее можно будет продолжить единственным образом до вероятностной меры \( P \)
+на \( \sigma(\mathcal{A}) = \mathcal{B}(\RR) \).
+Тогда \( P \) --- искомая мера.
+
+По теореме о непрерывности вероятностной меры достаточно проверить,
+что \( P_0 \) непрерывна в нуле на \( \mathcal{A} \).
+Пусть \( \{ A_n, n \in \NN \} \) такова,
+что \( A_N \downarrow \varnothing \) и \( \forall n \ A_N \in \mathcal{A} \).
+Надо показать, что \( P_0 (A_n) \to 0 \).
+Пусть сначала \( \exists N > 0 : A_1 \subseteq (-N, N] \).
+Зафиксируем \( \varepsilon > 0 \) и для \( \forall k \in \NN \)
+выберем \( B_k \in \mathcal{A} : [B_k] \subseteq A_k \)
+и \( P_0 (A_k) - P_0 (B_k) \leq \frac{\varepsilon}{2^k} \).
+Такой выбор возможен, так как \( F \) непрерывна справа.
+Если
+\(
+    A_k = \bigsqcup\limits_{m = 1}^{s} ( a_m, b_n ]
+\), то выберем
+\(
+    B_k = \bigsqcup\limits_{m = 1}^{s} ( a_m', b_n ]
+\), где \( a_m' > a_m \).
+Тогда
+\[
+    P_0 (A_k) - P_0(B_k) = \sum\limits_{m = 1}^{s} ( F(a_m') - F(a_m) ) \leq \frac{\varepsilon}{2^k}
+\]
